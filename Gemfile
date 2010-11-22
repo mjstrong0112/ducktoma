@@ -2,6 +2,9 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.3'
 
+# Core Ext
+gem 'andand', :git => "git://github.com/raganwald/andand.git"
+
 # UI
 gem 'haml', '~> 3.0.21'
 gem 'simple_form', '~> 1.2.2'
