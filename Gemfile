@@ -27,8 +27,8 @@ group :test do
   gem 'azebiki', '~> 0.0.2', :require => nil
   gem 'forgery', '~> 0.3.6'
   gem 'database_cleaner', '~> 0.6.0'
-  #gem 'remarkable_activemodel', '~> 4.0.0.alpha4', :require => nil
-  #gem 'remarkable_mongoid', :git => "git://github.com/bcardarella/remarkable_mongoid.git", :require => nil
+  gem 'remarkable_activemodel', '~> 4.0.0.alpha4', :require => nil
+  gem 'remarkable_mongoid', '~> 0.5.0', :require => nil
   #gem 'mongoid-rspec', '~> 1.2.1'
   #gem 'webmock', '~> 1.3.5'
   gem 'timecop', '~> 0.3.5'
