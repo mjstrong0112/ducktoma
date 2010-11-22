@@ -11,7 +11,7 @@ gem 'flutie', '~> 1.1.2'
 gem 'inherited_resources', '~> 1.1.2'
 
 # Auth
-gem 'devise', '~> 1.1.3'
+#gem 'devise', '~> 1.1.3'
 # DB
 gem 'mongoid', '~> 2.0.0.beta.20'
 # Bson and bson_ext have to be the same version
@@ -32,6 +32,7 @@ group :test do
   #gem 'mongoid-rspec', '~> 1.2.1'
   #gem 'webmock', '~> 1.3.5'
   gem 'timecop', '~> 0.3.5'
+  gem 'test_notifier', '~> 0.3.6'
   gem 'autotest', '~> 4.4.5'
 end
 
