@@ -11,7 +11,7 @@ gem 'flutie', '~> 1.1.2'
 gem 'inherited_resources', '~> 1.1.2'
 
 # Auth
-#gem 'devise', '~> 1.1.3'
+gem 'devise', '~> 1.1.3'
 # DB
 gem 'mongoid', '~> 2.0.0.beta.20'
 # Bson and bson_ext have to be the same version
