@@ -1,9 +1,13 @@
 require 'spec_helper'
 
 describe User do
+
   should_validate_presence_of :email
   should_validate_uniqueness_of :email
   should_validate_confirmation_of :password
+
+  should_reference_many :adoptions
+
   before(:all) do
     @basic_user = User.new
   end
@@ -19,6 +23,7 @@ describe User do
   it "should save default fabricator user" do
     user = Fabricate.build(:user)
     lambda{ user.save! }.should_not raise_error
+    user.adoptions.should_not be_blank
   end
 #  it "could be an admin user" do
 #    @basic_user.respond_to?(:admin?).should be true
