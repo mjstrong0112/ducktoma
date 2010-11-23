@@ -1,9 +1,13 @@
 Ducktoma::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :path => 'accounts'
 
   get "home/index"
 
   root :to => "home#index"
+
+  resources :users do
+    resources :adoptions
+  end
 
   resources :adoptions
 

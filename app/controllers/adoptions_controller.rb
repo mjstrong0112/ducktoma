@@ -1,9 +1,7 @@
 class AdoptionsController < ApplicationController
   inherit_resources
 
-  before_filter :authenticate_user!
+  belongs_to :user, :optional => :true
 
-  def begin_of_association_chain
-    current_user
-  end
+  before_filter :authenticate_user!
 end
