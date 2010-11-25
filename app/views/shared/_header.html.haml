@@ -1,4 +1,6 @@
 #header
+
   = image_tag "logo.png", :id => "logo", :alt => "ducktoma"
-  = image_tag "login.png", :id => "login", :alt => "login"
+  = link_to new_user_session_path do
+    = image_tag "login.png", :id => "login", :alt => "login"
   = image_tag "plane.png",  :id => "plane", :alt => "Annual Duck Race"
