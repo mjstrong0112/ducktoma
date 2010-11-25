@@ -17,8 +17,8 @@ describe User do
     User.count.should == 1
     first = User.first
     first.id.should == user.id
-    first.valid_password?("notright").should be false
-    first.valid_password?("testing").should be true
+    first.should_not be_a_valid_password("notright")
+    first.should be_a_valid_password("testing")
   end
   it "should save default fabricator user" do
     user = Fabricate.build(:user)

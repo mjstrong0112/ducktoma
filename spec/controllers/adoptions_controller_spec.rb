@@ -6,7 +6,7 @@ describe AdoptionsController do
       @user = Fabricate(:user)
       sign_in @user
     end
-    it "should load all adoptions on GET 'index'" do
+    it "loads all adoptions on GET 'index'" do
       Adoption.delete_all
       all_adoptions = (1..5).to_a.collect{Fabricate(:adoption)}
       get :index
@@ -20,10 +20,10 @@ describe AdoptionsController do
     end
   end
   context "as a guest" do
-    it "should redirect to home on GET user adoptions 'index'" do
+    it "redirects to login on GET user adoptions 'index'" do
       get :index, :user => Fabricate.build(:user)
       response.should_not be_success
-      #response.should be_redirect_to(home_path)
+      response.should redirect_to(new_user_session_path)
     end
   end
 end

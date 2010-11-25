@@ -3,5 +3,5 @@ class AdoptionsController < ApplicationController
 
   belongs_to :user, :optional => :true
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :only => :index
 end
