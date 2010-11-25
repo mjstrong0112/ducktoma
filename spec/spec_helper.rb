@@ -22,7 +22,7 @@ Spork.prefork do
     # config.mock_with :mocha
     # config.mock_with :flexmock
     # config.mock_with :rspec
-    config.mock_with :rr
+    config.mock_with RR::Adapters::Rspec
 
     config.include Devise::TestHelpers, :type => :controller
 
