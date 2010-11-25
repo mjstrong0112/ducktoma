@@ -5,6 +5,7 @@
 
 @import "compass/reset";
 @import "flutie/flutie";
+@import "images";
 
 
 //global variables
@@ -35,6 +36,7 @@ $title-family: Myriad Pro, Arial, Helvetica, sans-serif;
 html, body { height: 100%; }
 body{ background-image: url(../../images/gradientbg.gif); background-color: #7cbbd9; height: 100%; }
 object {vertical-align: top; }
+
 
 /* code for sticky footer */
 .wrapper {

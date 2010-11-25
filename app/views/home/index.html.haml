@@ -1,15 +1,15 @@
 .title
-  %img(src="images/adopt.png" alt="Adopt a Duck Now!" width="256" height="27")/
+  = image_tag "adopt.png", :id => "adopt", :alt => "Adopt a Duck Now!"
   %h1 Adopt a Duck Now!
 
 .form
   .header
-    %img.number(src="images/no1.gif" width="28" height="28")/
+    = image_tag "no1.gif", :class => "number"
     Specify Number of Ducks ($50 x Duck)
 
   #duck-form
     #duck-form-image
-      %img(src="images/duck.gif" width="186"  height="154")
+      = image_tag "duck.gif", :class => "duck-form-image"
     %input#duck-count-input(type="text")
     #duck-count ducks
 
