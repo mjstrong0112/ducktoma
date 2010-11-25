@@ -9,7 +9,6 @@ gem 'andand', :git => "git://github.com/raganwald/andand.git"
 # UI
 gem 'haml', '~> 3.0.21'
 gem 'simple_form', '~> 1.2.2'
-gem 'flutie', '~> 1.1.2'
 gem 'compass', '~> 0.10.6'
 
 # Controller
@@ -56,6 +55,9 @@ gem 'fabrication', '~> 0.9.0', :require => nil, :group => :test
 gem 'fabrication', '~> 0.9.0', :group => :development
 
 group :development do
+  # UI
+  gem 'flutie', '~> 1.1.2'
+  # Utilities
   gem 'thin', '~> 1.2.7'
   gem 'rails3-generators', '~> 0.14.0'
 end
