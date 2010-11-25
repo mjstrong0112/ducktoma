@@ -92,8 +92,9 @@ object {vertical-align: top; }
 }
 #ground {
 	background: url(../../images/ground.png) repeat-x;
+	background-position: bottom;
 	width: 100%;
-	height: 127px;
+	height: $footer-height;
 }
 .title {
     height: 30px;
