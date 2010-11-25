@@ -5,3 +5,165 @@
 
 @import "compass/reset";
 @import "flutie/flutie";
+
+
+//global variables
+$main-width: 900px;
+$main-height: 600px;
+$header-height: 50px;
+$footer-height: 180px;
+$form-width: 750px;
+$title-family: Myriad Pro, Arial, Helvetica, sans-serif;
+
+@mixin rounded-border($radius) {
+    -moz-border-radius: $radius;
+    -webkit-border-radius: $radius;
+    border-radius: $radius;
+}
+@mixin box-shadow($radius) {
+	-moz-box-shadow: 0px 0px #{$radius} rgba(0,0,0,.3);
+	-webkit-box-shadow: 0px 0px #{$radius} rgba(0,0,0,.3);
+	box-shadow: 0px 0px 9px 1px;
+}
+// combines line-height and width for a vertically centered box
+@mixin vbox($height) {
+    height: $height;
+    line-height: $height;
+}
+
+
+html, body { height: 100%; }
+body{ background-image: url(../../images/gradientbg.gif); background-color: #7cbbd9; height: 100%; }
+object {vertical-align: top; }
+
+/* code for sticky footer */
+.wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto #{-$footer-height}; /* the bottom margin is the negative value of the footer's height */
+}
+.push {
+	height: $footer-height - 30;
+}
+.footer {
+	height: $footer-height;
+}
+
+#distance {
+	width: 1px;
+	height: 47%;
+	margin-left: -1px;
+	background-color: white;
+	margin-bottom: -$main-height/2 - $header-height;
+	float: left;
+}
+#container {
+	margin: 0 auto;
+	width: $main-width;
+	height: 540px;
+	position: relative;
+	text-align: left;
+	clear: left;
+	padding-bottom: 160px;
+}
+#header {
+	height: $header-height;
+	margin-bottom: 10px;
+    img { vertical-align: middle; }
+}
+#main {
+    @include rounded-border(15px);
+    @include box-shadow(20px);
+    $padding: 30;
+	padding: #{$padding}px;
+	width: $main-width - $padding*2;
+	height: $main-height - $padding*2;
+	background-color: #FFF;
+}
+#clouds {
+	position: absolute;
+	overflow: hidden;
+	background: url(../../images/clouds_bg.png) repeat-x center bottom;
+	height: 550px;
+	width: 100%;
+}
+#ground {
+	background: url(../../images/ground.png) repeat-x;
+	width: 100%;
+	height: 127px;
+}
+.title {
+    height: 30px;
+	margin: auto;
+	text-align: center;
+	h1 {
+	    position: relative;
+	    top: -10px;
+	    z-index: -1;
+    }
+}
+.form {
+	width: $form-width;
+	margin: auto;
+	padding-top: 10px;
+	.header {
+        @include vbox(60px);
+        @include box-shadow(20px);
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: #666666;
+        font-family: $title-family;
+        font-size: 22px;
+        .number {
+            float: left;
+            margin: 16px;
+        }
+	}
+}
+#duck-form {
+    @include vbox(205px);
+    @include rounded-border(15px);
+	background-color: #7fbedc;
+}
+#duck-form input {
+	font-size: 62px;
+	font-family: $title-family;
+	color: #3f9ecb;
+	width: 90px;
+	height: 90px;
+	margin-top: 62px;
+	margin-right: 30px;
+	float: left;
+	text-align: center;
+	border: none;
+}
+#duck-count {
+	font-size: 62px;
+	font-family: $title-family;
+	color: #fff;
+}
+#duck-form-image {
+	float: left;
+	margin: 25px;
+}
+#duck-form-total {
+	padding: 10px;
+	font-size: 40px;
+	font-family: $title-family;
+	color: #666;
+	text-align: right;
+}
+.blue-button, .blue-button-disabled {
+    @include vbox(82px);
+    width: 247px;
+	margin: auto;
+	text-align: center;
+	background: url(../../images/button.png);
+	font-size: 22px;
+	color: white;
+	font-family: $title-family;
+}
+.blue-button-disabled {
+	background: url(../../images/button-disabled.png);
+}
