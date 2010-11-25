@@ -11,6 +11,9 @@ gem 'haml', '~> 3.0.21'
 gem 'simple_form', '~> 1.2.2'
 gem 'compass', '~> 0.10.6'
 
+# Temp gems
+gem 'placeholder', '~> 0.0.6'
+
 # Controller
 gem 'inherited_resources', '~> 1.1.2'
 
