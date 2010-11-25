@@ -57,17 +57,18 @@ gem 'fabrication', '~> 0.9.0', :group => :development
 group :development do
   # UI
   gem 'flutie', '~> 1.1.2'
-  # Utilities
+
+  # Servers
+  #gem 'mongrel', '>= 1.2.0.pre2'
   gem 'thin', '~> 1.2.7'
+  #gem 'unicorn'
+
+  # Utilities
   gem 'rails3-generators', '~> 0.14.0'
 end
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-
-# Use unicorn as the web server
-# gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
