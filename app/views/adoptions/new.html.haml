@@ -1,0 +1,21 @@
+.title
+  = image_tag "adopt.png", :id => "adopt", :alt => "Adopt a Duck Now!"
+  %h1 Adopt a Duck Now!
+
+.form
+  .header
+    = image_tag "no1.gif", :class => "number"
+    Specify Number of Ducks ($50 x Duck)
+
+  = simple_form_for @adoption do |f|
+    = f.input
+  #duck-form
+    #duck-form-image
+      = image_tag "duck.gif", :class => "duck-form-image"
+    %input#duck-count-input(type="text")
+    #duck-count ducks
+
+  #duck-form-total
+    Total: $0.00
+
+#submit-duck-button.blue-button-disabled Continue
