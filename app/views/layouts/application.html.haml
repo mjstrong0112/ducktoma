@@ -10,7 +10,7 @@
     .wrapper
       #clouds
       #container
-        = render 'layouts/header'
+        = render 'shared/header'
         
         #main                   
           %p.notice= notice
@@ -24,6 +24,6 @@
           = yield
 
       .push
-    = render 'layouts/footer'
-    = render 'layouts/javascripts'  
+    = render 'shared/footer'
+    = render 'shared/javascripts'
     
