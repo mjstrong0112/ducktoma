@@ -1,0 +1,19 @@
+.form(style="padding-top: 0px;")
+  .header(style="margin-top: 0px;")
+    = image_tag "no3.gif", :class => "number"
+    Adoption Summary
+    
+  %h1 Your raffle number.
+  
+  #raffle-number= @adoption.raffle_number
+
+  %h1 Duck numbers.
+  - @adoption.ducks.each do |duck|
+    .duck-number= duck.number    
+
+  .break &nbsp;
+  
+  #duck-form-total
+    Total: $#{@adoption.fee}
+
+#print.blue-button Print

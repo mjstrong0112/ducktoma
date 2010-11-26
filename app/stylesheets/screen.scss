@@ -36,7 +36,7 @@ $title-family: Myriad Pro, Arial, Helvetica, sans-serif;
 html, body { height: 100%; }
 body{ background-image: url(../../images/gradientbg.gif); background-color: #7cbbd9; height: 100%; }
 object {vertical-align: top; }
-
+h1 { font-size: 30px; font-family: $title-family; color: #666666; font-weight: normal;}
 
 /* code for sticky footer */
 .wrapper {
@@ -46,7 +46,7 @@ object {vertical-align: top; }
 	margin: 0 auto #{-$footer-height}; /* the bottom margin is the negative value of the footer's height */
 }
 .push {
-	height: $footer-height - 30;
+	height: 30px;
 }
 .footer {
 	height: $footer-height;
@@ -63,7 +63,7 @@ object {vertical-align: top; }
 #container {
 	margin: 0 auto;
 	width: $main-width;
-	height: 540px;
+	min-height: 540px;
 	position: relative;
 	text-align: left;
 	clear: left;
@@ -80,7 +80,7 @@ object {vertical-align: top; }
     $padding: 30;
 	padding: #{$padding}px;
 	width: $main-width - $padding*2;
-	height: $main-height - $padding*2;
+	min-height: $main-height - $padding*2;
 	background-color: #FFF;
 }
 #clouds {
@@ -123,6 +123,17 @@ object {vertical-align: top; }
             margin: 16px;
         }
 	}
+}
+#raffle-number{
+    @include vbox(100px);
+    @include rounded-border(15px);
+    color: white;
+    text-align: center;
+	background-color: #7fbedc;    
+    font-size: 50px;
+    font-family: $title-family;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 #duck-form {
     @include vbox(205px);
@@ -170,3 +181,14 @@ object {vertical-align: top; }
 .blue-button-disabled {
 	background: url(../../images/button-disabled.png);
 }
+.duck-number {
+    background: url(../../images/duck-small.gif) no-repeat;
+    width: 90px; height: 58px;
+	font-family: $title-family;
+	font-size: 30px;
+	color: white;
+    padding-top: 50px;
+    padding-left: 40px;
+    float: left;
+}
+.break { clear: both; }
