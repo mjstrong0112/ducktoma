@@ -1,6 +1,6 @@
 var keyCodes = [ 37, 38, 39, 40, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 8, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105 ];			   
 $(document).ready(function() {				   
-	var input = $("#duck-count-input");
+	var input = $("#adoption_duck_count");
 	
 	input.val(0);
 	input.focus(function() {
@@ -26,11 +26,11 @@ $(document).ready(function() {
 			$("#duck-count").text("duck")
 		}
 		if(duckCount != 0) {            
-			$("#submit-duck-button").addClass('blue-button');
-			$("#submit-duck-button").removeClass('blue-button-disabled');
+			$("#adoption_submit").addClass('blue-button');
+			$("#adoption_submit").removeClass('blue-button-disabled');
 		}else {
-			$("#submit-duck-button").addClass('blue-button-disabled');
-			$("#submit-duck-button").removeClass('blue-button');
+			$("#adoption_submit").addClass('blue-button-disabled');
+			$("#adoption_submit").removeClass('blue-button');
 		}
 	});				
 });

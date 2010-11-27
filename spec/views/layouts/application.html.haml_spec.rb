@@ -2,8 +2,11 @@ require 'views/views_helper'
 
 describe "layouts/application.html.haml" do
   before do
-    # Stub out signed in to avoid loading devise
-    stub(view).user_signed_in? {false}
+    #stub(view).user_signed_in? {false}
+    stub.proxy(view).render
+    stub(view).render('shared/header'){''}
+    stub(view).render('shared/footer'){''}
+    stub(view).render('shared/javascripts'){''}
   end
   it "renders the title" do
     render

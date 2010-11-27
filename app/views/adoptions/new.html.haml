@@ -6,16 +6,14 @@
   .header
     = image_tag "no1.gif", :class => "number"
     Specify Number of Ducks ($50 x Duck)
+  = form_for @adoption do |f|
+    #duck-form
+      #duck-form-image
+        = image_tag "duck.gif", :class => "duck-form-image"
+      = f.text_field :duck_count
+      #duck-count ducks
 
-  = simple_form_for @adoption do |f|
-    = f.input
-  #duck-form
-    #duck-form-image
-      = image_tag "duck.gif", :class => "duck-form-image"
-    %input#duck-count-input(type="text")
-    #duck-count ducks
+    #duck-form-total
+      Total: $0.00
 
-  #duck-form-total
-    Total: $0.00
-
-#submit-duck-button.blue-button-disabled Continue
+    = f.submit "Continue", :class => "submit-duck-button blue-button-disabled"

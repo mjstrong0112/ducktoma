@@ -1,7 +1,7 @@
 require 'views/views_helper'
 
 describe "shared/_header.html.haml" do
-  before do
+  before(:each) do
     # Stub out signed in to avoid loading devise
     stub(view).user_signed_in? {false}
   end
