@@ -22,5 +22,9 @@ describe Adoption do
         duck.should_not be_persisted
       end
     end
+    it "should generate a raffle number on save" do      
+      @adoption.save
+      @adoption.raffle_number.should_not be_blank
+    end
   end
 end

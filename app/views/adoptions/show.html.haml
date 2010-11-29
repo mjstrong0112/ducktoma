@@ -4,12 +4,14 @@
     Adoption Summary
     
   %h1 Your raffle number.
-  
+ 
   #raffle-number= @adoption.raffle_number
 
   %h1 Duck numbers.
   - @adoption.ducks.each do |duck|
-    .duck-number= duck.number    
+    .duck-number
+      %div(style="width: 44px; text-align: center;")
+        = duck.number
 
   .break &nbsp;
   

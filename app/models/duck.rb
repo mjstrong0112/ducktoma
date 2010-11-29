@@ -10,9 +10,9 @@ class Duck
 
   before_create :generate_number
 
-  def number= number
-    self.number ||= number
-  end
+  #def number= count
+  #  @number ||= count
+  #end
 
   def generate_number
     last_duck_number = Duck.max(:number)

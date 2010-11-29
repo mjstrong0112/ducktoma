@@ -6,7 +6,7 @@ describe "adoptions/show.html.haml" do
   end
 
   it "should contain the raffle number" do
-    render
+    render    
     rendered.should have_selector('#raffle-number', :content => @adoption.raffle_number)
   end
 
