@@ -6,7 +6,7 @@
 @import "compass/reset";
 @import "flutie/flutie";
 @import "images";
-
+@import 'forms';
 
 //global variables
 $main-width: 900px;
@@ -36,7 +36,7 @@ $title-family: Myriad Pro, Arial, Helvetica, sans-serif;
 html, body { height: 100%; }
 body{ background-image: url(../../images/gradientbg.gif); background-color: #7cbbd9; height: 100%; }
 object {vertical-align: top; }
-h1 { font-size: 30px; font-family: $title-family; color: #666666; font-weight: normal;}
+h1, h2 { font-size: 30px; font-family: $title-family; color: #666666; font-weight: normal;}
 
 /* code for sticky footer */
 .wrapper {

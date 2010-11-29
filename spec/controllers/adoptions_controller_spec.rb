@@ -26,4 +26,19 @@ describe AdoptionsController do
       response.should redirect_to(new_user_session_path)
     end
   end
+
+  context "POST 'create'" do
+    before(:each) do
+      @attr = { :duck_count => 5 }
+    end
+    it "creates an adoption" do
+      lambda do
+        post :create, :adoption => @attr
+      end.should change(Adoption, :count).by(1)
+    end
+    it "redirects to the adoption show page" do
+      post :create, :adoption => @attr
+      response.should redirect_to adoption_path(assigns(:adoption))
+    end
+  end
 end

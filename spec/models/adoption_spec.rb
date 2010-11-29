@@ -22,11 +22,11 @@ describe Adoption do
         duck.should_not be_persisted
       end
     end
-    it "should generate a raffle number on save" do      
+    it "generates a raffle number on create" do
       @adoption.save
       @adoption.raffle_number.should_not be_blank
     end
-    it "should generate fee on save" do
+    it "generates fee on create" do
       count = Forgery::Basic.number
       @adoption.duck_count = count
       @adoption.save

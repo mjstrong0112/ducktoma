@@ -6,7 +6,6 @@ class Duck
   referenced_in :adoption
 
   validates_presence_of :number, :if => :persisted?
-  validates_uniqueness_of :number
 
   before_create :generate_number
 

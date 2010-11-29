@@ -3,7 +3,7 @@ Ducktoma::Application.routes.draw do
 
   get "home/index"
 
-  root :to => "home#index"
+  root :to => "adoptions#new"
 
   resources :users do
     resources :adoptions

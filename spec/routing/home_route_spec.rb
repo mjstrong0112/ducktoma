@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe "routing to home" do
-  it "routes / to home#index" do
+  it "routes / to adoptions#new" do
     { :get => "/" }.should route_to(
-        :controller => "home",
-        :action => "index"
+        :controller => "adoptions",
+        :action => "new"
     )
   end
 end

@@ -5,17 +5,17 @@ describe "adoptions/show.html.haml" do
     @adoption = assign(:adoption, Fabricate(:adoption))
   end
 
-  it "should contain the raffle number" do
+  it "contains the raffle number" do
     render    
     rendered.should have_selector('#raffle-number', :content => @adoption.raffle_number)
   end
 
-  it "should contain a print button" do
+  it "contains a print button" do
     render
     rendered.should have_selector('#print', :class => "blue-button")
   end
 
-  it "should contain total" do
+  it "contains total (fee)" do
     render
     rendered.should have_selector('div', :content => @adoption.fee.to_s)
   end
