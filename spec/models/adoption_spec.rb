@@ -26,5 +26,11 @@ describe Adoption do
       @adoption.save
       @adoption.raffle_number.should_not be_blank
     end
+    it "should generate fee on save" do
+      count = Forgery::Basic.number
+      @adoption.duck_count = count
+      @adoption.save
+      @adoption.fee.should_not be_blank
+    end
   end
 end

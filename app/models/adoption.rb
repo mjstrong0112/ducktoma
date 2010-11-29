@@ -7,7 +7,7 @@ class Adoption
   referenced_in :user
   references_many :ducks
 
-  before_create :create_raffle_number, :save_ducks
+  before_create :save_fee, :create_raffle_number, :save_ducks
 
   # Helper method to generate number of ducks when user enters count on first page
   def duck_count= count    
@@ -15,9 +15,15 @@ class Adoption
     self.ducks = (1..count.to_i).to_a.collect{Duck.new}
   end
   def duck_count
-    self.ducks.count
+    self.ducks.count    
   end
   private
+  def save_fee
+    self.fee = generate_fee(self.ducks)
+  end
+  def generate_fee(ducks)
+    self.ducks.count*50
+  end
   def create_raffle_number
     record=true
     while record
