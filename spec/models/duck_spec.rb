@@ -12,6 +12,10 @@ describe Duck do
     ducks = (1..20).collect{Fabricate.build(:duck)}
     lambda{ ducks.each{|a| a.save!} }.should_not raise_error
   end
+  it "generates a unique number" do
+    ducks = (1..200).collect{Duck.create}
+    ducks.map{|d| d.number}.uniq!.should be_nil
+  end
   it "generates a number on create" do
     duck = Duck.new
     duck.save

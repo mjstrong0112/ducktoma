@@ -27,7 +27,7 @@ describe Adoption do
       adoption.should have(count).ducks
       adoption.ducks.each do |duck|
         duck.should_not be_persisted
-      end
+    end    
     end
     it "generates a raffle number on create" do
       @adoption.save

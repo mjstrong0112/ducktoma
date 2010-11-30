@@ -34,7 +34,7 @@ $title-family: Myriad Pro, Arial, Helvetica, sans-serif;
 
 
 html, body { height: 100%; }
-body{ background-image: url(../../images/gradientbg.gif); background-color: #7cbbd9; height: 100%; }
+body{ background-image: url(../../images/gradientbg.gif); background-repeat: repeat-x; background-color: #7cbbd9; height: 100%; }
 object {vertical-align: top; }
 h1, h2 { font-size: 30px; font-family: $title-family; color: #666666; font-weight: normal;}
 img{ margin: 0px; }
@@ -192,5 +192,16 @@ img{ margin: 0px; }
     padding-top: 55px;
     padding-left: 40px;
     float: left;
+}
+#sponsors { background: #886937; }
+.sponsors-table {
+    width: $form-width; 
+    margin: auto;
+    text-align: center;
+    padding-top: 20px;
+}
+.sponsors-table-content {
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 .break, .clear { clear: both; height: 0px;}
