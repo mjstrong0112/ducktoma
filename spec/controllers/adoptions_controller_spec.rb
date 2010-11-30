@@ -59,10 +59,6 @@ describe AdoptionsController do
         post :create, :adoption => @attr
         response.should render_template('new')
       end
-      it "shows an error message" do
-        post :create, :adoption => @attr
-        flash[:error].should =~ /please enter a valid number/i
-      end
     end
   end
 end
