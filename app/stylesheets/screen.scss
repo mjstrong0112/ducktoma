@@ -180,6 +180,11 @@ img{ margin: 0px; }
     border: none;
 	font-family: $title-family;
 }
+.blue-button a {
+    color: white;
+    font-family: $title-family;
+    text-decoration: none;
+}
 .blue-button-disabled {
 	background: url(../../images/button-disabled.png);
 }
