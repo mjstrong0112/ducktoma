@@ -15,6 +15,6 @@ class Duck
 
   def generate_number
     last_duck_number = Duck.max(:number)
-    @number = last_duck_number ? (last_duck_number + 1) : 1
+    self.number = last_duck_number ? (last_duck_number + 1) : 1
   end
 end

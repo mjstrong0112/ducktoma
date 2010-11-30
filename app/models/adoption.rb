@@ -7,6 +7,7 @@ class Adoption
   referenced_in :user
   references_many :ducks
 
+  validates_presence_of :ducks
   before_create :save_fee, :create_raffle_number, :save_ducks
 
   # Helper method to generate number of ducks when user enters count on first page

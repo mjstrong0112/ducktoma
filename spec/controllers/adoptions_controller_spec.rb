@@ -28,17 +28,41 @@ describe AdoptionsController do
   end
 
   context "POST 'create'" do
-    before(:each) do
-      @attr = { :duck_count => 5 }
-    end
-    it "creates an adoption" do
-      lambda do
+    context "success" do
+      before(:each) do
+        @attr = { :duck_count => 5 }
+      end
+      it "creates an adoption" do
+        lambda do
+          post :create, :adoption => @attr
+        end.should change(Adoption, :count).by(1)
+      end
+      it "redirects to the adoption show page" do
         post :create, :adoption => @attr
-      end.should change(Adoption, :count).by(1)
+        response.should redirect_to adoption_path(assigns(:adoption))
+      end
+      it "shows a success notice" do
+        post :create, :adoption => @attr
+        flash[:notice].should =~ /success/i
+      end
     end
-    it "redirects to the adoption show page" do
-      post :create, :adoption => @attr
-      response.should redirect_to adoption_path(assigns(:adoption))
+    context "failure" do
+      before(:each) do
+        @attr = { :duck_count => 0 }
+      end
+      it "doesn't create an adoption" do
+        lambda do
+          post :create, :adoption => @attr
+        end.should_not change(Adoption, :count)
+      end
+      it "renders the 'new' page" do
+        post :create, :adoption => @attr
+        response.should render_template('new')
+      end
+      it "shows an error message" do
+        post :create, :adoption => @attr
+        flash[:error].should =~ /please enter a valid number/i
+      end
     end
   end
 end
