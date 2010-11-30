@@ -26,8 +26,8 @@ describe "layouts/application.html.haml" do
   it "renders the flash" do
     flash[:notice] = "Testing notice"
     flash[:alert] = "Testing alert"
-    mock.proxy(view).notice
-    mock.proxy(view).alert
+    mock.proxy(view).notice.times(any_times)
+    mock.proxy(view).alert.times(any_times)
     render
     check do
       div(:class => ['flash', 'notice'], :content => "Testing notice")
