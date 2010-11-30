@@ -6,17 +6,20 @@
     = stylesheet_link_tag 'compiled/screen.css', :media => 'screen, projection'
     = csrf_meta_tag
   %body
-    #distance
+    /#distance    
     .wrapper
       #clouds
       #container
         = render 'shared/header'
         
         #main
-          - flash.each do |key, value|
-            %div(class="flash #{ key }")= value
-          
-          = yield
+          = image_tag "logo.png", :id => "logo", :alt => "ducktoma"
+          .clear &nbsp;
+          %div(style="margin-top: -25px;")
+            - flash.each do |key, value|
+              %div(class="flash #{ key }")= value
+
+            = yield
 
       .push
     = render 'shared/footer'

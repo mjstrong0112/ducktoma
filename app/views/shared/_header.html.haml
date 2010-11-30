@@ -1,6 +1,6 @@
 #header
 
-  = image_tag "logo.png", :id => "logo", :alt => "ducktoma"
+  /= image_tag "logo.png", :id => "logo", :alt => "ducktoma"
   - if !user_signed_in?
     = link_to new_user_session_path do      
       = image_tag "login.png", :id => "login", :alt => "Sign In"

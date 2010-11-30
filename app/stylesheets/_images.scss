@@ -1,9 +1,13 @@
 /**  header **/
-img#logo { float: left; }
-img#login { float: left; margin-left: 20px; margin-top: 12px; }
+img#logo { float: left; margin-left: -48px; margin-top: -120px;}
+img#login { float: left; margin-left: 130px; margin-top: 18px; }
 img#plane { float: right; }
 
 /** index page **/
 img#adopt { width: 256px; height: 27px; }
 img.number { width: 28px; height: 28px;}
 .duck-form-image { width: 186px; height: 154px; }
+
+/** sponsors **/
+#etherpros-logo { float: left; padding-top: 20px }
+#heb-logo { float: right; }

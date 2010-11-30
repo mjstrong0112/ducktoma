@@ -11,8 +11,8 @@
 //global variables
 $main-width: 900px;
 $main-height: 600px;
-$header-height: 50px;
-$footer-height: 180px;
+$header-height: 66px;
+$footer-height: 309px;
 $form-width: 750px;
 $title-family: Myriad Pro, Arial, Helvetica, sans-serif;
 
@@ -37,7 +37,7 @@ html, body { height: 100%; }
 body{ background-image: url(../../images/gradientbg.gif); background-color: #7cbbd9; height: 100%; }
 object {vertical-align: top; }
 h1, h2 { font-size: 30px; font-family: $title-family; color: #666666; font-weight: normal;}
-
+img{ margin: 0px; }
 /* code for sticky footer */
 .wrapper {
 	min-height: 100%;
@@ -46,7 +46,7 @@ h1, h2 { font-size: 30px; font-family: $title-family; color: #666666; font-weigh
 	margin: 0 auto #{-$footer-height}; /* the bottom margin is the negative value of the footer's height */
 }
 .push {
-	height: 30px;
+	height: 320px;
 }
 .footer {
 	height: $footer-height;
@@ -67,7 +67,8 @@ h1, h2 { font-size: 30px; font-family: $title-family; color: #666666; font-weigh
 	position: relative;
 	text-align: left;
 	clear: left;
-	padding-bottom: 160px;
+	padding-bottom: 20px;
+	padding-top: 40px;
 }
 #header {
 	height: $header-height;
@@ -94,7 +95,7 @@ h1, h2 { font-size: 30px; font-family: $title-family; color: #666666; font-weigh
 	background: url(../../images/ground.png) repeat-x;
 	background-position: bottom;
 	width: 100%;
-	height: $footer-height;
+	height: 180px;
 }
 .title {
     height: 30px;
@@ -192,4 +193,4 @@ h1, h2 { font-size: 30px; font-family: $title-family; color: #666666; font-weigh
     padding-left: 40px;
     float: left;
 }
-.break { clear: both; }
+.break, .clear { clear: both; height: 0px;}
