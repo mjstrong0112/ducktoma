@@ -23,15 +23,15 @@ describe "layouts/application.html.haml" do
       end
     end
   end
-  it "renders the flash" #do
-#    flash[:notice] = "Testing notice"
-#    flash[:alert] = "Testing alert"
-#    mock.proxy(view).notice
-#    mock.proxy(view).alert
-#    render
-#    check do
-#      p(:class => ['notice'], :content => "Testing notice")
-#      p(:class => ['alert'], :content => "Testing alert")
-#    end
-#  end
+  it "renders the flash" do
+    flash[:notice] = "Testing notice"
+    flash[:alert] = "Testing alert"
+    mock.proxy(view).notice
+    mock.proxy(view).alert
+    render
+    check do
+      div(:class => ['flash', 'notice'], :content => "Testing notice")
+      div(:class => ['flash', 'alert'], :content => "Testing alert")
+    end
+  end
 end

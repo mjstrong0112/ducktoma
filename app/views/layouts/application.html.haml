@@ -16,8 +16,8 @@
           = image_tag "logo.png", :id => "logo", :alt => "ducktoma"
           .clear &nbsp;
           %div(style="margin-top: -25px;")
-            - flash.each do |key, value|
-              %div(class="flash #{ key }")= value
+            .flash.notice= notice
+            .flash.alert= alert
 
             = yield
 
