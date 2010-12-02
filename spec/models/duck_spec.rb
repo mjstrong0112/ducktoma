@@ -5,7 +5,8 @@ describe Duck do
   should_be_referenced_in :adoption
 
   context "when persisted" do
-    subject { Duck.create }
+    # Force setting number to nil to test validate_presence_of
+    subject { Duck.create.tap{|d| d.write_attribute(:number, nil)} }
     it { should validate_presence_of :number }
   end
   it "can save default fabricator ducks" do
