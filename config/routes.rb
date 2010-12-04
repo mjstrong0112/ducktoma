@@ -9,6 +9,10 @@ Ducktoma::Application.routes.draw do
     resources :adoptions
   end
 
+  namespace :sales do
+    resources :adoptions
+  end
+  
   resources :adoptions
 
   # The priority is based upon order of creation:

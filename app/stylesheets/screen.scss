@@ -111,7 +111,7 @@ img{ margin: 0px; }
 	width: $form-width;
 	margin: auto;
 	padding-top: 10px;
-	.header {
+	.header, .header-slim {
         @include vbox(60px);
         @include box-shadow(20px);
         margin-top: 20px;
@@ -124,6 +124,13 @@ img{ margin: 0px; }
             margin: 16px;
         }
 	}
+    .header-slim {
+        @include vbox(50px);
+        .number {
+            float: left;
+            margin: 11px;
+        }
+    }
 }
 #raffle-number{
     @include vbox(100px);
@@ -209,4 +216,13 @@ img{ margin: 0px; }
     padding-top: 10px;
     padding-bottom: 20px;
 }
+.sales-adoption-form {
+    margin: auto;
+    width: 570px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
 .break, .clear { clear: both; height: 0px;}
+.center { text-align: center; }
+.left { float: left; }
+.right { float: right; }
