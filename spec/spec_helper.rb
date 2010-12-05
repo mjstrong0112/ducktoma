@@ -50,6 +50,6 @@ Spork.each_run do
   require 'fabrication'
 
   if Spork.using_spork?
-    load File.join(Rails.root, "app", "models", "user.rb")
+    #load File.join(Rails.root, "app", "models", "user.rb")
   end
 end

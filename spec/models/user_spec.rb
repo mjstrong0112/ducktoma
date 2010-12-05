@@ -25,6 +25,19 @@ describe User do
     lambda{ user.save! }.should_not raise_error
     user.adoptions.should_not be_blank
   end
+  it "can have roles" do
+    @basic_user.should have(0).roles
+  end
+  it "can be an admin" do
+    @basic_user.add_role :admin
+    @basic_user.should be_an_admin
+    @basic_user.should have_role :admin
+    @basic_user.roles.should == [:admin]
+  end
+  it "can be a sales associate" do
+    @basic_user.add_role :sales
+    @basic_user.should have_role :sales
+  end
 #  it "could be an admin user" do
 #    @basic_user.respond_to?(:admin?).should be true
 #  end

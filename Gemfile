@@ -1,5 +1,4 @@
 source 'http://rubygems.org'
-
 gem 'rack-contrib', :require => 'rack/contrib'
 gem 'rails', '3.0.3'
 
@@ -20,12 +19,18 @@ gem 'placeholder', '~> 0.0.6'
 gem 'inherited_resources', '~> 1.1.2'
 
 # Auth
-gem 'devise', '~> 1.1.3'
+gem 'devise', '~> 1.1.5'
+gem 'cancan', '~> 1.4.1'
+#gem 'cancan-permits', '~> 0.3.6'
+gem 'roles_generic', '~> 0.3.3'
+gem 'roles_mongoid', '~> 0.3.4'
+#gem 'cream', '~> 0.8.0'
+
 # DB
 gem 'mongoid', '~> 2.0.0.beta.20'
 # Bson and bson_ext have to be the same version
-gem 'bson', '~> 1.1.2'
-gem 'bson_ext', '~> 1.1.2'
+gem 'bson', '~> 1.1.4'
+gem 'bson_ext', '~> 1.1.4'
 
 # Test gems without generators
 group :test do
@@ -51,7 +56,6 @@ group :development, :test do
   gem 'rspec-expectations', '~> 2.1.0'
   gem 'rspec-rails', '~> 2.1.0'
   gem 'steak', '>= 1.0.0.rc.4'
-
   gem 'spork', '>= 0.9.0.rc2'
 end
 
@@ -77,7 +81,3 @@ end
 
 # Deploy with Capistrano
 # gem 'capistrano'
-
-# To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
-# gem 'ruby-debug'
-# gem 'ruby-debug19'
