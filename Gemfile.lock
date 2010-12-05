@@ -208,3 +208,4 @@ DEPENDENCIES
   thin (~> 1.2.7)
   timecop (~> 0.3.5)
   webrat (~> 0.7.2)
+  will_paginate

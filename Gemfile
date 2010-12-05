@@ -3,6 +3,8 @@ source 'http://rubygems.org'
 gem 'rack-contrib', :require => 'rack/contrib'
 gem 'rails', '3.0.3'
 
+gem 'will_paginate'
+
 # Core Ext
 gem 'andand', :git => "git://github.com/raganwald/andand.git"
 

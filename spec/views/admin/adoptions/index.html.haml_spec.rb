@@ -6,9 +6,15 @@ describe "admin/adoptions/index.html.haml" do
     (1..50).to_a.each do |n|
       @collection.push Fabricate.build(:adoption)
     end
-    stub(view).collection { @collection }
+    @collection = assign(:adoptions, @collection.paginate(:page => 1))
   end
-  it "displays the information for all adoptions" do
+  it "displays pagination links" do
+    render
+    rendered.should have_selector('div.pagination')
+    rendered.should have_selector('span.previous_page')
+    rendered.should have_selector('a.next_page')
+  end
+  it "displays all the information for the adoptions collection" do
     render
     @collection.each do |adoption|
       rendered.should have_selector('td', :content => adoption.raffle_number)

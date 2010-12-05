@@ -6,12 +6,13 @@ describe Admin::AdoptionsController do
       @user = Fabricate(:user)
       sign_in @user
     end
-    it "loads all adoptions on GET 'index'" do
+    it "loads adoptions with pagination on GET 'index'" do
       Adoption.delete_all
-      all_adoptions = (1..5).to_a.collect{Fabricate(:adoption)}
+      all_adoptions = (1..30).to_a.collect{Fabricate(:adoption)}
       get :index
       response.should be_success
-      assigns(:adoptions).to_a.should == all_adoptions
+      assigns(:adoptions).to_a.should_not == all_adoptions
+      assigns(:adoptions).to_a.should == Adoption.paginate(:page => 1)
     end
   end
   context "as a guest" do

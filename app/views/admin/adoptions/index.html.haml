@@ -1,9 +1,10 @@
+= will_paginate @adoptions
 %table
   %tr
     %th Raffle Number
     %th Duck Count
     %th Fee
-  - collection.each do |adoption|
+  - @adoptions.each do |adoption|
     %tr
       %td= adoption.raffle_number
       %td= adoption.duck_count
@@ -12,3 +13,4 @@
 %h2 Total ducks adopted: #{total_duck_count}
 %br/
 %h2 Total donations raised: #{number_to_currency total_fee}
+= will_paginate @adoptions
