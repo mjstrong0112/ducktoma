@@ -1,8 +1,5 @@
 .form(style="padding-top: 0px;")
-  .header(style="margin-top: 0px;")
-    = image_tag "no3.gif", :class => "number"
-    Adoption Summary
-    
+  = render 'shared/title', :text => 'Adoption Summary', :number => 3
   %h1 Your raffle number.
  
   #raffle-number= @adoption.raffle_number

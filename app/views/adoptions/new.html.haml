@@ -3,9 +3,8 @@
   %h1 Adopt a Duck Now!
 
 .form
-  .header
-    = image_tag "no1.gif", :class => "number"
-    Specify Number of Ducks ($50 x Duck)
+  = render 'shared/title', :text => 'Specify Number of Ducks($50 x Duck)', :number => 1
+
   = form_for @adoption do |f|
     #duck-form
       #duck-form-image

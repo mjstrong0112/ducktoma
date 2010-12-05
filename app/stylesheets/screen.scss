@@ -46,7 +46,7 @@ img{ margin: 0px; }
 	margin: 0 auto #{-$footer-height}; /* the bottom margin is the negative value of the footer's height */
 }
 .push {
-	height: 320px;
+	height: 320px;    	
 }
 .footer {
 	height: $footer-height;
@@ -216,12 +216,29 @@ img{ margin: 0px; }
     padding-top: 10px;
     padding-bottom: 20px;
 }
-.sales-adoption-form {
+.sales-adoption-form, .sales-adoption-form-ducks {
     margin: auto;
     width: 570px;
     margin-top: 20px;
     margin-bottom: 40px;
 }
+.sales-adoption-form input[type="text"] {
+    width: 260px;
+}
+.sales-adoption-form-ducks input[type="text"] {
+    width: 100px;
+}
+.sales-adoption-form-ducks .left {
+    padding-left: 10px;
+}
+.sales-adoption-form-title {
+    margin-top: -20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+
 .break, .clear { clear: both; height: 0px;}
 .center { text-align: center; }
 .left { float: left; }
