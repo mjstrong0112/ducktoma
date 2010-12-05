@@ -5,6 +5,11 @@ require 'spork'
 ENV["RAILS_ENV"] ||= 'test'
 
 Spork.prefork do
+
+  if Spork.using_spork?
+    Spork.trap_class_method(Rails::Mongoid, :load_models)
+  end
+
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
   require 'remarkable/active_model'
@@ -43,4 +48,8 @@ Spork.prefork do
 end
 Spork.each_run do
   require 'fabrication'
+
+  if Spork.using_spork?
+    load File.join(Rails.root, "app", "models", "user.rb")
+  end
 end
