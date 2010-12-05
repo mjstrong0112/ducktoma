@@ -12,6 +12,10 @@ Ducktoma::Application.routes.draw do
   namespace :sales do
     resources :adoptions
   end
+
+  namespace :admin do
+    resources :adoptions
+  end
   
   resources :adoptions
 

@@ -5,6 +5,7 @@
     = link_to new_user_session_path do      
       = image_tag "login.png", :id => "login", :alt => "Sign In"
   - else
-    = link_to "Sign Out", destroy_user_session_path
+    = link_to destroy_user_session_path do
+      = image_tag "logout.png", :id => "logout", :alt => "Sign Out"
 
   = image_tag "plane.png",  :id => "plane", :alt => "Annual Duck Race"
