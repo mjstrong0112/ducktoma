@@ -1,33 +1,39 @@
 require 'spec_helper'
 
-describe Admin::AdoptionsController do
+describe Sales::AdoptionsController do
+  context "as a sales user" do
+    before(:each) do
+      @user = Fabricate(:sales_user)
+      sign_in @user
+    end
+    it "GET 'new' is successful" do
+      get :new
+      response.should be_success
+    end
+  end
   context "as an admin" do
     before(:each) do
       @user = Fabricate(:admin)
       sign_in @user
     end
-    it "loads adoptions with pagination on GET 'index'" do
-      Adoption.delete_all
-      all_adoptions = (1..30).to_a.collect{Fabricate(:adoption)}
-      get :index
+    it "GET 'new' is successful" do
+      get :new
       response.should be_success
-      assigns(:adoptions).to_a.should_not == all_adoptions
-      assigns(:adoptions).to_a.should == Adoption.paginate(:page => 1)
     end
   end
-  context "as a non-admin" do
+  context "as a standard user" do
     before(:each) do
       @user = Fabricate(:user)
       sign_in @user
     end
-    it "redirects to root on GET user adoptions 'index'" do
-      get :index
+    it "redirects to root on GET user adoptions 'new'" do
+      get :new
       response.should_not be_success
       response.should redirect_to root_path
     end
   end
   context "as a guest" do
-    it "redirects to login on GET user adoptions 'index'" do
+    it "redirects to login on GET user adoptions 'new'" do
       get :index
       response.should_not be_success
       response.should redirect_to(new_user_session_path)

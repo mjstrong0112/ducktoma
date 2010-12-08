@@ -1,16 +1,6 @@
-= will_paginate @adoptions
-%table
-  %tr
-    %th Raffle Number
-    %th Duck Count
-    %th Fee
-  - @adoptions.each do |adoption|
-    %tr
-      %td= adoption.raffle_number
-      %td= adoption.duck_count
-      %td= number_to_currency adoption.fee
+= render :partial => 'adoptions/adoptions_table', :locals => { :adoptions => @adoptions }
+%br/
 
 %h2 Total ducks adopted: #{total_duck_count}
 %br/
 %h2 Total donations raised: #{number_to_currency total_fee}
-= will_paginate @adoptions

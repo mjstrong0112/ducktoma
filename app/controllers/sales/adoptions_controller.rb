@@ -1,8 +1,10 @@
-class Sales::AdoptionsController < ApplicationController
-  inherit_resources
-  actions :index, :show, :new, :create
+module Sales
+  class Sales::AdoptionsController < BaseController
+    inherit_resources
+    actions :index, :show, :new, :create
+    load_and_authorize_resource
+    belongs_to :user, :optional => :true
 
-  belongs_to :user, :optional => :true
-
-  before_filter :authenticate_user!, :only => :index
+    #before_filter :authenticate_user!, :only => :index
+  end
 end

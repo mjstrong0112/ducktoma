@@ -57,7 +57,7 @@ describe User do
 #      Ability.new(@user).should_not be_able_to(:update, @other_user)
 #    end
   end
-#  context "an admin user" do
+  context "an admin user" do
 #    before(:each) do
 #      @user = Fabricate(:admin)
 #    end
@@ -68,5 +68,5 @@ describe User do
 #      @other_user = Fabricate(:user)
 #      Ability.new(@user).should be_able_to(:update, @other_user)
 #    end
-#  end
+  end
 end
