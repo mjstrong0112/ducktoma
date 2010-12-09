@@ -1,0 +1,19 @@
+.form(style="padding-top: 0px;")
+  = render 'shared/title', :text => 'Adoption Summary', :number => 3
+  %h1 Your raffle number.
+
+  #raffle-number= @adoption.raffle_number
+
+  %h1 Duck numbers.
+  - @adoption.ducks.each do |duck|
+    .duck-number
+      %div(style="width: 44px; text-align: center;")
+        = duck.number
+
+  .break &nbsp;
+
+  #duck-form-total
+    Total: #{number_to_currency(@adoption.fee)}
+
+#print.blue-button
+  = link_to_function "Print", "javascript:print()", :html_options => { :id => "print" }

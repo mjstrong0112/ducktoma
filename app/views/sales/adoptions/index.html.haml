@@ -1,0 +1,11 @@
+- if @adoptions.count > 0
+  = render :partial => 'adoptions_table', :locals => { :adoptions => @adoptions, :actions => true }
+  %br/
+
+  %h2 Total ducks adopted: #{current_user.duck_count}
+  %br/
+  %h2 Total donations raised: #{number_to_currency current_user.fee}
+
+- else
+  %h2 You don't have any adoptions.
+  %h3= link_to 'Adopt some ducks', new_adoption_url

@@ -197,12 +197,12 @@ img{ margin: 0px; }
 }
 .duck-number {
     background: url(../../images/duck-small.gif) no-repeat;
-    width: 90px; height: 58px;
+    width: 120px; height: 58px;
 	font-family: $title-family;
-	font-size: 30px;
+	font-size: 25px;
 	color: white;
     padding-top: 55px;
-    padding-left: 40px;
+    padding-left: 27px;
     float: left;
 }
 #sponsors { background: #886937; }
@@ -237,6 +237,10 @@ img{ margin: 0px; }
     text-align: center;
 }
 
+
+input[disabled='disabled'] {
+  background-color: #cccccc;
+}
 
 
 .break, .clear { clear: both; height: 0px;}

@@ -2,7 +2,9 @@ var keyCodes = [ 37, 38, 39, 40, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 8, 96, 
 $(document).ready(function() {				   
 	var input = $("#adoption_duck_count");
 	
-	input.val(0);
+    if (!input.val) {
+        input.val(0);
+    }
 	input.focus(function() {
 		if(input.val() == 0) {		
 			input.val('');

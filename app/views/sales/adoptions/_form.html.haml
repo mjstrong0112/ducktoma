@@ -1,48 +1,46 @@
 = render 'shared/title_slim', :text => 'Personal Information', :number => 1
-= form_for @adoption do |f|
+= simple_form_for [:sales, @adoption] do |f|
   .sales-adoption-form
     .left
       Name: <br/>
-      = text_field_tag 'name'
+      = text_field_tag 'name', '', :disabled => true
       %br/
       Phone: <br/>
-      = text_field_tag 'phone'
+      = text_field_tag 'phone', '', :disabled => true
       %br/
       Email: <br/>
-      = text_field_tag 'email'
+      = text_field_tag 'email', '', :disabled => true
     .right
       Address: <br/>
-      = text_field_tag 'address'
+      = text_field_tag 'address', '', :disabled => true
       %br/
       City: <br/>
-      = text_field_tag 'city'
+      = text_field_tag 'city', '', :disabled => true
       %br/
       .left
         State: <br/>
-        = text_field_tag 'state', '', :style => "width: 195px;"
+        = text_field_tag 'state', '', :style => "width: 195px;", :disabled => true
       .left(style="padding-left: 10px;")
         Zip: <br/>
-        = text_field_tag 'zip', '', :style => "width: 50px;"
+        = text_field_tag 'zip', '', :style => "width: 50px;", :disabled => true
       %br/
     .break &nbsp;
 
   = render 'shared/title_slim', :text => 'Number of Ducks', :number => 3
 
   .sales-adoption-form-ducks
-    .left(style="padding: 0;")
-      Lone Ducks: <br/>
-      = text_field_tag 'lone'
+    .left(style="padding: 0;")     
+      = f.input :duck_count, :label => "Lone Ducks: ", :value => @adoption.duck_count
     .left
       Family of Ducks: <br/>
-      = text_field_tag 'family'
+      = text_field_tag 'family', '', :disabled => true
     .left
       Flock: <br/>
-      = text_field_tag 'flock'
+      = text_field_tag 'flock', '', :disabled => true
     .left
       OODLES: <br/>
-      = text_field_tag 'oodles'
+      = text_field_tag 'oodles', '', :disabled => true
 
     .break &nbsp;
-
-  #submit-sales.blue-button
-    Submit
+  #submit-sales(style="margin:auto; width: 247px;")
+    = f.submit "Submit", :class => "submit-duck-button blue-button"

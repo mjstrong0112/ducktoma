@@ -4,12 +4,6 @@
     %th Raffle Number
     %th Duck Count
     %th Fee
-    /%th Actions
   = render :partial => 'adoptions/adoption_row', :collection => adoptions, :as => :adoption
 
-  -#- adoptions.each do |adoption|
-    %tr
-      %td= adoption.raffle_number
-      %td= adoption.duck_count
-      %td= number_to_currency adoption.fee
 = will_paginate adoptions
