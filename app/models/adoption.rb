@@ -26,12 +26,14 @@ class Adoption
     self.ducks.count*50
   end
   def create_raffle_number
-    record=true
-    while record
-      random = "R#{Array.new(9){rand(9)}.join}"
-      record = Adoption.where(:raffle_number => random).exists?
+    if self.raffle_number.blank?
+      record=true
+      while record
+        random = "R#{Array.new(9){rand(9)}.join}"
+        record = Adoption.where(:raffle_number => random).exists?
+      end
+      self.raffle_number = random
     end
-    self.raffle_number = random
   end
   def save_ducks
     self.ducks.each{|d| d.save}
