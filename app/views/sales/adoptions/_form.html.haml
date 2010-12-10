@@ -29,8 +29,13 @@
   = render 'shared/title_slim', :text => 'Number of Ducks', :number => 3
 
   .sales-adoption-form-ducks
-    .left(style="padding: 0;")     
-      = f.input :duck_count, :label => "Lone Ducks: ", :value => @adoption.duck_count
+    - if @adoption.raffle_number.blank?
+      .left(style="padding: 0;")
+        = f.input :duck_count, :label => "Lone Ducks: ", :value => @adoption.duck_count
+    - else
+      .left(style="padding: 0;")
+        Lone Ducks: <br/>      
+        = text_field_tag 'duck_count', @adoption.duck_count, :disabled => true
     .left
       Family of Ducks: <br/>
       = text_field_tag 'family', '', :disabled => true
