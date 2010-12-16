@@ -1,21 +1,16 @@
 = render 'shared/title_slim', :text => 'Personal Information', :number => 1
 = simple_form_for [:sales, @adoption] do |f|
-  .sales-adoption-form
+  .sales-adoption-form    
     .left
-      Name: <br/>
-      = text_field_tag 'name', '', :disabled => true
+      = render :partial => 'stub_text_field', :object => "name"
       %br/
-      Phone: <br/>
-      = text_field_tag 'phone', '', :disabled => true
+      = render :partial => 'stub_text_field', :object => "phone"
       %br/
-      Email: <br/>
-      = text_field_tag 'email', '', :disabled => true
+      = render :partial => 'stub_text_field', :object => "email"
     .right
-      Address: <br/>
-      = text_field_tag 'address', '', :disabled => true
+      = render :partial => 'stub_text_field', :object => "address"
       %br/
-      City: <br/>
-      = text_field_tag 'city', '', :disabled => true
+      = render :partial => 'stub_text_field', :object => "city"
       %br/
       .left
         State: <br/>
@@ -37,14 +32,11 @@
         Lone Ducks: <br/>      
         = text_field_tag 'duck_count', @adoption.duck_count, :disabled => true
     .left
-      Family of Ducks: <br/>
-      = text_field_tag 'family', '', :disabled => true
+      = render :partial => 'stub_text_field', :object => "family"
     .left
-      Flock: <br/>
-      = text_field_tag 'flock', '', :disabled => true
+      = render :partial => 'stub_text_field', :object => "flock"
     .left
-      OODLES: <br/>
-      = text_field_tag 'oodles', '', :disabled => true
+      = render :partial => 'stub_text_field', :object => "oodles"
 
     .break &nbsp;
   #submit-sales(style="margin:auto; width: 247px;")
