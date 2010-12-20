@@ -6,14 +6,15 @@
 @import "compass/reset";
 @import "flutie/flutie";
 @import "images";
-@import 'forms';
+@import "forms";
 
 //global variables
-$main-width: 900px;
+$main-width: 720px;
+$sidebar-width: 180px;
 $main-height: 600px;
 $header-height: 66px;
-$footer-height: 309px;
-$form-width: 750px;
+$footer-height: 140px; //309px with sponsors on bottom
+$form-width: 700px;
 $title-family: Myriad Pro, Arial, Helvetica, sans-serif;
 
 @mixin rounded-border($radius) {
@@ -46,7 +47,7 @@ img{ margin: 0px; }
 	margin: 0 auto #{-$footer-height}; /* the bottom margin is the negative value of the footer's height */
 }
 .push {
-	height: 320px;    	
+	height: 140px;
 }
 .footer {
 	height: $footer-height;
@@ -62,7 +63,7 @@ img{ margin: 0px; }
 }
 #container {
 	margin: 0 auto;
-	width: $main-width;
+	width: 1080px;
 	min-height: 540px;
 	position: relative;
 	text-align: left;
@@ -79,10 +80,30 @@ img{ margin: 0px; }
     @include rounded-border(15px);
     @include box-shadow(20px);
     $padding: 30;
+    float: left;
 	padding: #{$padding}px;
 	width: $main-width - $padding*2;
 	min-height: $main-height - $padding*2;
 	background-color: #FFF;
+}
+#sidebar, #sidebar-left {
+    /*@include rounded-border(15px);
+    @include box-shadow(20px);*/
+
+    $padding: 0;
+    $margin-left: 20;
+    margin-left: #{$margin-left}px;
+    padding: #{$padding}px;
+
+    margin-left: 20px;
+    width: $sidebar-width - $padding*2 - $margin-left;
+    float: left;
+    min-height: $main-height - $padding*2;
+    /*background-color: #FFF;*/
+}
+#sidebar-left {
+    margin-left: 0px;
+    margin-right: 20px;
 }
 #clouds {
 	position: absolute;
@@ -95,7 +116,7 @@ img{ margin: 0px; }
 	background: url(../../images/ground.png) repeat-x;
 	background-position: bottom;
 	width: 100%;
-	height: 180px;
+	height: 140px;
 }
 .title {
     height: 30px;
@@ -108,7 +129,7 @@ img{ margin: 0px; }
     }
 }
 .form {
-	width: $form-width;
+	/*width: $form-width;*/
 	margin: auto;
 	padding-top: 10px;
 	.header, .header-slim {
@@ -176,6 +197,10 @@ img{ margin: 0px; }
 	color: #666;
 	text-align: right;
 }
+.adoption-new-button {
+    width: 247px;
+    margin: auto;
+}
 .blue-button, .blue-button-disabled {
     @include vbox(82px);
     width: 247px;
@@ -205,9 +230,17 @@ img{ margin: 0px; }
     padding-left: 27px;
     float: left;
 }
-#sponsors { background: #886937; }
+#sponsors-title {
+    @include rounded-border(15px);
+    @include box-shadow(20px);    
+    background-color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+#sponsors { background: #886937;}
 .sponsors-table {
-    width: $form-width; 
+    width: $form-width;
     margin: auto;
     text-align: center;
     padding-top: 20px;
@@ -236,7 +269,6 @@ img{ margin: 0px; }
     margin-bottom: 20px;
     text-align: center;
 }
-
 
 input[disabled='disabled'] {
   background-color: #cccccc;

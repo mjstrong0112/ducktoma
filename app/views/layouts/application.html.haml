@@ -11,6 +11,11 @@
       #clouds
       #container
         = render 'shared/header'
+
+        #sidebar-left
+          /#sponsors-title= image_tag "sponsors.png", :alt => "sponsors"
+          = image_tag "etherpros.png", :id => "etherpros-logo", :alt => "Etherpros"
+                  
         #main
           = image_tag "logo.png", :id => "logo", :alt => "ducktoma"
           .clear &nbsp;
@@ -22,6 +27,11 @@
 
             = yield
 
+        #sidebar
+          /#sponsors-title= image_tag "sponsors.png", :alt => "sponsors"
+          = image_tag "heblogo.png", :id => "heb-logo", :alt => "HEB"
+             
+        .clear &nbsp;
       .push
     = render 'shared/footer'
     = render 'shared/javascripts'
