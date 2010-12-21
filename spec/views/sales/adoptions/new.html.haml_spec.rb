@@ -4,9 +4,8 @@ describe "sales/adoptions/new.html.haml" do
   before(:each) { assign(:adoption, Adoption.new) }
   context "form" do
     it "should have the right fields" do
-      fields_s='name phone email address city state zip lone family flock oodles'
-      fields = fields_s.split(' ')
       render
+      fields = %w(name phone email address city state zip)
       fields.each do |field|
         rendered.should have_selector('input', :name => field)
       end

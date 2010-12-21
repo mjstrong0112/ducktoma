@@ -9,7 +9,7 @@ gem 'andand', :git => "git://github.com/raganwald/andand.git"
 
 # UI
 gem 'haml', '~> 3.0.21'
-gem 'simple_form', '~> 1.2.2'
+gem 'simple_form', '~> 1.3.0'
 gem 'compass', '~> 0.10.6'
 
 # Temp gems
@@ -52,9 +52,9 @@ end
 
 # Test gems with generators (available in dev env)
 group :development, :test do
-  gem 'rspec-core', '~> 2.1.0'
-  gem 'rspec-expectations', '~> 2.1.0'
-  gem 'rspec-rails', '~> 2.1.0'
+  gem 'rspec-core', '~> 2.3.1'
+  gem 'rspec-expectations', '~> 2.3.0'
+  gem 'rspec-rails', '~> 2.3.1'
   gem 'steak', '>= 1.0.0.rc.4'
   gem 'spork', '>= 0.9.0.rc2'
 end
