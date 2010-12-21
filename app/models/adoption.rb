@@ -5,6 +5,9 @@ class Adoption
   field :raffle_number
   field :fee, :type => Integer
   field :type
+  
+  # State field for state machine. Default state MUST be specified.
+  field :state, :type => String, :default => "new"
 
   referenced_in :user
   references_many :ducks, :dependent => :destroy
@@ -15,6 +18,16 @@ class Adoption
 
   before_validation :save_fee, :create_raffle_number
   validates_presence_of :ducks, :fee, :raffle_number
+
+  state_machine :initial => :new do
+    event :complete do
+      transition :new => :completed
+    end
+    event :cancel do
+      transition all - [:canceled] => :canceled
+    end
+  end
+
   validates_associated :adopter_info
   validates_numericality_of :fee, :only_integer => true
   validate :ducks_must_be_available, :on => :create

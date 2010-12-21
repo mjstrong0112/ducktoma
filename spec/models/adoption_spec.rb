@@ -4,6 +4,7 @@ describe Adoption do
 
   should_have_field :raffle_number
   should_have_field :fee, :type => Integer
+  should_have_field :state, :type => String
 
   should_be_referenced_in :user
   should_reference_many :ducks  
@@ -80,6 +81,26 @@ describe Adoption do
       Settings[:duck_inventory] = 11
       mock.proxy(adoption).ducks_available? {|result| result.should be true; result}
       adoption.should be_valid(:create)
+    end
+  end
+  describe "it's state" do
+    it "is new by default" do
+      subject.should be_new
+    end
+    it "can be completed or canceled when new" do
+      [:complete, :cancel].each {|s| subject.send(:"can_#{s}?").should be true }
+    end
+    context "when completed" do
+      before(:all) { subject.state = :completed }
+      it "can be canceled" do
+        subject.can_cancel?.should be true
+      end
+    end
+    context "when canceled" do
+      before(:all) { subject.state = :canceled }
+      it "is permanentely canceled" do
+        subject.should have(0).state_events
+      end
     end
   end
 end

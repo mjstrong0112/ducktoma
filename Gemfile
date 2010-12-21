@@ -29,6 +29,10 @@ gem 'roles_generic', '~> 0.3.3'
 gem 'roles_mongoid', '~> 0.3.4'
 #gem 'cream', '~> 0.8.0'
 
+# Model
+gem 'state_machine', '~> 0.9.4'
+gem 'state_machine-mongoid', '~> 0.1.5'
+
 # DB
 gem 'mongoid', '~> 2.0.0.beta.20'
 # Bson and bson_ext have to be the same version
