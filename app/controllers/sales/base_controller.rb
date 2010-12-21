@@ -1,16 +1,12 @@
 module Sales
   class BaseController < ApplicationController
+    before_filter :authenticate_user!
     def current_ability
       @current_ability ||= SalesAbility.new(current_user)
     end
     rescue_from CanCan::AccessDenied do |exception|
-      if !user_signed_in?
-        flash[:error] = 'Please sign in to access this page'
-        redirect_to new_user_session_url
-      else
-        flash[:error] = 'You cannot access this page'
-        redirect_to root_url
-      end
-    end    
+      flash[:alert] = "You are not authorized to view this page."
+      redirect_to root_url
+    end
   end
 end

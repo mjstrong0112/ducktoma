@@ -10,10 +10,12 @@ Ducktoma::Application.routes.draw do
   end
 
   namespace :sales do
+    root :to => "dashboard#index"
     resources :adoptions
   end
 
   namespace :admin do
+    root :to => "dashboard#index"
     resources :adoptions
     resources :pricings
   end

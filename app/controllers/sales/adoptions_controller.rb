@@ -1,7 +1,7 @@
 module Sales
   class Sales::AdoptionsController < BaseController
     inherit_resources
-    actions :index, :show, :new, :create, :edit, :update, :delete
+    actions :index, :show, :new, :create, :edit, :update, :destroy
 
     load_and_authorize_resource
     belongs_to :user, :optional => :true
