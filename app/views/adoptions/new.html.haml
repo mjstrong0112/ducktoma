@@ -17,3 +17,9 @@
     .clear &nbsp;
     .adoption-new-button
       = f.submit "Continue", :class => "submit-duck-button blue-button-disabled"
+
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function() {
+      pricingScheme.addPricings(#{pricing_json});      
+    });

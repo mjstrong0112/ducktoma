@@ -37,5 +37,23 @@ describe Adoption do
       @adoption.save
       @adoption.fee.should_not be_blank
     end
+    it "generates fee with correct pricing system" do
+      Pricing.delete_all
+      pricing_rule_1 = Fabricate(:pricing, :quantity => 1, :price => 100)
+      pricing_rule_2 = Fabricate(:pricing, :quantity => 5, :price => 80)
+      pricing_rule_3 = Fabricate(:pricing, :quantity => 10, :price => 60)
+
+      adoption_1 = Fabricate.build(:adoption, :duck_count => 3)
+      adoption_1.save
+      adoption_1.fee.should == pricing_rule_1.price * adoption_1.duck_count
+
+      adoption_2 = Fabricate.build(:adoption, :duck_count => 9)
+      adoption_2.save
+      adoption_2.fee.should == pricing_rule_2.price * adoption_2.duck_count
+
+      adoption_3 = Fabricate.build(:adoption, :duck_count => 12)
+      adoption_3.save
+      adoption_3.fee.should == pricing_rule_3.price * adoption_3.duck_count
+    end    
   end
 end

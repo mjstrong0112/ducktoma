@@ -1,6 +1,19 @@
+var pricingScheme = new PricingScheme();
+function PricingScheme() {
+  var pricings = [];
+  this.addPricing = function(quantity,price) {
+    pricings.push([quantity,price]);
+  }
+  this.addPricings = function(array) {
+    pricings = array;
+  }
+  this.getPricings = function() {
+    return pricings;
+  }
+}
 var keyCodes = [ 37, 38, 39, 40, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 8, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105 ];			   
-$(document).ready(function() {				   
-	var input = $("#adoption_duck_count");
+$(document).ready(function() {
+    var input = $("#adoption_duck_count");
 	
     if (!input.val) {
         input.val(0);
@@ -37,7 +50,30 @@ $(document).ready(function() {
 	});				
 });
 function duck_price(duckCount) {
-	var price = duckCount*50;
-	return 'Total: $'+price+".00";
+  var index=0;
+  var not_true = true;
+  var pricing;
+  var pricings = pricingScheme.getPricings();
+  var price;
+  if(pricings.length > 0) {
+	  while(not_true) {
+	    pricing = pricings[index];
+	    if(pricing) {	
+	      if(duckCount > pricing['quantity']) {
+	        not_true = false;
+	      }
+	      index++;
+            }else{
+             not_true = false;
+            }
+	  }
+	  if(!pricing) {
+	    pricing = pricings[pricings.length-1]
+	  }
+  	  price = pricing['price']*duckCount
+  } else {
+    price = duckCount*50;
+  } 
+  return 'Total: $'+(price/100).toFixed(2);
 }
 

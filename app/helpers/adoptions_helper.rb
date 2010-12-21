@@ -13,4 +13,8 @@ module AdoptionsHelper
     end
     f_count
   end
+
+  def pricing_json
+    Pricing.desc(:quantity).map {|p| {:quantity => p.quantity, :price => p.price}}.to_json
+  end
 end

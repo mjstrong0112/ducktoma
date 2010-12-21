@@ -23,7 +23,17 @@ class Adoption
     self.fee = generate_fee(self.ducks)
   end
   def generate_fee(ducks)
-    self.ducks.count*50
+    pricings = Pricing.desc(:quantity).to_a
+    if pricings.count > 0
+      pricing = pricings.detect do |p|
+       duck_count > p.quantity
+      end
+      pricing ||= pricings.last
+
+      duck_count * pricing.price
+    else
+      duck_count * 50;
+    end
   end
   def create_raffle_number
     if self.raffle_number.blank?

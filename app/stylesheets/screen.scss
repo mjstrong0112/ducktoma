@@ -111,6 +111,7 @@ img{ margin: 0px; }
 	background: url(../../images/clouds_bg.png) repeat-x center bottom;
 	height: 550px;
 	width: 100%;
+    background-position: -280px;	
 }
 #ground {
 	background: url(../../images/ground.png) repeat-x;
@@ -270,9 +271,14 @@ img{ margin: 0px; }
     text-align: center;
 }
 
+.price-form input[type='text'] {
+    width: 30px;
+}
+
 input[disabled='disabled'] {
   background-color: #cccccc;
 }
+
 
 
 .break, .clear { clear: both; height: 0px;}

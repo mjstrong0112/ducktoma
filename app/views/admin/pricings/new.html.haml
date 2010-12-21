@@ -1,0 +1,9 @@
+%h1 Add a new price
+.price-form
+  = simple_form_for [:admin, @pricing] do |f|
+    .left= f.input :price, :label => false
+    .left(style="padding: 10px;") cents when more than
+    .left= f.input :quantity, :label => false
+    .left(style="padding: 10px;") ducks
+    .clear &nbsp;
+    = f.submit

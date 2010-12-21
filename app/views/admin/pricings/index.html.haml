@@ -1,0 +1,23 @@
+%h1 Pricing rules
+%table
+  %tr
+    %th When more than
+    %th Price
+    %th
+  - @pricings.each do |pricing|
+    %tr
+      %td        
+        = pluralize(pricing.quantity,"duck")
+      %td
+        = pricing.price
+        cents
+      %td= link_to 'delete', admin_pricing_path(pricing), :method => :delete      
+
+.price-form
+  = simple_form_for [:admin, Pricing.new] do |f|
+    .left= f.input :price, :label => false
+    .left(style="padding: 10px;") cents when more than
+    .left= f.input :quantity, :label => false
+    .left(style="padding: 10px;") ducks
+    .clear &nbsp;
+    = f.submit
