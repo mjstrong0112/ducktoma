@@ -18,7 +18,7 @@ describe "admin/adoptions/index.html.haml" do
     render
     @collection.each do |adoption|
       rendered.should have_selector('td', :content => adoption.raffle_number)
-      rendered.should have_selector('td', :content => number_to_currency(adoption.fee))
+      rendered.should have_selector('td', :content => number_to_currency(adoption.fee/100))
       rendered.should have_selector('td', :content => adoption.duck_count.to_s)
     end
   end

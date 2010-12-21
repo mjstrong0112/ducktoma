@@ -17,6 +17,6 @@ describe "adoptions/show.html.haml" do
 
   it "contains total (fee)" do
     render
-    rendered.should have_selector('div', :content => @adoption.fee.to_s)
+    rendered.should have_selector('div', :content => (@adoption.fee/100).to_s)
   end
 end
