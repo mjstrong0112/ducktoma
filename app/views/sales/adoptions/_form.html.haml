@@ -1,37 +1,33 @@
-= render 'shared/title_slim', :text => 'Personal Information', :number => 1
+
 = simple_form_for [:sales, @adoption] do |f|
-  .sales-adoption-form    
-    .left
-      = render :partial => 'stub_text_field', :object => "name"
-      %br/
-      = render :partial => 'stub_text_field', :object => "phone"
-      %br/
-      = render :partial => 'stub_text_field', :object => "email"
-    .right
-      = render :partial => 'stub_text_field', :object => "address"
-      %br/
-      = render :partial => 'stub_text_field', :object => "city"
-      %br/
+  = render "shared/error_messages", :target => @adoption
+  = render 'shared/title_slim', :text => 'Personal Information', :number => 1
+  - @adoption.adopter_info ||= ContactInfo.new
+  .sales-adoption-form
+    = f.simple_fields_for :adopter_info do |adopter_form|
       .left
-        State: <br/>
-        = text_field_tag 'state', '', :style => "width: 195px;", :disabled => true
-      .left(style="padding-left: 10px;")
-        Zip: <br/>
-        = text_field_tag 'zip', '', :style => "width: 50px;", :disabled => true
-      %br/
+        = adopter_form.input :full_name
+        %br/
+        = adopter_form.input :phone
+        %br/
+        = adopter_form.input :email
+      .right
+        = adopter_form.input :address
+        %br/
+        = adopter_form.input :city
+        %br/
+        .left
+          = adopter_form.input :state, :input_html => { :style => "width: 195px;" }         
+        .left(style="padding-left: 10px;")
+          = adopter_form.input :zip, :input_html => { :style => "width: 50px;" }
+        %br/
     .break &nbsp;
-    = f.input :raffle_number
-  = render 'shared/title_slim', :text => 'Number of Ducks', :number => 3
+  = render 'shared/title_slim', :text => 'Adoption Info', :number => 3
 
   .sales-adoption-form-ducks
-    - if @adoption.raffle_number.blank?
-      .left(style="padding: 0;")
-        = f.input :duck_count, :label => "Lone Ducks: ", :value => @adoption.duck_count
-    - else
-      .left(style="padding: 0;")
-        Lone Ducks: <br/>      
-        = text_field_tag 'duck_count', @adoption.duck_count, :disabled => true
-
+    .left(style="padding: 0;")
+      = f.input :duck_count, :label => "Lone Ducks: ", :value => @adoption.duck_count        
+    .left= f.input :raffle_number
     .break &nbsp;
   #submit-sales(style="margin:auto; width: 247px;")
     = f.submit "Submit", :class => "submit-duck-button blue-button"

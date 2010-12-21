@@ -7,7 +7,12 @@ class Adoption
   referenced_in :user
   references_many :ducks
 
+  embeds_one :adopter_info, :class_name => "ContactInfo"
+
+  accepts_nested_attributes_for :adopter_info
+
   validates_presence_of :ducks
+  validates_associated :adopter_info
   before_create :save_fee, :create_raffle_number, :save_ducks
 
   # Helper method to generate number of ducks when user enters count on first page

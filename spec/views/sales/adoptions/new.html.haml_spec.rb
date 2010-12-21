@@ -5,9 +5,9 @@ describe "sales/adoptions/new.html.haml" do
   context "form" do
     it "should have the right fields" do
       render
-      fields = %w(name phone email address city state zip)
+      fields = %w(full_name phone email address city state zip)
       fields.each do |field|
-        rendered.should have_selector('input', :name => field)
+        rendered.should have_selector('input', :name => 'adoption[adopter_info_attributes]['+field+']')
       end
     end
     it "should have a submit button" do

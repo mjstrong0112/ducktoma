@@ -257,11 +257,15 @@ img{ margin: 0px; }
     margin-top: 20px;
     margin-bottom: 40px;
 }
-.sales-adoption-form input[type="text"] {
+.sales-adoption-form {
+  input[type="text"], input[type="email"], input[type="tel"] {
     width: 260px;
+    border: 1px solid #cccccc;
+    margin: 0.5em 0px;    
+  }
 }
 .sales-adoption-form-ducks input[type="text"] {
-    width: 100px;
+    width: 100px;    
 }
 .sales-adoption-form-ducks .left {
     padding-left: 10px;
