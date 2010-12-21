@@ -6,8 +6,8 @@ describe SalesAbility do
       @user = Fabricate.build(:sales_user)      
       @ability = SalesAbility.new(@user)
     end
-    it "gives complete access" do
-      @ability.should be_able_to :manage, :all      
+    it "can manage Adoptions" do
+      @ability.should be_able_to :manage, Adoption      
     end
   end
   context "as admin user" do

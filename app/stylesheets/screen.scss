@@ -230,6 +230,7 @@ img{ margin: 0px; }
     padding-top: 55px;
     padding-left: 27px;
     float: left;
+    display: none;
 }
 #sponsors-title {
     @include rounded-border(15px);
@@ -285,3 +286,4 @@ input[disabled='disabled'] {
 .center { text-align: center; }
 .left { float: left; }
 .right { float: right; }
+.hide { display: none; }

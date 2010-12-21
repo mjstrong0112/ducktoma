@@ -1,11 +1,7 @@
 class Admin::DashboardController < Admin::BaseController
   #load_and_authorize_resource
+  before_filter :authenticate_admin!
   def index
 
   end
-  #belongs_to :user, :optional => :true
-  #before_filter :authenticate_user!, :only => :index
-  #def index
-    #@adoptions = Adoption.paginate(:page => params[:page] ||= 1)
-  #end
 end

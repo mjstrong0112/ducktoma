@@ -4,7 +4,7 @@
 
   #raffle-number= @adoption.raffle_number
 
-  %h1 Duck numbers.
+  %h1.hide Duck numbers.
   - @adoption.ducks.each do |duck|
     .duck-number
       %div(style="width: 71px; text-align: center;")
@@ -13,7 +13,7 @@
   .break &nbsp;
 
   #duck-form-total
-    Total: #{number_to_currency(@adoption.fee)}
+    Total: #{number_to_currency(@adoption.fee/100)}
 
 #print.blue-button
   = link_to_function "Print", "javascript:print()", :html_options => { :id => "print" }
