@@ -29,5 +29,12 @@ class User
     end
     f_count
   end
-  
+
+  def adoptions_f(type)
+    unless type
+      adoptions
+    else
+      adoptions.where(:type => type)
+    end
+  end
 end

@@ -6,6 +6,28 @@ describe Sales::AdoptionsController do
       @user = Fabricate(:sales_user)
       sign_in @user
     end
+    context "GET 'index'" do
+      it "is successful" do
+        get :index
+        response.should be_success
+      end
+      it "shows users sales adoptions" do
+        Adoption.delete_all
+        sales_adoptions = (1..5).to_a.collect{Fabricate(:adoption, :user_id => @user.id, :type => :sales)}
+        other_adoptions = (1..5).to_a.collect{Fabricate(:adoption)}
+        get :index
+        response.should be_success
+        assigns(:adoptions).to_a.should == sales_adoptions
+        assigns(:adoptions).to_a.should_not == Adoption.all
+      end
+      it "doesn't show non-sales adoptions" do
+        Adoption.delete_all
+        user_adoptions = (1..5).to_a.collect{Fabricate(:adoption, :user_id => @user.id, :type => :std)}
+        get :index
+        response.should be_success
+        assigns(:adoptions).to_a.should_not == user_adoptions
+      end
+    end
     it "GET 'new' is successful" do
       get :new
       response.should be_success

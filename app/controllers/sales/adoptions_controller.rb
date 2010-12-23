@@ -7,10 +7,11 @@ class Sales::AdoptionsController < Sales::BaseController
 
   #before_filter :authenticate_user!, :only => :index
   def index
-    @adoptions = current_user.adoptions.paginate(:page => params[:page] ||= 1)
+    @adoptions = current_user.adoptions_f(:sales).paginate(:page => params[:page] ||= 1)
   end
   def create
     @adoption = Adoption.new(params[:adoption])
+    @adoption.type = "sales"
     @adoption.user = current_user if current_user
     create!
   end

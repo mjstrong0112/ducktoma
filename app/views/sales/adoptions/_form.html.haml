@@ -26,8 +26,8 @@
 
   .sales-adoption-form-ducks
     .left(style="padding: 0;")
-      = f.input :duck_count, :label => "Lone Ducks: ", :value => @adoption.duck_count        
-    .left= f.input :raffle_number
+      = f.input :duck_count, :label => "Number of Ducks Adopted: ", :value => @adoption.duck_count
+    .left= f.input :raffle_number, :label => "Adoption Number: "
     .break &nbsp;
   #submit-sales(style="margin:auto; width: 247px;")
     = f.submit "Submit", :class => "submit-duck-button blue-button"

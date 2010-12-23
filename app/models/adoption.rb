@@ -3,6 +3,7 @@ class Adoption
 
   field :raffle_number
   field :fee, :type => Integer
+  field :type
 
   referenced_in :user
   references_many :ducks
@@ -31,7 +32,7 @@ class Adoption
     pricings = Pricing.desc(:quantity).to_a
     if pricings.count > 0
       pricing = pricings.detect do |p|
-       duck_count > p.quantity
+       duck_count >= p.quantity
       end
       pricing ||= pricings.last
 

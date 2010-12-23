@@ -6,10 +6,11 @@ class AdoptionsController < ApplicationController
 
   #before_filter :authenticate_user!, :only => :index
   def index
-    @adoptions = current_user.adoptions.paginate(:page => params[:page] ||= 1)
+    @adoptions = current_user.adoptions_f(:std).paginate(:page => params[:page] ||= 1)
   end
   def create
     @adoption = Adoption.new(params[:adoption])
+    @adoption.type = "std"
     @adoption.user = current_user if current_user
     create!
   end

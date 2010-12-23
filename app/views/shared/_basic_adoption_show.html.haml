@@ -1,11 +1,11 @@
 .form(style="padding-top: 0px;")
   = render 'shared/title', :text => 'Adoption Summary', :number => 3
-  %h1 Your raffle number.
+  %h1 Your adoption number.
 
   #raffle-number= @adoption.raffle_number
 
-  %h1.hide Duck numbers.
-  - @adoption.ducks.each do |duck|
+  -#%h1 Duck numbers.
+  -#- @adoption.ducks.each do |duck|
     .duck-number
       %div(style="width: 71px; text-align: center;")
         = duck.number

@@ -1,7 +1,7 @@
 %h1 Pricing rules
 %table
   %tr
-    %th When more than
+    %th When more than or equal to
     %th Price
     %th
   - @pricings.each do |pricing|
@@ -16,7 +16,7 @@
 .price-form
   = simple_form_for [:admin, Pricing.new] do |f|
     .left= f.input :price, :label => false
-    .left(style="padding: 10px;") cents when more than
+    .left(style="padding: 10px;") cents when more than or equal to
     .left= f.input :quantity, :label => false
     .left(style="padding: 10px;") ducks
     .clear &nbsp;
