@@ -12,9 +12,10 @@ class Adoption
 
   accepts_nested_attributes_for :adopter_info
 
-  validates_presence_of :ducks
+  before_validation :save_fee, :create_raffle_number
+  validates_presence_of :ducks, :fee, :raffle_number
   validates_associated :adopter_info
-  before_create :save_fee, :create_raffle_number, :save_ducks
+  before_create :save_ducks
 
   # Helper method to generate number of ducks when user enters count on first page
   def duck_count= count    
@@ -24,9 +25,14 @@ class Adoption
   def duck_count
     self.ducks.count    
   end
+  def dollar_fee
+    BigDecimal.new(fee.to_s)/100
+  end
   private
   def save_fee
-    self.fee = generate_fee(self.ducks)
+    unless type == 'sales'
+      self.fee ||= generate_fee(self.ducks)
+    end
   end
   def generate_fee(ducks)
     pricings = Pricing.desc(:quantity).to_a
@@ -42,13 +48,15 @@ class Adoption
     end
   end
   def create_raffle_number
-    if self.raffle_number.blank?
-      record=true
-      while record
-        random = "R#{Array.new(9){rand(9)}.join}"
-        record = Adoption.where(:raffle_number => random).exists?
+    unless type == 'sales'
+      if self.raffle_number.blank?
+        record=true
+        while record
+          random = "R#{Array.new(9){rand(9)}.join}"
+          record = Adoption.where(:raffle_number => random).exists?
+        end
+        self.raffle_number = random
       end
-      self.raffle_number = random
     end
   end
   def save_ducks

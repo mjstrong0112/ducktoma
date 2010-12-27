@@ -21,8 +21,7 @@ Fabricator(:sales_user, :from => :user) do
 end
 Fabricator(:adoption) do
   raffle_number { Forgery::Basic::UPPER_ALPHA.random_subset(1).join + Forgery::Basic.number(:at_least=> 100000, :at_most => 999999).to_s }
-  duck_count { (1..10).to_a.sample }
-  fee { Forgery::Basic.number(:at_least => 100, :at_most => 8000000) }
+  duck_count { (1..10).to_a.sample }  
 end
 
 Fabricator(:duck) do

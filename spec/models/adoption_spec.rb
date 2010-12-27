@@ -9,7 +9,6 @@ describe Adoption do
   should_reference_many :ducks  
 
   should_embed_one :adopter_info
-
   it "should save default fabricator adoptions" do
     adoptions = (1..20).collect{Fabricate.build(:adoption)}
     lambda{ adoptions.each{|a| a.save!} }.should_not raise_error

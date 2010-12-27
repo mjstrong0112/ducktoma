@@ -12,6 +12,9 @@ gem 'haml', '~> 3.0.21'
 gem 'simple_form', '~> 1.3.0'
 gem 'compass', '~> 0.10.6'
 
+#Form gems
+gem 'carmen'
+
 # Temp gems
 gem 'placeholder', '~> 0.0.6'
 

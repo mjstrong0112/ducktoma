@@ -17,17 +17,19 @@
         = adopter_form.input :city
         %br/
         .left
-          = adopter_form.input :state, :input_html => { :style => "width: 195px;" }         
+          = adopter_form.input :state, :collection => Carmen::state_codes('US'),
+                                       :input_html => { :style => "width: 70px;" }
         .left(style="padding-left: 10px;")
-          = adopter_form.input :zip, :input_html => { :style => "width: 50px;" }
+          = adopter_form.input :zip, :input_html => { :style => "width: 70px;" }
         %br/
     .break &nbsp;
-  = render 'shared/title_slim', :text => 'Adoption Info', :number => 3
+  = render 'shared/title_slim', :text => 'Adoption Info', :number => 2
 
   .sales-adoption-form-ducks
     .left(style="padding: 0;")
-      = f.input :duck_count, :label => "Number of Ducks Adopted: ", :value => @adoption.duck_count
-    .left= f.input :raffle_number, :label => "Adoption Number: "
+      = f.input :duck_count, :label => "Number of Ducks Adopted", :value => @adoption.duck_count
+    .left= f.input :raffle_number, :label => "Adoption Number"
+    .left= f.input :fee
     .break &nbsp;
   #submit-sales(style="margin:auto; width: 247px;")
     = f.submit "Submit", :class => "submit-duck-button blue-button"

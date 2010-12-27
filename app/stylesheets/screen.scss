@@ -99,7 +99,11 @@ img{ margin: 0px; }
     width: $sidebar-width - $padding*2 - $margin-left;
     float: left;
     min-height: $main-height - $padding*2;
+    text-align: center;    
     /*background-color: #FFF;*/
+    img {
+        margin-bottom: 10px;
+    }
 }
 #sidebar-left {
     margin-left: 0px;
@@ -279,11 +283,18 @@ img{ margin: 0px; }
 .price-form input[type='text'] {
     width: 30px;
 }
+span.error {
+    padding: 3px 3px;
+    margin: 0;    
+    font-size: 10px;
+    width: 65px;
+    display: block;    
+}
 
 input[disabled='disabled'] {
   background-color: #cccccc;
 }
-
+select { border-color: #cccccc; padding: 2px 2px;  }
 
 
 .break, .clear { clear: both; height: 0px;}

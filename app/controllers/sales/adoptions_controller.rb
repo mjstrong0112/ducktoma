@@ -11,7 +11,7 @@ class Sales::AdoptionsController < Sales::BaseController
   end
   def create
     @adoption = Adoption.new(params[:adoption])
-    @adoption.type = "sales"
+    @adoption.type = :sales
     @adoption.user = current_user if current_user
     create!
   end
