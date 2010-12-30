@@ -28,13 +28,7 @@ class Adoption
   def dollar_fee
     BigDecimal.new(fee.to_s)/100
   end
-  private
-  def save_fee
-    unless type == 'sales'
-      self.fee ||= generate_fee(self.ducks)
-    end
-  end
-  def generate_fee(ducks)
+  def calculate_fee
     pricings = Pricing.desc(:quantity).to_a
     if pricings.count > 0
       pricing = pricings.detect do |p|
@@ -45,6 +39,12 @@ class Adoption
       duck_count * pricing.price
     else
       duck_count * 50;
+    end
+  end
+  private
+  def save_fee
+    unless type == 'sales'
+      self.fee ||= calculate_fee
     end
   end
   def create_raffle_number

@@ -37,4 +37,8 @@ class User
       adoptions.where(:type => type)
     end
   end
+
+  def sales_adoptions
+    adoptions_f :sales
+  end
 end

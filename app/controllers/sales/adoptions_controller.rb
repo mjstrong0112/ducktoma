@@ -6,9 +6,6 @@ class Sales::AdoptionsController < Sales::BaseController
   belongs_to :user, :optional => :true
 
   #before_filter :authenticate_user!, :only => :index
-  def index
-    @adoptions = current_user.adoptions_f(:sales).paginate(:page => params[:page] ||= 1)
-  end
   def create
     @adoption = Adoption.new(params[:adoption])
     @adoption.type = :sales
@@ -17,5 +14,13 @@ class Sales::AdoptionsController < Sales::BaseController
   end
   def update
     update! { sales_adoptions_url }
+  end
+
+  protected
+  def begin_of_association_chain
+    parent? ? parent : current_user
+  end
+  def collection
+    @adoptions ||= end_of_association_chain.where(:type => "sales")
   end
 end

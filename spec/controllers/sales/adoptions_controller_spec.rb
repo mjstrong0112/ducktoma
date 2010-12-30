@@ -12,16 +12,14 @@ describe Sales::AdoptionsController do
         response.should be_success
       end
       it "shows users sales adoptions" do
-        Adoption.delete_all
-        sales_adoptions = (1..5).to_a.collect{Fabricate(:adoption, :user_id => @user.id, :type => :sales)}
-        other_adoptions = (1..5).to_a.collect{Fabricate(:adoption)}
+        sales_adoptions = (1..5).to_a.collect{Fabricate(:sales_adoption, :user_id => @user.id)}
+        5.times{Fabricate(:adoption)}
         get :index
         response.should be_success
         assigns(:adoptions).to_a.should == sales_adoptions
         assigns(:adoptions).to_a.should_not == Adoption.all
       end
       it "doesn't show non-sales adoptions" do
-        Adoption.delete_all
         user_adoptions = (1..5).to_a.collect{Fabricate(:adoption, :user_id => @user.id, :type => :std)}
         get :index
         response.should be_success
