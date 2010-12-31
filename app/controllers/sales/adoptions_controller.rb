@@ -12,9 +12,8 @@ class Sales::AdoptionsController < Sales::BaseController
     @adoption.user = current_user if current_user
     create!
   end
-  def update
-    update! { sales_adoptions_url }
-  end
+
+  update! { sales_adoptions_url }
 
   protected
   def begin_of_association_chain
