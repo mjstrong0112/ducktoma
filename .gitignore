@@ -1,5 +1,6 @@
 .bundle
 .idea
+.autotest
 *~
 *.swp
 db/*.sqlite3
