@@ -9,6 +9,7 @@ class Settings
                  :update_attributes, :save, :changed?
 
   field :duck_inventory, :type => Integer, :default => 20000
+  field :adoptions_live, :type => Boolean, :default => true
 
   validates_presence_of :duck_inventory
   validates_numericality_of :duck_inventory, :only_integer => true, :greater_than_or_equal_to => 0

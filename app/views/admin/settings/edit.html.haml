@@ -1,9 +1,11 @@
 %h2 Site Settings
 
-= form_for [:admin, @settings], :url => { :action => :update }, :html => {:method => :put} do |f|
+= simple_form_for [:admin, @settings], :url => { :action => :update }, :html => {:method => :put} do |f|
   = render "shared/error_messages", :target => @settings
   = f.label :duck_inventory
   = f.text_field :duck_inventory
+  = f.input :adoptions_live, :as => :boolean
+  %br/
   = f.submit "Update Settings"
 
 = link_to "Admin Dashboard", admin_root_path
