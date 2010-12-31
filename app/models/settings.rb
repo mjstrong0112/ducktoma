@@ -8,7 +8,7 @@ class Settings
   def_delegators :instance, :[], :[]=, :read_attribute, :write_attribute, :write_attributes, :remove_attribute,
                  :update_attributes, :save, :changed?
 
-  field :duck_inventory, :type => Integer, :default => 200000
+  field :duck_inventory, :type => Integer, :default => 20000
 
   validates_presence_of :duck_inventory
   validates_numericality_of :duck_inventory, :only_integer => true, :greater_than_or_equal_to => 0
