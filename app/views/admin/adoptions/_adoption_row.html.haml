@@ -3,6 +3,7 @@
   %td= adoption.duck_count
   %td= number_to_currency adoption.dollar_fee
   %td
-    /= link_to 'Edit', edit_admin_adoption_url(adoption)
-    /|
-    /= link_to 'Delete', admin_adoption_url(adoption), :method => :delete
+    - if adoption.type == 'sales'
+      = link_to 'Edit', edit_admin_adoption_url(adoption)
+      |
+      = link_to 'Delete', admin_adoption_url(adoption), :method => :delete

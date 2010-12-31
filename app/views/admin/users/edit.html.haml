@@ -1,0 +1,13 @@
+%h1 Editing #{@user.email}
+= simple_form_for [:admin, @user] do |f|
+  = f.input :email
+  = f.input :password
+  = f.input :password_confirmation
+  = f.collection_check_boxes :roles, [[:admin, 'Admin'] ,[:sales, 'Sales']], :first, :last
+  = f.submit 'Submit'
+
+%br/
+%br/
+= link_to "Back to all users", admin_users_path
+|
+= link_to "Admin Dashboard", admin_root_path

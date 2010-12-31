@@ -1,3 +1,8 @@
 .form
   %h1.sales-adoption-form-title Sales Associate Form 
   = render 'form', :object => @adoption
+
+%br/
+= link_to "View Sales Adoptions", sales_adoptions_path
+|
+= link_to "Sales Dashboard", sales_root_path
