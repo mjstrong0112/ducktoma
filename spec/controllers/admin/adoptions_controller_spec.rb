@@ -7,7 +7,6 @@ describe Admin::AdoptionsController do
       sign_in @user
     end
     it "loads adoptions with pagination on GET 'index'" do
-      Adoption.delete_all
       all_adoptions = (1..30).to_a.collect{Fabricate(:adoption)}
       get :index
       response.should be_success
