@@ -18,6 +18,7 @@ Ducktoma::Application.routes.draw do
     root :to => "dashboard#index"
     resources :adoptions
     resources :pricings
+    resource :settings
   end
   
   resources :adoptions

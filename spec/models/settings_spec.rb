@@ -4,11 +4,6 @@ describe Settings do
   it "is a singleton" do
     Settings.should include Singleton
   end
-  it "has no settings at start" do
-    # Only has 1 attribute (ID)
-    Settings.instance.should have(1).attributes
-    Settings.instance.attributes.keys.should == ["_id"]
-  end
   it "has one instance that is persisted automatically" do
     Settings.instance.should be_persisted
   end
