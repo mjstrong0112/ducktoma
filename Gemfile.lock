@@ -107,6 +107,7 @@ GEM
       mongo (~> 1.1)
       tzinfo (~> 0.3.22)
       will_paginate (~> 3.0.pre)
+    newrelic_rpm (2.13.4)
     nokogiri (1.4.4)
     notifier (0.1.1)
     placeholder (0.0.6)
@@ -245,6 +246,7 @@ DEPENDENCIES
   inherited_resources (~> 1.1.2)
   launchy (~> 0.3.7)
   mongoid (~> 2.0.0.beta.20)
+  newrelic_rpm
   placeholder (~> 0.0.6)
   rack-contrib
   rails (= 3.0.3)

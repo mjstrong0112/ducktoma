@@ -35,6 +35,11 @@ gem 'mongoid', '~> 2.0.0.beta.20'
 gem 'bson', '~> 1.1.4'
 gem 'bson_ext', '~> 1.1.4'
 
+# Production gems used for live site
+group :production do
+  gem 'newrelic_rpm'
+end
+
 # Test gems without generators
 group :test do
   gem 'rr', '~> 1.0.2'
