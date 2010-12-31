@@ -5,6 +5,11 @@ class AdoptionsController < ApplicationController
   belongs_to :user, :optional => :true
 
   #before_filter :authenticate_user!, :only => :index
+  def new
+    unless Duck.available?
+      render('home/ducks_exhausted')
+    end    
+  end
   def index
     @adoptions = current_user.adoptions_f(:std).paginate(:page => params[:page] ||= 1)
   end

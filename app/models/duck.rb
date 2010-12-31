@@ -17,4 +17,8 @@ class Duck
     last_duck_number = Duck.max(:number)
     self.number = last_duck_number ? (last_duck_number + 1) : 1
   end
+
+  def self.available?
+    Duck.count <= Settings[:duck_inventory]
+  end
 end
