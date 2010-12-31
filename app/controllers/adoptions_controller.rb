@@ -8,7 +8,9 @@ class AdoptionsController < ApplicationController
   def new
     unless Duck.available?
       render('home/ducks_exhausted')
-    end    
+    else
+      new!
+    end
   end
   def index
     @adoptions = current_user.adoptions_f(:std).paginate(:page => params[:page] ||= 1)
