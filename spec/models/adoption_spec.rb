@@ -57,4 +57,19 @@ describe Adoption do
       adoption_3.fee.should == pricing_rule_3.price * adoption_3.duck_count
     end    
   end
+  context "inventory exhausted" do
+    before(:each) do
+      Fabricate(:adoption, :duck_count => 10)
+      Settings.update_attributes({:duck_inventory => 10})
+    end
+    it "should not allow adoption" do
+      adoption = Fabricate.build(:adoption , :duck_count => 1)
+      mock.proxy(adoption).ducks_available? {|result| result.should be false; result}
+      adoption.should_not be_valid(:create)
+      adoption.errors.should be_invalid(:duck_count)
+      Settings[:duck_inventory] = 11
+      mock.proxy(adoption).ducks_available? {|result| result.should be true; result}
+      adoption.should be_valid(:create)
+    end
+  end
 end

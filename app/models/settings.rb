@@ -6,7 +6,7 @@ class Settings
 
   extend SingleForwardable
   def_delegators :instance, :[], :[]=, :read_attribute, :write_attribute, :write_attributes, :remove_attribute,
-                 :save, :changed?
+                 :update_attributes, :save, :changed?
 
   field :duck_inventory, :type => Integer, :default => 200000
 

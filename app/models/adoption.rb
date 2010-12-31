@@ -15,6 +15,8 @@ class Adoption
   before_validation :save_fee, :create_raffle_number
   validates_presence_of :ducks, :fee, :raffle_number
   validates_associated :adopter_info
+  validate :ducks_must_be_available, :on => :create
+
   before_create :save_ducks
 
   # Helper method to generate number of ducks when user enters count on first page
@@ -41,7 +43,12 @@ class Adoption
       duck_count * 50;
     end
   end
+  def ducks_available?
+    (duck_count + Duck.count) <= Settings[:duck_inventory]
+  end
+
   private
+
   def save_fee
     unless type == 'sales'
       self.fee ||= calculate_fee
@@ -61,5 +68,8 @@ class Adoption
   end
   def save_ducks
     self.ducks.each{|d| d.save}
+  end
+  def ducks_must_be_available
+    errors.add :duck_count, "is more than the available ducks" unless ducks_available?
   end
 end
