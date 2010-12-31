@@ -21,6 +21,6 @@ class Sales::AdoptionsController < Sales::BaseController
     parent? ? parent : current_user
   end
   def collection
-    @adoptions ||= end_of_association_chain.where(:type => "sales")
+    @adoptions ||= end_of_association_chain.where(:type => "sales").paginate(:page => params[:page] || 1)
   end
 end
