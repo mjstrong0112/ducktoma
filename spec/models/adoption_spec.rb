@@ -57,6 +57,10 @@ describe Adoption do
       adoption_3.fee.should == pricing_rule_3.price * adoption_3.duck_count
     end    
   end
+  it "doesn't allow string fees" do
+    adoption = Fabricate.build(:adoption, :fee => 'shouldnotbevalid')
+    adoption.should_not be_valid
+  end
   context "inventory exhausted" do
     before(:each) do
       Fabricate(:adoption, :duck_count => 10)

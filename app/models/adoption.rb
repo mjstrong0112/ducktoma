@@ -1,3 +1,4 @@
+require 'whole_number_validator'
 class Adoption
   include Mongoid::Document
 
@@ -15,9 +16,14 @@ class Adoption
   before_validation :save_fee, :create_raffle_number
   validates_presence_of :ducks, :fee, :raffle_number
   validates_associated :adopter_info
+  validates_numericality_of :fee, :only_integer => true
   validate :ducks_must_be_available, :on => :create
 
   before_create :save_ducks
+
+  def validate
+     
+  end
 
   # Helper method to generate number of ducks when user enters count on first page
   def duck_count= count    
@@ -29,6 +35,10 @@ class Adoption
   end
   def dollar_fee
     BigDecimal.new(fee.to_s)/100
+  end
+  def dollar_fee= dollars
+    n_dollars = BigDecimal.new(dollars)
+    self.fee = (n_dollars*100).to_i
   end
   def calculate_fee
     pricings = Pricing.desc(:quantity).to_a

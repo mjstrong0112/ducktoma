@@ -29,7 +29,7 @@
     .left(style="padding: 0;")
       = f.input :duck_count, :label => "Number of Ducks Adopted", :value => @adoption.duck_count
     .left= f.input :raffle_number, :label => "Adoption Number"
-    .left= f.input :fee
+    .left= f.input :dollar_fee, :label => "Fee (in dollars)"
     .break &nbsp;
   #submit-sales(style="margin:auto; width: 247px;")
     = f.submit "Submit", :class => "submit-duck-button blue-button"
