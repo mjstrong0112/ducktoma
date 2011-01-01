@@ -35,7 +35,7 @@ function updateTotal(input) {
     }else{
         $("#duck-count").text("duck")
     }
-    if(duckCount != 0 && duckCount <= settings.getInventoryCount()) {
+    if(duckCount != 0 && (duckCount <= settings.getInventoryCount() || !settings.getInventoryCount())) {
         $('#adoption_submit').removeAttr("disabled");
         $("#adoption_submit").addClass('blue-button');
         $("#adoption_submit").removeClass('blue-button-disabled');
@@ -48,7 +48,7 @@ function updateTotal(input) {
 var keyCodes = [ 37, 38, 39, 40, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 8, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105 ];			   
 $(document).ready(function() {
     var input = $("#adoption_duck_count");
-	$('#adoption_submit').attr("disabled", "disabled");
+	//$('#adoption_submit').attr("disabled", "disabled");
     if (!input.val) {
         input.val(0);
     }
