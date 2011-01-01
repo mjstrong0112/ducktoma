@@ -6,8 +6,10 @@ class AdoptionsController < ApplicationController
 
   #before_filter :authenticate_user!, :only => :index
   def new
-    unless Duck.available?
+    if !Duck.available?
       render('home/ducks_exhausted')
+    elsif !Settings[:adoptions_live]
+      render('home/coming_soon')
     else
       new!
     end

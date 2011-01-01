@@ -37,7 +37,7 @@ $title-family: Myriad Pro, Arial, Helvetica, sans-serif;
 html, body { height: 100%; }
 body{ background-image: url(../../images/gradientbg.gif); background-repeat: repeat-x; background-color: #7cbbd9; height: 100%; }
 object {vertical-align: top; }
-h1, h2 { font-size: 30px; font-family: $title-family; color: #666666; font-weight: normal;}
+h1, h2 { font-size: 28px; font-family: $title-family; color: #666666; font-weight: normal;}
 img{ margin: 0px; }
 /* code for sticky footer */
 .wrapper {
@@ -141,7 +141,7 @@ img{ margin: 0px; }
         margin-bottom: 20px;
         color: #666666;
         font-family: $title-family;
-        font-size: 22px;
+        font-size: 19px;
         .number {
             float: left;
             margin: 16px;
@@ -289,6 +289,16 @@ span.error {
 }
 .tier3 { margin: auto; width: 833px; padding-top: 20px; }
 .tier3 img {  vertical-align: middle; }
+
+#comingsoon {
+    width: 581px;
+    height: 260px;
+    padding-top: 180px;
+    margin: auto;   
+    background-image: url(../../images/comingsoon.gif);
+    background-repeat: none;
+    
+}
 
 input[disabled='disabled'] {
   background-color: #cccccc;

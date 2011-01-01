@@ -19,6 +19,6 @@ class Duck
   end
 
   def self.available?
-    Duck.count <= Settings[:duck_inventory]
+    Duck.count < Settings[:duck_inventory]
   end
 end
