@@ -17,6 +17,7 @@ describe "shared/_header.html.haml" do
   end
   it "renders the sign out link if logged in" do
     mock(view).user_signed_in? { true }
+    mock(view).current_user { Fabricate(:admin) }
     render
 
     # Assign tmp vars for azebiki
