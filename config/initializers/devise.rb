@@ -142,3 +142,4 @@ Devise.setup do |config|
 end
 
 Devise::SessionsController.ssl_required :new, :create
+Devise::RegistrationsController.ssl_required :new, :create, :edit, :update
