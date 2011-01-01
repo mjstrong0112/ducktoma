@@ -7,7 +7,7 @@ class Adoption
   field :type
 
   referenced_in :user
-  references_many :ducks
+  references_many :ducks, :dependent => :destroy
 
   embeds_one :adopter_info, :class_name => "ContactInfo"
 

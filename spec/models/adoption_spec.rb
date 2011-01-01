@@ -61,6 +61,12 @@ describe Adoption do
     adoption = Fabricate.build(:adoption, :fee => 'shouldnotbevalid')
     adoption.should_not be_valid
   end
+  it "destroys ducks when adoption is destroyed" do
+    adoption = Fabricate(:adoption, :duck_count => 1)
+    duck_id = adoption.ducks.first.id
+    adoption.destroy
+    Duck.where(:id => duck_id).first.should be_nil
+  end
   context "inventory exhausted" do
     before(:each) do
       Fabricate(:adoption, :duck_count => 10)
