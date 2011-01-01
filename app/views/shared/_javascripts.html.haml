@@ -1,5 +1,5 @@
-= google_jquery :version => '1.4.4', :uncompressed => Rails.env.development?
-= google_swfobject :version => '2.2', :uncompressed => Rails.env.development?
+= google_jquery :version => '1.4.4', :uncompressed => Rails.env.development?, :ssl => request.ssl?
+= google_swfobject :version => '2.2', :uncompressed => Rails.env.development?, :ssl => request.ssl?
 = javascript_include_tag 'rails'
 
 = javascript_include_tag "jquery.alphanumeric.pack"
