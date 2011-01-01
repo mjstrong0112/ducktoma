@@ -35,11 +35,9 @@ gem 'mongoid', '~> 2.0.0.beta.20'
 gem 'bson', '~> 1.1.4'
 gem 'bson_ext', '~> 1.1.4'
 
-# Production gems used for live site
-group :production do
-  gem 'newrelic_rpm'
-  gem 'hoptoad_notifier'
-end
+# Analytics, Exception Handling, Production
+gem 'newrelic_rpm'
+gem 'hoptoad_notifier'
 
 # Test gems without generators
 group :test do
