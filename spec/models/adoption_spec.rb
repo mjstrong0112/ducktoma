@@ -76,7 +76,7 @@ describe Adoption do
       adoption = Fabricate.build(:adoption , :duck_count => 1)
       mock.proxy(adoption).ducks_available? {|result| result.should be false; result}
       adoption.should_not be_valid(:create)
-      adoption.errors.should be_invalid(:duck_count)
+      adoption.errors[:duck_count].any?.should be true
       Settings[:duck_inventory] = 11
       mock.proxy(adoption).ducks_available? {|result| result.should be true; result}
       adoption.should be_valid(:create)
