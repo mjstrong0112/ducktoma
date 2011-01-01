@@ -3,14 +3,31 @@
     #ground &nbsp;
   #sponsors
     .tier3
-      = image_tag "tier3/ikea.gif"
-      = image_tag "tier3/carinos.png"
-      = image_tag "tier3/cort.png"
-      = image_tag "tier3/coolriverlogo.gif"
-      = image_tag "tier3/floorcenters.jpg"
-      = image_tag "tier3/austinwhitelime.jpg"
-      = image_tag "tier3/mikeparker.gif"
-      = image_tag "tier3/wellsfargo.jpg"
+      = link_to 'http://www.ikea.com/' do
+        = image_tag "tier3/ikea.gif"
+
+      = link_to 'http://www.carinos.com/' do
+        = image_tag "tier3/carinos.png"
+
+      = link_to 'http://www.cort.com/' do
+        = image_tag "tier3/cort.png"
+      = link_to 'http://www.coolrivercafe.com/' do
+        = image_tag "tier3/coolriverlogo.gif"
+
+      = link_to 'http://floorcenterstx.com/' do
+        = image_tag "tier3/floorcenters.jpg"
+
+      = link_to 'http://www.limetexas.org/' do
+        = image_tag "tier3/austinwhitelime.jpg"
+
+      = link_to 'http://mikeparkerrealestate.com/' do
+        = image_tag "tier3/mikeparker.gif"
+
+      = link_to 'https://www.wellsfargo.com/' do
+        = image_tag "tier3/wellsfargo.jpg"
+
+      = link_to 'http://www.homedepot.com/' do
+        = image_tag "tier3/homedepot.jpg"
 /  #sponsors
 /    .sponsors-table
 /      = image_tag "oursponsors.png", :alt => "Our Sponsors"

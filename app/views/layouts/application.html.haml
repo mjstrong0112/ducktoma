@@ -14,17 +14,25 @@
 
         #sidebar-left
           /#sponsors-title= image_tag "sponsors.png", :alt => "sponsors"
-          = image_tag "jman.png", :id => "jman-logo", :alt => "Journeyman Construction"
-          = image_tag "saltlick.png", :id => "saltlick-logo", :alt => "Saltlick"
-          = image_tag "antiwave.png", :id => "antiwave-logo", :alt => "Antiwave"
+          = link_to 'http://www.journeymanco.com/' do
+            = image_tag "jman.png", :id => "jman-logo", :alt => "Journeyman Construction"
+
+          = link_to 'http://www.saltlickbbq.com/' do
+            = image_tag "saltlick.png", :id => "saltlick-logo", :alt => "Saltlick"
+
+          = link_to 'http://www.antiwave.com/' do
+            = image_tag "antiwave.png", :id => "antiwave-logo", :alt => "Antiwave"
+
           = image_tag "wright.png", :id => "wright-logo", :alt => "Wright"
-          = image_tag "etherpros.png", :id => "etherpros-logo", :alt => "Etherpros"          
-                  
+          
+          = link_to 'http://www.etherpros.com/' do
+            = image_tag "etherpros.png", :id => "etherpros-logo", :alt => "Etherpros"
+
         #main
           = link_to root_url do
             = image_tag "logo.png", :id => "logo", :alt => "ducktoma"
           .clear &nbsp;
-          %div(style="margin-top: -10px;")                                    
+          %div(style="margin-top: -10px;")
             - if notice
               .flash.notice= notice
             - if alert
@@ -34,10 +42,17 @@
 
         #sidebar
           /#sponsors-title= image_tag "sponsors.png", :alt => "sponsors"
-          = image_tag "bestbuy.png", :id => "bestbuy-logo", :alt => "HEB"
-          = image_tag "maxwell.png", :id => "maxwell-logo", :alt => "Maxwell"
-          = image_tag "heblogo.png", :id => "heb-logo", :alt => "HEB"
-          = image_tag "Express_Primary.png", :id => "expressprimary-logo", :alt => "Express Primary"          
+          = link_to 'http://www.bestbuy.com/' do
+            = image_tag "bestbuy.png", :id => "bestbuy-logo", :alt => "HEB"
+
+          = link_to 'http://www.nylemaxwell.com/' do
+            = image_tag "maxwell.png", :id => "maxwell-logo", :alt => "Maxwell"
+
+          = link_to 'http://www.heb.com/' do
+            = image_tag "heblogo.png", :id => "heb-logo", :alt => "HEB"
+
+          = image_tag "Express_Primary.png", :id => "expressprimary-logo", :alt => "Express Primary"
+          
           = image_tag "brath.png", :id => "brath-logo", :alt => "Brath"          
              
         .clear &nbsp;
