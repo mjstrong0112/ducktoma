@@ -67,17 +67,17 @@ $(document).ready(function() {
 		updateTotal(this);
 	});
     $('#family-button').click(function() {
-        var amount = parseInt(input.val()) + duckFamilyAmount;        
+        var amount = duckFamilyAmount;        
         input.val(amount);
         updateTotal(input);
     });
     $('#flock-button').click(function() {
-        var amount = parseInt(input.val()) + duckFlockAmount;
+        var amount = duckFlockAmount;
         input.val(amount);
         updateTotal(input);
     });
     $('#oodle-button').click(function() {
-        var amount = parseInt(input.val()) + duckOodleAmount;        
+        var amount = duckOodleAmount;
         input.val(amount);
         updateTotal(input);
     })
