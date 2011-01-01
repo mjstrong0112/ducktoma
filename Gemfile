@@ -38,6 +38,7 @@ gem 'bson_ext', '~> 1.1.4'
 # Production gems used for live site
 group :production do
   gem 'newrelic_rpm'
+  gem 'hoptoad_notifier'
 end
 
 # Test gems without generators
