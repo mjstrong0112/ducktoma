@@ -7,4 +7,6 @@
 
 %br/
 %br/
-= link_to "Admin Dashboard", admin_root_path
+
+- content_for :navlinks do
+  .navlink= link_to "Admin Dashboard", admin_root_path

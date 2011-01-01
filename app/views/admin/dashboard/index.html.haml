@@ -11,4 +11,7 @@
 = link_to 'Edit Site Settings', edit_admin_settings_url
 %br/
 %br/
-= link_to "Home", root_url
+
+- content_for :navlinks do
+  .navlink= link_to "Home", root_url
+

@@ -5,4 +5,6 @@
 = link_to 'Add an adoption', new_sales_adoption_url
 %br/
 %br/
-= link_to "Home", root_url
+
+- content_for :navlinks do
+  .navlink= link_to "Home", root_url

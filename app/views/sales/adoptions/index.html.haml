@@ -11,5 +11,7 @@
   %h3= link_to 'Adopt some ducks', new_sales_adoption_url
 
 %br/
-= link_to "Sales Dashboard", sales_root_path
+
+- content_for :navlinks do
+  .navlink= link_to "Sales Dashboard", sales_root_path
 

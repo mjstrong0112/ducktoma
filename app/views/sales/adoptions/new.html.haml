@@ -3,6 +3,6 @@
   = render 'form', :object => @adoption
 
 %br/
-= link_to "View Sales Adoptions", sales_adoptions_path
-|
-= link_to "Sales Dashboard", sales_root_path
+- content_for :navlinks do
+  .navlink= link_to "View Sales Adoptions", sales_adoptions_path
+  .navlink= link_to "Sales Dashboard", sales_root_path

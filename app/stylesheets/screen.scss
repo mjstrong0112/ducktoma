@@ -314,6 +314,22 @@ span.error {
     display: inline;
     cursor: pointer;
 }
+#navlinks {
+    margin-top: 10px;
+}
+.navlink {
+    @include rounded-border(8px);
+    border: 1px solid #24b9ff;
+    background: #bfe7ff;    
+    color: #347281;
+    margin-bottom: 1em;
+    padding: 5px;
+    a {
+        color: #347281;
+        text-decoration: none;
+    }
+    display: inline;
+}
 
 input[disabled='disabled'] {
   background-color: #cccccc;

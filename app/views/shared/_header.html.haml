@@ -1,11 +1,21 @@
 #header
 
   /= image_tag "logo.png", :id => "logo", :alt => "ducktoma"
-  - if !user_signed_in?
+  - unless user_signed_in?
     = link_to new_user_session_path do      
       = image_tag "login.png", :id => "login", :alt => "Sign In"
   - else
     = link_to destroy_user_session_path do
       = image_tag "logout.png", :id => "logout", :alt => "Sign Out"
-
+    - if current_user.admin?
+      = link_to admin_root_path do
+        = image_tag "admin.png", :alt => "Admin panel"
+        
+      = link_to sales_root_path do
+        = image_tag "sales.png", :alt => "Sales panel"
+        
+    - elsif current_user.is?(:sales)
+      = link_to sales_root_path do
+        = image_tag "sales.png", :alt => "Sales panel"
+        
   = image_tag "plane.png",  :id => "plane", :alt => "Annual Duck Race"
