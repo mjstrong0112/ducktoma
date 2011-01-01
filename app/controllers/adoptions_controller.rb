@@ -19,7 +19,13 @@ class AdoptionsController < ApplicationController
     @adoption = Adoption.new(params[:adoption])
     @adoption.type = "std"
     @adoption.user = current_user if current_user
-    create!
+    if @adoption.ducks_available?
+      create!
+    else
+      flash[:alert] = 'There are only ' + Settings[:duck_inventory].to_s +
+                        ' ducks left. You tried to adopt ' + @adoption.duck_count.to_s + ' ducks'
+      redirect_to new_adoption_url
+    end
   end
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = 'Please sign in to access this page'

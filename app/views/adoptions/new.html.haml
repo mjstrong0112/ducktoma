@@ -21,5 +21,6 @@
 - content_for :javascripts do
   :javascript
     $(document).ready(function() {
-      pricingScheme.addPricings(#{pricing_json});      
+      pricingScheme.addPricings(#{pricing_json});
+      settings.setInventoryCount(#{Settings[:duck_inventory]-Duck.count});      
     });

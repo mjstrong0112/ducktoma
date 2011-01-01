@@ -1,4 +1,5 @@
 var pricingScheme = new PricingScheme();
+var settings = new Settings();
 function PricingScheme() {
   var pricings = [];
   this.addPricing = function(quantity,price) {
@@ -10,6 +11,15 @@ function PricingScheme() {
   this.getPricings = function() {
     return pricings;
   }
+}
+function Settings() {
+    var duckInventory;
+    this.setInventoryCount = function(count) {
+        duckInventory = count;
+    }
+    this.getInventoryCount = function() {
+        return duckInventory;
+    }
 }
 var keyCodes = [ 37, 38, 39, 40, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 8, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105 ];			   
 $(document).ready(function() {
@@ -40,7 +50,7 @@ $(document).ready(function() {
 		}else{
 			$("#duck-count").text("duck")
 		}
-		if(duckCount != 0) {
+		if(duckCount != 0 && duckCount <= settings.getInventoryCount()) {
             $('#adoption_submit').removeAttr("disabled");
 			$("#adoption_submit").addClass('blue-button');
 			$("#adoption_submit").removeClass('blue-button-disabled');
