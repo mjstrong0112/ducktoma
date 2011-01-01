@@ -121,7 +121,7 @@ img{ margin: 0px; }
 	height: 140px;
 }
 .title {
-    height: 30px;
+    height: 40px;
 	margin: auto;
 	text-align: center;
 	h1 {
@@ -167,8 +167,9 @@ img{ margin: 0px; }
     margin-bottom: 20px;
 }
 #duck-form {
-    @include vbox(150px);
+    /*@include vbox(151px);*/
     @include rounded-border(15px);
+    height: 151px;
 	background-color: #7fbedc;
 }
 #duck-form input {
@@ -184,6 +185,7 @@ img{ margin: 0px; }
 	border: none;
 }
 #duck-count {
+    padding-top: 50px;
 	font-size: 50px;
 	font-family: $title-family;
 	color: #fff;
@@ -193,8 +195,8 @@ img{ margin: 0px; }
 	margin: 25px;
 }
 #duck-form-total {
-	padding: 10px;
-	font-size: 30px;
+	padding: 14px;
+	font-size: 25px;
 	font-family: $title-family;
 	color: #666;
 	text-align: right;
@@ -213,6 +215,7 @@ img{ margin: 0px; }
 	color: white;
     border: none;
 	font-family: $title-family;
+    cursor: pointer;	
 }
 .blue-button a {
     color: white;
@@ -298,6 +301,18 @@ span.error {
     background-image: url(../../images/comingsoon.gif);
     background-repeat: none;
     
+}
+
+#duck-count-buttons {
+    margin-top: 10px;
+    float: left;
+    img {
+        margin-right: 0px;
+    }
+}
+#family-button, #flock-button, #oodle-button {
+    display: inline;
+    cursor: pointer;
 }
 
 input[disabled='disabled'] {

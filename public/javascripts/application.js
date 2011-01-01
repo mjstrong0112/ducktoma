@@ -1,5 +1,8 @@
 var pricingScheme = new PricingScheme();
 var settings = new Settings();
+var duckFamilyAmount = 5;
+var duckFlockAmount = 10;
+var duckOodleAmount = 25;
 function PricingScheme() {
   var pricings = [];
   this.addPricing = function(quantity,price) {
@@ -21,6 +24,27 @@ function Settings() {
         return duckInventory;
     }
 }
+function updateTotal(input) {
+    var duckCount = $(input).val();
+    $("#duck-form-total").text(duck_price(duckCount));
+
+    //if more than one duck
+    if(duckCount > 1 || duckCount == 0) {
+        //pluralize word "duck"
+        $("#duck-count").text("ducks")
+    }else{
+        $("#duck-count").text("duck")
+    }
+    if(duckCount != 0 && duckCount <= settings.getInventoryCount()) {
+        $('#adoption_submit').removeAttr("disabled");
+        $("#adoption_submit").addClass('blue-button');
+        $("#adoption_submit").removeClass('blue-button-disabled');
+    }else {
+        $('#adoption_submit').attr("disabled", "disabled");
+        $("#adoption_submit").addClass('blue-button-disabled');
+        $("#adoption_submit").removeClass('blue-button');
+    }
+}
 var keyCodes = [ 37, 38, 39, 40, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 8, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105 ];			   
 $(document).ready(function() {
     var input = $("#adoption_duck_count");
@@ -40,26 +64,23 @@ $(document).ready(function() {
 	});
 	input.numeric();	
 	input.keyup(function(event) {		
-		var duckCount = $(this).val();
-		$("#duck-form-total").text(duck_price(duckCount));
-		
-		//if more than one duck
-		if(duckCount > 1 || duckCount == 0) {
-			//pluralize word "duck"
-			$("#duck-count").text("ducks")
-		}else{
-			$("#duck-count").text("duck")
-		}
-		if(duckCount != 0 && duckCount <= settings.getInventoryCount()) {
-            $('#adoption_submit').removeAttr("disabled");
-			$("#adoption_submit").addClass('blue-button');
-			$("#adoption_submit").removeClass('blue-button-disabled');
-		}else {
-            $('#adoption_submit').attr("disabled", "disabled");
-			$("#adoption_submit").addClass('blue-button-disabled');
-			$("#adoption_submit").removeClass('blue-button');
-		}
-	});				
+		updateTotal(this);
+	});
+    $('#family-button').click(function() {
+        var amount = parseInt(input.val()) + duckFamilyAmount;        
+        input.val(amount);
+        updateTotal(input);
+    });
+    $('#flock-button').click(function() {
+        var amount = parseInt(input.val()) + duckFlockAmount;
+        input.val(amount);
+        updateTotal(input);
+    });
+    $('#oodle-button').click(function() {
+        var amount = parseInt(input.val()) + duckOodleAmount;        
+        input.val(amount);
+        updateTotal(input);
+    })
 });
 function duck_price(duckCount) {
   var index=0;

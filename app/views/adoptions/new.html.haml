@@ -6,15 +6,18 @@
   = render 'shared/title_slim', :text => 'Specify Number of Ducks', :number => 1
 
   = form_for @adoption do |f|
-    #duck-form
+    #duck-form.clearfix
       %div(style="margin: auto; width: 480px;")
         #duck-form-image
           = image_tag "duck.gif", :class => "duck-form-image"
         = f.text_field :duck_count
         #duck-count ducks
-    #duck-form-total
+    #duck-count-buttons
+      #family-button= image_tag "family.png"
+      #flock-button= image_tag "flock.png"
+      #oodle-button= image_tag "oodle.png"      
+    #duck-form-total.clearfix
       Total: $0.00
-    .clear &nbsp;
     .adoption-new-button
       = f.submit "Continue", :class => "submit-duck-button blue-button-disabled"
 

@@ -27,10 +27,11 @@
             = image_tag "etherpros.png", :id => "etherpros-logo", :alt => "Etherpros"
 
         #main
-          = link_to root_url do
-            = image_tag "logo.png", :id => "logo", :alt => "ducktoma"
-          .clear &nbsp;
-          %div(style="margin-top: -10px;")
+          .clearfix
+            = link_to root_url do
+              = image_tag "logo.png", :id => "logo", :alt => "ducktoma"
+
+          %div
             - if notice
               .flash.notice= notice
             - if alert
