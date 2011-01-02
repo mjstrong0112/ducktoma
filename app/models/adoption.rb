@@ -21,10 +21,6 @@ class Adoption
 
   before_create :save_ducks
 
-  def validate
-     
-  end
-
   # Helper method to generate number of ducks when user enters count on first page
   def duck_count= count    
     return if persisted?
