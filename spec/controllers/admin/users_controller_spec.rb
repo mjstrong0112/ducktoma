@@ -12,6 +12,37 @@ describe Admin::UsersController do
     assigns(:users).to_a.should_not == all_users
     assigns(:users).to_a.should == User.paginate(:page => 1)
   end
+  describe "POST 'create'" do
+    context "with valid information" do
+      before(:all) do
+        @attr = {:email => Forgery::Internet.email_address,
+                 :password => "updatedpass", :password_confirmation => "updatedpass"}
+      end
+      it "should create a new user" do
+        lambda do
+          post :create, :user => @attr
+        end.should change(User,:count).by(1)
+      end
+      it "should redirect to index page" do
+        post :create, :user => @attr
+        response.should redirect_to admin_users_path
+      end
+    end
+    context "with invalid information" do
+      before(:all) do
+        @attr = {:email => "invalidemail", :password => "abc", :password_confirmation => "xyz"}
+      end
+      it "should not create a new user" do
+        lambda do
+          post :create, :user => @attr
+        end.should_not change(User,:count).by(1)
+      end
+      it "should render the new action" do
+        post :create, :user => @attr
+        response.should render_template('new')
+      end
+    end
+  end
   describe "PUT 'update'" do
     it "updates succesfully with blank passwords" do
       password = @user.password
