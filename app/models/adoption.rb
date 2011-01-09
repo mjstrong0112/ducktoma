@@ -10,6 +10,7 @@ class Adoption
   field :state, :type => String, :default => "new"
 
   referenced_in :user
+  referenced_in :payment_notification
   references_many :ducks, :dependent => :destroy
 
   embeds_one :adopter_info, :class_name => "ContactInfo"
@@ -20,8 +21,11 @@ class Adoption
   validates_presence_of :ducks, :fee, :raffle_number
 
   state_machine :initial => :new do
+    event :confirm do
+      transition :new => :pending
+    end
     event :complete do
-      transition :new => :completed
+      transition :pending => :completed
     end
     event :cancel do
       transition all - [:canceled] => :canceled
@@ -64,6 +68,35 @@ class Adoption
   end
   def ducks_available?
     (duck_count + Duck.count) <= Settings[:duck_inventory]
+  end
+
+
+  def paypal_encrypted(return_url, notify_url)
+    values = {
+      :business => 'seller_1294338383_biz@gmail.com',
+      :cmd => '_cart',
+      :upload => 1,
+      :return => return_url,
+      :invoice => id,
+      :cert_id => "TUDGHDHRBDG4Y",
+      :notify_url => notify_url
+    }
+    values.merge!({
+      "amount_1" => dollar_fee,
+      "item_name_1" => duck_count.to_s + ' ducks',
+      "item_number_1" => id,
+      "quantity_1" => 1
+    })
+    encrypt_for_paypal(values)
+  end
+
+  PAYPAL_CERT_PEM = File.read("#{Rails.root}/certs/paypal_cert.pem")
+  APP_CERT_PEM = File.read("#{Rails.root}/certs/app_cert.pem")
+  APP_KEY_PEM = File.read("#{Rails.root}/certs/app_key.pem")
+
+  def encrypt_for_paypal(values)
+    signed = OpenSSL::PKCS7::sign(OpenSSL::X509::Certificate.new(APP_CERT_PEM), OpenSSL::PKey::RSA.new(APP_KEY_PEM, ''), values.map { |k, v| "#{k}=#{v}" }.join("\n"), [], OpenSSL::PKCS7::BINARY)
+    OpenSSL::PKCS7::encrypt([OpenSSL::X509::Certificate.new(PAYPAL_CERT_PEM)], signed.to_der, OpenSSL::Cipher::Cipher::new("DES3"), OpenSSL::PKCS7::BINARY).to_s.gsub("\n", "")
   end
 
   private

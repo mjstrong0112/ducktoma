@@ -38,9 +38,9 @@ describe AdoptionsController do
           post :create, :adoption => @attr
         end.should change(Adoption, :count).by(1)
       end
-      it "redirects to the adoption show page" do
+      it "redirects to the adoption edit page" do
         post :create, :adoption => @attr
-        response.should redirect_to adoption_path(assigns(:adoption))
+        response.should redirect_to edit_adoption_path(assigns(:adoption))
       end
       it "shows a success notice" do
         post :create, :adoption => @attr
@@ -60,6 +60,38 @@ describe AdoptionsController do
         post :create, :adoption => @attr
         response.should render_template('new')
       end
+    end
+  end
+
+  context "GET 'edit'" do
+    before(:each) do
+      @adoption = Fabricate(:adoption)
+    end
+    it "renders confirm if state is new" do
+      @adoption.state.should == 'new'
+      get :edit, :id=> @adoption.id
+      response.should be_success
+      response.should render_template('confirm')
+    end
+    it "renders pending if state is pending" do
+      @adoption.state = 'pending'
+      @adoption.save!
+      get :edit, :id => @adoption.id
+      response.should be_success
+    end
+    it "renders completed if state is completed" do
+      @adoption.state = 'completed'
+      @adoption.save!
+      get :edit, :id => @adoption.id
+      response.should be_success
+      response.should render_template('completed')
+    end
+    it "renders canceled if state is canceled" do
+      @adoption.state = 'canceled'
+      @adoption.save!
+      get :edit, :id => @adoption.id
+      response.should be_success
+      response.should render_template('canceled')
     end
   end
 end

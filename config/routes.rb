@@ -23,7 +23,8 @@ Ducktoma::Application.routes.draw do
   end
   
   resources :adoptions
-
+  resources :payment_notifications
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

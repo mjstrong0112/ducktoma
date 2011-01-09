@@ -6,7 +6,7 @@ describe Adoption do
   should_have_field :fee, :type => Integer
   should_have_field :state, :type => String
 
-  should_be_referenced_in :user
+  should_be_referenced_in :user  
   should_reference_many :ducks  
 
   should_embed_one :adopter_info
@@ -87,8 +87,10 @@ describe Adoption do
     it "is new by default" do
       subject.should be_new
     end
-    it "can be completed or canceled when new" do
-      [:complete, :cancel].each {|s| subject.send(:"can_#{s}?").should be true }
+    it "can be confirmed or canceled when new" do
+      [:confirm, :cancel].each {|s| subject.send(:"can_#{s}?").should be true }
+      #subject.confirm.should == true
+      #subject.cancel.should == true
     end
     context "when completed" do
       before(:all) { subject.state = :completed }

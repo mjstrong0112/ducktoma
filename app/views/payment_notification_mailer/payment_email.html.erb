@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p>
+      You have successfully paid for <%= @adoption.duck_count %> ducks.
+    </p>
+    <p>Thanks for adopting and have a great day!</p>
+    <p>The real email is <%= @payment.buyer_info.email %></p>
+  </body>
+</html>

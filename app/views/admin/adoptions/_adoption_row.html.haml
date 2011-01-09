@@ -2,6 +2,7 @@
   %td= adoption.raffle_number
   %td= adoption.duck_count
   %td= number_to_currency adoption.dollar_fee
+  %td= adoption.state
   %td
     - if adoption.type == 'sales'
       = link_to 'Edit', edit_admin_adoption_url(adoption)

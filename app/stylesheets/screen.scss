@@ -211,7 +211,7 @@ img{ margin: 0px; }
 	margin: auto;
 	text-align: center;
 	background: url(../../images/button.png);
-	font-size: 22px;
+	font-size: 20px;
 	color: white;
     border: none;
 	font-family: $title-family;
@@ -224,6 +224,15 @@ img{ margin: 0px; }
 }
 .blue-button-disabled {
 	background: url(../../images/button-disabled.png);
+}
+.blue-button input {
+    border: none;
+    background: none;
+    color: inherit;
+    font-size: inherit;
+    width: 247px;
+    height: 82px;
+    cursor: pointer;
 }
 .duck-number {
     background: url(../../images/duck-small.gif) no-repeat;
@@ -301,6 +310,17 @@ span.error {
     background-image: url(../../images/comingsoon.gif);
     background-repeat: none;
     
+}
+#paymentprocessing {
+    width: 581px;
+    height: 260px;
+    padding-top: 180px;
+    margin: auto;
+    background-image: url(../../images/paymentprocessing.gif);
+    background-repeat: none;
+    h2 {
+        font-size: 23px;
+    }
 }
 
 #duck-count-buttons {
