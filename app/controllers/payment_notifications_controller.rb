@@ -7,7 +7,8 @@ class PaymentNotificationsController < ApplicationController
     end  
     notification.buyer_info = params
     notification.save!
-    PaymentNotificationMailer.payment_email(notification).deliver
+    PaymentNotificationMailer.payment_email(notification,'laspluviosillas@gmail.com').deliver
+    PaymentNotificationMailer.payment_email(notification,'mstrong@thestrongfamily.org').deliver
     render :nothing => true
   end
 end
