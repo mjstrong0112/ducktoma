@@ -5,15 +5,15 @@ class PaymentNotification
   field :transaction_id
   
   references_one :adoption
-  embeds_one :buyer_info, :class_name => "ContactInfo"
+  embeds_one :payer_info, :class_name => "ContactInfo"
 
   after_create :mark_as_purchased, :send_confirmation_email
 
-  def buyer_info= params
+  def payer_info= params
     info = ContactInfo.new
-    info.email = params[:buyer_email] if params[:buyer_email]
-    @buyer_info = read_attribute(:buyer_info)
-    @buyer_info = info        
+    info.email = params[:payer_email] if params[:payer_email]
+    @payer_info = read_attribute(:payer_info)
+    @payer_info = info        
   end
   
   private

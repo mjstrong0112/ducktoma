@@ -5,7 +5,7 @@ class PaymentNotificationsController < ApplicationController
     if Adoption.find(params[:invoice])
       notification.adoption = Adoption.find(params[:invoice])
     end  
-    notification.buyer_info = params
+    notification.payer_info = params
     notification.save!
     #Test emails for paypal sandbox
     PaymentNotificationMailer.payment_email(notification,'laspluviosillas@gmail.com').deliver
