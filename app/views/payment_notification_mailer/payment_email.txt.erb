@@ -4,3 +4,8 @@ Welcome to example.com
 You have successfully paid for <%= @adoption.duck_count %>
 Thanks for buying and have a great day!
 The real email is <%= @payment.payer_info.email %>
+phone: <%= @payment.payer_info.phone %>
+street: <%= @payment.payer_info.address %>
+city: <%= @payment.payer_info.city %>
+state: <%= @payment.payer_info.state %>
+zip: <%= @payment.payer_info.zip %>

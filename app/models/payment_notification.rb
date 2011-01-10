@@ -12,6 +12,12 @@ class PaymentNotification
   def payer_info= params
     info = ContactInfo.new
     info.email = params[:payer_email] if params[:payer_email]
+    info.full_name = params[:first_name] + ' ' + params[:last_name] if params[:first_name] && params[:last_name]
+    info.phone = params[:contact_phone] if params[:contact_phone]
+    info.city = params[:address_city] if params[:address_city]
+    info.state = params[:address_state] if params[:address_state]
+    info.address = params[:address_street] if params[:address_street]
+    info.zip = params[:address_zip].to_i if params[:address_zip]
     @payer_info = read_attribute(:payer_info)
     @payer_info = info        
   end

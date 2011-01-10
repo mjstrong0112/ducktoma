@@ -8,6 +8,11 @@
       You have successfully paid for <%= @adoption.duck_count %> ducks.
     </p>
     <p>Thanks for adopting and have a great day!</p>
-    <p>The real email is <%= @payment.payer_info.email %></p>
+    <p>email: <%= @payment.payer_info.email %></p>
+    phone: <%= @payment.payer_info.phone %>
+    street: <%= @payment.payer_info.address %>
+    city: <%= @payment.payer_info.city %>
+    state: <%= @payment.payer_info.state %>
+    zip: <%= @payment.payer_info.zip %>
   </body>
 </html>
