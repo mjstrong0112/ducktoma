@@ -14,7 +14,7 @@ class ContactInfo
 
   validates_presence_of :full_name#, :city, :state, :zip
   validates_numericality_of :zip, :only_integer => true, :greater_than_or_equal_to => 10000, :less_than_or_equal_to => 99999, :allow_blank => true
-  validates_length_of :phone, :minimum => 10, :maximum => 10, :allow_blank => true
+  validates_length_of :phone, :minimum => 10, :maximum => 14, :allow_blank => true
   validates :email, :format => { :with => /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
                     :uniqueness => { :case_sensitive => false }, :allow_blank => true
 
