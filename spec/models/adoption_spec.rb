@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Adoption do
 
-  should_have_field :raffle_number
+  should_have_field :adoption_number
   should_have_field :fee, :type => Integer
   should_have_field :state, :type => String
 
@@ -33,7 +33,7 @@ describe Adoption do
     end
     it "generates a raffle number on create" do
       @adoption.save
-      @adoption.raffle_number.should_not be_blank
+      @adoption.adoption_number.should_not be_blank
     end
     it "generates fee on create" do
       @adoption.save

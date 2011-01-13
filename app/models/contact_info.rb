@@ -22,8 +22,8 @@ class ContactInfo
 
   private
   def must_have_form_of_contact
-    if phone.blank? && email.blank? && (address.blank? || city.blank? || state.blank? || zip.blank?)
-      errors.add :base, "You must enter a phone, address, or email"
+    if phone.blank? && email.blank? && (address.blank? || city.blank? || state.blank? || zip.blank?)      
+      errors.add(:base, "You must enter a phone, address, or email")      
     end
   end
 

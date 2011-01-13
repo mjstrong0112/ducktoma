@@ -354,7 +354,14 @@ span.error {
 input[disabled='disabled'] {
   background-color: #cccccc;
 }
+input:focus, select:focus {
+    background-color: lightyellow;
+}
 select { border-color: #cccccc; padding: 2px 2px;  }
+.alert {
+    h2 { font-size: 20px; color: #8A362C; }
+    ul { margin-bottom: 0px; }
+}
 
 
 .break, .clear { clear: both; height: 0px;}

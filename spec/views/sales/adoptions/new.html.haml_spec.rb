@@ -1,7 +1,11 @@
 require 'views/views_helper'
 
 describe "sales/adoptions/new.html.haml" do
-  before(:each) { assign(:adoption, Adoption.new) }
+  before(:each) {
+    adoption = Adoption.new
+    adoption.adopter_info = ContactInfo.new
+    assign(:adoption, adoption)
+  }
   context "form" do
     it "should have the right fields" do
       render

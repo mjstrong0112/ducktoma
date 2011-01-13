@@ -1,35 +1,36 @@
 
 = simple_form_for [:sales, @adoption] do |f|
-  = render "shared/error_messages", :target => @adoption
+  = render "shared/error_messages", :target => [ {:item => @adoption, :exclude => :adopter_info }, {:item => @adoption.adopter_info }]
   = render 'shared/title_slim', :text => 'Personal Information', :number => 1
   - @adoption.adopter_info ||= ContactInfo.new
   .sales-adoption-form
     = f.simple_fields_for :adopter_info do |adopter_form|
       .left
-        = adopter_form.input :full_name
+        = adopter_form.input :full_name, :input_html => {:tabindex => 1}
         %br/
-        = adopter_form.input :phone
+        = adopter_form.input :phone, :input_html => {:tabindex => 3}        
         %br/
-        = adopter_form.input :email
+        = adopter_form.input :email, :input_html => {:tabindex => 5}
       .right
-        = adopter_form.input :address
+        = adopter_form.input :address, :input_html => {:tabindex => 2}
         %br/
-        = adopter_form.input :city
+        = adopter_form.input :city, :input_html => {:tabindex => 3}
         %br/
         .left
           = adopter_form.input :state, :collection => Carmen::state_codes('US'),
-                                       :input_html => { :style => "width: 70px;" }
+                                       :input_html => { :style => "width: 70px;", :tabindex => 6 }
         .left(style="padding-left: 10px;")
-          = adopter_form.input :zip, :input_html => { :style => "width: 70px;" }
+          = adopter_form.input :zip, :input_html => { :style => "width: 70px;", :tabindex => 7 }
         %br/
     .break &nbsp;
   = render 'shared/title_slim', :text => 'Adoption Info', :number => 2
 
   .sales-adoption-form-ducks
     .left(style="padding: 0;")
-      = f.input :duck_count, :label => "Number of Ducks Adopted", :value => @adoption.duck_count
-    .left= f.input :raffle_number, :label => "Adoption Number"
-    .left= f.input :dollar_fee, :label => "Fee (in dollars)"
+      = f.input :duck_count, :label => "Number of Ducks Adopted", :value => @adoption.duck_count, :input_html => {:tabindex => 8}
+    .left
+      = f.input :adoption_number, :label => "Adoption Number", :input_html => {:tabindex => 9}          
+    .left= f.input :dollar_fee, :label => "Fee (in dollars)", :input_html => {:tabindex => 10}
     .break &nbsp;
   #submit-sales(style="margin:auto; width: 247px;")
-    = f.submit "Submit", :class => "submit-duck-button blue-button"
+    = f.submit "Submit", :class => "submit-duck-button blue-button", :tabindex => 11

@@ -2,7 +2,7 @@ require 'whole_number_validator'
 class Adoption
   include Mongoid::Document
 
-  field :raffle_number
+  field :adoption_number
   field :fee, :type => Integer
   field :type
   
@@ -17,8 +17,8 @@ class Adoption
 
   accepts_nested_attributes_for :adopter_info
 
-  before_validation :save_fee, :create_raffle_number
-  validates_presence_of :ducks, :fee, :raffle_number
+  before_validation :save_fee, :create_adoption_number
+  validates_presence_of :ducks, :fee, :adoption_number
 
   state_machine :initial => :new do
     event :confirm do
@@ -106,15 +106,15 @@ class Adoption
       self.fee ||= calculate_fee
     end
   end
-  def create_raffle_number
+  def create_adoption_number
     unless type == 'sales'
-      if self.raffle_number.blank?
+      if self.adoption_number.blank?
         record=true
         while record
           random = "R#{Array.new(9){rand(9)}.join}"
-          record = Adoption.where(:raffle_number => random).exists?
+          record = Adoption.where(:adoption_number => random).exists?
         end
-        self.raffle_number = random
+        self.adoption_number = random
       end
     end
   end

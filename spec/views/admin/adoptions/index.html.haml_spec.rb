@@ -17,7 +17,7 @@ describe "admin/adoptions/index.html.haml" do
   it "displays all the information for the adoptions collection" do
     render
     @collection.each do |adoption|
-      rendered.should have_selector('td', :content => adoption.raffle_number)
+      rendered.should have_selector('td', :content => adoption.adoption_number)
       rendered.should have_selector('td', :content => number_to_currency(adoption.dollar_fee))
       rendered.should have_selector('td', :content => adoption.duck_count.to_s)
     end
