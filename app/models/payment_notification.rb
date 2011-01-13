@@ -26,10 +26,15 @@ class PaymentNotification
   def mark_as_purchased
     if status == "Completed"
       adoption.state = 'completed'
+      adoption.adopter_info = payer_info
       adoption.save!
     end
   end
-  def send_confirmation_email
-    
+  def send_confirmation_email    
+    PaymentNotificationMailer.payment_email(adoption, payer_info.email).deliver
+    #Test emails for paypal sandbox
+    PaymentNotificationMailer.payment_email(adoption,'laspluviosillas@gmail.com').deliver
+    #PaymentNotificationMailer.payment_email(adoption,'mstrong@thestrongfamily.org').deliver
+    #PaymentNotificationMailer.payment_email(adoption,'paul@thestrongfamily.org').deliver
   end
 end

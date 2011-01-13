@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %meta{'http-equiv' => 'Content-Type', :content => 'text/html'}/
+    %title Payment Notification Email
+  %body
+    %h2{:style =>'font-size: 25px; font-family: Myriad Pro, Arial, Helvetica, sans-serif; color: #666666; font-weight: normal;'}
+      Your payment has been processed.
+
+    %h2{:style =>'font-size: 20px; font-family: Myriad Pro, Arial, Helvetica, sans-serif; color: #666666; font-weight: normal; margin-bottom: 5px;'}
+      Your adoption number:
+    %div{:style => "font-family: Myriad Pro, Arial, Helvetica, sans-serif; font-size: 50px; background-color: #7fbedc; color: white; text-align: center; line-height: 100px; height: 100px;"}
+      = @adoption.adoption_number
+
+    %div{:style =>'font-size: 20px; font-family: Myriad Pro, Arial, Helvetica, sans-serif; color: #666666; font-weight: normal; float: left; margin-top: 5px;' }
+      Number of Ducks: #{ @adoption.duck_count }
+
+    %div{:style =>'font-size: 20px; font-family: Myriad Pro, Arial, Helvetica, sans-serif; color: #666666; font-weight: normal; float: right; margin-top: 5px; margin-bottom: 5px;' }
+      Total: #{number_to_currency(@adoption.dollar_fee)}
+
+    %div{:style => 'clear :both'}
+
+    %div{:style => "border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc; font-size: 13px; margin-top: 20px; padding: 0px 10px; color: #777777;"}
+      %p The race will take place on (insert date here) at (insert location here).
+      %p Any other information can go here.
+      %p Thanks for adopting!
