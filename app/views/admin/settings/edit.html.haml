@@ -1,7 +1,7 @@
 %h2 Site Settings
 
 = simple_form_for [:admin, @settings], :url => { :action => :update }, :html => {:method => :put} do |f|
-  = render "shared/error_messages", :target => @settings
+  -# = render "shared/error_messages", :target => @settings
   = f.label :duck_inventory
   = f.text_field :duck_inventory
   = f.input :adoptions_live, :as => :boolean
