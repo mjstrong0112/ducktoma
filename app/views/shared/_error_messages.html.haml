@@ -10,8 +10,7 @@
   - total_count=0
   - target.each do |arr|
     - total_count += arr[:item].errors.count if arr[:item]
-    
-  - if target.first[:item].errors.any? ## HACK
+  - unless total_count == 0
     #errorExplanation.alert
       %h2 #{pluralize(total_count, "error")} prohibited this record from being saved:
       %ul
