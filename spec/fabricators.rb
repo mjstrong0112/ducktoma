@@ -36,3 +36,7 @@ end
 Fabricator(:duck) do
   number { Forgery::Basic.number(:at_least => 1, :at_most => 10000) }
 end
+
+Fabricator(:location) do
+  name { Forgery::Address.state }
+end

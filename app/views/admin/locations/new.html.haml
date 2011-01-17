@@ -1,0 +1,7 @@
+%h1 Add a new location
+
+= render 'form', :target => @location
+
+- content_for :navlinks do
+  .navlink= link_to "Admin Dashboard", admin_root_path
+  .navlink= link_to "Back to All Locations", admin_locations_path

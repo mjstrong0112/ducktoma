@@ -1,0 +1,16 @@
+%h1 All locations
+%table
+  %tr
+    %th Name
+    %th
+  - @locations.each do |location|
+    %tr
+      %td        
+        = location.name
+      %td= link_to 'delete', admin_location_path(location), :method => :delete
+
+%h3 Add a new location
+= render 'form', :target => Location.new
+
+- content_for :navlinks do
+  .navlink= link_to "Admin Dashboard", admin_root_path

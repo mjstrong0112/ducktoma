@@ -37,7 +37,8 @@ $title-family: Myriad Pro, Arial, Helvetica, sans-serif;
 html, body { height: 100%; }
 body{ background-image: url(../../images/gradientbg.gif); background-repeat: repeat-x; background-color: #7cbbd9; height: 100%; }
 object {vertical-align: top; }
-h1, h2 { font-size: 28px; font-family: $title-family; color: #666666; font-weight: normal;}
+h1, h2 , h3 { font-size: 28px; font-family: $title-family; color: #666666; font-weight: normal;}
+h3 { font-size: 25px; }
 img{ margin: 0px; }
 /* code for sticky footer */
 .wrapper {
