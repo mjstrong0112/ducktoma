@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Admin::LocationsController do
+describe Admin::OrganizationsController do
   context "GET 'index'" do
     before(:each) do
       @user = Fabricate(:admin)
@@ -28,48 +28,47 @@ describe Admin::LocationsController do
     end
     describe "with valid information" do
       before(:each) do
-        @attr = {:name => "County of Rock and Roll - Austin Texas"}
+        @attr = { :name => "The Organization of Sertoma" }
       end
-      it "creates a new location" do
+      it "creates a new organization" do
         lambda do
-          post :create, :location => @attr
-        end.should change(Location, :count).by(1)
+          post :create, :organization => @attr
+        end.should change(Organization, :count).by(1)
       end
       it "redirects to index" do
-        post :create, :location => @attr
-        response.should redirect_to admin_locations_url
+        post :create, :organization => @attr
+        response.should redirect_to admin_organizations_url
       end
     end
     describe "with invalid information" do
       before(:each) do
         @attr = {}
       end
-      it "doesn't create a new location" do
+      it "doesn't create a new organization" do
         lambda do
-          post :create, :location => @attr
-        end.should_not change(Location, :count)
+          post :create, :organization => @attr
+        end.should_not change(Organization, :count)
       end
       it "renders the new page" do
-        post :create, :location => @attr
+        post :create, :organization => @attr
         response.should render_template('new')
       end
     end
   end
-
   context "DELETE 'destroy'" do
     before(:each) do
       @user = Fabricate(:admin)
       sign_in @user
-      @location = Fabricate(:location)
+      @organization = Fabricate(:organization)
     end
-    it "destroys the location" do
+    it "destroys the organization" do
       lambda do
-        delete :destroy, :id => @location.id
-      end.should change(Location, :count).by(-1)
+        delete :destroy, :id => @organization.id
+      end.should change(Organization, :count).by(-1)
     end
     it "redirects to index" do
-      delete :destroy, :id => @location.id
-      response.should redirect_to admin_locations_url
+      delete :destroy, :id => @organization.id
+      response.should redirect_to admin_organizations_url
     end
   end
 end

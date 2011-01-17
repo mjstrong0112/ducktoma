@@ -19,6 +19,7 @@ Ducktoma::Application.routes.draw do
     resources :adoptions
     resources :users
     resources :locations
+    resources :organizations
     resources :pricings
     resource :settings    
   end

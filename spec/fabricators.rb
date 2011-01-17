@@ -40,3 +40,6 @@ end
 Fabricator(:location) do
   name { Forgery::Address.state }
 end
+Fabricator(:organization) do
+  name { Forgery::Name.company_name }
+end

@@ -1,0 +1,16 @@
+%h1 All organizations
+%table
+  %tr
+    %th Name
+    %th
+  - @organizations.each do |organization|
+    %tr
+      %td
+        = organization.name
+      %td= link_to 'delete', admin_organization_path(organization), :method => :delete
+
+%h3 Add a new organization
+= render 'form', :target => Organization.new
+
+- content_for :navlinks do
+  .navlink= link_to "Admin Dashboard", admin_root_path
