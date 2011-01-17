@@ -1,15 +1,5 @@
 %h1 Add a new price
-.price-form
-  = simple_form_for [:admin, @pricing] do |f|
-    .left= f.input :price, :label => false
-    .left(style="padding: 10px;") cents when more than or equal to
-    .left= f.input :quantity, :label => false
-    .left(style="padding: 10px;") ducks
-    .clear &nbsp;
-    = f.submit
-
-%br/
-%br/
+= render 'form', :target => @pricing
 
 - content_for :navlinks do
   .navlink= link_to "Admin Dashboard", admin_root_path

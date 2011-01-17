@@ -54,13 +54,13 @@ class Adoption
     self.fee = (n_dollars*100).to_i
   end
   def calculate_fee
+    #Sort pricings from greatest to smallest
     pricings = Pricing.desc(:quantity).to_a
     if pricings.count > 0
       pricing = pricings.detect do |p|
-       duck_count >= p.quantity
+       duck_count > p.quantity
       end
       pricing ||= pricings.last
-
       duck_count * pricing.price
     else
       duck_count * 50;

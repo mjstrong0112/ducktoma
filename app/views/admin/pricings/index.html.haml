@@ -1,7 +1,7 @@
 %h1 Pricing rules
 %table
   %tr
-    %th When more than or equal to
+    %th When more than
     %th Price
     %th
   - @pricings.each do |pricing|
@@ -13,17 +13,7 @@
         cents
       %td= link_to 'delete', admin_pricing_path(pricing), :method => :delete      
 
-.price-form
-  = simple_form_for [:admin, Pricing.new] do |f|
-    .left= f.input :price, :label => false
-    .left(style="padding: 10px;") cents when more than or equal to
-    .left= f.input :quantity, :label => false
-    .left(style="padding: 10px;") ducks
-    .clear &nbsp;
-    = f.submit
-
-%br/
-%br/
+= render 'form', :target => Pricing.new
 
 - content_for :navlinks do
   .navlink= link_to "Admin Dashboard", admin_root_path
