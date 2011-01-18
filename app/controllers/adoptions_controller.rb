@@ -36,7 +36,13 @@ class AdoptionsController < ApplicationController
     @adoption.type = "std"
     @adoption.user = current_user if current_user
     if @adoption.ducks_available?
-      create! { edit_adoption_url(@adoption.id) }
+      #Can't seem to get inherited resources to use no notice
+      #create! { edit_adoption_url(@adoption.id)}
+      if @adoption.save
+        redirect_to edit_adoption_url(@adoption.id)
+      else         
+        render('new')
+      end
     else
       flash[:alert] = 'There are only ' + Settings[:duck_inventory].to_s +
                         ' ducks left. You tried to adopt ' + @adoption.duck_count.to_s + ' ducks'

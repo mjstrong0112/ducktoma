@@ -1,0 +1,24 @@
+//global variables
+$main-width: 720px;
+$sidebar-width: 180px;
+$main-height: 600px;
+$header-height: 66px;
+$footer-height: 235px; //309px with sponsors on bottom
+$form-width: 700px;
+$title-family: Myriad Pro, Arial, Helvetica, sans-serif;
+
+@mixin rounded-border($radius) {
+    -moz-border-radius: $radius;
+    -webkit-border-radius: $radius;
+    border-radius: $radius;
+}
+@mixin box-shadow($radius) {
+	-moz-box-shadow: 0px 0px #{$radius} rgba(0,0,0,.3);
+	-webkit-box-shadow: 0px 0px #{$radius} rgba(0,0,0,.3);
+	box-shadow: 0px 0px 9px 1px;
+}
+// combines line-height and width for a vertically centered box
+@mixin vbox($height) {
+    height: $height;
+    line-height: $height;
+}

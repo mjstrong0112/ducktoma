@@ -1,3 +1,16 @@
-/* Welcome to Compass. Use this file to define print styles.
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" /> */
+@import "compass/reset";
+@import "flutie/flutie";
+@import "global";
+h1, h2 , h3 { font-size: 28px; font-family: $title-family; color: #666666; font-weight: normal;}
+img { display: none; }
+#print { display: none; }
+#raffle-number {
+    @include vbox(100px);
+    color: white;
+    text-align: center;
+	background-color: #7fbedc;
+    font-size: 50px;
+    font-family: $title-family;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
