@@ -22,8 +22,4 @@
       = f.submit "Continue", :class => "submit-duck-button blue-button-disabled"
 
 - content_for :javascripts do
-  :javascript
-    $(document).ready(function() {
-      pricingScheme.addPricings(#{pricing_json});
-      settings.setInventoryCount(#{Settings[:duck_inventory]-Duck.count});      
-    });
+  = render 'shared/pricingjs'

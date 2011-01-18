@@ -42,10 +42,6 @@ describe AdoptionsController do
         post :create, :adoption => @attr
         response.should redirect_to edit_adoption_path(assigns(:adoption))
       end
-      it "shows a success notice" do
-        post :create, :adoption => @attr
-        flash[:notice].should =~ /success/i
-      end
     end
     context "failure" do
       before(:each) do

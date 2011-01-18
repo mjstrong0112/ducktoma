@@ -6,7 +6,7 @@ class Sales::AdoptionsController < Sales::BaseController
   belongs_to :user, :optional => :true
 
   #before_filter :authenticate_user!, :only => :index
-  def create
+  def create    
     @adoption = Adoption.new(params[:adoption])
     @adoption.type = :sales
     @adoption.user = current_user if current_user

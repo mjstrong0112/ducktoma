@@ -6,3 +6,8 @@
 - content_for :navlinks do
   .navlink= link_to "View Sales Adoptions", sales_adoptions_path
   .navlink= link_to "Sales Dashboard", sales_root_path
+
+
+- content_for :javascripts do
+  = render 'shared/pricingjs'
+  = javascript_include_tag 'sales'

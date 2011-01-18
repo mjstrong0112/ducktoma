@@ -1,7 +1,8 @@
 require 'whole_number_validator'
+include ApplicationHelper
 class Adoption
   include Mongoid::Document
-
+  
   field :adoption_number
   field :fee, :type => Integer
   field :type
@@ -17,7 +18,7 @@ class Adoption
 
   accepts_nested_attributes_for :adopter_info
 
-  before_validation :save_fee, :create_adoption_number
+  before_validation :save_duck_count, :save_fee, :create_adoption_number
   validates_presence_of :ducks, :fee, :adoption_number
 
   state_machine :initial => :new do
@@ -35,6 +36,7 @@ class Adoption
   validates_associated :adopter_info
   validates_numericality_of :fee, :only_integer => true
   validate :ducks_must_be_available, :on => :create
+  #validate :duck_count_must_correspond_to_fee, :on => :create
 
   before_create :save_ducks
 
@@ -100,7 +102,15 @@ class Adoption
   end
 
   private
-
+  def save_duck_count
+    #If the fee has been entered but the duck_count hasn't been generated,
+    #presumably because javascript was turned off preventing the duck_count from being sent in the post CREATE
+    #Generate it here.
+    if (!fee.nil? && (duck_count.nil? || duck_count == 0))
+      pricing = retrieve_pricing_scheme(fee)
+      self.duck_count = fee/pricing.price
+    end
+  end
   def save_fee
     unless type == 'sales'
       self.fee ||= calculate_fee
@@ -120,6 +130,15 @@ class Adoption
   end
   def save_ducks
     self.ducks.each{|d| d.save}
+  end
+  def duck_count_must_correspond_to_fee
+    #Only applies when a duck_count exists. If the duck_count is nil or 0, it will be generated on save_duck_count.
+    if(duck_count > 0)
+      pricing = retrieve_pricing_scheme(fee)
+      if(duck_count > fee/pricing.price)
+        errors.add :duck_count, "does not correspond to amount donated."
+      end
+    end
   end
   def ducks_must_be_available
     errors.add :duck_count, "is more than the available ducks" unless ducks_available?

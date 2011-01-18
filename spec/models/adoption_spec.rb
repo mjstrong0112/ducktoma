@@ -35,6 +35,24 @@ describe Adoption do
       @adoption.save
       @adoption.adoption_number.should_not be_blank
     end
+    it "generates correct duck_count based on pricing" do
+      Pricing.delete_all
+      pricing_rule_1 = Fabricate(:pricing, :quantity => 0, :price => 100)
+      pricing_rule_2 = Fabricate(:pricing, :quantity => 10, :price => 95)
+      pricing_rule_3 = Fabricate(:pricing, :quantity => 20, :price => 90)
+
+      adoption_1 = Fabricate.build(:adoption, :fee => 900, :duck_count => 0)
+      adoption_1.save
+      adoption_1.duck_count.should == 9
+
+      adoption_2 = Fabricate.build(:adoption, :fee => 1345, :duck_count => 0)
+      adoption_2.save
+      adoption_2.duck_count.should == 14
+
+      adoption_3 = Fabricate.build(:adoption, :fee => 2300, :duck_count => 0)
+      adoption_3.save
+      adoption_3.duck_count.should == 25
+    end
     it "generates fee on create" do
       @adoption.save
       @adoption.fee.should_not be_blank
