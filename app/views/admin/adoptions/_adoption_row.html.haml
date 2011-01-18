@@ -5,6 +5,6 @@
   %td= adoption.state
   %td
     - if adoption.type == 'sales'
-      = link_to 'Edit', edit_admin_adoption_url(adoption)
+      = link_to 'Edit', edit_sales_adoption_url(adoption)
       |
       = link_to 'Delete', admin_adoption_url(adoption), :method => :delete
