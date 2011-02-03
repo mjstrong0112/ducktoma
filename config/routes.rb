@@ -12,8 +12,12 @@ Ducktoma::Application.routes.draw do
   namespace :sales do
     root :to => "dashboard#index"
     resources :adoptions
+    resources :sales_events do
+      resources :adoptions
+    end
+    match "/new" => "sales_events#new"
   end
-
+  
   namespace :admin do
     root :to => "dashboard#index"
     resources :adoptions

@@ -1,0 +1,25 @@
+.form
+  %h2.sales-adoption-form-title Sales Event Information
+  = simple_form_for [:sales, @sales_event] do |f|
+    %div(style="width: 400px; margin: auto;")
+      .left
+        %h4 Location
+        = f.input :location, :collection => Location.to_collection, :label => false, :input_html => { :style => "width: 195px;" }
+      .left(style="margin-left: 10px;")
+        %h4 Organization
+        = f.input :organization, :collection => Organization.to_collection , :label => false, :input_html => { :style => "width: 195px;" }
+      .clear
+      %br/
+      %div(style="text-align: center;")
+        %h4 Sales Event Date
+        = f.input :date, :label => false, :input_html => { :style => "width: 130px;" }
+      .adoption-new-button
+        = f.submit "Continue", :class => "submit-duck-button blue-button"
+
+- content_for :javascripts do
+  = stylesheet_link_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/redmond/jquery-ui.css"
+  = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"
+  :javascript
+      $(function() {
+        $("#sales_event_date").datepicker();      
+      });

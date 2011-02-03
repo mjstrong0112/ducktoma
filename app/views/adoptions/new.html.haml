@@ -2,9 +2,8 @@
   = image_tag "adopt.png", :id => "adopt", :alt => "Adopt a Duck Now!"
   %h1 Adopt a Duck Now!
 
-.form
+.form  
   = render 'shared/title_slim', :text => 'Specify Number of Ducks', :number => 1
-
   = form_for @adoption do |f|
     #duck-form.clearfix
       %div(style="margin: auto; width: 480px;")

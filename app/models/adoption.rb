@@ -12,6 +12,7 @@ class Adoption
 
   referenced_in :user
   referenced_in :payment_notification
+  referenced_in :sales_event
   references_many :ducks, :dependent => :destroy
 
   embeds_one :adopter_info, :class_name => "ContactInfo"

@@ -9,9 +9,13 @@ class Sales::BaseController < ApplicationController
   end
   private
   def verify_sales
-    unless current_user.is?(:sales) || current_user.admin?
-      flash[:alert] = "You are not authorized to view this page."
-      redirect_to root_url
+    if current_user?
+      unless current_user.is?(:sales) || current_user.admin?
+        flash[:alert] = "You are not authorized to view this page."
+        redirect_to root_url
+      end
+    else
+      redirect_to new_user_session_url
     end
   end
 end

@@ -2,7 +2,7 @@ class AdoptionsController < ApplicationController
   inherit_resources
   actions :index, :show, :new, :create, :edit, :update
   load_and_authorize_resource
-  belongs_to :user, :optional => :true
+  belongs_to :user, :optional => :true  
 
   #before_filter :authenticate_user!, :only => :index
   def new

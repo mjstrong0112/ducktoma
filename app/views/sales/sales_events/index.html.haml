@@ -1,0 +1,19 @@
+%table
+  %tr
+    %th Organization
+    %th Location
+    %th Date
+    %th Number of Adoptions
+    %th Actions
+  - @sales_events.each do |sales_event|
+    %tr
+      %td= sales_event.organization
+      %td= sales_event.location
+      %td= sales_event.date
+      %td= sales_event.adoptions.count
+      %td= link_to "Continue", new_sales_sales_event_adoption_path(sales_event)
+%br/
+
+- content_for :navlinks do
+  .navlink= link_to "Sales Dashboard", sales_root_path
+

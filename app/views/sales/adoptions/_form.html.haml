@@ -1,5 +1,9 @@
+- if parent?
+  - arr = [:sales_sales_event, @adoption]
+- else
+  - arr = [:sales, @adoption]
 
-= simple_form_for [:sales, @adoption] do |f|
+= simple_form_for arr do |f|
   = render "shared/error_messages", :target => [ {:item => @adoption, :exclude => :adopter_info }, {:item => @adoption.adopter_info }]
   = render 'shared/title_slim', :text => 'Personal Information', :number => 1
   - @adoption.adopter_info ||= ContactInfo.new

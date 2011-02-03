@@ -53,7 +53,7 @@ describe Sales::AdoptionsController do
     end
   end
   context "as a guest" do
-    it "redirects to login on GET user adoptions 'new'" do
+    it "redirects to login on GET user adoptions 'index'" do
       get :index
       response.should_not be_success
       response.should redirect_to(new_user_session_path)
