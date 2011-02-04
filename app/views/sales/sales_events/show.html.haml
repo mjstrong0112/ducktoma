@@ -1,0 +1,27 @@
+%h1 View Sales
+%table
+  %tr
+    %th Contributor
+    %th Donator
+    %th Amount Donated
+    %th Actions
+  - @sales_event.adoptions.each do |adoption|
+    %tr
+      - if adoption.user == current_user
+        %td.blue_highlight= adoption.user.email
+        %td.blue_highlight= adoption.adopter_info.full_name
+        %td.blue_highlight= number_to_currency(adoption.dollar_fee)
+        %td.blue_highlight
+          = link_to "Edit", edit_sales_adoption_path(adoption)
+          |
+          = link_to "Delete", sales_adoption_path(adoption), :method => :delete
+      - else
+        %td= adoption.user.email
+        %td= adoption.adopter_info.full_name
+        %td= number_to_currency(adoption.dollar_fee)
+        %td
+          = link_to "Edit", edit_sales_adoption_path(adoption)
+%br/
+
+- content_for :navlinks do
+  .navlink= link_to "Sales Dashboard", sales_root_path

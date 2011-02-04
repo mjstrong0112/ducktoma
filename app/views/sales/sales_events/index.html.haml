@@ -11,7 +11,10 @@
       %td= sales_event.location
       %td= sales_event.date
       %td= sales_event.adoptions.count
-      %td= link_to "Continue", new_sales_sales_event_adoption_path(sales_event)
+      %td
+        = link_to "Continue", new_sales_sales_event_adoption_path(sales_event)
+        |
+        = link_to "Show Sales", sales_sales_event_path(sales_event) 
 %br/
 
 - content_for :navlinks do

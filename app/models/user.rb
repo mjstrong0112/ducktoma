@@ -41,4 +41,8 @@ class User
   def sales_adoptions
     adoptions_f :sales
   end
+
+  def sales_events
+    SalesEvent.find(adoptions.map{|a| a.sales_event_id})
+  end
 end
