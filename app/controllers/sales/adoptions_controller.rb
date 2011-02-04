@@ -13,7 +13,15 @@ class Sales::AdoptionsController < Sales::BaseController
       @adoption.type = :sales
       @adoption.user = current_user if current_user
       create! { new_sales_adoption_url }
-    else
+    else    
+      @sales_event = SalesEvent.find(params[:sales_event_id])
+
+      @adoption = Adoption.new(params[:adoption])
+      @adoption.type = :sales
+      @adoption.user = current_user if current_user
+
+      @sales_event.adoptions.build(@adoption)
+      
       create! { new_sales_sales_event_adoption_url }
     end    
   end

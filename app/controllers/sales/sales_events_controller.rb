@@ -1,4 +1,4 @@
-class Sales::SalesEventsController < ApplicationController
+class Sales::SalesEventsController < Sales::BaseController
   inherit_resources
   actions :index, :new, :create, :edit, :update, :destroy
   load_and_authorize_resource
