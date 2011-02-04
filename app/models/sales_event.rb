@@ -5,5 +5,5 @@ class SalesEvent
 
   field :location
   field :organization
-  field :date, :type => Date
+  field :date, :type => String
 end
