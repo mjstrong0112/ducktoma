@@ -43,6 +43,11 @@ class User
   end
 
   def sales_events
-    SalesEvent.find(adoptions.map{|a| a.sales_event_id})
+    ids = adoptions.map{|a| a.sales_event_id}.compact
+    unless ids.blank?
+      SalesEvent.find(ids)
+    else
+      {}
+    end
   end
 end

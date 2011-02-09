@@ -8,6 +8,11 @@ class SalesEvent
   field :date, :type => String
 
   def creators
-    User.find(adoptions.map{|a| a.user_id})
-  end
+    ids = adoptions.map{|a| a.user_id}.compact
+    unless ids.blank?
+      User.find(ids)
+    else
+      {}
+    end
+  end    
 end
