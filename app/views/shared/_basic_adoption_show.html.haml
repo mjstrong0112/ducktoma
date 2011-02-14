@@ -16,5 +16,55 @@
     Total: #{number_to_currency(@adoption.dollar_fee)}
 
 
+#adoption-print
+  #adopter-info
+    = image_tag "adoptionsummary.gif"
+    %div(style="border-top: 1px solid #ccc; padding-top: 10px;")
+      %h3 Your Adoption Number:
+      %h1  #{ "  " + @adoption.adoption_number }
+      %br/
+      %h3 Number of Ducks Adopted:
+      %h1= @adoption.duck_count
+      %br/
+      %h3 Total:
+      %h1= number_to_currency(@adoption.dollar_fee)
+  - unless @adoption.adopter_info.nil?
+    = image_tag "contactinfo.gif", :id =>"contact-info"
+    = image_tag "contactinfosmall.gif", :id =>"contact-info-small"
+    %div(style="border-top: 1px solid #ccc; padding-top: 10px;")
+      .left(style="width: 50%;")
+        %h3 Name:
+        %h1= @adoption.adopter_info.full_name
+        %br/
+        - unless @adoption.adopter_info.email.blank?
+          %h3 Email:
+          %h1= @adoption.adopter_info.email
+          %br/
+        - unless @adoption.adopter_info.phone.blank?
+          %h3 Phone:
+          %h1= @adoption.adopter_info.phone
+
+      .left(style="width: 50%")
+        - unless @adoption.adopter_info.city.blank?
+          %h3 Address:
+          %h1= @adoption.adopter_info.address
+          %br/
+        - unless @adoption.adopter_info.city.blank?
+          %h3 City:
+          %h1= @adoption.adopter_info.city
+          %br/
+        - unless @adoption.adopter_info.state.blank?
+          .left(style="margin-right: 10px;")
+            %h3 State:
+            %h1= @adoption.adopter_info.state
+        - unless @adoption.adopter_info.state.blank?
+          .left
+            %h3 Zip:
+            %h1= @adoption.adopter_info.zip
+      .clear
+      #adoption-thanks
+        %div(style="margin: auto; width: 295px;")
+          = image_tag "thanksforadopting.gif"
+
 #print.blue-button
   = link_to_function "Print", "javascript:print()", :html_options => { :id => "print" }

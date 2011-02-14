@@ -2,7 +2,7 @@
 @import "flutie/flutie";
 @import "global";
 h1, h2 , h3 { font-size: 28px; font-family: $title-family; color: #666666; font-weight: normal;}
-img { display: none; }
+img { display: none; padding: 0px; margin: 0px; border: 0px; }
 #print { display: none; }
 #raffle-number {
     @include vbox(100px);
@@ -14,3 +14,16 @@ img { display: none; }
     margin-top: 20px;
     margin-bottom: 20px;
 }
+#adoption-print {
+    div { line-height: 35px; }
+    h1, h2, h3{ display: inline; }
+    h1 { padding-left: 5px; font-size: 22px;}
+    h3 { font-size: 19px; }
+    img { display: inline; }
+    #contact-info-small { display: none; }    
+}
+#print.bluebuttonm, .form { display: none; }
+#adoption-thanks {
+border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; margin-top: 20px;
+}
+canvas { display: none; }

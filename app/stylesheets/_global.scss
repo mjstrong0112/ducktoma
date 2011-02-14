@@ -1,10 +1,10 @@
 //global variables
-$main-width: 720px;
-$sidebar-width: 180px;
-$main-height: 600px;
-$header-height: 66px;
+$main-width: 648px;
+$sidebar-width: 162px;
+$main-height: 540px;
+$header-height: 59px;
 $footer-height: 235px; //309px with sponsors on bottom
-$form-width: 700px;
+$form-width: 630px;
 $title-family: Myriad Pro, Arial, Helvetica, sans-serif;
 
 @mixin rounded-border($radius) {

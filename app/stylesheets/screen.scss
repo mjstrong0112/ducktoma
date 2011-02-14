@@ -13,9 +13,9 @@
 html, body { height: 100%; }
 body{ background-image: url(../../images/gradientbg.gif); background-repeat: repeat-x; background-color: #7cbbd9; height: 100%; }
 object {vertical-align: top; }
-h1, h2 , h3, h4 { font-size: 28px; font-family: $title-family; color: #666666; font-weight: normal;}
-h3 { font-size: 25px; }
-h4 { font-size: 18px;}
+h1, h2 , h3, h4 { font-size: 25px; font-family: $title-family; color: #666666; font-weight: normal;}
+h3 { font-size: 22px; }
+h4 { font-size: 16px;}
 img{ margin: 0px; }
 /* code for sticky footer */
 .wrapper {
@@ -41,22 +41,23 @@ img{ margin: 0px; }
 }
 #container {
 	margin: 0 auto;
-	width: 1080px;	
+	width: 972px;	
 	position: relative;
 	text-align: left;
 	clear: left;
 	padding-bottom: 20px;
-	padding-top: 40px;
+	padding-top: 36px;
 }
 #header {
 	height: $header-height;
 	margin-bottom: 10px;
     img { vertical-align: middle; }
+    a { text-decoration: none; }
 }
 #main {
     @include rounded-border(15px);
-    @include box-shadow(20px);
-    $padding: 30;
+    /*@include box-shadow(20px);*/
+    $padding: 27;
     float: left;
 	padding: #{$padding}px;
 	width: $main-width - $padding*2;	
@@ -113,16 +114,16 @@ img{ margin: 0px; }
 	margin: auto;
 	padding-top: 10px;
 	.header, .header-slim {
-        @include vbox(60px);
+        @include vbox(54px);
         @include box-shadow(20px);
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 18px;
+        margin-bottom: 18px;
         color: #666666;
         font-family: $title-family;
         font-size: 19px;
         .number {
             float: left;
-            margin: 16px;
+            margin: 14px;
         }
 	}
     .header-slim {
@@ -147,49 +148,49 @@ img{ margin: 0px; }
 #duck-form {
     /*@include vbox(151px);*/
     @include rounded-border(15px);
-    height: 151px;
+    height: 136px;
 	background-color: #7fbedc;
 }
 #duck-form input {
-	font-size: 50px;
+	font-size: 45px;
 	font-family: $title-family;
 	color: #3f9ecb;
-	width: 80px;
-	height: 60px;
-    margin-top: 43px;
-	margin-right: 30px;
+	width: 72px;
+	height: 54px;
+    margin-top: 38px;
+	margin-right: 27px;
 	float: left;
 	text-align: center;
 	border: none;
 }
 #duck-count {
-    padding-top: 50px;
-	font-size: 50px;
+    padding-top: 45px;
+	font-size: 45px;
 	font-family: $title-family;
 	color: #fff;
 }
 #duck-form-image {
 	float: left;
-	margin: 25px;
+	margin: 22px;
 }
 #duck-form-total {
 	padding: 14px;
-	font-size: 25px;
+	font-size: 23px;
 	font-family: $title-family;
 	color: #666;
 	text-align: right;
 }
 .adoption-new-button {
-    width: 247px;
+    width: 231px;
     margin: auto;
 }
 .blue-button, .blue-button-disabled {
-    @include vbox(82px);
-    width: 247px;
+    @include vbox(74px);
+    width: 222px;
 	margin: auto;
 	text-align: center;
 	background: url(../../images/button.png);
-	font-size: 20px;
+	font-size: 18px;
 	color: white;
     border: none;
 	font-family: $title-family;
@@ -208,8 +209,8 @@ img{ margin: 0px; }
     background: none;
     color: inherit;
     font-size: inherit;
-    width: 247px;
-    height: 82px;
+    width: 222px;
+    height: 74px;
     cursor: pointer;
 }
 .duck-number {
@@ -290,14 +291,16 @@ span.error {
     
 }
 #paymentprocessing {
-    width: 581px;
-    height: 260px;
-    padding-top: 180px;
+    width: 522px;
+    height: 267px;
+    padding-top: 162px;
+    padding-left: 30px;
+    padding-right: 30px;
     margin: auto;
     background-image: url(../../images/paymentprocessing.gif);
     background-repeat: none;
     h2 {
-        font-size: 23px;
+        font-size: 20px;
     }
 }
 
@@ -315,6 +318,19 @@ span.error {
 #navlinks {
     margin-top: 10px;
 }
+#adoption-print {
+    margin-top: -20px;
+    margin-bottom: 10px;
+    div { line-height: 35px; }
+    h1, h2, h3{ display: inline; }
+    h1 { padding-left: 5px; font-size: 22px;}
+    h3 { font-size: 19px; }
+    #adopter-info { display: none; }
+}
+#adoption-thanks {
+display: none;
+}
+#contact-info { display: none; }
 .navlink {
     @include rounded-border(8px);
     border: 1px solid #24b9ff;

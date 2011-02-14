@@ -6,7 +6,9 @@
   %body
     /#distance    
     .wrapper
-      #clouds
+      %canvas(id="example" width="0" height="500" style="position: absolute;")
+        #clouds
+      -#.pushup(style="margin-top: -500px;")
       #container
         = render 'shared/header'
 
