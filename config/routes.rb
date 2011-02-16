@@ -25,7 +25,12 @@ Ducktoma::Application.routes.draw do
     resources :locations
     resources :organizations
     resources :pricings
-    resource :settings    
+
+    match "/payment_notifications/failed" => "payment_notifications#failed"
+    resources :payment_notifications
+
+    
+    resource :settings
   end
   
   resources :adoptions

@@ -76,12 +76,12 @@ class Adoption
 
   def paypal_encrypted(return_url, notify_url)
     values = {
-      :business => 'seller_1294338383_biz@gmail.com',
+      :business => PAYPAL['email'],
       :cmd => '_cart',
       :upload => 1,
       :return => return_url,
       :invoice => id,
-      :cert_id => "TUDGHDHRBDG4Y",
+      :cert_id => PAYPAL['cert_id'],
       :notify_url => notify_url
     }
     values.merge!({

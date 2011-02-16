@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    %meta{'http-equiv' => 'Content-Type', :content => 'text/html'}/
+    %title Unauthorized IPN Access
+  %body
+    %h2{:style =>'font-size: 25px; font-family: Myriad Pro, Arial, Helvetica, sans-serif; color: #666666; font-weight: normal;'}
+      An IPN notification has been sent without the correct secret for verification.
+
+    %h2{:style =>'font-size: 20px; font-family: Myriad Pro, Arial, Helvetica, sans-serif; color: #666666; font-weight: normal; margin-bottom: 5px;'}
+      = link_to "View Details", admin_payment_notification_url(@notification)

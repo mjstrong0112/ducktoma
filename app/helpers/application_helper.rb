@@ -10,4 +10,16 @@ module ApplicationHelper
     pricing ||= pricings.last
     return pricing
   end
+  #if the value is null or blank, it will display null or blank as a string
+  def null_literal(value)
+    if value
+      if value.blank?
+        "blank"
+      elsif !value.blank?
+        value
+      end
+    else
+      "null"
+    end
+  end
 end

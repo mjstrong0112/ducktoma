@@ -1,0 +1,15 @@
+%h1 Successful Payment Notifications
+%table
+  %tr
+    %th Invoice ID
+    %th Email
+    %th Amount
+    %th Created At
+    %th Actions
+  - @payment_notifications.each do |payment_notification|
+    %tr
+      %td= null_literal(payment_notification.invoice)
+      %td= null_literal(payment_notification.payer_info.email)
+      %td= null_literal(payment_notification.params['payment_gross'])
+      %td= payment_notification.created_at.to_s.to_date
+      %td #{ link_to 'details', admin_payment_notification_url(payment_notification)} | #{ link_to 'delete', admin_payment_notification_url(payment_notification), :method => :delete}

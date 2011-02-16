@@ -16,7 +16,7 @@
       Number of Ducks: #{ @adoption.duck_count }
 
     %div{:style =>'font-size: 20px; font-family: Myriad Pro, Arial, Helvetica, sans-serif; color: #666666; font-weight: normal; float: right; margin-top: 5px; margin-bottom: 5px;' }
-      Total: #{number_to_currency(@adoption.dollar_fee)}
+      Total: #{number_to_currency(dollar_fee @adoption.fee)}
 
     %div{:style => 'clear :both'}
 

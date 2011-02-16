@@ -1,0 +1,17 @@
+development:
+  email: 'seller_1294338383_biz@gmail.com'
+  secret: 'stumpsecret'
+  cert_id: 'TUDGHDHRBDG4Y'
+  url: 'https://www.sandbox.paypal.com/cgi-bin/webscr?'
+
+test:
+  email: 'test@example.com'
+  secret: 'testsecret'
+  cert_id: 'fakecertid'
+  url: 'https://www.sandbox.paypal.com/cgi-bin/webscr?'
+
+production:
+  email: 'seller_1294338383_biz@gmail.com'
+  secret: 'supersecret'
+  cert_id: 'TUDGHDHRBDG4Y'
+  url: 'https://www.sandbox.paypal.com/cgi-bin/webscr?'
