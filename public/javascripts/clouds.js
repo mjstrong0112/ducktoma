@@ -11,8 +11,8 @@ function timer() {
 }
 timer();
 function moveClouds() {
-    if(context.canvas.width != window.innerWidth) {
-        context.canvas.width  = window.innerWidth;
+    if(context.canvas.width != $(window).width()) {
+        context.canvas.width  = $(window).width();
     }
 
 	context.clearRect(0,0,4000,500);

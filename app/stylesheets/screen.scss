@@ -25,7 +25,8 @@ img{ margin: 0px; }
 	margin: 0 auto #{-$footer-height}; /* the bottom margin is the negative value of the footer's height */
 }
 .push {
-	height: #{$footer-height};
+	/*height: #{$footer-height};*/
+   height: 140px;	
 }
 .footer {
 	height: $footer-height;
@@ -41,7 +42,7 @@ img{ margin: 0px; }
 }
 #container {
 	margin: 0 auto;
-	width: 972px;	
+	width: 972px;
 	position: relative;
 	text-align: left;
 	clear: left;
@@ -74,7 +75,7 @@ img{ margin: 0px; }
 
     margin-left: 20px;
     width: $sidebar-width - $padding*2 - $margin-left;
-    float: left;    
+    float: left;
     text-align: center;    
     /*background-color: #FFF;*/
     img {
@@ -91,7 +92,7 @@ img{ margin: 0px; }
 	background: url(../../images/clouds_bg.png) repeat-x center bottom;
 	height: 550px;
 	width: 100%;
-    background-position: -280px;	
+    background-position: -280px;
 }
 #ground {
 	background: url(../../images/ground.png) repeat-x;
@@ -278,7 +279,7 @@ span.error {
     width: 65px;
     display: block;    
 }
-.tier3 { margin: auto; width: 833px; padding-top: 20px; }
+.tier3 { margin: auto; width: 534px; padding-top: 20px; padding-bottom: 23px;}
 .tier3 img {  vertical-align: middle; }
 
 #comingsoon {
