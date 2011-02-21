@@ -304,7 +304,11 @@ span.error {
         font-size: 20px;
     }
 }
-
+#duck-cost-link a {
+    font-size: 18px;
+    color: #666;
+    cursor: pointer;
+}
 #duck-count-buttons {
     margin-top: 10px;
     float: left;

@@ -11,14 +11,36 @@
           = image_tag "duck.gif", :class => "duck-form-image"
         = f.text_field :duck_count
         #duck-count ducks
+        #duck-cost-link
+          %a How much do ducks cost?
     #duck-count-buttons
       #family-button= image_tag "family.png"
       #flock-button= image_tag "flock.png"
       #oodle-button= image_tag "oodle.png"      
     #duck-form-total.clearfix
       Total: $0.00
+    #pricing(style="display: none;")
+      %table
+        %tr
+          %th When more than
+          %th Price
+        - Pricing.all.each do |pricing|
+          %tr
+            %td
+              = pluralize(pricing.quantity,"duck")
+            %td
+              = pricing.price
+              cents
+
     .adoption-new-button
       = f.submit "Continue", :class => "submit-duck-button blue-button-disabled"
 
 - content_for :javascripts do
   = render 'shared/pricingjs'
+  = stylesheet_link_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/redmond/jquery-ui.css"  
+  :javascript
+    $(document).ready(function() {
+      $('#duck-cost-link').click(function() {
+        $("#pricing").dialog({title: 'Duck Pricing Scheme'});
+      });
+    })
