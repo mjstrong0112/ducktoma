@@ -82,11 +82,11 @@ class PaymentNotification
     info = ContactInfo.new
     info.email = self.payer_info.email
     info.full_name = self.payer_info.full_name
-    info.phone = self.phone
-    info.city = self.city
-    info.state = self.state
-    info.address = self.address
-    info.zip = self.zip
+    info.phone = self.payer_info.phone
+    info.city = self.payer_info.city
+    info.state = self.payer_info.state
+    info.address = self.payer_info.address
+    info.zip = self.payer_info.zip
     info
   end
   def mark
