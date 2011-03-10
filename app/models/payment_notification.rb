@@ -2,7 +2,10 @@ class PaymentNotification
   include Mongoid::Document
   include Mongoid::Timestamps
   field :params, :type => Hash
+
+  #Paypal state
   field :status
+
   field :transaction_id
   field :invoice 
 
@@ -14,7 +17,8 @@ class PaymentNotification
   scope :unauthorized, where(:state =>'unauthorized')
   scope :orphans, where(:state => 'orphan')
   scope :completed, where(:state =>'completed')
-  # State field for state machine. Default state MUST be specified.
+
+  #Our state
   field :state, :type => String, :default => "new"
 
 
@@ -74,6 +78,17 @@ class PaymentNotification
     end
   end
   private
+  def payer_info_copy
+    info = ContactInfo.new
+    info.email = self.payer_info.email
+    info.full_name = self.payer_info.full_name
+    info.phone = self.phone
+    info.city = self.city
+    info.state = self.state
+    info.address = self.address
+    info.zip = self.zip
+    info
+  end
   def mark
     unless state == 'unauthorized'
       if status == "Completed" && valid_state?
@@ -82,7 +97,7 @@ class PaymentNotification
         save!
 
         adoption.state = 'completed'
-        adoption.adopter_info = payer_info
+        adoption.adopter_info = payer_info_copy
         adoption.save!        
       elsif status == "Denied"
         #TODO: Handle denied paypal payment
