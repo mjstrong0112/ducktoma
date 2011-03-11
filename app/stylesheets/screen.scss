@@ -126,6 +126,7 @@ img{ margin: 0px; }
             float: left;
             margin: 14px;
         }
+
 	}
     .header-slim {
         @include vbox(50px);
@@ -305,8 +306,8 @@ span.error {
     }
 }
 #duck-cost-link a {
-    font-size: 18px;
-    color: #666;
+    font-size: 14px;
+    color: white;
     cursor: pointer;
 }
 #duck-count-buttons {

@@ -1,3 +1,8 @@
 .form .header, .form .header-slim {
-    border: 1px solid #ccc;
+    background-image: url(../images/header-background.png);
+    padding-left: 10px;
+    margin-left: -14px;
+    padding-top: 15px;
+    padding-bottom: 6px;
+    margin-right: -10px;
 }
