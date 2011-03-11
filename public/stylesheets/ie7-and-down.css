@@ -8,3 +8,7 @@
     width: 565px;
     /*margin-right: -10px;*/
 }
+#clouds {
+    margin-bottom: -550px;
+    position: relative;
+}

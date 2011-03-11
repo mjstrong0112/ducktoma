@@ -87,12 +87,12 @@ img{ margin: 0px; }
     margin-right: 20px;
 }
 #clouds {
-	position: absolute;
+	position: absolute;    	
 	overflow: hidden;
 	background: url(../../images/clouds_bg.png) repeat-x center bottom;
 	height: 550px;
 	width: 100%;
-    background-position: -290px;
+    background-position: -290px 0;
 }
 #ground {
 	background: url(../../images/ground.png) repeat-x;
