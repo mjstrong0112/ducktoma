@@ -20,6 +20,41 @@
 
     %div{:style => 'clear :both'}
 
-    %div{:style => "border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc; font-size: 13px; margin-top: 20px; padding: 0px 10px; color: #777777;"}
-      %p The race will take place on July 4, 2011 at Bright Lake behind the Dell Diamond, Round Rock, TX.      
+    - unless @adoption.adopter_info.blank?
+      %div{:style => "margin-top: 20px; color: #81bcdb; font-size: 25px; font-family: Myriad Pro, Arial, Helvetica, sans-serif; "}
+        Contact Info
+      %div{:style => "border-top: 1px solid #ccc; padding-top: 10px;"}
+        %div{:style => "float: left; width: 50%;"}
+          - unless @adoption.adopter_info.full_name.blank?
+            %h3{:style => "margin: .5em 0px; font-weight: normal; font-size: 19px; color:#666; font-family: Myriad Pro, Arial, Helvetica, sans-serif;"}
+              Name: #{@adoption.adopter_info.full_name}
+
+          - unless @adoption.adopter_info.email.blank?
+            %h3{:style => "margin: .5em 0px; font-weight: normal; font-size: 19px; color:#666; font-family: Myriad Pro, Arial, Helvetica, sans-serif;"}
+              Email: #{@adoption.adopter_info.email}
+
+          - unless @adoption.adopter_info.phone.blank?
+            %h3{:style => "margin: .5em 0px; font-weight: normal; font-size: 19px; color:#666; font-family: Myriad Pro, Arial, Helvetica, sans-serif;"}
+              Phone: #{@adoption.adopter_info.phone}
+
+        %div{:style => "float: left; width: 50%;"}
+          - unless @adoption.adopter_info.address.blank?
+            %h3{:style => "margin: .5em 0px; font-weight: normal; font-size: 19px; color:#666; font-family: Myriad Pro, Arial, Helvetica, sans-serif;"}
+              Address: #{ @adoption.adopter_info.address}
+
+          - unless @adoption.adopter_info.city.blank?
+            %h3{:style => "margin: .5em 0px; font-weight: normal; font-size: 19px; color:#666; font-family: Myriad Pro, Arial, Helvetica, sans-serif;"}
+              City: #{ @adoption.adopter_info.city }
+
+          - unless @adoption.adopter_info.state.blank?
+            %h3{:style => "margin: .5em 0px; font-weight: normal; font-size: 19px; color:#666; font-family: Myriad Pro, Arial, Helvetica, sans-serif;"}
+              State: #{ @adoption.adopter_info.state }
+
+          - unless @adoption.adopter_info.zip.blank?
+            %h3{:style => "margin: .5em 0px; font-weight: normal; font-size: 19px; color:#666; font-family: Myriad Pro, Arial, Helvetica, sans-serif;"}
+              Zip: #{ @adoption.adopter_info.zip }
+
+    %div{:style => "clear: both; border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc; font-size: 13px; margin-top: 20px; padding: 0px 10px; color: #777777;"}
+      %p The race will take place on July 4, 2011 at Bright Lake behind the Dell Diamond, Round Rock, TX.
+      %p For any questions, feel free to email duckrace@rrsertoma.org.      
       %p Thanks for adopting!

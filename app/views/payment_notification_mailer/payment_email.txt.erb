@@ -2,7 +2,17 @@ Your payment has been processed.
 Your adoption number: <%= @adoption.adoption_number %>
 Number of Ducks: <%= @adoption.duck_count %>
 Total: <%=  number_to_currency(@adoption.dollar_fee) %>
+
+Contact Information:
+Name: <%= @adoption.adopter_info.full_name %>
+Email: <%= @adoption.adopter_info.email %>
+Phone: <%= @adoption.adopter_info.phone %>
+Address: <%= @adoption.adopter_info.address %>
+City: <%= @adoption.adopter_info.city %>
+State: <%= @adoption.adopter_info.state %>
+Zip: <%= @adoption.adopter_info.zip %>
+
 ============================================
-The race will take place on (insert date here) at (insert location here).
-Any other information can go here.
+The race will take place on July 4, 2011 at Bright Lake behind the Dell Diamond, Round Rock, TX.
+For any questions, feel free to email duckrace@rrsertoma.org.
 Thanks for adopting!

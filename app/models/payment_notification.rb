@@ -56,16 +56,12 @@ class PaymentNotification
     self.state = 'orphan'    
   end
   def send_unauthorized_access_email
-    PaymentNotificationMailer.unauthorized_access_email(self,'laspluviosillas@gmail.com').deliver
-    PaymentNotificationMailer.unauthorized_access_email(self,'mstrong@thestrongfamily.org').deliver
-    PaymentNotificationMailer.unauthorized_access_email(self,'paul@thestrongfamily.org').deliver
+    PaymentNotificationMailer.unauthorized_access_email(self,'ducksale@rrsertoma.org').deliver
   end
 
   def send_confirmation_email
     #Test emails for paypal sandbox
-    PaymentNotificationMailer.payment_email(adoption,'laspluviosillas@gmail.com').deliver
-    PaymentNotificationMailer.payment_email(adoption,'mstrong@thestrongfamily.org').deliver
-    PaymentNotificationMailer.payment_email(adoption,'paul@thestrongfamily.org').deliver
+    PaymentNotificationMailer.payment_email(adoption,'ducksale@rrsertoma.org').deliver
 
     #real email
     PaymentNotificationMailer.payment_email(adoption, payer_info.email).deliver

@@ -45,7 +45,7 @@
           %h1= @adoption.adopter_info.phone
 
       .left(style="width: 50%")
-        - unless @adoption.adopter_info.city.blank?
+        - unless @adoption.adopter_info.address.blank?
           %h3 Address:
           %h1= @adoption.adopter_info.address
           %br/
@@ -62,6 +62,12 @@
             %h3 Zip:
             %h1= @adoption.adopter_info.zip
       .clear
+      #raceinfo
+        %p
+          The race will take place on July 4, 2011 at Bright Lake behind the Dell Diamond, Round Rock, TX.
+          %br/
+          For any questions, feel free to email duckrace@rrsertoma.org.      
+
       #adoption-thanks
         %div(style="margin: auto; width: 295px;")
           = image_tag "thanksforadopting.gif"
