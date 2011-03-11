@@ -55,8 +55,8 @@ function roundMainCorners(){
     }
   }
 }
+roundMainCorners();
 $(document).ready(function() {
-    roundMainCorners();
     var input = $("#adoption_duck_count");
 	//$('#adoption_submit').attr("disabled", "disabled");
     if (!input.val) {
