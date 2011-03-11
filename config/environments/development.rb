@@ -29,8 +29,8 @@ Ducktoma::Application.configure do
   :address              => "smtp.gmail.com",
   :port                 => 587,
   :domain               => 'gmail.com',
-  :user_name            => 'laspluviosillas',
-  :password             => '942100',
+  :user_name            => 'duckrace@rrsertoma.org',
+  :password             => 'rrs1BillBuckler',
   :authentication       => 'plain',
   :enable_starttls_auto => true  }  
 end

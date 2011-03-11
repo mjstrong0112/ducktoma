@@ -2,16 +2,19 @@ development:
   email: 'seller_1294338383_biz@gmail.com'
   secret: 'stumpsecret'
   cert_id: 'TUDGHDHRBDG4Y'
+  cert_file: 'paypal_cert_development.pem'
   url: 'https://www.sandbox.paypal.com/cgi-bin/webscr?'
 
 test:
   email: 'test@example.com'
   secret: 'testsecret'
   cert_id: 'fakecertid'
+  cert_file: 'paypal_cert_development.pem'
   url: 'https://www.sandbox.paypal.com/cgi-bin/webscr?'
 
 production:
-  email: 'seller_1294338383_biz@gmail.com'
+  email: 'treasurer@rrsertoma.org'
   secret: 'supersecret'
-  cert_id: 'TUDGHDHRBDG4Y'
-  url: 'https://www.sandbox.paypal.com/cgi-bin/webscr?'
+  cert_id: '65MRLD83CSDRA'
+  cert_file: 'paypal_cert.pem'
+  url: 'https://www.paypal.com/cgi-bin/webscr?'
