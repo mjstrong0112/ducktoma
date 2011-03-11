@@ -17,11 +17,12 @@
 
 
 .center(style="margin:auto; width: 340px;")
-  #print.blue-button.left(style="width: 80px; padding-left: 13px;")
+  -##print.blue-button.left(style="width: 80px; padding-left: 13px;")
     = link_to_function "Print", "javascript:print()", :html_options => { :id => "print" }
+
   - form_tag PAYPAL['url'] do
     = hidden_field_tag :cmd, "_s-xclick"
     = hidden_field_tag :encrypted, @adoption.paypal_encrypted(edit_adoption_url(@adoption), payment_notifications_url(:secret => PAYPAL['secret']))
 
-    #print.blue-button.left
+    #print.blue-button
       = submit_tag "Continue to Checkout"
