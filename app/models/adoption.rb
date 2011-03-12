@@ -2,7 +2,8 @@ require 'whole_number_validator'
 include ApplicationHelper
 class Adoption
   include Mongoid::Document
-  
+  include Mongoid::Timestamps
+
   field :adoption_number
   field :fee, :type => Integer
   field :type
