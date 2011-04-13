@@ -5,7 +5,6 @@ Fabricator(:user) do
 end
 
 Fabricator(:admin, :from => :user) do
-  # Admin stuff here
   email { Forgery::Internet.email_address }
   password { Forgery::Basic.password :allow_special => true }
   roles [:admin]
@@ -17,7 +16,6 @@ Fabricator(:pricing) do
 end
 
 Fabricator(:sales_user, :from => :user) do
-  # Admin stuff here
   email { Forgery::Internet.email_address }
   password { Forgery::Basic.password :allow_special => true }
   roles [:sales]

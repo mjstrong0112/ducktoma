@@ -21,7 +21,7 @@
         = adopter_form.input :city, :input_html => {:tabindex => 3}
         %br/
         .left
-          = adopter_form.input :state, :collection => Carmen::state_codes('US'),
+          = adopter_form.input :state, :collection => Carmen::state_codes('US'), :selected => "TX",
                                        :input_html => { :style => "width: 70px;", :tabindex => 6 }
         .left(style="padding-left: 10px;")
           = adopter_form.input :zip, :input_html => { :style => "width: 70px;", :tabindex => 7 }

@@ -28,8 +28,7 @@
             %td
               = pluralize(pricing.quantity,"duck")
             %td
-              = pricing.price
-              cents
+              = number_to_currency dollar_fee(pricing.price)
 
     .adoption-new-button
       = f.submit "Continue", :class => "submit-duck-button blue-button-disabled"

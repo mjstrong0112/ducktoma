@@ -8,13 +8,10 @@
     .wrapper
       %canvas(id="example" width="0" height="500" style="position: absolute;")
         #clouds
-      -#.pushup(style="margin-top: -500px;")
       #container
         = render 'shared/header'
 
         #sidebar-left
-          /#sponsors-title= image_tag "sponsors.png", :alt => "sponsors"
-
           = link_to 'http://www.usmoneyreserve.com/', :target => "_blank" do
             = image_tag "bullionlogo.png", :id => "bullion-logo", :alt => "Bullion Gold Reserves"
 
