@@ -22,4 +22,21 @@ module ApplicationHelper
       "null"
     end
   end
+
+  def find_total_fee_by_organization(organization)
+    total_fee = 0
+    adoptions = []
+    sales_events = SalesEvent.where(:organization => organization)
+    sales_events.each{|sales_event| adoptions += sales_event.adoptions.to_a.flatten }
+    adoptions.each{|adoption| total_fee += adoption.fee }
+    total_fee
+  end
+  def find_total_ducks_by_organization(organization)
+    total_ducks = 0
+    adoptions = []
+    sales_events = SalesEvent.where(:organization => organization)
+    sales_events.each{|sales_event| adoptions += sales_event.adoptions.to_a.flatten }
+    adoptions.each{|adoption| total_ducks += adoption.duck_count }
+    total_ducks    
+  end
 end
