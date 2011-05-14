@@ -39,7 +39,7 @@ gem 'bson', '~> 1.1.4'
 gem 'bson_ext', '~> 1.1.4'
 
 gem 'will_paginate'
-
+#gem 'rb-fsevent', ' ~> 0.4.0'
 
 # Analytics, Exception Handling, Production
 gem 'newrelic_rpm'
@@ -66,7 +66,6 @@ end
 # Test gems with generators (available in dev env)
 group :development, :test do
   # Test notifiers
-  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'guard-livereload'
 
   gem 'rspec-core', '~> 2.3.1'
