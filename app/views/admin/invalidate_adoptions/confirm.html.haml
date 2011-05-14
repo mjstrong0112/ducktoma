@@ -1,0 +1,20 @@
+%h1 Confirm Adoption Invalidation
+%p{:style => "font-size: 18px;"} Adoptions to be invalidated
+%table
+  %thead
+    %tr
+      %th Adoption Number
+      %th Number of Ducks
+      %th Amount
+  %tbody
+    - @adoptions.each do |adoption|
+      %tr
+        %td= adoption.adoption_number
+        %td= adoption.duck_count
+        %td= number_to_currency(dollar_fee(adoption.fee))
+
+%p{:style => "font-size: 18px;"} Are you sure you want to invalidate these #{@adoptions.count} adoptions?
+
+= form_for :invalidate, :url => admin_invalidate_adoption_url do |f|
+  = hidden_field_tag :date,  @date
+  %p= f.submit "Invalidate Adoptions"

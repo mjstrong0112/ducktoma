@@ -11,6 +11,30 @@ describe Admin::LocationsController do
       response.should be_success
     end
   end
+  context "PUT update" do
+    before(:each) do
+      @location = Fabricate(:location)
+      @user = Fabricate(:admin)
+      sign_in @user
+    end
+    describe "with valid information" do
+      it "updates the location's name" do
+        put :update, :id => @location.id, :location => {:name => "Hello World"}
+        @location.reload
+        @location.name.should  == "Hello World"
+      end
+      it "should redirect to index" do
+        put :update, :id => @location.id, :location => {:name => "Austin Best BBQ"}
+        response.should redirect_to admin_locations_url
+      end
+    end
+    describe "with invalid information" do
+      it "should render the edit page" do
+        put :update, :id => @location.id, :location => {}
+        response.should render_template
+      end      
+    end
+  end
   context "GET 'new'" do
     before(:each) do
       @user = Fabricate(:admin)

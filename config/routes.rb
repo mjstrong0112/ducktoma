@@ -25,16 +25,20 @@ Ducktoma::Application.routes.draw do
     resources :locations
     resources :organizations
     resources :pricings
-
     match "/payment_notifications/failed" => "payment_notifications#failed"
     resources :payment_notifications
-
-    
     resource :settings
+    match '/ducks/:number' => "ducks#show"
+
+    match '/invalidate_adoptions/confirm' => "invalidate_adoptions#confirm", :as => :confirm_invalidation
+    match '/invalidate_adoptions' => "invalidate_adoptions#index", :as => :invalidate_adoptions
+    match '/invalidate_adoptions/invalidate' => "invalidate_adoptions#invalidate", :as => :invalidate_adoption
   end
   
   resources :adoptions
   resources :payment_notifications
+
+  match 'adoptions/number/:adoption_number' => 'adoptions#show'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

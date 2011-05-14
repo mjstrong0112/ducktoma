@@ -1,8 +1,7 @@
 source 'http://rubygems.org'
 gem 'rack-contrib', :require => 'rack/contrib'
 gem 'rails', '3.0.3'
-
-gem 'will_paginate'
+gem 'rack', '1.2.1'
 
 # Core Ext
 gem 'andand', :git => "git://github.com/raganwald/andand.git"
@@ -39,6 +38,9 @@ gem 'mongoid', '~> 2.0.0.beta.20'
 gem 'bson', '~> 1.1.4'
 gem 'bson_ext', '~> 1.1.4'
 
+gem 'will_paginate'
+
+
 # Analytics, Exception Handling, Production
 gem 'newrelic_rpm'
 gem 'hoptoad_notifier'
@@ -63,6 +65,10 @@ end
 
 # Test gems with generators (available in dev env)
 group :development, :test do
+  # Test notifiers
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'guard-livereload'
+
   gem 'rspec-core', '~> 2.3.1'
   gem 'rspec-expectations', '~> 2.3.0'
   gem 'rspec-rails', '~> 2.3.1'

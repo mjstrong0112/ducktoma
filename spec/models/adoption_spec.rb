@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Adoption do
 
-  should_have_field :adoption_number
+  should_have_field :adoption_number, :type => String
   should_have_field :fee, :type => Integer
   should_have_field :state, :type => String
 

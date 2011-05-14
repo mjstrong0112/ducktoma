@@ -14,5 +14,5 @@ class SalesEvent
     else
       {}
     end
-  end    
+  end
 end

@@ -1,0 +1,4 @@
+%h1 Editing Location #{ @location.name }
+= simple_form_for [:admin, @location] do |f|
+  = f.input :name
+  = f.submit "Save"

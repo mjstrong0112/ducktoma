@@ -3,7 +3,7 @@ class Location
 
   field :name
   
-  validates :name, :presence => true
+  validates_presence_of :name
 
   def self.to_collection
     Location.all.map(&:name)

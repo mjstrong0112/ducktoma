@@ -1,0 +1,4 @@
+%h1 Editing Organization #{ @organization.name }
+= simple_form_for [:admin, @organization] do |f|
+  = f.input :name
+  = f.submit "Save"

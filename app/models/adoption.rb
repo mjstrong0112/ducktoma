@@ -23,17 +23,23 @@ class Adoption
   before_validation :save_duck_count, :save_fee, :create_adoption_number
   validates_presence_of :ducks, :fee, :adoption_number
 
-  state_machine :initial => :new do
-    event :confirm do
-      transition :new => :pending
-    end
-    event :complete do
-      transition :pending => :completed
-    end
-    event :cancel do
-      transition all - [:canceled] => :canceled
-    end
-  end
+  scope :valid, excludes(:state => "invalid")
+  scope :paid, not_in(:state => ["invalid", "pending"] )
+  
+  #state_machine :initial => :new do
+  #  event :confirm do
+  #    transition :new => :pending
+  #  end
+  #  event :invalidate do
+  #    transition :pending => :completed
+  #  end
+  #  event :complete do
+  #    transition :pending => :completed
+  #  end
+  #  event :cancel do
+  #    transition all - [:canceled] => :canceled
+  #  end
+  #end
 
   validates_associated :adopter_info
   validates_numericality_of :fee, :only_integer => true

@@ -21,6 +21,30 @@ describe Admin::OrganizationsController do
       response.should be_success
     end
   end
+  context "PUT update" do
+    before(:each) do
+      @organization = Fabricate(:organization)
+      @user = Fabricate(:admin)
+      sign_in @user
+    end
+    describe "with valid information" do
+      it "updates the organization's name" do
+        put :update, :id => @organization.id, :organization => {:name => "Hello World"}
+        @organization.reload
+        @organization.name.should  == "Hello World"
+      end
+      it "should redirect to index" do
+        put :update, :id => @organization.id, :organization => {:name => "Austin Best BBQ"}
+        response.should redirect_to admin_organizations_url
+      end
+    end
+    describe "with invalid information" do
+      it "should render the edit page" do
+        put :update, :id => @organization.id, :organization => {}
+        response.should render_template
+      end
+    end
+  end
   context "POST 'create'" do
     before(:each) do
       @user = Fabricate(:admin)

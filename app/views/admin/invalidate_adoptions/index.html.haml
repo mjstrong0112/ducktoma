@@ -1,0 +1,14 @@
+%h1 Invalidate Adoptions
+%h4 Invalidate all pending adoptions before:
+= form_for :invalidate, :url => admin_confirm_invalidation_url do |f|
+  %p= f.text_field :date,  :style => "width: 150px", :id => "invalidate_date"
+  %p= f.submit "Invalidate Adoptions"
+  
+
+- content_for :javascripts do  
+  = stylesheet_link_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/redmond/jquery-ui.css"
+  = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"
+  :javascript
+      $(function() {
+        $("#invalidate_date").datepicker({dateFormat: 'mm-dd-yy'});
+      });
