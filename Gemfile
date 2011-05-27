@@ -38,7 +38,8 @@ gem 'mongoid', '~> 2.0.0.beta.20'
 gem 'bson', '~> 1.1.4'
 gem 'bson_ext', '~> 1.1.4'
 
-gem 'will_paginate'
+gem "will_paginate"
+# gem 'kaminari'
 #gem 'rb-fsevent', ' ~> 0.4.0'
 
 # Analytics, Exception Handling, Production
