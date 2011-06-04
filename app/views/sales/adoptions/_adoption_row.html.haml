@@ -1,8 +1,0 @@
-%tr
-  %td= adoption.adoption_number
-  %td= adoption.duck_count
-  %td= number_to_currency adoption.dollar_fee
-  %td
-    = link_to 'Edit', edit_sales_adoption_url(adoption)
-    |
-    = link_to 'Delete', sales_adoption_url(adoption), :method => :delete

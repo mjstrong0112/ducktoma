@@ -1,9 +1,9 @@
-= render :partial => 'adoptions_table', :locals => { :adoptions => @adoptions }
+= render :partial => '/adoptions/table', :locals => { :adoptions => @adoptions }
 %br/
 
-%h2 Total ducks adopted: #{total_duck_count}
+%h2 Total ducks adopted: #{@total_ducks}
 %br/
-%h2 Total donations raised: #{number_to_currency dollar_fee(total_fee)}
+%h2 Total donations raised: #{number_to_currency dollar_fee(@total_donations)}
 
 %br/
 %br/

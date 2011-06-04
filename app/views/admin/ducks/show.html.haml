@@ -1,4 +1,8 @@
 %h1 Information for Duck No #{@duck.number}
+.right
+  %span.large-text.lightgrey Adoption Number
+.clear
+#raffle-number.no-top-margin
+  = @adoption.adoption_number
 
-%h3 Adoption number:
-%h1= @adoption.adoption_number
+= render 'shared/contact_info', :adoption => @adoption, :include_race_info => false

@@ -1,5 +1,5 @@
 - if @adoptions.count > 0
-  = render :partial => 'adoptions_table', :locals => { :adoptions => @adoptions }
+  = render 'table', :adoptions => @adoptions
   %br/
 
   %h2 Total ducks adopted: #{current_user.duck_count}

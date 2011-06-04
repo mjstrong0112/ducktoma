@@ -1,381 +1,571 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+// ??? Not sure where this belongs
+.blue_highlight {
+    background    : #BFE7FF;
+}
 
 @import "compass/reset";
 @import "flutie/flutie";
 @import "images";
 @import "forms";
-
 @import "global";
 
-html, body { height: 100%; }
-body{ background-image: url(../../images/gradientbg.gif); background-repeat: repeat-x; background-color: #7cbbd9; height: 100%; }
-object {vertical-align: top; }
-h1, h2 , h3, h4 { font-size: 25px; font-family: $title-family; color: #666666; font-weight: normal;}
-h3 { font-size: 22px; }
-h4 { font-size: 16px;}
-img{ margin: 0px; }
-/* code for sticky footer */
-.wrapper {
-	min-height: 100%;
-	height: auto !important;
-	height: 100%;
-	margin: 0 auto #{-$footer-height}; /* the bottom margin is the negative value of the footer's height */
-}
-.push {
-	/*height: #{$footer-height};*/
-   height: 140px;	
-}
-.footer {
-	height: $footer-height;
-}
-.blue { color: #7fbedc; font-weight: bold; }
-#distance {
-	width: 1px;
-	height: 47%;
-	margin-left: -1px;
-	background-color: white;
-	margin-bottom: -$main-height/2 - $header-height;
-	float: left;
-}
-#container {
-	margin: 0 auto;
-	width: 972px;
-	position: relative;
-	text-align: left;
-	clear: left;
-	padding-bottom: 20px;
-	padding-top: 36px;
-}
-#header {
-	height: $header-height;
-	margin-bottom: 10px;
-    img { vertical-align: middle; }
-    a { text-decoration: none; }
-}
-#main {
-    @include rounded-border(15px);
-    /*@include box-shadow(20px);*/
-    $padding: 27;
-    float: left;
-	padding: #{$padding}px;
-	width: $main-width - $padding*2;	
-	background-color: #FFF;
-}
-#sidebar, #sidebar-left {
-    /*@include rounded-border(15px);
-    @include box-shadow(20px);*/
+/* ==============
+   Layout Styles
+   ============== */
 
-    $padding: 0;
-    $margin-left: 20;
-    margin-left: #{$margin-left}px;
-    padding: #{$padding}px;
-
-    margin-left: 20px;
-    width: $sidebar-width - $padding*2 - $margin-left;
-    float: left;
-    text-align: center;    
-    /*background-color: #FFF;*/
-    img {
-        margin-bottom: 10px;
+    html, body {
+      height: 100%;
     }
-}
-#sidebar-left {
-    margin-left: 0px;
-    margin-right: 20px;
-}
-#clouds {
-	position: absolute;    	
-	overflow: hidden;
-	background: url(../../images/clouds_bg.png) repeat-x center bottom;
-	height: 550px;
-	width: 100%;
-    background-position: -290px 0;
-}
-#ground {
-	background: url(../../images/ground.png) repeat-x;
-	background-position: bottom;
-	width: 100%;
-	height: 140px;
-}
-.title {
-    height: 40px;
-	margin: auto;
-	text-align: center;
-	h1 {
-	    position: relative;
-	    top: -10px;
-	    z-index: -1;
-    }
-}
-.form {
-	/*width: $form-width;*/
-	margin: auto;
-	padding-top: 10px;
-	.header, .header-slim {
-        @include vbox(54px);
-        @include box-shadow(20px);
-        margin-top: 18px;
-        margin-bottom: 18px;
-        color: #666666;
-        font-family: $title-family;
-        font-size: 19px;
-        .number {
-            float: left;
-            margin: 14px;
-        }
 
-	}
-    .header-slim {
-        @include vbox(50px);
-        .number {
-            float: left;
-            margin: 11px;
+    body{
+      background-image: url(../../images/gradientbg.gif);
+      background-repeat: repeat-x;
+      background-color: #7cbbd9;
+      height: 100%;
+      color: #333;
+    }
+
+    // Hack for walking duck in flash.
+    // Prevents some unwanted spacing from appearing.
+    object {
+      vertical-align: top;
+    }
+
+    img{
+      margin: 0px;
+    }
+
+    // -- header and font styles -- //
+    h1, h2 , h3, h4 {
+     font-size: 25px;
+     font-family: $title-family;
+     color: #666666;
+     font-weight: normal;
+    }
+
+    h3 {
+      font-size: 22px;
+    }
+
+    h4 {
+      font-size: 16px;
+    }
+
+    // -- vertical center css hack -- //
+    #distance {
+        width: 1px;
+        height: 47%;
+        margin-left: -1px;
+        background-color: white;
+        margin-bottom: -$main-height/2 - $header-height;
+        float: left;
+    }
+
+    #container {
+        margin: 0 auto;
+        width: 972px;
+        position: relative;
+        text-align: left;
+        clear: left;
+        padding-bottom: 20px;
+        padding-top: 36px;
+    }
+
+    // -- footer -- //
+    #ground {
+      background: url(../../images/ground.png) repeat-x;
+      background-position: bottom;
+      width: 100%;
+      height: 140px;
+    }
+
+    #c501 {
+      color: #3b2e18;
+      text-align: center;
+      padding-bottom: 5px;
+      font-size: 15px;
+    }
+
+    .tier3 {
+      margin: auto;
+      width: 534px;
+      padding-top: 20px;
+      padding-bottom: 23px;
+
+        img {
+          vertical-align: middle;
         }
     }
-}
-#raffle-number{
-    @include vbox(100px);
-    @include rounded-border(15px);
-    color: white;
-    text-align: center;
-	background-color: #7fbedc;    
-    font-size: 50px;
-    font-family: $title-family;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-#duck-form {
-    /*@include vbox(151px);*/
-    @include rounded-border(15px);
-    height: 136px;
-	background-color: #7fbedc;
-}
-#duck-form input {
-	font-size: 45px;
-	font-family: $title-family;
-	color: #3f9ecb;
-	width: 72px;
-	height: 54px;
-    margin-top: 38px;
-	margin-right: 27px;
-	float: left;
-	text-align: center;
-	border: none;
-}
-#duck-count {
-    padding-top: 45px;
-	font-size: 45px;
-	font-family: $title-family;
-	color: #fff;
-}
-#duck-form-image {
-	float: left;
-	margin: 22px;
-}
-#duck-form-total {
-	padding: 14px;
-	font-size: 23px;
-	font-family: $title-family;
-	color: #666;
-	text-align: right;
-}
-.adoption-new-button {
-    width: 231px;
-    margin: auto;
-}
-.blue-button, .blue-button-disabled {
-    @include vbox(74px);
-    width: 222px;
-	margin: auto;
-	text-align: center;
-	background: url(../../images/button.png);
-	font-size: 18px;
-	color: white;
-    border: none;
-	font-family: $title-family;
-    cursor: pointer;	
-}
-.blue-button a {
-    color: white;
-    font-family: $title-family;
-    text-decoration: none;
-}
-.blue-button-disabled {
-	background: url(../../images/button-disabled.png);
-}
-.blue-button input {
-    border: none;
-    background: none;
-    color: white;
-    font-size: 18px;
-    width: 222px;
-    height: 74px;
-    cursor: pointer;
-}
-.duck-number {
-    background: url(../../images/duck-small.gif) no-repeat;
-    width: 120px; height: 58px;
-	font-family: $title-family;
-	font-size: 25px;
-	color: white;
-    padding-top: 55px;
-    padding-left: 27px;
-    float: left;
-    display: none;
-}
-#sponsors-title {
-    @include rounded-border(15px);
-    @include box-shadow(20px);    
-    background-color: #ffffff;
-    padding: 10px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-#sponsors { background: #886937;}
-.sponsors-table {
-    width: $form-width;
-    margin: auto;
-    text-align: center;
-    padding-top: 20px;
-}
-.sponsors-table-content {
-    padding-top: 10px;
-    padding-bottom: 20px;
-}
-.sales-adoption-form, .sales-adoption-form-ducks {
-    margin: auto;
-    width: 570px;
-    margin-top: 20px;
-    margin-bottom: 40px;
-}
-.sales-adoption-form {
-  input[type="text"], input[type="email"], input[type="tel"] {
-    width: 260px;
-    border: 1px solid #cccccc;
-    margin: 0.5em 0px;    
-  }
-}
-.sales-adoption-form-ducks input[type="text"] {
-    width: 100px;    
-}
-.sales-adoption-form-ducks .left {
-    padding-left: 10px;
-}
-.sales-adoption-form-title {
-    margin-top: -20px;
-    margin-bottom: 20px;
-    text-align: center;
-}
 
-.price-form input[type='text'] {
-    width: 30px;
-}
-span.error {
-    padding: 3px 3px;
-    margin: 0;    
-    font-size: 10px;
-    width: 65px;
-    display: block;    
-}
-.tier3 { margin: auto; width: 534px; padding-top: 20px; padding-bottom: 23px;}
-.tier3 img {  vertical-align: middle; }
+    #sponsors-title {
+      @include rounded-border(15px);
+      @include box-shadow(20px);
+      background-color: white;
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-#comingsoon {
-    width: 524px;
-    height: 260px;
-    padding-top: 180px;
-    margin: auto;   
-    background-image: url(../../images/comingsoon.gif);
-    background-repeat: no-repeat;
+    #sponsors {
+      background: #886937;
+    }
+
+    .sponsors-table {
+      width: $form-width;
+      margin: auto;
+      text-align: center;
+      padding-top: 20px;
+    }
+
+    .sponsors-table-content {
+      padding-top: 10px;
+      padding-bottom: 20px;
+    }
+
+    // code for sticky footer
+    .wrapper {
+      min-height: 100%;
+      height: auto !important;
+      height: 100%;
+      // the bottom margin is the negative value of the footer's height
+      margin: 0 auto #{-$footer-height};
+    }
+
+    .push {
+       height: 140px;
+    }
+
+    .footer {
+       height: $footer-height;
+    }
+
+    // -- other -- //
+    #header {
+      height: $header-height;
+      margin-bottom: 10px;
+
+        img {
+          vertical-align: middle;
+        }
+
+        a {
+          text-decoration: none;
+        }
+    }
+
+    #main {
+        @include rounded-border(15px);
+        $padding: 27;
+
+        float: left;
+        padding: #{$padding}px;
+        width: $main-width - $padding*2;
+        background-color: #FFF;
+    }
+
+    #sidebar {
+      $padding: 0;
+      $margin-left: 20;
+
+      margin-left: #{$margin-left}px;
+      padding: #{$padding}px;
+      width: $sidebar-width - $padding*2 - $margin-left;
+      float: left;
+      text-align: center;
+
+        img {
+          margin-bottom: 10px;
+        }
+    }
+
+    #sidebar-left {
+      @extend #sidebar; 
+
+      margin-left: 0px;
+      margin-right: 20px;
+    }
+
+    .title {
+      height: 40px;
+      margin: auto;
+      text-align: center;
+
+        h1 {
+            position: relative;
+            top: -10px;
+            z-index: -1;
+        }
+    }
+
+    #clouds {
+      position: absolute;
+      overflow: hidden;
+      background: url(../../images/clouds_bg.png) repeat-x center bottom;
+      height: 550px;
+      width: 100%;
+      background-position: -290px 0;
+    }
+
+
+
+/* =============================
+   Reusable styles for all pages
+   ============================= */
+
+    // -- Rails Notice -- //
+    span.error {
+      padding: 3px 3px;
+      margin: 0;
+      font-size: 10px;
+      width: 65px;
+      display: block;
+    }
+
+    // -- Form and inputs -- //
+    .form {
+      margin: auto;
+      padding-top: 10px;
+
+        .header, .header-slim {
+          @include vbox(54px);
+          @include box-shadow(20px);
+          
+          margin-top: 18px;
+          margin-bottom: 18px;
+          color: #666666;
+          font-family: $title-family;
+          font-size: 19px;
+          
+            .number {
+              float: left;
+              margin: 14px;
+            }
+
+        }
+
+        .header-slim {
+          @include vbox(50px);
+
+            .number {
+              float: left;
+              margin: 11px;
+            }
+        }
+    }
+
+    // -- Button styles -- //
+    .blue-button {
+      @include vbox(74px);
+
+      font-size: 18px;
+      width: 222px;
+      margin: auto;
+      text-align: center;
+      background: url(../../images/button.png);
+      color: white;
+      border: none;
+      font-family: $title-family;
+      cursor: pointer;
+
+        input {
+          font-size: 18px;
+          border: none;
+          background: none;
+          color: white;
+          width: 222px;
+          height: 74px;
+          cursor: pointer;
+        }         
+    }
+
+    .blue-button a {
+      color: white;
+      font-family: $title-family;
+      text-decoration: none;
+    }
+
+    .blue-button-disabled {
+      @extend .blue-button;
+      background: url(../../images/button-disabled.png);
+    }
+
+
+    // -- Other -- //
+    .large-text {
+      font-size: 20px;
+      color: #444;
+    }
+    .lightgrey {
+      color: #999;
+    }
+
+    .blue {
+      color: #7fbedc; font-weight: bold;
+    }
+
+
+
+/* ==========================
+   Home page (Adoption - New)
+/* ========================== */
+
+    #duck-form {
+      @include rounded-border(15px);
+
+      height: 136px;
+      background: #7fbedc;
+
+        #duck-form-image {
+          float: left;
+          margin: 22px;
+        }
+
+        #duck-cost-link a {
+          font-size: 14px;
+          color: white;
+          cursor: pointer;
+        }
+
+        input {                        
+          font-size: 45px;
+          font-family: $title-family;
+          color: #3f9ecb;
+          width: 72px;
+          height: 54px;
+          margin-top: 38px;
+          margin-right: 27px;
+          float: left;
+          text-align: center;
+          border: none;
+        }
+    }
+
+    #duck-count-buttons {
+      margin-top: 10px;
+      float: left;
+
+        img {
+          margin-right: 0px;
+        }
+        
+        #family-button, #flock-button, #oodle-button {            
+          display: inline;
+          cursor: pointer;
+        }
+    }
+
+    #duck-count {
+      padding-top: 45px;
+      font-size: 45px;
+      font-family: $title-family;
+      color: #fff;
+    }
+
+    #duck-form-total {
+      padding: 14px;
+      font-size: 23px;
+      font-family: $title-family;
+      color: #666;
+      text-align: right;
+    }
+    .adoption-new-button {
+      width: 231px;
+      margin: auto;
+    }
     
-}
-#paymentprocessing {
-    width: 522px;
-    height: 267px;
-    padding-top: 162px;
-    padding-left: 30px;
-    padding-right: 30px;
-    margin: auto;
-    background-image: url(../../images/paymentprocessing.gif);
-    background-repeat: none;
-    h2 {
-        font-size: 20px;
+    // I don't think this style is used at all anymore.
+    // but I'm keeping it just in case.
+    .duck-number {
+      background: url(../../images/duck-small.gif) no-repeat;
+      width: 120px;
+      height: 58px;
+      font-family: $title-family;
+      font-size: 25px;
+      color: white;
+      padding-top: 55px;
+      padding-left: 27px;
+      float: left;
+      display: none;
     }
-}
-#duck-cost-link a {
-    font-size: 14px;
-    color: white;
-    cursor: pointer;
-}
-#duck-count-buttons {
-    margin-top: 10px;
-    float: left;
-    img {
-        margin-right: 0px;
+
+    .price-form input[type='text'] {
+      width: 30px;
     }
-}
-#family-button, #flock-button, #oodle-button {
-    display: inline;
-    cursor: pointer;
-}
-#navlinks {
-    margin-top: 10px;
-}
-#adoption-print {
-    margin-top: -20px;
-    margin-bottom: 10px;
-    div { line-height: 35px; }
-    h1, h2, h3{ display: inline; }
-    h1 { padding-left: 5px; font-size: 22px;}
-    h3 { font-size: 19px; }
-    #adopter-info { display: none; }
-}
-#c501 { color: #3b2e18; text-align: center; padding-bottom: 5px; font-size: 15px;}
-#adoption-thanks {
-margin-bottom: -10px;
-}
-#raceinfo {
-border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; color: #666; line-height: 25px;
-margin-top: 10px;
-}
-#contact-info { display: none; }
 
-.navlink {
-    @include rounded-border(8px);
-    border: 1px solid #24b9ff;
-    background: #bfe7ff;    
-    color: #347281;
-    margin-bottom: 1em;
-    padding: 5px;
-    a {
-        color: #347281;
-        text-decoration: none;
+    #comingsoon {
+      width: 524px;
+      height: 260px;
+      padding-top: 180px;
+      margin: auto;
+      background-image: url(../../images/comingsoon.gif);
+      background-repeat: no-repeat;        
     }
-    display: inline;
-}
-
-.blue_highlight {
-    background-color: #BFE7FF;
-}
-
-input[disabled='disabled'] {
-  background-color: #cccccc;
-}
-input:focus, select:focus {
-    background-color: lightyellow;
-}
-select { border-color: #cccccc; padding: 2px 2px;  }
-.alert {
-    h2 { font-size: 20px; color: #8A362C; }
-    ul { margin-bottom: 0px; }
-}
 
 
-.break, .clear { clear: both; height: 0px;}
-.center { text-align: center; }
-.left { float: left; }
-.right { float: right; }
-.hide { display: none; }
+/* ===============
+   Adoption - Show
+   =============== */
+
+    #raffle-number {
+      @include vbox(100px);
+      @include rounded-border(15px);
+
+      color: white;
+      text-align: center;
+      background-color: #7fbedc;
+      font-size: 50px;
+      font-family: $title-family;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      &.no-top-margin { margin-top: 0px; }
+    }
+
+    #adoption-contact-info {
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+
+        p {
+          font-size: 18px;
+          color: #444;
+        }
+    }
+
+    #adoption-thanks {
+      margin-bottom: -10px;
+    }
+    
+    #raceinfo {
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      line-height: 25px;
+      margin-top: 10px;
+      color: #666;
+    }
+
+    // contact-info only present on print
+    #contact-info {
+      display: none;
+    }
+
+    #adoption-print {
+      margin-top: -20px;
+      margin-bottom: 10px;
+
+        h1, h2, h3{
+          display: inline;
+        }
+
+        h1 {
+          padding-left: 5px;
+          font-size: 22px;
+        }
+
+        h3 {
+          font-size: 19px;
+        }
+
+        #adopter-info {
+          display: none;
+        }
+    }
+    
+    #navlinks {
+      margin-top: 10px;
+    }
+
+
+
+/* =======================
+   Adoption - PayPal steps
+/* ======================= */
+
+    #paymentprocessing {
+      width: 522px;
+      height: 267px;
+      padding-top: 162px;
+      padding-left: 30px;
+      padding-right: 30px;
+      margin: auto;
+      background-image: url(../../images/paymentprocessing.gif);
+      background-repeat: none;
+
+        h2 {
+          font-size: 20px;
+        }
+    }
+
+
+
+/* ============
+   Admin styles
+   ============ */
+
+    #admin-dashboard {
+        line-height: 18px;
+    }
+
+    .navlink {
+      @include rounded-border(8px);
+
+      display: inline;
+      background: #bfe7ff;
+      color: #347281;
+      border: 1px solid #24b9ff;
+      margin-bottom: 1em;
+      padding: 5px;
+
+        a {
+          color: #347281;
+          text-decoration: none;
+        }
+    }
+
+
+
+/* ==================
+   Sales Event - New
+   ================== */
+   
+    #new-sales-event {
+      width: 400px;
+      margin: auto;
+
+        select {
+          width: 195px;
+        }
+    }
+
+
+
+/* =====================
+   Sales Adoption - New
+   ===================== */
+
+    .sales-adoption-form, .sales-adoption-form-ducks {
+      margin: auto;
+      width: 570px;
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+
+    .sales-adoption-form {
+      input[type="text"], input[type="email"], input[type="tel"] {
+        width: 260px;
+        border: 1px solid #cccccc;
+        margin: 0.5em 0px;
+      }
+    }
+
+    .sales-adoption-form-ducks input[type="text"] {
+      width: 100px;
+    }
+
+    .sales-adoption-form-ducks .left {
+      padding-left: 10px;
+    }
+
+    .sales-adoption-form-title {
+      margin-top: -20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }

@@ -1,13 +1,13 @@
 .form
   %h2.sales-adoption-form-title Sales Event Information
   = simple_form_for [:sales, @sales_event] do |f|
-    %div(style="width: 400px; margin: auto;")
+    #new-sales-event
       .left
         %h4 Location
-        = f.input :location, :collection => Location.to_collection, :label => false, :input_html => { :style => "width: 195px;" }
+        = f.input :location, :collection => Location.to_collection, :label => false
       .left(style="margin-left: 10px;")
         %h4 Organization
-        = f.input :organization, :collection => Organization.to_collection , :label => false, :input_html => { :style => "width: 195px;" }
+        = f.input :organization, :collection => Organization.to_collection , :label => false
       .clear
       %br/
       %div(style="text-align: center;")
