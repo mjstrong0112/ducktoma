@@ -19,6 +19,9 @@ Ducktoma::Application.routes.draw do
   end
   
   namespace :admin do
+    get '/ducks/regenerate' => 'ducks#regenerate', :as => :regenerate_ducks
+    match '/ducks/:number' => "ducks#show"
+
     root :to => "dashboard#index"
     resources :adoptions
     resources :users
@@ -28,7 +31,6 @@ Ducktoma::Application.routes.draw do
     match "/payment_notifications/failed" => "payment_notifications#failed"
     resources :payment_notifications
     resource :settings
-    match '/ducks/:number' => "ducks#show"
 
     match '/invalidate_adoptions/confirm' => "invalidate_adoptions#confirm", :as => :confirm_invalidation
     match '/invalidate_adoptions' => "invalidate_adoptions#index", :as => :invalidate_adoptions
