@@ -1,8 +1,12 @@
 class Admin::UsersController < Admin::BaseController
   inherit_resources
   load_and_authorize_resource
-  actions :index, :new, :create, :edit, :update, :destroy
+  actions :index, :new, :create, :edit, :update, :destroy, :show
   #before_filter :authenticate_user!, :only => :index
+  def show
+    @user = User.find(params[:id])
+    @adoptions = @user.adoptions.paginate(:page => params[:page] ||= 1, :per_page => 20)
+  end
   def index
     @users = User.paginate(:page => params[:page] ||= 1)
   end
