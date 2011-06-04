@@ -1,14 +1,13 @@
 class Duck
   include Mongoid::Document
 
-  field :number, :type => Integer
-  index :number
+  field :number, :type => Integer  
   referenced_in :adoption
   validates_presence_of :number, :if => :persisted?
   before_create :generate_number
 
   def number= number
-    read_attribute(:number) || write_attribute(:number, number)
+    write_attribute(:number, number)
   end
 
   def generate_number
