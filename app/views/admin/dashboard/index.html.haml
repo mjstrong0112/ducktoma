@@ -1,26 +1,21 @@
 %h1 Admin Dashboard
-= link_to 'View all adoptions', admin_adoptions_url
-%br/
-%br/
-= link_to 'Set pricing rules', admin_pricings_url
-%br/
-%br/
-= link_to 'View all users', admin_users_url
-%br/
-%br/
-#{ link_to 'View all locations', admin_locations_url } | #{ link_to 'View all organizations', admin_organizations_url }
-%br/
-%br/
-#{ link_to "View successful payment notifications", admin_payment_notifications_url } | #{ link_to "View failed payment notifications", admin_payment_notifications_failed_url}
-%br/
-%br/
-= link_to 'Edit Site Settings', edit_admin_settings_url
-%br/
-%br/
-= link_to "Invalidate Adoptions", admin_invalidate_adoptions_url
-%br/
-%br/
+#admin-dashboard
+  %p.large-text Search Functions
+  %p= link_to 'View all adoptions', admin_adoptions_url
+  %p= link_to 'View all users', admin_users_url
+  %p #{ link_to 'View all locations', admin_locations_url } | #{ link_to 'View all organizations', admin_organizations_url }
+  %p #{ link_to "View successful payment notifications", admin_payment_notifications_url } | #{ link_to "View failed payment notifications", admin_payment_notifications_failed_url}
 
+  %br/
+
+  %p.large-text Update actions
+  %p= link_to 'Set pricing rules', admin_pricings_url
+  %p= link_to 'Edit Site Settings', edit_admin_settings_url
+  %p= link_to "Invalidate Adoptions", admin_invalidate_adoptions_url
+  %p= link_to "Regenerate Duck Numbers", admin_regenerate_ducks_url
+
+%br/
 - content_for :navlinks do
   .navlink= link_to "Home", root_url
+
 
