@@ -2,12 +2,13 @@ source 'http://rubygems.org'
 gem 'rack-contrib', :require => 'rack/contrib'
 gem 'rails', '3.0.3'
 gem 'rack', '1.2.1'
+gem 'rake', '0.8.7'
 
 # Core Ext
 gem 'andand', :git => "git://github.com/raganwald/andand.git"
 
 # UI
-gem 'haml', '~> 3.0.21'
+gem 'haml'
 gem 'simple_form', '~> 1.3.0'
 gem 'compass', '~> 0.10.6'
 

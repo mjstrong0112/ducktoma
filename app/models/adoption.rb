@@ -10,7 +10,7 @@ class Adoption
   
   # State field for state machine. Default state MUST be specified.
   field :state, :type => String, :default => "new"
-
+  
   referenced_in :user
   referenced_in :payment_notification
   referenced_in :sales_event
@@ -22,8 +22,9 @@ class Adoption
 
   before_validation :save_duck_count, :save_fee, :create_adoption_number
   validates_presence_of :ducks, :fee, :adoption_number
-
+   
   scope :valid, excludes(:state => "invalid")
+  scope :invalid, where(:state => "invalid")
   scope :paid, not_in(:state => ["invalid", "pending"] )
   
   #state_machine :initial => :new do

@@ -7,6 +7,10 @@ class Sales::AdoptionsController < Sales::BaseController
   belongs_to :sales_event, :optional => :true
   before_filter :authenticate_user!, :only => :index
 
+  def index
+    @adoptions = current_user.adoptions.order_by([:adoption_number, :asc]).paginate(:page => params[:page] ||= 1, :per_page => 20)
+  end
+
   def create
     unless parent?
       @adoption = Adoption.new(params[:adoption])
