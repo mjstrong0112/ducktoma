@@ -6,7 +6,7 @@ class Ability
     can :edit, Adoption, :user_id => nil
     if user
       can :read, Adoption, :user_id => user.id
-      can :manage, :all if user.admin?      
+      can :manage, :all if user.admin?
     end
   end
 end

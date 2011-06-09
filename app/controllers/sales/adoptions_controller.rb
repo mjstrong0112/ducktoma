@@ -1,14 +1,25 @@
 class Sales::AdoptionsController < Sales::BaseController
   inherit_resources
-  actions :index, :show, :new, :create, :edit, :update, :destroy
-
+  actions :all
   load_and_authorize_resource
-  #belongs_to :user, :optional => :true
   belongs_to :sales_event, :optional => :true
-  before_filter :authenticate_user!, :only => :index
 
   def index
     @adoptions = current_user.adoptions.order_by([:adoption_number, :asc]).paginate(:page => params[:page] ||= 1, :per_page => 20)
+  end
+
+  #def show
+  #  @adoption = Adoption.find(params[:id])
+  #  authorize! :show, @adoption
+  #end
+
+  def edit    
+    edit!
+    #@adoption = Adoption.find(params[:id])
+  end
+
+  def update
+    @adoption = Adoption.find(params[:id])
   end
 
   def create
@@ -33,9 +44,9 @@ class Sales::AdoptionsController < Sales::BaseController
   update! { sales_adoptions_url }
 
   protected
-  def begin_of_association_chain
-    parent? ? parent : current_user
-  end
+  #def begin_of_association_chain
+  #  parent? ? parent : current_user
+  #end
   def collection
     @adoptions ||= end_of_association_chain.where(:type => "sales").paginate(:page => params[:page] || 1)
   end

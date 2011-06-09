@@ -6,11 +6,13 @@ class Adoption
 
   field :adoption_number
   field :fee, :type => Integer
+  index :fee
   field :type
   
   # State field for state machine. Default state MUST be specified.
   field :state, :type => String, :default => "new"
-  
+  index :state
+
   referenced_in :user
   referenced_in :payment_notification
   referenced_in :sales_event

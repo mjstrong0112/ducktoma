@@ -504,6 +504,26 @@
         line-height: 18px;
     }
 
+    #duck-number {
+        input {
+            width: 30px;
+            margin-right: 8px;
+        }
+        #duck-number-link {
+            margin-top: 3px;
+            cursor: pointer;
+        }
+        margin-bottom: 5px;
+    }
+
+    #adoption-number {
+        #adoption-number-link {
+            margin-top: 3px;
+            cursor: pointer;
+            margin-left: 8px;        
+        }
+    }
+    
     .navlink {
       @include rounded-border(8px);
 

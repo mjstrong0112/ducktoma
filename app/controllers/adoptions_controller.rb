@@ -1,10 +1,11 @@
 class AdoptionsController < ApplicationController
   inherit_resources
-  actions :index, :show, :new, :create, :edit, :update
-  load_and_authorize_resource
-  belongs_to :user, :optional => :true  
+  actions :all, :except => [:show]
+  belongs_to :user, :optional => :true
+  load_and_authorize_resource :except => [:show]
 
   #before_filter :authenticate_user!, :only => :index
+  
   def new
     if !Duck.available?
       render('home/ducks_exhausted')
@@ -14,6 +15,18 @@ class AdoptionsController < ApplicationController
       new!
     end
   end
+  def show
+    # search for adoption on either id or adoption number
+    if params[:id]
+
+      @adoption = Adoption.find(params[:id])
+    elsif params[:adoption_number]
+
+      @adoption = Adoption.where(:adoption_number => params[:adoption_number]).first
+    end
+    
+    authorize! :show, @adoption
+  end  
   def edit
     @adoption = Adoption.find(params[:id])
     if @adoption.state == 'new'
@@ -31,6 +44,7 @@ class AdoptionsController < ApplicationController
   def index
     @adoptions = current_user.adoptions_f(:std).paginate(:page => params[:page] ||= 1)
   end
+  
   def create
     @adoption = Adoption.new(params[:adoption])
     @adoption.type = "std"

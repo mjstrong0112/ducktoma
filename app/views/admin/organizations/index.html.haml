@@ -7,10 +7,9 @@
     %th
   - @organizations.each do |organization|
     %tr
-      %td
-        = organization.name
-      %td= find_total_ducks_by_organization(organization.name)
-      %td= number_to_currency dollar_fee find_total_fee_by_organization(organization.name)
+      %td= organization.name
+      %td= @organization_values[organization.name][:total_ducks]
+      %td= number_to_currency dollar_fee @organization_values[organization.name][:total_donations]
       %td= link_to "Edit", edit_admin_organization_url(organization)
 
 %h3 Add a new organization

@@ -5,6 +5,19 @@
   %p= link_to 'View all users', admin_users_url
   %p #{ link_to 'View all locations', admin_locations_url } | #{ link_to 'View all organizations', admin_organizations_url }
   %p #{ link_to "View successful payment notifications", admin_payment_notifications_url } | #{ link_to "View failed payment notifications", admin_payment_notifications_failed_url}
+  
+  #duck-number.clearfix
+    .left
+      %input#duck-number-input
+    .left
+      #duck-number-link <a>Search by duck number</a>
+        
+
+  #adoption-number.clearfix
+    .left
+      %input#adoption-number-input
+    .left
+      #adoption-number-link <a>Search by adoption number</a>
 
   %br/
 
@@ -15,7 +28,24 @@
   %p= link_to "Regenerate Duck Numbers", admin_regenerate_ducks_url
 
 %br/
+
+-# simple javascript code for dynamic links
+- content_for :javascript do
+  :javascript
+    $(document).ready(function(){
+      // TODO: Fix URL embedding.
+      // this link might break if the rails routes file is ever changed.
+      $('#duck-number-link').click(function() {
+        window.location = "/admin/ducks/" + $('#duck-number-input').val(); 
+      });
+
+      $('#adoption-number-link').click(function() {
+        window.location = "/admin/adoptions/" + $('#adoption-number-input').val();
+      });
+    })
+
 - content_for :navlinks do
   .navlink= link_to "Home", root_url
+
 
 

@@ -23,7 +23,8 @@ Ducktoma::Application.routes.draw do
     match '/ducks/:number' => "ducks#show"
 
     root :to => "dashboard#index"
-    resources :adoptions
+    resources :adoptions, :only => :index
+
     resources :users
     resources :locations
     resources :organizations
@@ -35,10 +36,18 @@ Ducktoma::Application.routes.draw do
     match '/invalidate_adoptions/confirm' => "invalidate_adoptions#confirm", :as => :confirm_invalidation
     match '/invalidate_adoptions' => "invalidate_adoptions#index", :as => :invalidate_adoptions
     match '/invalidate_adoptions/invalidate' => "invalidate_adoptions#invalidate", :as => :invalidate_adoption
+
+    match "/adoptions/:id" => redirect("/adoptions/%{id}")
+
   end
   
-  resources :adoptions
+  resources :adoptions, :except => :show
+  get '/adoptions/:id' => 'adoptions#show', :as => :adoption, :constraints => { :id => /\w{24}/ }
+  get '/adoptions/:adoption_number' => 'adoptions#show', :as => :adoption
+
   resources :payment_notifications
+
+
 
   match 'adoptions/number/:adoption_number' => 'adoptions#show'
   
