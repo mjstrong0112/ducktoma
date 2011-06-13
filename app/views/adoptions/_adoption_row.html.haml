@@ -5,7 +5,7 @@
   - if current_user.admin? || current_user.is?(:sales)
     %td= adoption.state
     %td
-      = link_to 'Show', adoption_url(adoption), :class => "show-adoption"
+      = link_to 'Show', adoption_url(adoption.id), :class => "show-adoption"
       - if adoption.type == 'sales'
         |
         = link_to 'Edit', edit_sales_adoption_url(adoption)

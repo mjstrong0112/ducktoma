@@ -1,7 +1,10 @@
+require 'spec_helper'
 require 'views/views_helper'
 
 describe "admin/adoptions/index.html.haml" do
   before(:each) do
+    @admin = Fabricate.build(:admin)
+    stub(view).current_user { @admin }
     @collection = []
     (1..50).to_a.each do |n|
       @collection.push Fabricate.build(:adoption)
