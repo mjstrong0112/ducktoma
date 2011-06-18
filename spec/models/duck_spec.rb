@@ -22,10 +22,15 @@ describe Duck do
     duck.save
     duck.number.should_not be_blank
   end
-  it "has an immutable number field" do
-    duck = Fabricate.build(:duck)    
-    number = duck.number
-    duck.number = number+1
-    duck.number.should == number
-  end
+  
+  # Duck numbers are no longer immutable
+  # for the time being. Immutability was removed
+  # in order to support the "generate duck numbers" function.
+
+  #it "has an immutable number field" do
+  #  duck = Fabricate.build(:duck)
+  #  number = duck.number
+  #  duck.number = number+1
+  #  duck.number.should == number
+  #end
 end

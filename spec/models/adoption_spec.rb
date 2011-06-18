@@ -101,6 +101,11 @@ describe Adoption do
       adoption.should be_valid(:create)
     end
   end
+
+  # State machine support was removed due to
+  # its poor MongoDB support.
+
+=begin
   describe "it's state" do
     it "is new by default" do
       subject.should be_new
@@ -123,4 +128,5 @@ describe Adoption do
       end
     end
   end
+=end
 end

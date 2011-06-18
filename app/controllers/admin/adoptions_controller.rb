@@ -1,16 +1,52 @@
 class Admin::AdoptionsController < Admin::BaseController
   inherit_resources
   actions :index
-
-  load_and_authorize_resource
-  belongs_to :user, :optional => :true
-
-  #before_filter :authenticate_user!, :only => :index
+  load_and_authorize_resource :only => [:index]
 
   def index
-    ids = Adoption.paid.only(:id).map(&:id)
+    all_ids = Adoption.paid.only(:id).map(&:id)
     @total_donations = Adoption.paid.sum(:fee)
-    @total_ducks = Duck.where(:adoption_id.in => ids).count
+    @total_ducks = Duck.where(:adoption_id.in => all_ids).count
     @adoptions = Adoption.valid.paginate(:page => params[:page] ||= 1, :per_page => 20)
   end
+
+  # Due to an oversight, the first version of ducktoma didn't have
+  # validates_uniqueness_of :adoption_number for Adoptions.
+  # This led to some unwanted duplicates in prod.
+  #
+  # This function was coded to get rid of the duplicates present in production.
+  #
+  # Adoptions now DO validate the uniqueness of their adoption_number,
+  # so even though this function will probably never be run again,
+  # I decided to keep it, just in case.
+
+  def find_duplicates
+    @duplicate_adoptions = get_duplicates
+  end
+
+  def remove_duplicates
+    duplicate_adoptions = get_duplicates
+    duplicate_adoptions.each do |duplicate|
+      duplicate.delete
+    end
+
+    flash[:notice] = "Duplicates successfully removed!"
+    redirect_to admin_root_url
+  end
+
+  private
+  def get_duplicates
+    # Find all adoption numbers that are duplicated in the db.
+    duplicate_numbers = duplicates Adoption.only(:adoption_number).map(&:adoption_number)
+
+    # Get the full adoption objects corresponding to the duplicate_numbers found.
+    adoptions = Adoption.where(:adoption_number.in => duplicate_numbers).to_a
+
+    # The action above returns all objects for duplicate numbers in the database,
+    # which means it will return two or more objects for each number in the duplicate_numbers array.
+    # We only want to show - one - entry for each duplicate adoption.
+    # So, the line below removes the duplicates of the duplicates.
+    duplicate_adoptions = adoptions.uniq_by(&:adoption_number)
+  end
+
 end

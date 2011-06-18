@@ -32,4 +32,8 @@ module ApplicationHelper
     adoption_ids = Adoption.where(:sales_event_id.in => sales_events).only(:id).map(&:id)
     Duck.where(:adoption_id.in => adoption_ids).count
   end
+
+  def duplicates(enum)
+    enum.inject(Hash.new(0)) { |h,e| h[e] += 1; h }.select { |k,v| v > 1 }.collect { |x| x.first }
+  end  
 end

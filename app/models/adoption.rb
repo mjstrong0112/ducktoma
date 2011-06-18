@@ -28,7 +28,8 @@ class Adoption
   scope :valid, excludes(:state => "invalid")
   scope :invalid, where(:state => "invalid")
   scope :paid, not_in(:state => ["invalid", "pending"] )
-  
+  scope :sales, where(:state => "new").order_by([:adoption_number, :asc])
+
   #state_machine :initial => :new do
   #  event :confirm do
   #    transition :new => :pending
@@ -46,6 +47,7 @@ class Adoption
 
   validates_associated :adopter_info
   validates_numericality_of :fee, :only_integer => true
+  validates_uniqueness_of :adoption_number
   validate :ducks_must_be_available, :on => :create
   #validate :duck_count_must_correspond_to_fee, :on => :create
 

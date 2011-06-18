@@ -90,4 +90,25 @@ describe AdoptionsController do
       response.should render_template('canceled')
     end
   end
+
+  describe "GET 'show'" do
+    before(:each) do
+      @user = Fabricate(:admin)
+      sign_in @user
+
+      @adoption = Fabricate(:adoption, :adoption_number => "number")
+    end
+
+    it "can find by adoption_number" do
+      get :show, :adoption_number => @adoption.adoption_number
+      response.should be_success
+    end
+
+    it "can find by id" do
+      get :show, :id => @adoption.id
+      response.should be_success
+    end
+
+  end
+
 end

@@ -3,13 +3,19 @@ class Admin::DucksController < ApplicationController
 
   def show
     @duck = Duck.where(:number => params[:number]).first
+    raise Mongoid::Errors::DocumentNotFound.new(Duck, params[:number]) if @duck.nil?
     @adoption = @duck.adoption
+  rescue Mongoid::Errors::DocumentNotFound
+    flash[:alert] = "Duck " + params[:number] + " could not be found"
+    redirect_to admin_root_url
   end
 
   # Regenerates duck numbers.
-  # NOTE: This is a very taxing operation. Use with care.
-  # Would like to hear optimization options.
+  # NOTE: This is a very taxing operation.
+  # It performs thousands of queries.
+  # Use with care.
   def regenerate
+    
     # Set invalid adoptions to have a number of -1 since they no longer count.
     Adoption.invalid.each do |adoption|
       adoption.ducks.each do |duck|
@@ -32,4 +38,5 @@ class Admin::DucksController < ApplicationController
 
     redirect_to admin_root_url, :notice => "Duck numbers regenerated successfully!"
   end
+  
 end

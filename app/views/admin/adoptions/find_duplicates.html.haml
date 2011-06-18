@@ -1,0 +1,17 @@
+%h1 Duplicate adoptions
+%table
+  %tr
+    %th Adoption Number
+    %th Duck Count
+    %th Fee
+
+  - @duplicate_adoptions.each do |adoption|
+    %tr
+      %td= adoption.adoption_number
+      %td= adoption.duck_count
+      %td= adoption.fee
+
+%p{:style => "font-size: 18px;"} Are you sure you want to remove these #{@duplicate_adoptions.count} adoptions?
+
+= form_for :duplicates, :url => admin_remove_duplicates_url do |f|
+  %p= f.submit "Remove Adoptions"

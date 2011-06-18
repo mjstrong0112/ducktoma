@@ -18,15 +18,18 @@ class AdoptionsController < ApplicationController
   def show
     # search for adoption on either id or adoption number
     if params[:id]
-
       @adoption = Adoption.find(params[:id])
     elsif params[:adoption_number]
-
       @adoption = Adoption.where(:adoption_number => params[:adoption_number]).first
+      raise Mongoid::Errors::DocumentNotFound.new(Adoption, params[:adoption_number]) if @adoption.nil?
     end
     
     authorize! :show, @adoption
-  end  
+  rescue Mongoid::Errors::DocumentNotFound
+    flash[:alert] = "Adoption could not be found"
+    redirect_to root_url
+  end
+
   def edit
     @adoption = Adoption.find(params[:id])
     if @adoption.state == 'new'

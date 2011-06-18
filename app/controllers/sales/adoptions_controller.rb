@@ -5,7 +5,8 @@ class Sales::AdoptionsController < Sales::BaseController
   belongs_to :sales_event, :optional => :true
 
   def index
-    @adoptions = current_user.adoptions.order_by([:adoption_number, :asc]).paginate(:page => params[:page] ||= 1, :per_page => 20)
+    @adoptions = current_user.adoptions.sales
+                  .paginate(:page => params[:page] ||= 1, :per_page => 20)
   end
 
   #def show
