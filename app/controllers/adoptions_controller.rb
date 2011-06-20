@@ -3,7 +3,6 @@ class AdoptionsController < ApplicationController
   actions :all, :except => [:show]
   belongs_to :user, :optional => :true
   load_and_authorize_resource :except => [:show]
-
   #before_filter :authenticate_user!, :only => :index
   
   def new
