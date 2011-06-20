@@ -1,38 +1,46 @@
 require 'whole_number_validator'
 include ApplicationHelper
+# ========
+# Adoption
+# ========
+#
+# = fields =
+#   adoption_number:  Unique identifier for adoptions.
+#
+#   status:           Amount paid for adoption.
+#
+#   type:             Adoption type. Can be "std" (PayPal) or "sales".
+#
+#   state:            Only used for PayPal adoptions, stores the stage
+#                     in the paypal payment process this adoption is in.
+
 class Adoption
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  # == fields ==
   field :adoption_number
   field :fee, :type => Integer
   index :fee
   field :type
-  
-  # State field for state machine. Default state MUST be specified.
+
+  # State of - PayPal - adoption.
+  # Can be the following values:
+  #   New:            User hasn't confirmed purchase or gone to PayPal website.
+  #
+  #   Pending:        User has confirmed purchase, but PayPal confirmation
+  #                   IPN hasn't arrived.
+  #
+  #   Completed:      Payment completed, successful, IPN has arrived and
+  #                   no problems encountered.
+  #
+  #   Invalid:        Cancelled adoption.
   field :state, :type => String, :default => "new"
   index :state
 
-  referenced_in :user
-  referenced_in :payment_notification
-  referenced_in :sales_event
-  references_many :ducks, :dependent => :destroy
-  embeds_one :adopter_info, :class_name => "ContactInfo"
-
-  accepts_nested_attributes_for :adopter_info
-
-  before_validation :save_duck_count, :save_fee, :create_adoption_number
-  validates_presence_of :ducks, :fee, :adoption_number
-   
-  scope :valid, excludes(:state => "invalid")
-  scope :invalid, where(:state => "invalid")
-  scope :paid, not_in(:state => ["invalid", "pending"] )
-  scope :sales, where(:type => "sales").order_by([:adoption_number, :asc])
-
-
   # State machine has been disabled due to
   # poor MongoDB support.
-  
+
   # state_machine :initial => :new do
   #   event :confirm do
   #     transition :new => :pending
@@ -48,12 +56,34 @@ class Adoption
   #   end
   # end
 
+
+  # == associations ==
+  referenced_in :user
+  referenced_in :payment_notification
+  referenced_in :sales_event
+  references_many :ducks, :dependent => :destroy
+  embeds_one :adopter_info, :class_name => "ContactInfo"
+  accepts_nested_attributes_for :adopter_info
+
+
+  # == validations ===
+  validates_presence_of :ducks, :fee, :adoption_number
   validates_associated :adopter_info
   validates_numericality_of :fee, :only_integer => true
   validates_uniqueness_of :adoption_number
   validate :ducks_must_be_available, :on => :create
-  #validate :duck_count_must_correspond_to_fee, :on => :create
+  # validate :duck_count_must_correspond_to_fee, :on => :create
 
+
+  # == scopes ==
+  scope :valid, excludes(:state => "invalid")
+  scope :invalid, where(:state => "invalid")
+  scope :paid, not_in(:state => ["invalid", "pending"] )
+  scope :sales, where(:type => "sales").order_by([:adoption_number, :asc])
+
+
+  # == hooks ==
+  before_validation :save_duck_count, :save_fee, :create_adoption_number
   before_create :save_ducks
 
 
@@ -83,23 +113,23 @@ class Adoption
 
   def calculate_fee
     # Sort pricings from greatest to smallest
-    # If no pricings exist, use default price of 50.
     pricings = Pricing.desc(:quantity).to_a
-    if pricings.count > 0
-      # Grab right pricing from pricings-list
-      # by its duck range.
-      pricing = pricings.detect do |p|
-       duck_count > p.quantity
-      end
+    
+    # If no pricings exist, use default price of 50.
+    return duck_count * 50 if pricings.count == 0
 
-      # If no duck-range in a pricing corresponded
-      # to our duck count, just use the last pricing.
-      pricing ||= pricings.last
-
-      duck_count * pricing.price
-    else
-      duck_count * 50;
+    # Grab right pricing from pricings-list
+    # by its duck range.
+    pricing = pricings.detect do |p|
+     duck_count > p.quantity
     end
+
+    # If no duck-range in a pricing corresponded
+    # to our duck count, just use the last pricing.
+    pricing ||= pricings.last
+
+    # Alas, calculate the price.
+    duck_count * pricing.price
   end
 
   def ducks_available?
@@ -157,16 +187,21 @@ class Adoption
   end
 
   def create_adoption_number
-    unless type == 'sales'
-      if self.adoption_number.blank?
-        record=true
-        while record
-          random = "R#{Array.new(9){rand(9)}.join}"
-          record = Adoption.where(:adoption_number => random).exists?
-        end
-        self.adoption_number = random
-      end
+    # Adoption numbers must be entered manually
+    # for sales adoptions.
+    return nil if type == 'sales'
+
+    # Don't want to override a perfectly
+    # good adoption_number if the number is already set.
+    return nil if self.adoption_number.present?
+
+    # Generate unique number.
+    record = true
+    while record
+      random = "R#{Array.new(9){rand(9)}.join}"
+      record = Adoption.where(:adoption_number => random).exists?
     end
+    self.adoption_number = random
   end
 
   def save_ducks
@@ -174,14 +209,16 @@ class Adoption
   end
 
   def duck_count_must_correspond_to_fee
-    # Only applies when a duck_count exists. If the duck_count is nil or 0,
-    # it will be generated on save_duck_count.
-    if(duck_count > 0)
-      pricing = retrieve_pricing_scheme(fee)
-      if(duck_count > fee/pricing.price)
-        errors.add :duck_count, "does not correspond to amount donated."
-      end
+    # Validation only apples when a duck_count exists.
+    # If the duck_count is nil or 0, the ducks will be
+    # generated on save_duck_count.
+    return nil if duck_count == 0 || duck_count.nil?
+
+    pricing = retrieve_pricing_scheme(fee)
+    if(duck_count > fee/pricing.price)
+      errors.add :duck_count, "does not correspond to amount donated."
     end
+
   end
 
   def ducks_must_be_available

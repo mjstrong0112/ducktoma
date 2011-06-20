@@ -23,7 +23,8 @@ class PaymentNotification
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  # Paypal values.
+  # == fields ==
+  # Paypal values
   field :params, :type => Hash
   field :transaction_id
   field :invoice
@@ -65,15 +66,19 @@ class PaymentNotification
   #   end
   # end  
 
+
+  # == associations ==
   references_one :adoption
   embeds_one :payer_info, :class_name => "ContactInfo"
 
-  after_create :mark
 
+  # == scopes ==
   scope :unauthorized, where(:state =>'unauthorized')
   scope :orphans, where(:state => 'orphan')
   scope :completed, where(:state =>'completed')
 
+  # == hooks ==
+  after_create :mark
 
   # Converts IPN value hash into ContactInfo object.
   def payer_info_params= params
