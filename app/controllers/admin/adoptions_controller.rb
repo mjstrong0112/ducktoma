@@ -10,6 +10,21 @@ class Admin::AdoptionsController < Admin::BaseController
     @adoptions = Adoption.valid.paginate(:page => params[:page] ||= 1, :per_page => 20)
   end
 
+  require 'csv'
+  def export_csv
+    csv_string = CSV.generate do |csv|
+      # Headers
+      csv << ['Adoption Number', 'Duck count','Fee', 'First Duck']
+      Adoption.paid.each do |adoption|
+        ducks = adoption.ducks
+        values = [adoption.adoption_number, ducks.count, "$" + adoption.dollar_fee.to_s, ducks.first.number]
+        csv << values
+      end
+    end
+
+    send_data csv_string, :type => "text/plain", :filename => "report.csv", :disposition => 'attachment'
+  end
+
   # Due to an oversight, the first version of ducktoma didn't have
   # validates_uniqueness_of :adoption_number for Adoptions.
   # This led to some unwanted duplicates in prod.
