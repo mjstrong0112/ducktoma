@@ -27,7 +27,7 @@ class Admin::DucksController < ApplicationController
     # Regenerate the duck numbers of valid adoptions so that there
     # will be no gaps in the numbers.
     duck_count = 1
-    Adoption.valid.each do |adoption|
+    Adoption.valid.order_by([:adoption_number, :asc]).each do |adoption|
       adoption.ducks.each do |duck|
         duck.number = duck_count
         duck.save
