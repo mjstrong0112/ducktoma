@@ -30,7 +30,7 @@ Ducktoma::Application.configure do
   :port                 => 587,
   :domain               => 'gmail.com',
   :user_name            => 'duckrace@rrsertoma.org',
-  :password             => 'rrs1BillBuckler',
+  :password             => 'rrsBillBuckler',
   :authentication       => 'plain',
   :enable_starttls_auto => true  }  
 end
