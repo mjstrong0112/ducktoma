@@ -146,7 +146,6 @@ class PaymentNotification
 
     # If everything went according to plan.
     if status == "Completed" && valid_state?
-      send_confirmation_email
       self.state = 'completed'
       save!
       # Set adoption to 'completed' and give it
@@ -154,6 +153,8 @@ class PaymentNotification
       adoption.state = 'completed'
       adoption.adopter_info = payer_info_copy
       adoption.save!
+
+      send_confirmation_email
     end
   end
 
