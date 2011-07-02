@@ -60,7 +60,7 @@ class AdoptionsController < ApplicationController
         render('new')
       end
     else
-      flash[:alert] = 'There are only ' + Settings[:duck_inventory].to_s +
+      flash[:alert] = 'There are only ' + (Settings[:duck_inventory]-Duck.valid_count).to_s +
                         ' ducks left. You tried to adopt ' + @adoption.duck_count.to_s + ' ducks'
       redirect_to new_adoption_url
     end

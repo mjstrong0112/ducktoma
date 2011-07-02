@@ -7,7 +7,7 @@ include ApplicationHelper
 # = fields =
 #   adoption_number:  Unique identifier for adoptions.
 #
-#   status:           Amount paid for adoption.
+#   fee:              Amount paid for adoption.
 #
 #   type:             Adoption type. Can be "std" (PayPal) or "sales".
 #
@@ -87,7 +87,7 @@ class Adoption
   before_create :save_ducks
 
 
-  def duck_count= count    
+  def duck_count= count  
     return if persisted?
     self.ducks = (1..count.to_i).to_a.collect{Duck.new}
   end
@@ -133,7 +133,7 @@ class Adoption
   end
 
   def ducks_available?
-    (duck_count + Duck.count) <= Settings[:duck_inventory]
+    (duck_count + Duck.valid_count) <= Settings[:duck_inventory]
   end
 
   # = Paypal encryption as defined by Ryan Bates from Railscasts.

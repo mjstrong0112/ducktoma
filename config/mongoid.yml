@@ -16,7 +16,8 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  database: ducktoma_development
+  database: app356318
+  # database: ducktoma_development
 
 test:
   <<: *defaults

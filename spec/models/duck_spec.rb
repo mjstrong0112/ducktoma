@@ -22,6 +22,37 @@ describe Duck do
     duck.save
     duck.number.should_not be_blank
   end
+
+  it "does not count invalid ducks for available?" do
+    Settings[:duck_inventory] = 90
+    Fabricate(:adoption, :state => :invalid, :duck_count => 20)
+    Fabricate(:adoption, :type => :std, :duck_count => 3)
+    # Make sure ducks and adoptions were actually created.
+    Duck.count.should == 23
+    Adoption.count.should == 2
+
+    Settings[:duck_inventory] = 5
+    
+    # Even though there are 23 ducks in the database,
+    # and only 5 in the inventory (after the inventory change),
+    # the test should pass since 20 of the 23 ducks
+    # are invalid ducks and do not count.
+    Duck.should be_available
+  end
+
+  it "does count pending ducks for available?" do
+    Settings[:duck_inventory] = 90
+    Fabricate(:adoption, :duck_count => 15, :state => "pending")
+    Fabricate(:adoption, :duck_count => 3)
+
+    # Make sure ducks and adoptions were actually created.
+    Duck.count.should == 18
+    Adoption.count.should == 2
+
+    Settings[:duck_inventory] = 18
+    
+    Duck.should_not be_available
+  end
   
   # Duck numbers are no longer immutable
   # for the time being. Immutability was removed

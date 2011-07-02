@@ -1,5 +1,5 @@
 :javascript
     $(document).ready(function() {
       pricingScheme.addPricings(#{pricing_json});
-      settings.setInventoryCount(#{Settings[:duck_inventory]-Duck.count});
+      settings.setInventoryCount(#{Settings[:duck_inventory]-Duck.valid_count});
     });
