@@ -12,13 +12,13 @@ class Admin::AdoptionsController < Admin::BaseController
 
   require 'csv'
   def export_csv
-    @ducks = Duck.all.only([:adoption_id, :number]).order_by([:number, :asc]).group_by(&:adoption_id)
+    all_ducks = Duck.all.only([:adoption_id, :number]).order_by([:number, :asc]).group_by(&:adoption_id)
     csv_string = CSV.generate do |csv|
       # Headers
       csv << ['Adoption Number', 'Duck count','Fee', 'First Duck']
       Adoption.paid.order_by([:adoption_number, :asc]).each do |adoption|
         ducks = adoption.ducks
-        values = [adoption.adoption_number, @ducks[adoption.id].count, "$" + adoption.dollar_fee.to_s, @ducks[adoption.id][0].number]
+        values = [adoption.adoption_number, all_ducks[adoption.id].count, "$" + adoption.dollar_fee.to_s, all_ducks[adoption.id][0].number]
         csv << values
       end
     end
