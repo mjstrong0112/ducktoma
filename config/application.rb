@@ -13,7 +13,7 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Ducktoma
   class Application < Rails::Application
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+    config.action_mailer.default_url_options = { :host => 'localhost:3000' }
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -56,5 +56,6 @@ module Ducktoma
         ActiveSupport::Dependencies.mechanism = :load
       end
     end
+
   end
 end
