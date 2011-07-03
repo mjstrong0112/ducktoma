@@ -45,7 +45,9 @@ Ducktoma::Application.routes.draw do
     # ------------------
     # Adoptions actions.
     # ------------------
-    match "/adoptions/export" => "adoptions#export_csv"
+    match "/adoptions/export_by_name" => "adoptions#export_by_name"
+    match "/adoptions/export_by_adoption_number" => "adoptions#export_by_adoption_number"
+    match "/adoptions/export_by_duck_number" => "adoptions#export_by_duck_number"
     match "/adoptions/find_duplicates" => 'adoptions#find_duplicates', :as => :find_duplicates
     post "/adoptions/remove_duplicates" => 'adoptions#remove_duplicates', :as => :remove_duplicates
     

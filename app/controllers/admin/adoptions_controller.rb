@@ -11,15 +11,46 @@ class Admin::AdoptionsController < Admin::BaseController
   end
 
   require 'csv'
-  def export_csv
+  def export_by_adoption_number
     all_ducks = Duck.all.only([:adoption_id, :number]).order_by([:number, :asc]).group_by(&:adoption_id)
     csv_string = CSV.generate do |csv|
       # Headers
       csv << ['Adoption Number', 'Duck count','Fee', 'First Duck']
-      Adoption.paid.order_by([:adoption_number, :asc]).each do |adoption|
-        ducks = adoption.ducks
+      Adoption.paid.only([:id, :adoption_number, :fee]).order_by([:adoption_number, :asc]).each do |adoption|
         values = [adoption.adoption_number, all_ducks[adoption.id].count, "$" + adoption.dollar_fee.to_s, all_ducks[adoption.id][0].number]
         csv << values
+      end
+    end
+
+    send_data csv_string, :type => "text/plain", :filename => "report.csv", :disposition => 'attachment'
+  end
+
+  def export_by_name
+    all_ducks = Duck.all.only([:adoption_id, :number]).order_by([:number, :asc]).group_by(&:adoption_id)
+    csv_string = CSV.generate do |csv|
+      adoptions = Adoption.paid.only([:id, :adoption_number, :adopter_info]).to_a.sort!{|a,b| a.full_name <=> b.full_name }
+      # Headers
+      csv << ['Name','Adoption Number', 'First Duck']
+      adoptions.each do |adoption|
+        values = [adoption.full_name, adoption.adoption_number, all_ducks[adoption.id][0].number]
+        csv << values
+      end
+    end
+
+    send_data csv_string, :type => "text/plain", :filename => "report.csv", :disposition => 'attachment'
+  end
+
+  def export_by_duck_number
+    all_ducks = Duck.all.only([:adoption_id, :number]).order_by([:number, :asc]).group_by(&:adoption_id)
+    csv_string = CSV.generate do |csv|
+      # Headers
+      csv << ['Duck Number', 'Full Name', 'Adoption Number']
+      Adoption.paid.only(:id, :adoption_number, :adopter_info).order_by([:adoption_number, :asc]).each do |adoption|
+        all_ducks[adoption.id].each do |duck|
+          values = [duck.number, adoption.adopter_info.try(:full_name), adoption.adoption_number]
+          csv << values
+        end
+
       end
     end
 

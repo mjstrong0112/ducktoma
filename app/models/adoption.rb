@@ -87,6 +87,10 @@ class Adoption
   before_create :save_ducks
 
 
+  def full_name
+    adopter_info.try(:full_name) || "None" 
+  end
+
   def duck_count= count  
     return if persisted?
     self.ducks = (1..count.to_i).to_a.collect{Duck.new}
