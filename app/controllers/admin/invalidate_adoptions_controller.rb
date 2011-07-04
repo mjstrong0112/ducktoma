@@ -11,7 +11,9 @@ class Admin::InvalidateAdoptionsController < ApplicationController
     adoptions = Adoption.where(:created_at.lte => date, :state => "pending")
     adoptions.each {|adoption| adoption.state = "invalid"; adoption.save! }
 
-    adoptions = Adoption.where(:created_at.lte => date, :state => "new", :type => :std)
+    # Adoptions with a state of new that are paypal never even got past the confirmation page.
+    # There's nothing to wait for with these adoptions, so they should always be invalidated.
+    adoptions = Adoption.where(:state => "new", :type => :std)
     adoptions.each {|adoption| adoption.state = "invalid"; adoption.save! }
 
     flash[:notice] = "Adoption invalidation successful!"
