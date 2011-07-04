@@ -30,9 +30,9 @@ class Admin::AdoptionsController < Admin::BaseController
     csv_string = CSV.generate do |csv|
       adoptions = Adoption.paid.only([:id, :adoption_number, :adopter_info]).to_a.sort!{|a,b| a.full_name <=> b.full_name }
       # Headers
-      csv << ['Name','Adoption Number', 'First Duck']
+      csv << ['Name','Adoption Number', 'First Duck', 'Duck count']
       adoptions.each do |adoption|
-        values = [adoption.full_name, adoption.adoption_number, all_ducks[adoption.id][0].number]
+        values = [adoption.full_name, adoption.adoption_number, all_ducks[adoption.id][0].number, all_ducks[adoption.id].count]
         csv << values
       end
     end
