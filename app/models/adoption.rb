@@ -24,6 +24,7 @@ class Adoption
   index :fee
   field :type
 
+  #field :organization
   # State of - PayPal - adoption.
   # Can be the following values:
   #   New:            User hasn't confirmed purchase or gone to PayPal website.
@@ -62,6 +63,8 @@ class Adoption
   referenced_in :payment_notification
   referenced_in :sales_event
   references_many :ducks, :dependent => :destroy
+  # Booster club this adoption is associated to.
+  referenced_in :organization
   embeds_one :adopter_info, :class_name => "ContactInfo"
   accepts_nested_attributes_for :adopter_info
 

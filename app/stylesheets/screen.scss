@@ -308,6 +308,12 @@
 /* ==========================
    Home page (Adoption - New)
 /* ========================== */
+    .affiliate {
+        margin-right: 15px;
+        font-size: 19px;
+        margin-top: 3px;
+        float: left;
+    }
 
     #duck-form {
       @include rounded-border(15px);

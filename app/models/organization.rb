@@ -2,6 +2,7 @@ class Organization
   include Mongoid::Document
   
   field :name
+  references_many :adoptions
 
   validates :name, :presence => true
 

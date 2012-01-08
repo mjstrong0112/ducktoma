@@ -3,7 +3,7 @@
 
 .form  
   = render 'shared/title_slim', :text => 'Specify Number of Ducks', :number => 1
-  = form_for @adoption do |f|
+  = simple_form_for @adoption do |f|
     #duck-form.clearfix
       %div(style="margin: auto; width: 480px;")
         #duck-form-image
@@ -29,6 +29,13 @@
               = pluralize(pricing.quantity,"duck")
             %td
               = number_to_currency dollar_fee(pricing.price)
+
+    .input.select.optional.clearfix
+      %h4.affiliate Affiliate Organization (Optional):
+      %select#adoption_organization.select.optional.left{:name => "adoption[organization_id]"}
+        %option{:value => "", :selected => "selected"} None
+        - Organization.all.each do |organization|
+          %option{:value => "#{organization.id}"}= organization.name
 
     .adoption-new-button
       = f.submit "Continue", :class => "submit-duck-button blue-button-disabled"
