@@ -205,7 +205,7 @@ class Adoption
     # Generate unique number.
     record = true
     while record
-      random = "R#{Array.new(9){rand(9)}.join}"
+      random = "T#{Array.new(6){rand(6)}.join}"
       record = Adoption.where(:adoption_number => random).exists?
     end
     self.adoption_number = random
