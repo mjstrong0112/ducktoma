@@ -1,6 +1,9 @@
+.alert{:style =>"text-align: center; font-weight: bold;"}
+  Please click the "Continue to Checkout" button below, or your order will not be processed.
+
 .form(style="padding-top: 0px;")
   = render 'shared/title', :text => 'Confirm your order', :number => 2
-  %h1 Your adoption number.
+  %h1 Your pending adoption number.
 
   #raffle-number= @adoption.adoption_number
 

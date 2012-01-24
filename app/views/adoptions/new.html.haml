@@ -34,7 +34,7 @@
       %h4.affiliate Affiliate Organization (Optional):
       %select#adoption_organization.select.optional.left{:name => "adoption[organization_id]"}
         %option{:value => "", :selected => "selected"} None
-        - Organization.all.each do |organization|
+        - Organization.all(:sort => :name).each do |organization|
           %option{:value => "#{organization.id}"}= organization.name
 
     .adoption-new-button
