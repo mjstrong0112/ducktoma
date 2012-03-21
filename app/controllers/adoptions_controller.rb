@@ -11,6 +11,7 @@ class AdoptionsController < ApplicationController
     elsif !Settings[:adoptions_live]
       render('home/coming_soon')
     else
+      @pricings = Pricing.all.sort_by { |p| p.quantity }
       new!
     end
   end

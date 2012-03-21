@@ -1,14 +1,15 @@
 .title
   = image_tag "adopt.png", :id => "adopt", :alt => "Adopt a Duck Now!"
 
-.form  
-  = render 'shared/title_slim', :text => 'Specify Number of Ducks', :number => 1
+.form
+  .header-slim(style="margin-top: 0px; padding-left: 15px;") Specify Number of Ducks
+  /= render 'shared/title_slim', :text => 'Specify Number of Ducks', :number => 1
   = simple_form_for @adoption do |f|
     #duck-form.clearfix
       %div(style="margin: auto; width: 480px;")
         #duck-form-image
           = image_tag "duck.gif", :class => "duck-form-image"
-        = f.text_field :duck_count
+        = f.text_field :duck_count, :value => 1
         #duck-count ducks
         #duck-cost-link
           %a How much do ducks cost?
@@ -23,7 +24,7 @@
         %tr
           %th When more than
           %th Price
-        - Pricing.all.each do |pricing|
+        - @pricings.each do |pricing|
           %tr
             %td
               = pluralize(pricing.quantity,"duck")
@@ -31,7 +32,7 @@
               = number_to_currency dollar_fee(pricing.price)
 
     .input.select.optional.clearfix
-      %h4.affiliate Affiliate Organization (Optional):
+      %h4.affiliate Click the bar, below, and pick a group to get credit for your purchase (optional) :
       %select#adoption_organization.select.optional.left{:name => "adoption[organization_id]"}
         %option{:value => "", :selected => "selected"} None
         - Organization.all(:sort => :name).each do |organization|
@@ -46,6 +47,9 @@
   :javascript
     $(document).ready(function() {
       $('#duck-cost-link').click(function() {
-        $("#pricing").dialog({title: 'Duck Pricing Scheme'});
+        $("#pricing").dialog({title: 'Duck Pricing'});
       });
+      // call update total once to refresh price based on the initial value
+      // of the duck_count text field.
+      updateTotal($("#adoption_duck_count"));
     })
