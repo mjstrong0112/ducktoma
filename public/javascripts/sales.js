@@ -9,12 +9,37 @@ $(document).ready(function() {
     input.keyup(function() {
         calculateDuckCount(input.val());
     });
+
     calculateDuckCount(input.val());
 });
 //recieves a price in dollars
 function calculateDuckCount(price) {
     cents_price = price*100;
     pricing_rule = retrieve_pricing_rule(cents_price);
+
+
+    // HACK!
+    // Due to brochure screw-up, the brochure says you can adopt 24 ducks for 100 dlls
+    // and 11 ducks for 50 dlls despite the math not adding up. To keep true to the brochure's
+    // promise, we've hardcoded this exception for the pricing scheme logic when those two values
+    // are entered.
+    if(cents_price >= 10000 && cents_price <=10008) {
+        $("#ducks_adopted").val(24);
+        $('#amount_for_adoption').val(price);
+        $("#cash_donation").val(0);
+        $('#adoption_duck_count').val($('#ducks_adopted').val());
+        return;
+    }
+
+    if(cents_price >= 5000 && cents_price <= 5005) {
+        $("#ducks_adopted").val(11);
+        $('#amount_for_adoption').val(price);
+        $("#cash_donation").val(0);
+        $('#adoption_duck_count').val($('#ducks_adopted').val());
+        return;
+    }
+    // ENDHACK
+
     //if the user has donated enough to get one or more ducks
     if(pricing_rule) {
         calculated_ducks = Math.floor(cents_price/pricing_rule['price']);
@@ -46,7 +71,7 @@ function retrieve_pricing_rule(price) {
         //if the amount donated is greater than or equals to the minimum amount required to enter this pricing bracket
         //then we've found the correct pricing rule.
         if( price >= ((t_pricing_rule['quantity']+1) * t_pricing_rule['price'])  ) {
-            pricing_rule = t_pricing_rule;            
+            pricing_rule = t_pricing_rule;
         }
         index++;
     }    
