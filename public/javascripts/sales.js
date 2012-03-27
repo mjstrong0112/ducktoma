@@ -1,5 +1,4 @@
-$(document).ready(function() {   
-
+$(document).ready(function() {
     var input = $('#adoption_dollar_fee');	
 	input.focus(function() {
 		if(input.val() == 0) {
@@ -10,6 +9,7 @@ $(document).ready(function() {
         calculateDuckCount(input.val());
     });
 
+    // run calculateDuckCount an initial time for any pre-entered values.
     calculateDuckCount(input.val());
 });
 //recieves a price in dollars
@@ -41,6 +41,7 @@ function calculateDuckCount(price) {
     // ENDHACK
 
     //if the user has donated enough to get one or more ducks
+    // (pricing_rule will be null if the amount of dlls isn't enough to fit in any of the pricings)
     if(pricing_rule) {
         calculated_ducks = Math.floor(cents_price/pricing_rule['price']);
         $('#ducks_adopted').val(calculated_ducks);
@@ -49,7 +50,8 @@ function calculateDuckCount(price) {
         remainder = Math.round(remainder*Math.pow(10,2))/Math.pow(10,2);
         $('#cash_donation').val(remainder);
 
-    }else{
+    } else {
+    // otherwise all money goes as cash donation.
         $('#ducks_adopted').val(0);
         $('#amount_for_adoption').val(0);
         $('#cash_donation').val(price);
