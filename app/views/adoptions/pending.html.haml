@@ -1,9 +1,18 @@
-#paymentprocessing
-  %h2.center
-    Your payment is still being processed.
-    %br/
-    %br/
-    You will be sent an email with details about your adoption once the payment has completed.
-    %br/
-    %br/
-    Thank you for your patience.
+.form(style="padding-top: 0px;")
+  %h1 Your <span style="color: #fe3e39;">pending</span> adoption number.
+
+  #raffle-number= @adoption.adoption_number
+
+  .break &nbsp;
+
+  #duck-form-total
+    Total: #{number_to_currency(@adoption.dollar_fee)}
+
+%h2.center(style="border-top: 1px dotted #ccc; padding-top: 20px; font-size: 20px;")
+  Your payment is still being processed.
+  %br/
+  %br/
+  You will be sent an email with details about your adoption once the payment has completed.
+  %br/
+  %br/
+  Thank you for your patience.

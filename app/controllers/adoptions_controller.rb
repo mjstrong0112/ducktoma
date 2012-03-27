@@ -33,7 +33,7 @@ class AdoptionsController < ApplicationController
   def edit
     @adoption = Adoption.find(params[:id])
     if @adoption.state == 'new'
-      render('confirm')
+      render 'confirm', :layout => 'barebones'
       @adoption.state =  'pending'
       @adoption.save!
     elsif @adoption.state == 'pending'

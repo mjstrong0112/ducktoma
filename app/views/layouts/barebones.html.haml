@@ -1,0 +1,8 @@
+!!!
+%html
+  %head
+    %title Ducktoma
+  %body
+    = yield
+    = google_jquery :version => '1.4.4', :ssl => request.ssl?
+    = yield :javascripts
