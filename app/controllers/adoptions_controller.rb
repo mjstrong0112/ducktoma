@@ -12,6 +12,7 @@ class AdoptionsController < ApplicationController
       render('home/coming_soon')
     else
       @pricings = Pricing.all.sort_by { |p| p.quantity }
+      @organizations = Organization.all(:sort => :name)
       new!
     end
   end

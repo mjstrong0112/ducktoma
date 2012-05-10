@@ -35,7 +35,7 @@
       %h4.affiliate Click the bar, below, and pick a group to get credit for your purchase (optional) :
       %select#adoption_organization.select.optional.left{:name => "adoption[organization_id]"}
         %option{:value => "", :selected => "selected"} None
-        - Organization.all(:sort => :name).each do |organization|
+        - @organizations.each do |organization|
           %option{:value => "#{organization.id}"}= organization.name
 
     .adoption-new-button

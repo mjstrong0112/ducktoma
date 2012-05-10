@@ -6,7 +6,7 @@ class Location
   validates_presence_of :name
 
   def self.to_collection
-    Location.all.map(&:name)
+    Location.all(:sort => :name).map(&:name)
   end
   
 end

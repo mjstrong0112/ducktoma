@@ -1,6 +1,10 @@
 .form(style="padding-top: 0px;")
   = render 'shared/title', :text => 'Adoption Summary', :number => 3
-  %h1 Your adoption number.
+  %h1
+    Your adoption number.
+    - if (current_user.admin? || current_user.is?(:sales)) && @adoption.type == 'sales'
+      &nbsp;
+      = link_to "edit", edit_sales_adoption_url(@adoption)
 
   #raffle-number= @adoption.adoption_number
 
