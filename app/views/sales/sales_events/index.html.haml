@@ -1,22 +1,28 @@
-%table
+%table#sales_events
   %tr
     %th Organization
     %th Location
     %th Date
-    %th Number of Adoptions
+    %th Adopted
     %th Actions
   - @sales_events.each do |sales_event|
     %tr
       %td= sales_event.organization
       %td= sales_event.location
-      %td= sales_event.date
+      %td.date= sales_event.date
       %td= sales_event.adoptions.count
       %td
-        = link_to "Continue", new_sales_sales_event_adoption_path(sales_event)
-        |
-        = link_to "Show", sales_sales_event_path(sales_event) 
+        - if @scope && @scope == :admin
+          = link_to "Show", admin_sales_event_url(sales_event)
+        - else
+          = link_to "Continue", new_sales_sales_event_adoption_url(sales_event)
+          |
+          = link_to "Show", sales_sales_event_url(sales_event)
 %br/
 
 - content_for :navlinks do
-  .navlink= link_to "Sales Dashboard", sales_root_path
+  - if @scope && @scope == :admin
+    .navlink= link_to "Admin Dashboard", admin_root_path
+  - else
+    .navlink= link_to "Sales Dashboard", sales_root_path
 

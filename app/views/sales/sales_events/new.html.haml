@@ -1,6 +1,8 @@
 .form
-  %h2.sales-adoption-form-title Sales Event Information
+  %h2.sales-adoption-form-title= @reassignation ? 'Reassign Adoptions' : 'Sales Event Information'
   = simple_form_for [:sales, @sales_event] do |f|
+    - if @reassignation
+      = hidden_field_tag :adoption_numbers, @adoption_numbers
     #new-sales-event
       .left
         %h4 Location

@@ -54,6 +54,14 @@ Ducktoma::Application.routes.draw do
     resources :adoptions, :only => :index
     # Redirect admin show to standard show.
     match "/adoptions/:id" => redirect("/adoptions/%{id}")
+
+    resources :sales_events do
+      match :index, :show
+      member do
+        match 'move'
+        match 'reassign'
+      end
+    end
   end
   
   resources :adoptions, :except => :show
