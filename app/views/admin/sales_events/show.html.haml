@@ -7,7 +7,7 @@
     %th Donator
     %th Amount Donated
     %th Actions
-  - @sales_event.adoptions.each do |adoption|
+  - @adoptions.each do |adoption|
     %tr{class: adoption.user == current_user ? 'blue_highlight' : ''}
       %td= check_box_tag :select, adoption.adoption_number, false, :class => 'select', :id => nil
       %td= adoption.adoption_number

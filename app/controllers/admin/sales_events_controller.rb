@@ -11,6 +11,8 @@ class Admin::SalesEventsController < Admin::BaseController
   end
 
   def show
+    @sales_event = SalesEvent.find(params[:id])
+    @adoptions = @sales_event.adoptions.sort_by(&:adoption_number)
     show!
   end
 
