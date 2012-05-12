@@ -1,0 +1,32 @@
+.form(style="padding-top: 0px;")
+  = render 'shared/title', :text => 'Adoption Summary', :number => 3
+  %h1
+    Your adoption number.
+    - if (current_user.admin? || current_user.is?(:sales)) && adoption.type == 'sales'
+      &nbsp;
+      = link_to "edit", edit_sales_adoption_url(adoption)
+
+  #raffle-number= adoption.adoption_number
+  .break &nbsp;
+
+  #duck-form-total
+    Total: #{number_to_currency(adoption.dollar_fee)}
+
+
+#adoption-print
+  #adopter-info
+    = image_tag "adoptionsummary.gif"
+    %div(style="border-top: 1px solid #ccc; padding-top: 10px;")
+      %h3 Your Adoption Number:
+      %h1  #{ "  " + adoption.adoption_number }
+      %br/
+      %h3 Number of Ducks Adopted:
+      %h1= adoption.duck_count
+      %br/
+      %h3 Total:
+      %h1= number_to_currency(adoption.dollar_fee)
+
+  = render 'shared/contact_info', :adoption => adoption, :include_race_info => true
+
+#print.blue-button
+  = link_to_function "Print", "javascript:print()", :html_options => { :id => "print" }
