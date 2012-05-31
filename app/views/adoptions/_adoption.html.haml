@@ -5,6 +5,8 @@
     - if (current_user.admin? || current_user.is?(:sales)) && adoption.type == 'sales'
       &nbsp;
       = link_to "edit", edit_sales_adoption_url(adoption)
+      &nbsp;
+      = link_to "view sales event", admin_sales_event_url(adoption.sales_event)
 
   #raffle-number= adoption.adoption_number
   .break &nbsp;

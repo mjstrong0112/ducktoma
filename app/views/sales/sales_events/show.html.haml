@@ -12,7 +12,7 @@
       %td= number_to_currency(adoption.dollar_fee)
       %td
         = link_to "Edit", edit_sales_adoption_path(adoption)
-        - if adoption.user == current_user || current_user.is_admin?
+        - if adoption.user == current_user || current_user.roles.include?(:admin)
           |
           = link_to "Delete", sales_adoption_path(adoption), :method => :delete
 %br/
