@@ -1,5 +1,8 @@
-%h1 View Sales
-%h2= @sales_event.organization + " / " + @sales_event.location
+%h1 View Sales Event
+%h3 Organization: #{@sales_event.organization}
+%h3 Location: #{@sales_event.location}
+%h3 Date: #{@sales_event.date}
+%br/
 %table
   %tr
     %th
