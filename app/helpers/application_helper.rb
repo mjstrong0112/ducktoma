@@ -27,6 +27,7 @@ module ApplicationHelper
     sales_events = SalesEvent.where(:organization => organization).only(:id).map(&:id)
     Adoption.where(:sales_event_id.in => sales_events).sum(:fee)
   end
+
   def find_total_ducks_by_organization(organization)
     sales_events = SalesEvent.where(:organization => organization).only(:id).map(&:id)
     adoption_ids = Adoption.where(:sales_event_id.in => sales_events).only(:id).map(&:id)

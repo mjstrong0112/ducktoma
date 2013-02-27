@@ -23,7 +23,4 @@ class Admin::SalesEventsController < Admin::BaseController
     render 'sales/sales_events/new'
   end
 
-  def reassign
-  end
-
 end
