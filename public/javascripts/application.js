@@ -13,7 +13,7 @@ jQuery.fn.submitWithAjax = function() {
 var pricingScheme = new PricingScheme();
 var settings = new Settings();
 var duckFamilyAmount = 5;
-var duckFlockAmount = 10;
+var duckFlockAmount = 11;
 var duckOodleAmount = 26;
 function PricingScheme() {
   var pricings = [];

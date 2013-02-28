@@ -11,7 +11,10 @@
       %td
         = pricing.price
         cents
-      %td= link_to 'delete', admin_pricing_path(pricing), :method => :delete      
+      %td
+        = link_to 'edit', edit_admin_pricing_path(pricing)
+        |
+        = link_to 'delete', admin_pricing_path(pricing), :method => :delete
 
 = render 'form', :target => Pricing.new
 

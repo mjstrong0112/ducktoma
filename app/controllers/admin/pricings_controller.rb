@@ -4,6 +4,7 @@ class Admin::PricingsController < Admin::BaseController
   actions :index, :show, :new, :create, :destroy
 
   create! { admin_pricings_url }
+  update! { admin_pricings_url }
 
   protected
   def collection
