@@ -7,7 +7,10 @@
     %tr
       %td        
         = location.name
-      %td= link_to "Edit", edit_admin_location_url(location)
+      %td
+        = link_to "Edit", edit_admin_location_url(location)
+        |
+        = link_to "Delete", admin_location_url(location), :method => :delete
 
 %h3 Add a new location
 = render 'form', :target => Location.new
