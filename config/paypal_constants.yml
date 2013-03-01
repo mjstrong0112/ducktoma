@@ -15,6 +15,6 @@ test:
 production:
   email: 'treasurer@rrsertoma.org'
   secret: 'supersecret'
-  cert_id: 'A7VCJGYC5QDT2'
+  cert_id: 'EJVAVU5U8KU4C'
   cert_file: 'paypal_cert.pem'
   url: 'https://www.paypal.com/cgi-bin/webscr?'
