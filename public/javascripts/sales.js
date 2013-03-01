@@ -21,7 +21,11 @@ function calculateDuckCount(price) {
     if(pricing_rule) {
         calculated_ducks = Math.floor(cents_price/pricing_rule['price']);
         $('#ducks_adopted').val(calculated_ducks);
-        $('#amount_for_adoption').val(calculated_ducks*pricing_rule['price']/100);
+
+        raw_price = (calculated_ducks*pricing_rule['price']/100)
+        rounded_price = Math.round(raw_price*100)/100
+        $('#amount_for_adoption').val(rounded_price);
+        
         remainder = price-$('#amount_for_adoption').val();
         remainder = Math.round(remainder*Math.pow(10,2))/Math.pow(10,2);
         $('#cash_donation').val(remainder);
