@@ -1,15 +1,11 @@
 .bundle
 .idea
 .autotest
+*.DS_Store
 *~
 *.swp
 db/*.sqlite3
 log/*.log
 tmp/**/*
 public/stylesheets/compiled
-public/javascripts/.DS_Store
-public/images/.DS_Store
-app/views/adoptions/.DS_Store
-public/.DS_Store
-app/.DS_Store
 autotest-growl
