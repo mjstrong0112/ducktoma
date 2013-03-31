@@ -1,6 +1,7 @@
 .bundle
 .idea
 .autotest
+.DS_Store
 *~
 *.swp
 db/*.sqlite3
