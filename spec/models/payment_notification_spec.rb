@@ -1,13 +1,6 @@
 require 'spec_helper'
 
 describe PaymentNotification do
-  should_have_field :params, :type => Hash
-  should_have_field :status
-  should_have_field :transaction_id
-  should_have_field :state, :type => String  
-  
-  should_embed_one :payer_info
-  should_reference_one :adoption
 
   it "new payment notifications have a valid state" do
     pn = PaymentNotification.new

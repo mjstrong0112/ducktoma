@@ -6,6 +6,7 @@
   - else
     = link_to destroy_user_session_path do
       = image_tag "logout.png", :id => "logout", :alt => "Sign Out"
+
     - if current_user.admin?
       = link_to admin_root_path do
         = image_tag "admin.png", :alt => "Admin panel"

@@ -13,18 +13,16 @@ include ApplicationHelper
 #
 #   state:            Only used for PayPal adoptions, stores the stage
 #                     in the paypal payment process this adoption is in.
+class Adoption < ActiveRecord::Base
 
-class Adoption
-  include Mongoid::Document
-  include Mongoid::Timestamps
+  # TODO: Switch out all "adoption_number" references to "number"
+  # TODO: Switch out all "organization" references to "club"
+  # TODO: Switch out all "type" with "sales_type" (polymorphism clash)
+  attr_accessible :number, :fee, :dollar_fee, :sales_type, :duck_count, :adopter_info_attributes
 
-  # == fields ==
-  field :adoption_number
-  field :fee, :type => Integer
-  index :fee
-  field :type
+  # TODO: Longterm un-white-list these to protect us from mass-assignment.
+  attr_accessible :club_id, :sales_event_id, :user_id
 
-  #field :organization
   # State of - PayPal - adoption.
   # Can be the following values:
   #   New:            User hasn't confirmed purchase or gone to PayPal website.
@@ -36,62 +34,55 @@ class Adoption
   #                   no problems encountered.
   #
   #   Invalid:        Cancelled adoption.
-  field :state, :type => String, :default => "new"
-  index :state
-
-  # State machine has been disabled due to
-  # poor MongoDB support.
-
-  # state_machine :initial => :new do
-  #   event :confirm do
-  #     transition :new => :pending
-  #   end
-  #   event :invalidate do
-  #     transition :pending => :completed
-  #   end
-  #   event :complete do
-  #     transition :pending => :completed
-  #   end
-  #   event :cancel do
-  #     transition all - [:canceled] => :canceled
-  #   end
-  # end
+  attr_accessible :state
 
 
   # == associations ==
-  referenced_in :user
-  referenced_in :payment_notification
-  referenced_in :sales_event
-  references_many :ducks, :dependent => :destroy
-  # Booster club this adoption is associated to.
-  referenced_in :organization
-  embeds_one :adopter_info, :class_name => "ContactInfo"
+  has_many :ducks, :dependent => :destroy
+  belongs_to :user
+  belongs_to :payment_notification
+  belongs_to :sales_event
+  belongs_to :club, :class_name => "Organization"
+  has_one :adopter_info, :as => :contact, :class_name => "ContactInfo"
+
+  # TODO: Implement nested attributes for contact info.
   accepts_nested_attributes_for :adopter_info
 
-
   # == validations ===
-  validates_presence_of :ducks, :fee, :adoption_number
-  validates_associated :adopter_info
+  validates_presence_of :ducks, :fee, :number
   validates_numericality_of :fee, :only_integer => true
-  validates_uniqueness_of :adoption_number
+  validates_uniqueness_of :number
   validate :ducks_must_be_available, :on => :create
-  # validate :duck_count_must_correspond_to_fee, :on => :create
 
+  # TODO: Reimplement this validation? Fee hack was removed.
+  # -- validate :duck_count_must_correspond_to_fee, :on => :create
+
+  # TODO: Figure out what to do with this?
+  # Since this model is no longer embedded, it is no longer auto-created.
+  # -- validates_associated :adopter_info
 
   # == scopes ==
-  scope :valid, excludes(:state => "invalid")
+  scope :valid,   where("state != 'invalid'")
   scope :invalid, where(:state => "invalid")
-  scope :paid, not_in(:state => ["invalid", "pending"] )
-  scope :sales, where(:type => "sales").order_by([:adoption_number, :asc])
-
+  scope :paid,    where("state != 'invalid' AND state != 'pending'")
+  scope :sales,   where(:sales_type => "sales").order("number asc")
 
   # == hooks ==
   before_validation :save_duck_count, :save_fee, :create_adoption_number
   before_create :save_ducks
 
 
+  # simple alias.
+  def adoption_number; number; end
+  def type; sales_type; end
+  def type=(val); sales_type = val; end
+
   def full_name
     adopter_info.try(:full_name) || "None" 
+  end
+
+  def first_number
+    self.ducks.first.number
   end
 
   def duck_count= count  
@@ -103,7 +94,7 @@ class Adoption
   # Note: This performs a database query, so use with care as
   # it could potentially create N+1 queries if used recklessly.
   def duck_count
-    self.ducks.count
+    self.ducks.size
   end
 
   # Returns cents-fee in dollars.
@@ -116,11 +107,10 @@ class Adoption
     n_dollars = BigDecimal.new(dollars)
     self.fee = (n_dollars*100).to_i
   end
-
-
-  def calculate_fee
+  
+  def calculate_fee  
     # Sort pricings from greatest to smallest
-    pricings = Pricing.desc(:quantity).to_a
+    pricings = Pricing.order("quantity desc").to_a
     
     # If no pricings exist, use default price of 50.
     return duck_count * 50 if pricings.count == 0
@@ -138,9 +128,9 @@ class Adoption
     # Alas, calculate the price.
     duck_count * pricing.price
   end
-
+  
   def ducks_available?
-    (duck_count + Duck.valid_count) <= Settings[:duck_inventory]
+    (duck_count + Duck.valid_count) <= Settings[:duck_inventory].to_i
   end
 
   # = Paypal encryption as defined by Ryan Bates from Railscasts.
@@ -200,15 +190,15 @@ class Adoption
 
     # Don't want to override a perfectly
     # good adoption_number if the number is already set.
-    return nil if self.adoption_number.present?
+    return nil if self.number.present?
 
     # Generate unique number.
     record = true
     while record
       random = "T#{Array.new(6){rand(6)}.join}"
-      record = Adoption.where(:adoption_number => random).exists?
+      record = Adoption.where(:number => random).exists?
     end
-    self.adoption_number = random
+    self.number = random
   end
 
   def save_ducks

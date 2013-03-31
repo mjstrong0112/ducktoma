@@ -1,22 +1,22 @@
 require 'spec_helper'
 
 describe Duck do
-  should_have_field :number, :type => Integer
-  should_be_referenced_in :adoption
 
   context "when persisted" do
     # Force setting number to nil to test validate_presence_of
     subject { Duck.create.tap{|d| d.write_attribute(:number, nil)} }
-    it { should validate_presence_of :number }
   end
+
   it "can save default fabricator ducks" do
     ducks = (1..20).collect{Fabricate.build(:duck)}
     lambda{ ducks.each{|a| a.save!} }.should_not raise_error
   end
+
   it "generates a unique number" do
     ducks = (1..200).collect{Duck.create}
     ducks.map{|d| d.number}.uniq!.should be_nil
   end
+  
   it "generates a number on create" do
     duck = Duck.new
     duck.save
@@ -24,14 +24,15 @@ describe Duck do
   end
 
   it "does not count invalid ducks for available?" do
-    Settings[:duck_inventory] = 90
+    Settings.instance.update_attributes(:duck_inventory => 90)
+
     Fabricate(:adoption, :state => :invalid, :duck_count => 20)
     Fabricate(:adoption, :type => :std, :duck_count => 3)
     # Make sure ducks and adoptions were actually created.
     Duck.count.should == 23
     Adoption.count.should == 2
 
-    Settings[:duck_inventory] = 5
+    Settings.instance.update_attributes(:duck_inventory => 5)
     
     # Even though there are 23 ducks in the database,
     # and only 5 in the inventory (after the inventory change),
@@ -41,7 +42,8 @@ describe Duck do
   end
 
   it "does count pending ducks for available?" do
-    Settings[:duck_inventory] = 90
+    Settings.instance.update_attributes(:duck_inventory => 90)
+
     Fabricate(:adoption, :duck_count => 15, :state => "pending")
     Fabricate(:adoption, :duck_count => 3)
 
@@ -49,7 +51,7 @@ describe Duck do
     Duck.count.should == 18
     Adoption.count.should == 2
 
-    Settings[:duck_inventory] = 18
+    Settings.instance.update_attributes(:duck_inventory => 18)
     
     Duck.should_not be_available
   end

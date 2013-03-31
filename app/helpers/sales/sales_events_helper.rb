@@ -1,4 +1,5 @@
 module Sales::SalesEventsHelper
+
   def adoption_row adoption
     adoption.user == current_user ? klass = 'blue_highlight' : klass = ''
     fields = [adoption.user.email,
@@ -13,4 +14,11 @@ module Sales::SalesEventsHelper
       )
     }
   end
+
+
+  # TODO: Remove duplication (exists in sales/adoptions controller)
+  def parent?
+    params[:sales_event_id] # || params[:sales_event]
+  end
+
 end

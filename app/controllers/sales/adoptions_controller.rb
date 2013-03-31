@@ -1,53 +1,67 @@
 class Sales::AdoptionsController < Sales::BaseController
-  inherit_resources
-  actions :all
   load_and_authorize_resource
-  belongs_to :sales_event, :optional => :true
+  #belongs_to :sales_event, :optional => :true
 
   def index
-    @adoptions = current_user.adoptions.sales
-                  .paginate(:page => params[:page] ||= 1, :per_page => 20)
+    @adoptions = current_user.adoptions.sales.paginate(:page => params[:page] ||= 1, :per_page => 20)
   end
 
-  #def show
-  #  @adoption = Adoption.find(params[:id])
-  #  authorize! :show, @adoption
-  #end
+  def new
+    @sales_event = SalesEvent.find(params[:sales_event_id]) if params[:sales_event_id]
+    @adoption = Adoption.new
+  end
+
+
+  def show    
+    @adoption = Adoption.find params[:id]
+  end
 
   def edit    
-    edit!
-    #@adoption = Adoption.find(params[:id])
+    @adoption = Adoption.find params[:id]
   end
 
   def update
-    @adoption = Adoption.find(params[:id])
+    @adoption = Adoption.find params[:id]
+    if @adoption.update_attributes params[:adoption]
+      redirect_to sales_adoptions_url, :notice => "Adoption updated successfully!"
+    else
+      render 'edit'
+    end
   end
 
   def create
-    unless parent?
-      @adoption = Adoption.new(params[:adoption])
-      @adoption.type = :sales
-      @adoption.user = current_user if current_user
-      create! { new_sales_adoption_url }
-    else    
+    if parent?
       @sales_event = SalesEvent.find(params[:sales_event_id])
-
+      @adoption = @sales_event.adoptions.build params[:adoption]
+    else
       @adoption = Adoption.new(params[:adoption])
-      @adoption.type = :sales
-      @adoption.user = current_user if current_user
+    end
 
-      @sales_event.adoptions.build(@adoption)
-      
-      create! { new_sales_sales_event_adoption_url }
-    end    
+    @adoption.sales_type = :sales
+    @adoption.user = current_user if current_user
+    
+    if @adoption.save
+      redirect_to new_sales_sales_event_adoption_url, :notice => "Adoption created successfully!"
+    else
+      render 'new'
+    end
   end
 
-  update! { sales_adoptions_url }
+  def destroy
+    @adoption = Adoption.find params[:id]
+    if @adoption.destroy
+      redirect_to admin_locations_url, :notice => "Adoption destroyed successfullly!"
+    else
+      redirect_to admin_locations_url, :alert => "Could not destroy adoption."
+    end
+  end
 
-  protected
-  #def begin_of_association_chain
-  #  parent? ? parent : current_user
-  #end
+protected
+  
+  def parent?
+    params[:sales_event_id] # || params[:sales_event]
+  end
+
   def collection
     @adoptions ||= end_of_association_chain.where(:type => "sales").paginate(:page => params[:page] || 1)
   end

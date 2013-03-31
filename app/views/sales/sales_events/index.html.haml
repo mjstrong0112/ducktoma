@@ -7,8 +7,8 @@
     %th Actions
   - @sales_events.each do |sales_event|
     %tr
-      %td= sales_event.organization
-      %td= sales_event.location
+      %td= sales_event.organization.try(:name)
+      %td= sales_event.location.try(:name)
       %td.date= sales_event.date
       %td= sales_event.adoptions.count
       %td

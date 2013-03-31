@@ -1,0 +1,62 @@
+//global variables and styles
+$main-width: 648px;
+$sidebar-width: 162px;
+$main-height: 540px;
+$header-height: 59px;
+$footer-height: 237px;
+$form-width: 630px;
+$title-family: Myriad Pro, Arial, Helvetica, sans-serif;
+
+@mixin rounded-border($radius) {
+    -moz-border-radius: $radius;
+    -webkit-border-radius: $radius;
+    border-radius: $radius;
+}
+@mixin box-shadow($radius) {
+  box-shadow: 0px 0px 9px 1px;
+  -moz-box-shadow: 0px 0px #{$radius} rgba(0,0,0,.3);
+  -webkit-box-shadow: 0px 0px #{$radius} rgba(0,0,0,.3);
+}
+
+
+@mixin linear-gradient($stop1, $stop2) {
+   /* fallback/image non-cover color */
+   background-color: $stop1;
+
+   /* Firefox 3.6+ */
+   background-image: -moz-linear-gradient($stop1, $stop2);
+
+   /* Safari 4+, Chrome 1+ */
+   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($stop1), to($stop2));
+
+   /* Safari 5.1+, Chrome 10+ */
+   background-image: -webkit-linear-gradient($stop1, $stop2);
+
+   /* Opera 11.10+ */
+   background-image: -o-linear-gradient($stop1, $stop2);
+}
+
+// combines line-height and width for a vertically centered box
+@mixin vbox($height) {
+    height: $height;
+    line-height: $height;
+}
+
+input[disabled='disabled'] {
+  background-color: #cccccc;
+}
+input:focus, select:focus {
+   background-color: lightyellow;
+}
+select { border-color: #cccccc; padding: 2px 2px;  }
+.alert {
+    h2 { font-size: 20px; color: #8A362C; }
+    ul { margin-bottom: 0px; }
+}
+
+// CSS helper styles
+.break, .clear { clear: both; height: 0px;}
+.center { text-align: center; }
+.left { float: left; }
+.right { float: right; }
+.hide { display: none; }

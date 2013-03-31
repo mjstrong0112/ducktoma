@@ -1,13 +1,15 @@
-class Organization
-  include Mongoid::Document
+class Organization < ActiveRecord::Base
 
-  field :name
-  references_many :adoptions
+  attr_accessible :name
 
-  validates :name, :presence => true
+  # == assocations ==
+  has_many :adoptions
+  has_many :sales_events
+  
+  validates_presence_of :name
 
   def self.to_collection
-    Organization.all(:sort => :name).map(&:name)
+    Organization.order(:name).all.map { |o| [o.name, o.id] }
   end
-  
+
 end

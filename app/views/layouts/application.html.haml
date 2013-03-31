@@ -2,8 +2,12 @@
 %html
   %head
     %title Ducktoma
-    = render 'shared/head'
-  %body
+    = csrf_meta_tag
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = yield :javascripts
+
+  %body{'data-controller' => controller_name, 'data-action' => action_name}
     /#distance    
     .wrapper
       %canvas(id="example" width="0" height="500" style="position: absolute;")
@@ -13,25 +17,6 @@
 
         #sidebar-left
           &nbsp;
-          -# 
-            = link_to 'http://www.usmoneyreserve.com/', :target => "_blank" do
-              = image_tag "bullionlogo.png", :id => "bullion-logo", :alt => "Bullion Gold Reserves"
-
-            = link_to 'http://www.heb.com/', :target => "_blank" do
-              = image_tag "heblogo.png", :id => "heb-logo", :alt => "HEB"
-
-            = link_to 'http://www.brathinc.com/', :target => "_blank" do
-              = image_tag "brath.png", :id => "brath-logo", :alt => "Brath"
-
-            = link_to 'http://www.etherpros.com/', :target => "_blank" do
-              = image_tag "etherpros.png", :id => "etherpros-logo", :alt => "Etherpros"
-
-            = link_to 'http://henna.com/', :target => "_blank" do
-              = image_tag "henna.png", :id => "maxwell-logo", :alt => "Henna Automobiles"
-
-            = link_to 'http://www.limetexas.org/', :target => "_blank" do
-              = image_tag "whitelime.png", :id => "maxwell-logo", :alt => "White Lime"
-
 
         #main
           .clearfix
@@ -46,30 +31,13 @@
 
             = yield
             
-            #navlinks
-              = yield :navlinks
+            #navlinks= yield :navlinks
 
         #sidebar
           &nbsp;
-          -#
-            = link_to 'http://www.bestbuy.com/', :target => "_blank" do
-              = image_tag "bestbuy.png", :id => "bestbuy-logo", :alt => "HEB"
-
-            = link_to 'http://www.cort.com/', :target => "_blank" do
-              = image_tag "titlesponsor.png", :id => "jman-logo", :alt => "Cort"
-
-            = link_to 'http://www.wellsfargo.com/', :target => "_blank" do
-              = image_tag "wellsfargo.png", :id => "wellsfargo-logo", :alt => "Wells Fargo"
-
-            = link_to 'http://www.wrightdist.com/', :target => "_blank" do
-              = image_tag "wright.png", :id => "wright-logo", :alt => "Wright"
-
-            = link_to 'http://texsystemscabling.com/', :target => "_blank" do
-              = image_tag "tex.png", :id => "maxwell-logo", :alt => "Tex Cooling Systems"            
-
+            
         .clear &nbsp;
       #push.push
     = render 'shared/footer'
-    = render 'shared/javascripts'
     = yield :javascript
     

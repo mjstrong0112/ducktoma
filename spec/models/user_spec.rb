@@ -2,42 +2,38 @@ require 'spec_helper'
 
 describe User do
 
-  should_validate_presence_of :email
-  should_validate_uniqueness_of :email
-  should_validate_confirmation_of :password
-
-  should_reference_many :adoptions
-
   before(:all) do
     @basic_user = User.new
   end
+
   it "should save successfully with password" do
-    user = User.new(:email => "test@test.com", :password => "testing")
+    user = User.new(:email => "test@test.com", :password => "testing123")
     lambda{user.save!}.should_not raise_error
     User.count.should == 1
     first = User.first
     first.id.should == user.id
     first.should_not be_a_valid_password("notright")
-    first.should be_a_valid_password("testing")
+    first.should be_a_valid_password("testing123")
   end
+
   it "should save default fabricator user" do
     user = Fabricate.build(:user)
     lambda{ user.save! }.should_not raise_error
     user.adoptions.should_not be_blank
   end
-  it "can have roles" do
-    @basic_user.should have(0).roles
-  end
+
   it "can be an admin" do
-    @basic_user.add_role :admin
-    @basic_user.should be_an_admin
-    @basic_user.should have_role :admin
-    @basic_user.roles.should == [:admin]
+    @basic_user.role = :admin
+    @basic_user.is?(:admin).should be_true
+    @basic_user.is?(:sales).should be_true
   end
+
   it "can be a sales associate" do
-    @basic_user.add_role :sales
-    @basic_user.should have_role :sales
+    @basic_user.role = :sales
+    @basic_user.is?(:admin).should_not be_true
+    @basic_user.is?(:sales).should be_true
   end
+
 #  it "could be an admin user" do
 #    @basic_user.respond_to?(:admin?).should be true
 #  end

@@ -1,1 +1,1 @@
-PAYPAL = YAML.load_file("#{RAILS_ROOT}/config/paypal_constants.yml")[RAILS_ENV]
+PAYPAL = YAML.load_file("#{Rails.root}/config/paypal_constants.yml")[Rails.env]

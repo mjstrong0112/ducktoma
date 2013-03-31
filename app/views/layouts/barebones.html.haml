@@ -2,7 +2,7 @@
 %html
   %head
     %title Ducktoma
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
   %body
-    = yield
-    = google_jquery :version => '1.4.4', :ssl => request.ssl?
+    = yield    
     = yield :javascripts

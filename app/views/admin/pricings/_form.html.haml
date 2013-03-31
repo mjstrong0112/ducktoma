@@ -1,8 +1,8 @@
 .price-form
   = simple_form_for [:admin, target] do |f|
-    .left= f.input :price, :label => false
+    .left= f.input :price, :label => false, :as => :string
     .left(style="padding: 10px;") cents when more than
-    .left= f.input :quantity, :label => false
+    .left= f.input :quantity, :label => false, :as => :string
     .left(style="padding: 10px;") ducks
     .clear &nbsp;
     = f.submit

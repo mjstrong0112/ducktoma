@@ -1,5 +1,5 @@
 %h1 View Sales
-%h2= @sales_event.organization + " / " + @sales_event.location
+%h2= @sales_event.organization.try(:name).to_s + " / " + @sales_event.location.try(:name).to_s
 %table
   %tr
     %th Contributor

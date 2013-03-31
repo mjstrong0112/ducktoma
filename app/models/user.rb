@@ -1,53 +1,49 @@
-use_roles_strategy :role_strings
+class User < ActiveRecord::Base
 
-class User
-  include Mongoid::Document
-  include Roles::Mongoid
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  references_many :adoptions
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :role
 
-  strategy :role_strings, :default
+  # == associations ==
+  has_many :adoptions
+  has_many :sales_events, :through => :adoptions
 
-  roles :admin, :sales
+
+  def admin?
+    role.to_s == "admin"
+  end
+
+  def sales?
+    role.to_s == "sales"
+  end
+
+  def is? is_role
+    return false if role.nil?
+    # Admins automatically have all roles.
+    return true if admin?
+    return true if role.to_sym == is_role
+  end
 
   def duck_count
-    d_count = 0
-    adoptions.all.each do |adoption|
-      d_count += adoption.duck_count
-    end
-    d_count
+    adoptions.joins(:ducks).select("SUM(ducks.id) as duck_count").sum(&:duck_count)
   end
 
   def fee
-    f_count = 0
-    adoptions.all.each do |adoption|
-      f_count += adoption.fee
-    end
-    f_count
-  end
-
-  def adoptions_f(type)
-    unless type
-      adoptions
-    else
-      adoptions.where(:type => type)
-    end
+    adoptions.sum(&:fee)
   end
 
   def sales_adoptions
     adoptions_f :sales
   end
 
-  def sales_events
-    ids = adoptions.map{|a| a.sales_event_id}.compact
-    unless ids.blank?
-      SalesEvent.find(ids)
+  def adoptions_f(type)
+    unless type
+      adoptions
     else
-      {}
+      adoptions.where(:sales_type => type)
     end
   end
+
+
 end

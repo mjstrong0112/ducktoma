@@ -1,10 +1,5 @@
 %h1 New User
-= simple_form_for [:admin, @user] do |f|
-  = f.input :email
-  = f.input :password
-  = f.input :password_confirmation
-  = f.collection_check_boxes :roles, [[:admin, 'Admin'] ,[:sales, 'Sales']], :first, :last
-  = f.submit 'Submit'
+= render 'form', :user => @user
 
 %br/
 %br/

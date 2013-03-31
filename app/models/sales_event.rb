@@ -1,18 +1,13 @@
-class SalesEvent
-  include Mongoid::Document
+class SalesEvent < ActiveRecord::Base
 
-  references_many :adoptions, :dependent => :destroy
+  attr_accessible :date 
+  # TODO: Long term remove this to prevent mass-assignment vulnerability.
+  attr_accessible :location_id, :organization_id
 
-  field :location
-  field :organization
-  field :date, :type => String
+  has_many :adoptions
+  has_many :creators, :through => :adoptions, :class_name => "User"
 
-  def creators
-    ids = adoptions.map{|a| a.user_id}.compact
-    unless ids.blank?
-      User.find(ids)
-    else
-      {}
-    end
-  end
+  belongs_to :location
+  belongs_to :organization
+
 end

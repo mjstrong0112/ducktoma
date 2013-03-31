@@ -1,101 +1,32 @@
-source 'http://rubygems.org'
-gem 'rack-contrib', :require => 'rack/contrib'
-gem 'rails', '3.0.3'
-gem 'rack', '1.2.1'
-gem 'rake', '0.8.7'
+source 'https://rubygems.org'
 
-# Core Ext
-gem 'andand', :git => "git://github.com/raganwald/andand.git"
-
-# UI
+gem 'rails', '3.2.13'
+gem 'sqlite3'
+gem 'devise'
+gem 'cancan'
 gem 'haml'
-gem 'simple_form', '~> 1.3.0'
-gem 'compass', '~> 0.10.6'
-
-#Form gems
+gem "haml-rails"
+gem 'bourbon'
+gem 'simple_form'
+gem 'pry'
+gem 'will_paginate', '~> 3.0'
 gem 'carmen'
+gem 'letter_opener'
+gem 'acts_as_singleton'
 
-# Temp gems
-gem 'placeholder', '~> 0.0.6'
-
-# Controller
-gem 'inherited_resources', '~> 1.1.2'
-
-# Auth
-gem 'devise', '~> 1.1.5'
-gem 'cancan', '~> 1.4.1'
-#gem 'cancan-permits', '~> 0.3.6'
-gem 'roles_generic', '~> 0.3.3'
-gem 'roles_mongoid', '~> 0.3.4'
-#gem 'cream', '~> 0.8.0'
-
-# Model
-gem 'state_machine', '~> 0.9.4'
-gem 'state_machine-mongoid', '~> 0.1.5'
-
-# DB
-gem 'mongoid', '~> 2.0.0.beta.20'
-# Bson and bson_ext have to be the same version
-gem 'bson', '~> 1.1.4'
-gem 'bson_ext', '~> 1.1.4'
-
-gem "will_paginate"
-# gem 'kaminari'
-#gem 'rb-fsevent', ' ~> 0.4.0'
-
-# Analytics, Exception Handling, Production
-gem 'newrelic_rpm'
-gem 'hoptoad_notifier'
-
-# Test gems without generators
-group :test do
-  gem 'rr', '~> 1.0.2'
-  gem 'capybara', '~> 0.4.0'
-  gem 'launchy', '~> 0.3.7'
-  gem 'webrat', '~> 0.7.2', :require => nil
-  gem 'azebiki', '~> 0.0.2', :require => nil
-  gem 'forgery', '~> 0.3.6'
-  gem 'database_cleaner', '~> 0.6.0'
-  gem 'remarkable_activemodel', '~> 4.0.0.alpha4', :require => nil
-  gem 'remarkable_mongoid', '~> 0.5.0', :require => nil
-  #gem 'mongoid-rspec', '~> 1.2.1'
-  #gem 'webmock', '~> 1.3.5'
-  gem 'timecop', '~> 0.3.5'
-  gem 'test_notifier', '~> 0.3.6'
-  gem 'autotest', '~> 4.4.5'
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '>= 1.0.3'
 end
 
-# Test gems with generators (available in dev env)
-group :development, :test do
-  # Test notifiers
-  gem 'guard-livereload'
-
-  gem 'rspec-core', '~> 2.3.1'
-  gem 'rspec-expectations', '~> 2.3.0'
-  gem 'rspec-rails', '~> 2.3.1'
-  gem 'steak', '>= 1.0.0.rc.4'
-  gem 'spork', '>= 0.9.0.rc2'
+group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+  gem 'fabrication'
+  gem 'database_cleaner'
+  gem 'forgery', '0.5.0'
 end
 
-# Special gems that get reloaded by spork on each run ( no auto require ) (Microoptimization)
-gem 'fabrication', '~> 0.9.0', :require => nil, :group => :test
-gem 'fabrication', '~> 0.9.0', :group => :development
-
-group :development do
-  # UI
-  gem 'flutie', '~> 1.1.2'
-
-  # Servers
-  #gem 'mongrel', '>= 1.2.0.pre2'
-  gem 'thin', '~> 1.2.7'
-  #gem 'unicorn'
-
-  # Utilities
-  gem 'rails3-generators', '~> 0.14.0'
-end
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-# Deploy with Capistrano
-# gem 'capistrano'
+gem 'jquery-rails'

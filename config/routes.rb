@@ -1,9 +1,21 @@
 Ducktoma::Application.routes.draw do
-  devise_for :users, :path => 'accounts'
 
-  get "home/index"
-
+  devise_for :users
   root :to => "adoptions#new"
+
+  resources :adoptions, :except => :show
+  get '/adoptions/:id' => 'adoptions#show', :as => :adoption, :constraints => { :id => /[^\D]+/ }
+  get '/adoptions/:adoption_number' => 'adoptions#show', :as => :adoption
+  match 'adoptions/number/:adoption_number' => 'adoptions#show'
+  resources :payment_notifications
+
+  # -----------------
+  # Facebook Omniauth
+  # -----------------
+  match 'auth/:provider/callback', to: 'sessions#create'
+  match 'auth/failure', to: redirect('/')
+  match 'signout', to: 'sessions#destroy', as: 'signout'
+
 
   resources :users do
     resources :adoptions
@@ -55,22 +67,12 @@ Ducktoma::Application.routes.draw do
     # Redirect admin show to standard show.
     match "/adoptions/:id" => redirect("/adoptions/%{id}")
 
-    resources :sales_events do
-      match :index, :show
+    resources :sales_events, :only => [:index, :show] do
       member do
         match 'move'
         match 'reassign'
       end
     end
   end
-  
-  resources :adoptions, :except => :show
-  get '/adoptions/:id' => 'adoptions#show', :as => :adoption, :constraints => { :id => /\w{24}/ }
-  get '/adoptions/:adoption_number' => 'adoptions#show', :as => :adoption
 
-  resources :payment_notifications
-
-
-
-  match 'adoptions/number/:adoption_number' => 'adoptions#show'
 end

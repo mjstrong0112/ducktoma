@@ -9,7 +9,7 @@
   - @orphans.each do |orphan|
     %tr
       %td= null_literal(orphan.invoice)
-      %td= null_literal(orphan.payer_info.email)
+      %td= null_literal(orphan.payer_info.try(:email))
       %td= null_literal(orphan.params['payment_gross'])
       %td= orphan.created_at.to_s.to_date
       %td #{ link_to 'details', admin_payment_notification_url(orphan)} | #{ link_to 'delete', admin_payment_notification_url(orphan), :method => :delete}
@@ -25,7 +25,7 @@
   - @unauthorized.each do |unauthorized|
     %tr
       %td= null_literal(unauthorized.invoice)
-      %td= null_literal(unauthorized.payer_info.email)
+      %td= null_literal(unauthorized.payer_info.try(:email))
       %td= null_literal(unauthorized.params['payment_gross'])
       %td= unauthorized.created_at.to_s.to_date
       %td #{ link_to 'details', admin_payment_notification_url(unauthorized)} | #{ link_to 'delete', admin_payment_notification_url(unauthorized), :method => :delete}

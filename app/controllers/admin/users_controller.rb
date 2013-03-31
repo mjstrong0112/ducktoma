@@ -1,21 +1,41 @@
 class Admin::UsersController < Admin::BaseController
-  inherit_resources
   load_and_authorize_resource
-  actions :index, :new, :create, :edit, :update, :destroy, :show
-  #before_filter :authenticate_user!, :only => :index
+
+  def index
+    @users = User.paginate(:page => params[:page] ||= 1)
+  end
+
   def show
     @user = User.find(params[:id])
     @adoptions = @user.adoptions.paginate(:page => params[:page] ||= 1, :per_page => 20)
   end
-  def index
-    @users = User.paginate(:page => params[:page] ||= 1)
+
+  def new
+    @user = User.new
   end
-  create! { admin_users_path }
+
+  def create
+    @user = User.new params[:user]
+    if @user.save
+      redirect_to admin_users_path, :notice => "User created successfully!"
+    else
+      render 'new'
+    end
+  end
+
+  def edit
+    @user = User.find params[:id]
+  end
+  
   def update
     user_params = params[:user]
-    user_params[:password] = user_params[:password_confirmation] = nil if user_params[:password].blank? &&
+    user_params[:password] = user_params[:password_confirmation] = nil if user_params[:password].blank? &&                                
                                                                           user_params[:password_confirmation].blank?
-    update! { admin_users_path }
+    @user = User.find params[:id]
+    if @user.update_attributes user_params
+      redirect_to admin_users_path, :notice => "User created successfully!"      
+    else
+      render 'edit'
+    end
   end
 end
-

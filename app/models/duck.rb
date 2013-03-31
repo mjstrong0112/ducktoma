@@ -1,11 +1,9 @@
-class Duck
-  include Mongoid::Document
+class Duck < ActiveRecord::Base
 
-  # == fields ==
-  field :number, :type => Integer
+  attr_accessible :number, :adoption
 
   # == associations ==
-  referenced_in :adoption
+  belongs_to :adoption
 
   # == validations ==
   validates_presence_of :number, :if => :persisted?
@@ -18,18 +16,16 @@ class Duck
   end
 
   def generate_number
-    last_duck_number = Duck.max(:number)
+    last_duck_number = Duck.maximum(:number)
     self.number = last_duck_number ? (last_duck_number + 1) : 1
   end
 
-  def self.available?    
-    self.valid_count < Settings[:duck_inventory]
+  def self.available?
+    self.valid_count < Settings[:duck_inventory].to_i
   end
 
   # Returns number of ducks that correspond to valid adoptions.
   def self.valid_count
-    all_ids = Adoption.valid.only(:id).map(&:id)
-    Duck.where(:adoption_id.in => all_ids).count
+    Duck.joins(:adoption).where("adoptions.state != 'invalid'").count
   end
-
 end

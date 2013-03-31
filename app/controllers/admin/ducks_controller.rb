@@ -3,11 +3,12 @@ class Admin::DucksController < ApplicationController
 
   def show
     @duck = Duck.where(:number => params[:number]).first
-    raise Mongoid::Errors::DocumentNotFound.new(Duck, params[:number]) if @duck.nil?
-    @adoption = @duck.adoption
-  rescue Mongoid::Errors::DocumentNotFound
-    flash[:alert] = "Duck " + params[:number] + " could not be found"
-    redirect_to admin_root_url
+    if @duck
+      @adoption = @duck.adoption
+    else
+      flash[:alert] = "Duck " + params[:number] + " could not be found"
+     redirect_to admin_root_url      
+    end
   end
 
   # Regenerates duck numbers.

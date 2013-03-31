@@ -1,59 +1,34 @@
-class Admin::AdoptionsController < Admin::BaseController
-  inherit_resources
-  actions :index
+class Admin::AdoptionsController < Admin::BaseController    
   load_and_authorize_resource :only => [:index]
 
   def index
-    all_ids = Adoption.paid.only(:id).map(&:id)
-    @total_donations = Adoption.paid.sum(:fee)
-    @total_ducks = Duck.where(:adoption_id.in => all_ids).count
-    @adoptions = Adoption.valid.paginate(:page => params[:page] ||= 1, :per_page => 20)
+    @total_donations = Adoption.paid.select(&:fee).sum(&:fee)
+    @total_ducks = Adoption.paid.joins(:ducks).count
+    @adoptions = Adoption.valid.order("created_at asc").paginate(:page => params[:page] ||= 1, :per_page => 20)
   end
 
   require 'csv'
   def export_by_adoption_number
-    all_ducks = Duck.all.only([:adoption_id, :number]).order_by([:number, :asc]).group_by(&:adoption_id)
-    csv_string = CSV.generate do |csv|
-      # Headers
-      csv << ['Adoption Number', 'Duck count','Fee', 'First Duck']
-      Adoption.paid.only([:id, :adoption_number, :fee]).order_by([:adoption_number, :asc]).each do |adoption|
-        values = [adoption.adoption_number, all_ducks[adoption.id].count, "$" + adoption.dollar_fee.to_s, all_ducks[adoption.id][0].number]
-        csv << values
-      end
-    end
-
+    headers = ['Adoption Number', 'Duck count','Fee', 'First Duck']
+    csv_string = to_csv headers, :number do |a, csv|
+                   csv << [a.number, a.duck_count, "$" + a.dollar_fee.to_s, a.first_number]   
+                 end
     send_data csv_string, :type => "text/plain", :filename => "report.csv", :disposition => 'attachment'
   end
 
   def export_by_name
-    all_ducks = Duck.all.only([:adoption_id, :number]).order_by([:number, :asc]).group_by(&:adoption_id)
-    csv_string = CSV.generate do |csv|
-      adoptions = Adoption.paid.only([:id, :adoption_number, :adopter_info]).to_a.sort!{|a,b| a.full_name <=> b.full_name }
-      # Headers
-      csv << ['Name','Adoption Number', 'First Duck', 'Duck count']
-      adoptions.each do |adoption|
-        values = [adoption.full_name, adoption.adoption_number, all_ducks[adoption.id][0].number, all_ducks[adoption.id].count]
-        csv << values
-      end
-    end
-
+    headers = ['Name','Adoption Number', 'First Duck', 'Duck count']
+    csv_string = to_csv headers, :full_name do |a, csv|
+                   csv << [a.full_name, a.adoption_number, a.first_number, a.duck_count]
+                 end
     send_data csv_string, :type => "text/plain", :filename => "report.csv", :disposition => 'attachment'
   end
 
   def export_by_duck_number
-    all_ducks = Duck.all.only([:adoption_id, :number]).order_by([:number, :asc]).group_by(&:adoption_id)
-    csv_string = CSV.generate do |csv|
-      # Headers
-      csv << ['Duck Number', 'Full Name', 'Adoption Number']
-      Adoption.paid.only(:id, :adoption_number, :adopter_info).order_by([:adoption_number, :asc]).each do |adoption|
-        all_ducks[adoption.id].each do |duck|
-          values = [duck.number, adoption.adopter_info.try(:full_name), adoption.adoption_number]
-          csv << values
-        end
-
-      end
-    end
-
+    headers = ['Duck Number', 'Full Name', 'Adoption Number']
+    csv_string = to_csv headers, :number do |a, csv|
+                   a.ducks.each { |d| csv << [d.number, a.full_name, a.number] }
+                 end
     send_data csv_string, :type => "text/plain", :filename => "report.csv", :disposition => 'attachment'
   end
 
@@ -82,6 +57,17 @@ class Admin::AdoptionsController < Admin::BaseController
   end
 
   private
+
+  def to_csv headers, sort, &block
+    csv_string = CSV.generate do |csv|
+      # Headers
+      csv << headers
+      Adoption.valid.includes(:ducks).order(sort).each { |a| 
+        yield(a, csv)
+      }
+    end
+  end
+
   def get_duplicates
     # Find all adoption numbers that are duplicated in the db.
     duplicate_numbers = duplicates Adoption.only(:adoption_number).map(&:adoption_number)

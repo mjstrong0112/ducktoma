@@ -36,7 +36,7 @@
   :javascript
     sales_event_id = "#{@sales_event.id}"
     $(document).ready(function() {
-      $('#move_btn').click(function() {
+      $('#move_btn').click(function() {        
         $('#adoption_numbers').val(getCheckedIDs());
         return true;
       })
@@ -47,7 +47,7 @@
     function getCheckedIDs() {
       ids = []
       $('.select').each(function() {
-        if($(this).attr('checked')) {
+        if($(this).is(':checked')) {
          ids.push( $(this).val() );
         }
       });

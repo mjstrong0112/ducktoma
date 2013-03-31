@@ -10,4 +10,5 @@
 
 - content_for :javascripts do
   = render 'shared/pricingjs'
-  = javascript_include_tag 'sales'
+  :javascript
+    initSales();

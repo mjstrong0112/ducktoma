@@ -1,13 +1,13 @@
-class Admin::SettingsController < Admin::BaseController
-  inherit_resources
-  load_and_authorize_resource
-  actions :edit, :update
-  defaults :class_name => "Settings", :instance_name => "settings"
+class Admin::SettingsController < Admin::BaseController  
 
-  update! { edit_admin_settings_url }
-
-  protected
-  def resource
-    @settings ||= Settings.instance
+  def edit
+    authorize! :edit, Settings
+    @settings = Settings.instance
   end
+
+  def update
+    Settings.instance.update_attributes params[:settings]
+    redirect_to admin_root_url, :notice => "Settings updated succesfully."
+  end
+
 end

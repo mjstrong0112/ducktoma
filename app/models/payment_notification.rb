@@ -19,16 +19,11 @@
 #=                    as completed, and store the contact_info received from IPN
 #=                    into the associated adoption.
 
-class PaymentNotification
-  include Mongoid::Document
-  include Mongoid::Timestamps
+class PaymentNotification < ActiveRecord::Base
 
   # == fields ==
   # Paypal values
-  field :params, :type => Hash
-  field :transaction_id
-  field :invoice
-  field :status
+  attr_accessible :transaction_id, :invoice, :status, :params
 
   # State of IPN notification. Not to be confused with 'status' above.
   # since 'status' is simply the status value received from the IPN,
@@ -45,52 +40,35 @@ class PaymentNotification
   #                   Usually if the adoption associated to this payment
   #                   though its invoice number couldn't be found, the IPN
   #                   will be marked as an orphan.
-  field :state, :type => String, :default => "new"
+  attr_accessible :state
 
-
-  # State machine disabled due to its
-  # poor MongoDB support.
-
-  # state_machine :initial => :new do
-  #   event :orphan do
-  #     transition :new => :orphan
-  #   end
-  #   event :failed do
-  #     transition :new => :failed
-  #   end
-  #  event :unauthorized do
-  #     transition :new => :unauthorized
-  #   end
-  #   event :completed do
-  #     transition :new => :completed
-  #   end
-  # end  
-
+  serialize :params
 
   # == associations ==
-  references_one :adoption
-  embeds_one :payer_info, :class_name => "ContactInfo"
+  has_one :adoption
+  has_one :payer_info, :as => :contact, :class_name => "ContactInfo"
 
 
   # == scopes ==
   scope :unauthorized, where(:state =>'unauthorized')
-  scope :orphans, where(:state => 'orphan')
-  scope :completed, where(:state =>'completed')
+  scope :orphans,      where(:state => 'orphan')
+  scope :completed,    where(:state =>'completed')
 
   # == hooks ==
   after_create :mark
 
+
   # Converts IPN value hash into ContactInfo object.
   def payer_info_params= params
     info = ContactInfo.new
-    info.email = params[:payer_email] if params[:payer_email]
+    info.email = params[:payer_email]      if params[:payer_email]
     info.full_name = params[:first_name] + ' ' + params[:last_name] if params[:first_name] && params[:last_name]
-    info.phone = params[:contact_phone] if params[:contact_phone]
-    info.city = params[:address_city] if params[:address_city]
-    info.state = params[:address_state] if params[:address_state]
+    info.phone = params[:contact_phone]    if params[:contact_phone]
+    info.city = params[:address_city]      if params[:address_city]
+    info.state = params[:address_state]    if params[:address_state]
     info.address = params[:address_street] if params[:address_street]
-    info.zip = params[:address_zip].to_i if params[:address_zip]
-    self.payer_info = info    
+    info.zip = params[:address_zip].to_i   if params[:address_zip]
+    self.payer_info = info
   end
 
   def make_unauthorized
@@ -113,10 +91,6 @@ class PaymentNotification
     PaymentNotificationMailer.payment_email(adoption, payer_info.email).deliver
   end  
 
-  # def send_failed_email
-  #
-  # end
-
   def valid_state?
     case state
       when 'completed', 'new' then true
@@ -128,15 +102,15 @@ class PaymentNotification
   private
   # Creates a copy of the payer information to associate with adoptions.
   def payer_info_copy
-    info = ContactInfo.new
-    info.email = self.payer_info.email
-    info.full_name = self.payer_info.full_name
-    info.phone = self.payer_info.phone
-    info.city = self.payer_info.city
-    info.state = self.payer_info.state
-    info.address = self.payer_info.address
-    info.zip = self.payer_info.zip
-    info
+    ContactInfo.new.tap do |info|
+      info.email     = self.payer_info.email
+      info.full_name = self.payer_info.full_name
+      info.phone     = self.payer_info.phone
+      info.city      = self.payer_info.city
+      info.state     = self.payer_info.state
+      info.address   = self.payer_info.address
+      info.zip       = self.payer_info.zip
+    end
   end
 
   def mark
@@ -151,11 +125,10 @@ class PaymentNotification
       # Set adoption to 'completed' and give it
       # the contact_info received from the IPN notification.
       adoption.state = 'completed'
-      adoption.adopter_info = payer_info_copy
+      adoption.adopter_info = payer_info_copy      
       adoption.save!
 
       send_confirmation_email
     end
   end
-
 end

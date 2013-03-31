@@ -1,22 +1,8 @@
-# ContactInfo is populated in two ways:
-# 1. Entry of sales adoptions through the sales adoptions form.
-# 2. IPN PayPal notification after a PayPal adoption purchase.
-class ContactInfo
-  include Mongoid::Document
+class ContactInfo < ActiveRecord::Base
+  attr_accessible :address, :email, :full_name, :phone, :state, :city, :zip
 
-  # = fields =
-  field :full_name
-  field :email
-  field :phone
-  field :address
-  field :city
-  field :state
-  field :zip, :type => Integer
-
-
-  # = associations =
-  embedded_in :contact_source, :inverse_of => :contact_info
-
+  # TODO: Setup polymorphic relationship
+  belongs_to :contact, polymorphic: true
 
   # = validations =
   validates_presence_of :full_name
@@ -30,7 +16,7 @@ class ContactInfo
   # Either phone, email, or address, but not all are required.
   def must_have_form_of_contact
     if phone.blank? && email.blank? && (address.blank? || city.blank? || state.blank? || zip.blank?)      
-      errors.add(:base, "You must enter a phone, address, or email")      
+      errors[:base] << "You must enter a phone, address, or email"
     end
   end
 

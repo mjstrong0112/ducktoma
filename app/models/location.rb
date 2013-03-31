@@ -1,12 +1,12 @@
-class Location
-  include Mongoid::Document
-
-  field :name
+class Location < ActiveRecord::Base
   
+  attr_accessible :name
   validates_presence_of :name
+  has_many :sales_events
+
 
   def self.to_collection
-    Location.all(:sort => :name).map(&:name)
+    Location.order(:name).all.map { |l| [l.name, l.id] }
   end
-  
+
 end

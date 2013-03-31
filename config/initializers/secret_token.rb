@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Ducktoma::Application.config.secret_token = 'e8b99a383c9bcb4174535ad89f685b59dab8f905d9c14ab03e7a923b9d6ba2002ea13bd8a9dc22ead664c3ebea210d61ae2c0ac54d79e7dc964ef440be0e8d25'
+Ducktoma::Application.config.secret_token = 'f483ce9946b4a420d032f84864087c9e6afceb2f16de82ade67c8f058748ba6f867ed67e05b1c009fdd6a2ebfe75dcfb4b87cb90b2c07d17000ac699aff12173'

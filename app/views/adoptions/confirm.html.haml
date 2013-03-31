@@ -33,7 +33,7 @@
 
 -#%h2 Loading...
 
-- form_tag PAYPAL['url'], :id => 'paypal_form' do
+= form_tag PAYPAL['url'], :id => 'paypal_form' do
   = hidden_field_tag :cmd, "_s-xclick"
   = hidden_field_tag :encrypted, @adoption.paypal_encrypted(edit_adoption_url(@adoption), payment_notifications_url(:secret => PAYPAL['secret']))
 
