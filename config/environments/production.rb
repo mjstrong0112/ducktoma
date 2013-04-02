@@ -20,6 +20,10 @@ Ducktoma::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # Necessary config for heroku.
+  config.assets.initialize_on_precompile = false
+
+
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
@@ -76,5 +80,7 @@ Ducktoma::Application.configure do
   :password             => 'rrsBillBuckler',
   :authentication       => 'plain',
   :enable_starttls_auto => true  }
+
+
 
 end
