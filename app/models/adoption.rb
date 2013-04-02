@@ -50,7 +50,7 @@ class Adoption < ActiveRecord::Base
 
   # == validations ===
   validates_presence_of :ducks, :fee, :number
-  validates_numericality_of :fee, :only_integer => true
+  #validates_numericality_of :fee, :only_integer => true
   validates_uniqueness_of :number
   validate :ducks_must_be_available, :on => :create
 

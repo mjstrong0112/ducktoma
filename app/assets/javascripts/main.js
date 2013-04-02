@@ -66,13 +66,13 @@ function roundMainCorners(){
   //use javascript to round corners
   $("#main").corner("15px");
   if($("#duck-form").length != 0) {
-      $("#duck-form").corner("15px");        
+      $("#duck-form").corner("15px");
   }
 }
-roundMainCorners();
-
 
 $(document).ready(function() {
+  roundMainCorners();
+  
   var input = $("#adoption_duck_count");
 
   if (!input.val) {

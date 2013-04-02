@@ -17,14 +17,14 @@ class AdoptionsController < ApplicationController
   end
 
   def show
-    authorize! :show, @adoption
-
     # search for adoption on either id or adoption number
     if params[:id]
       @adoption = Adoption.find(params[:id])
     elsif params[:adoption_number]
       @adoption = Adoption.where(:number => params[:adoption_number]).first
     end    
+
+    authorize! :show, @adoption
 
     if @adoption.nil?
       flash[:alert] = "Adoption could not be found"
@@ -55,7 +55,10 @@ class AdoptionsController < ApplicationController
     if @adoption.ducks_available?
       if @adoption.save
         redirect_to edit_adoption_url(@adoption.id)
-      else         
+      else
+        # TODO: Reduce duplication (duplicated from new)
+        @pricings      = Pricing.all.sort_by(&:quantity)
+        @organizations = Organization.all.sort_by(&:name)
         render 'new'
       end
     else

@@ -4,7 +4,7 @@
     = link_to new_user_session_path do      
       = image_tag "login.png", :id => "login", :alt => "Sign In"
   - else
-    = link_to destroy_user_session_path do
+    = link_to destroy_user_session_path, method: :delete do
       = image_tag "logout.png", :id => "logout", :alt => "Sign Out"
 
     - if current_user.admin?
