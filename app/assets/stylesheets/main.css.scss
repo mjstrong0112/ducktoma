@@ -254,7 +254,20 @@
     }
 
     // -- Button styles -- //
-    .blue-button {
+    .blue-button {      
+      @include button(#52b0e6);
+      
+      display: block;
+      padding: 10px;
+      margin: 20px !important;
+      font-size: 22px;
+      font-family: $title-family;
+      font-weight: normal;
+      width: 222px;
+      margin: auto;
+      text-align: center;
+
+      /*
       @include vbox(74px);
 
       font-size: 18px;
@@ -275,18 +288,22 @@
           width: 222px;
           height: 74px;
           cursor: pointer;
-        }         
-    }
-
-    .blue-button a {
-      color: white;
-      font-family: $title-family;
-      text-decoration: none;
+        }
+      */
     }
 
     .blue-button-disabled {
-      @extend .blue-button;
-      background: url(button-disabled.png);
+      @include button(#ccc);
+      
+      display: block;
+      padding: 10px;
+      margin: 20px !important;
+      font-size: 22px;
+      font-family: $title-family;
+      font-weight: normal;
+      width: 222px;
+      margin: auto;
+      text-align: center;
     }
 
 
