@@ -85,6 +85,7 @@ GEM
     mime-types (1.21)
     multi_json (1.7.2)
     orm_adapter (0.4.0)
+    pg (0.15.0)
     polyglot (0.3.3)
     pry (0.9.12)
       coderay (~> 1.0.5)
@@ -171,6 +172,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   letter_opener
+  pg
   pry
   rails (= 3.2.13)
   rspec-rails (~> 2.0)

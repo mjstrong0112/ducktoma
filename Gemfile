@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-gem 'sqlite3'
 gem 'devise'
 gem 'cancan'
 gem 'haml'
@@ -13,6 +12,16 @@ gem 'will_paginate', '~> 3.0'
 gem 'carmen'
 gem 'letter_opener'
 gem 'acts_as_singleton'
+gem 'jquery-rails'
+
+# Heroku requires postgres.
+group :production  do
+  gem "pg"
+end
+
+group :development do
+  gem 'sqlite3'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -28,5 +37,3 @@ group :test, :development do
   gem 'database_cleaner'
   gem 'forgery', '0.5.0'
 end
-
-gem 'jquery-rails'
