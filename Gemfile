@@ -12,6 +12,9 @@ gem 'will_paginate', '~> 3.0'
 gem 'carmen'
 gem 'letter_opener'
 gem 'acts_as_singleton'
+gem 'omniauth-facebook'
+gem 'koala'
+gem 'carrierwave'
 gem 'jquery-rails'
 
 # Heroku requires postgres.
