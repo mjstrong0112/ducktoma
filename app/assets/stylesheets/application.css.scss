@@ -11,8 +11,9 @@
  *= require_self
  */
 
-@import "old_styles";
 @import "bourbon";
+@import "fonts";
+@import "old_styles";
 @import "global";
 @import "main";
 @import "images";

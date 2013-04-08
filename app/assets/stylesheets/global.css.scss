@@ -5,7 +5,8 @@ $main-height: 540px;
 $header-height: 59px;
 $footer-height: 237px;
 $form-width: 630px;
-$title-family: "Myriad Pro", "Open Sans", Arial, Helvetica, sans-serif;
+$title-family: "Open Sans", Arial, Helvetica, sans-serif;
+$header-family: "QikkiRegRegular", "Myriad Pro", "Open Sans", Arial, Helvetica, sans-serif;
 
 @mixin rounded-border($radius) {
     -moz-border-radius: $radius;

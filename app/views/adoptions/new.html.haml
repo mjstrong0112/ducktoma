@@ -1,7 +1,6 @@
-.title
-  = image_tag "adopt.png", :id => "adopt", :alt => "Adopt a Duck Now!"
-
+.title Sponsor a Duck Now
 .form
+  .header-slim(style="margin-top: 0px;") Specify Number of Ducks
   = simple_form_for @adoption do |f|
 
     #duck-form.clearfix
@@ -30,9 +29,10 @@
             %td= pluralize(pricing.quantity,"duck")
             %td= number_to_currency dollar_fee(pricing.price)
 
-    .input.select.optional.clearfix
-      %h4.affiliate Click the bar, below, and pick a group to get credit for your purchase (optional) :
-      %select#adoption_organization.select.optional.left{:name => "adoption[club_id]"}
+    .credit-group.input.select.optional.clearfix
+
+      .header-slim Pick a group to get credit for your purchase (optional) :      
+      %select#adoption_organization.select.optional{:name => "adoption[club_id]"}
         %option{:value => "", :selected => "selected"} None
         - @organizations.each do |organization|
           %option{:value => "#{organization.id}"}= organization.name

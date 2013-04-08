@@ -1,2 +1,3 @@
-%h1 Please choose the organization you belong to in order to continue:
-= render Organization.order('name asc')
+.left= image_tag @user.picture_url
+.left
+  %h1= @user.name

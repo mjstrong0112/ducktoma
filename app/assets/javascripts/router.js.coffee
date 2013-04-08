@@ -1,8 +1,8 @@
-EEBOS = {}
+@Router = {}
 
 UTIL =
   exec: (controller, action) ->
-    ns = EEBOS
+    ns = Router
     action = (if (action is `undefined`) then "init" else action)
     ns[controller][action]()  if controller isnt "" and ns[controller] and typeof ns[controller][action] is "function"
 

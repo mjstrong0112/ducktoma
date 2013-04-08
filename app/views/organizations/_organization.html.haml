@@ -3,5 +3,7 @@
   .description.left
     %h1= organization.name
     = organization.description || "No Description"
-    <br />
-    %button.pick-btn Pick This Organization
+    <br />    
+    - if pick    
+      %button.pick-btn{:'data-id' => organization.id} Pick This Organization  
+    

@@ -28,6 +28,7 @@ class OmniauthUser < ActiveRecord::Base
 
   # TODO: Implement.
   def is?(role)
+    return true if role.to_s == "facebook"
     false
   end
 

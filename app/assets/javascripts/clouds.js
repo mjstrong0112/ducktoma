@@ -6,7 +6,7 @@ var rangeIncrement=200;
 var lastY=-1;
 var offset=0;
 
-$.ready(function() {
+$(function() {	
 	example = document.getElementById('example');
 	context = example.getContext('2d');
 	generateCloudPattern();
