@@ -1,0 +1,21 @@
+.white-header Please select a member to credit this adoption to:
+%input#user_search{type: 'text'}/
+#user_search_content
+  
+
+-# TODO: Move to router.
+:javascript
+  var keyPressCount = 0;
+  $("#user_search").keypress(function() {    
+    keyPressCount++;
+    var currentCount = keyPressCount;
+    setTimeout(function() {
+      checkPressCount(currentCount);
+    }, 300);    
+  });
+
+  function checkPressCount(currentPressCount) {    
+    if(currentPressCount == keyPressCount) {    
+      $.get("/club_members/autocomplete_name/" + $("#user_search").val() + ".js");
+    }
+  }

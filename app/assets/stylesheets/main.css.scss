@@ -35,6 +35,19 @@
      font-family: $title-family;
      color: #666666;
      font-weight: normal;
+
+      &.header, &.title-header {
+        font-family: $header-family;
+        color: #369fcf;
+        text-shadow: 2px 2px #e0f6ff;
+        font-weight: bold;
+      }
+
+      &.header.grey {
+        color: #666;
+        text-shadow: none;
+      }
+
     }
 
     h3 {
@@ -43,6 +56,14 @@
 
     h4 {
       font-size: 16px;
+    }
+
+    a.xsmall {
+      font-size: 14px;
+    }
+
+    .blue-btn {
+      @include button(#38a6e5);
     }
 
     // -- vertical center css hack -- //
@@ -242,27 +263,31 @@
     }
 
     // -- Form and inputs -- //
+
+    .white-header { 
+      @include vbox(54px);          
+      text-align: center;
+      border: 1px solid #ccc;
+      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
+      
+      margin-top: 18px;
+      margin-bottom: 18px;
+      color: #666666;
+      font-family: $title-family;
+      font-size: 19px;
+      
+        .number {
+          float: left;
+          margin: 14px;
+        }            
+    }
+
     .form {
       margin: auto;
       padding-top: 10px;
 
         .header, .header-slim {
-          @include vbox(54px);          
-          text-align: center;
-          border: 1px solid #ccc;
-          box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
-          
-          margin-top: 18px;
-          margin-bottom: 18px;
-          color: #666666;
-          font-family: $title-family;
-          font-size: 19px;
-          
-            .number {
-              float: left;
-              margin: 14px;
-            }
-
+          @extend .white-header;
         }
 
         .header-slim {

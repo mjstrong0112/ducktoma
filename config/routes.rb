@@ -1,5 +1,6 @@
 Ducktoma::Application.routes.draw do
 
+  devise_for :club_members, controllers: {omniauth_callbacks: "omniauth_callbacks"}
   devise_for :users
   root :to => "adoptions#new"
 
@@ -15,8 +16,13 @@ Ducktoma::Application.routes.draw do
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
-  resources :omniauth_users
 
+  match '/profile' => "omniauth_users#show"
+
+  get 'club_members/autocomplete_name/:name' => "club_members#autocomplete_name", as: :club_members_autocomplete_name
+  resources :club_members do
+    get :share_to_wall, on: :member    
+  end
 
   resources :users do
     resources :adoptions

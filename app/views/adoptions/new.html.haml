@@ -29,13 +29,24 @@
             %td= pluralize(pricing.quantity,"duck")
             %td= number_to_currency dollar_fee(pricing.price)
 
-    .credit-group.input.select.optional.clearfix
+    - if @referer
+      = f.hidden_field :club_member_id, :value => @referer.id
+      .header 
+        This sale will be credited to:
+        = link_to "(is this incorrect? click here.)", root_path(:no_referer => true), class: "xsmall"
+      .club-member
+        .profile-image= image_tag @referer.picture_url
+        .profile-details-fluid
+          %h3= @referer.name
+          .organization.nofloat= image_tag @referer.organization.avatar.url
 
-      .header-slim Pick a group to get credit for your purchase (optional) :      
-      %select#adoption_organization.select.optional{:name => "adoption[club_id]"}
-        %option{:value => "", :selected => "selected"} None
-        - @organizations.each do |organization|
-          %option{:value => "#{organization.id}"}= organization.name
+    - else
+      .credit-group.input.select.optional.clearfix
+        .header-slim Pick a group to get credit for your purchase (optional) :      
+        %select#adoption_organization.select.optional{:name => "adoption[club_id]"}
+          %option{:value => "", :selected => "selected"} None
+          - @organizations.each do |organization|
+            %option{:value => "#{organization.id}"}= organization.name
 
     .adoption-new-button
       = f.submit "Continue", :id => "adoption_submit", :class => "submit-duck-button blue-button-disabled"

@@ -12,7 +12,12 @@ class AdoptionsController < ApplicationController
     else  
       @adoption      = Adoption.new
       @pricings      = Pricing.all.sort_by(&:quantity)
-      @organizations = Organization.all.sort_by(&:name)    
+      @organizations = Organization.all.sort_by(&:name)
+      
+      referer_id = params[:referer] || club_member_signed_in?
+      unless params[:no_referer] || referer_id.nil?
+        @referer = ClubMember.find referer_id
+      end
     end
   end
 
@@ -35,10 +40,21 @@ class AdoptionsController < ApplicationController
 
   def edit
     @adoption = Adoption.find(params[:id])
-    if @adoption.state == 'new'
-      render 'confirm', :layout => 'barebones'
-      @adoption.state =  'pending'
-      @adoption.save!
+    if @adoption.state == 'new' || @adoption.state == 'associate'
+
+      # If this organiztion has individuals,
+      # display intermediate page to show individual orders.
+      # Otherwise, jump directly to paypal.
+      if @adoption.club.try(:club_members).try(:count) > 0
+        render 'associate'
+        @adoption.state = 'associate'
+        @adoption.save!        
+      else
+        render 'confirm', :layout => 'barebones'
+        @adoption.state =  'pending'
+        @adoption.save!        
+      end
+
     elsif @adoption.state == 'pending'
       render('pending')
     elsif @adoption.state == 'completed'
@@ -51,7 +67,8 @@ class AdoptionsController < ApplicationController
   def create
     @adoption = Adoption.new(params[:adoption])
     @adoption.type = "std"
-    @adoption.user = current_user if current_user
+    # TODO: Need a better way to handle this association.
+    @adoption.user = current_user if current_user && !current_user.is?(:facebook)
     if @adoption.ducks_available?
       if @adoption.save
         redirect_to edit_adoption_url(@adoption.id)

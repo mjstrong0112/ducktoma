@@ -5,6 +5,7 @@ class Organization < ActiveRecord::Base
   # == assocations ==
   has_many :adoptions
   has_many :sales_events
+  has_many :club_members
   
   validates_presence_of :name
 

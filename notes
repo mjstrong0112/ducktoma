@@ -1,0 +1,27 @@
+Core functionality:
+====================
+Need login account for coach/band-leader/org-leader, has following features:
+
+  - Approve new fb individuals.
+  - Decline existing users.
+  - Create accounts for non-fb individuals.
+  - Specify boilerplate for facebook message.
+
+Change "your donation level" to "donations on your behalf"
+
+Finish intermediate page when referer is not specified so that page visitors can credit adoptions to individuals - not just organizations.
+
+Change "Share to Facebook" function to show popup allowing users to specify custom message.
+
+Deliver Mike screenshots of my progress to appease the blood thirsty.
+
+
+Nice to Haves:
+==============
+Organization reporting - progress of the org.
+
+Top 5 individuals in organization page - to create competition between individuals. Show their ranking in organization.
+
+Email notifications to band members when new fb user associates to their organization.
+
+(v long term): Have some sort of custom badge that can be published to Facebook if you're #1 or #2 or #3.

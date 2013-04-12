@@ -1,0 +1,144 @@
+.club-member {
+  @include clearfix;
+
+  .organization { 
+    float: right;
+    img { max-width: 130px; }
+    &.nofloat { 
+      float: none; 
+      margin-top: 25px;
+    }    
+  }
+
+  .profile-image {
+    float: left; 
+    height: 100px;
+    width: 100px;
+  }
+
+  .profile-details {
+    margin-top: 15px;
+    float: left;
+    width: 494px;
+    h3 {  margin-left: 15px; }
+  }
+
+  .profile-details-fluid {
+    float: left;
+    margin-left: 15px;
+  }
+
+  .donation-progress {
+    margin-top: 32px;
+    height: 30px; 
+    width: 100%;
+    border: 1px solid #bababa;
+    border-left-width: 0px;
+    background: #f5f5f5;
+    line-height: 30px;
+    padding: 0px 15px;
+    box-sizing: border-box;
+
+    span.amount {
+      font-family: $title-family;            
+      color: #0d4864;
+      text-shadow: 1px 1px #c5e0ed;
+      padding-left: 15px;
+      font-size: 18px;
+    }
+
+    span.description {
+      float: right;
+      display: inline-block;
+      color: #7a7a7a;
+      font-family: $title-family;
+      font-weight: bold;
+    }
+  }
+
+}
+
+h1.header.raised {
+
+  background: url("raised-bg.png") repeat-x bottom;
+  padding-top: 40px;
+  padding-bottom: 30px;
+  font-size: 22px;
+  text-align: center;
+  margin-left: -25px;
+  margin-right: -25px;
+
+  .amount {
+    font-size: 24px;    
+    color: #369fcf;
+    text-shadow: 2px 2px #e0f6ff;    
+  }
+
+}
+
+.club-member-small {
+  @include clearfix;
+  padding: 15px;
+  h3 { 
+    font-size: 20px;
+    line-height: 95px; 
+  }
+  img {
+    float: left;
+    padding-right: 15px;
+  }
+  &:hover {
+    background-color: #ebebeb;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+h3.donations {
+  text-align: center;
+  margin: 30px;
+}
+
+.share-options {
+  width: 525px;
+  margin: auto;
+  span.or { 
+    padding: 0px 15px; 
+    font-style: italic;
+    font-weight:bold;
+    color: #333;        
+    vertical-align: middle;
+  }
+}
+
+.facebook-share {
+  width: 237px;
+  height: 45px;
+  font-size: 0;
+  background: url('facebook-share.png') no-repeat;
+  border: none;
+  cursor: pointer;
+  vertical-align: middle;
+  display: inline-block;
+  &:hover { background: url('facebook-share-over.png') no-repeat; }
+}
+
+.twitter-share {
+  width: 237px;
+  height: 45px;
+  background: url('twitter-share.png') no-repeat;
+  border: none;
+  vertical-align: middle;
+}
+
+a.adopt-a-duck {  
+  font-size: 16px;  
+  font-family: $title-family;
+  font-weight: normal;
+  width: 237px;
+  height: 45px;
+  color: white;
+  text-decoration: none;
+  display: inline;
+  padding: 11px 20px;
+}

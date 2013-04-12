@@ -1,0 +1,19 @@
+.club-member
+  .profile-image= image_tag @user.picture_url
+  .profile-details
+    .organization= image_tag @user.organization.avatar.url  
+    %h3.header= @user.name    
+    .donation-progress
+      %span.amount $0
+      %span.description Your Donation Level
+
+%h1.header.grey.raised  Your organization has raised <span class="amount">$1,500.</span>
+
+%h3.donations Want More Donations?
+.share-options
+  = link_to "Facebook Share", share_to_wall_club_member_path(@user), class: "facebook-share"  
+  %span.or or
+  = link_to "Personally adopt a duck", root_url, class: "blue-btn adopt-a-duck"
+  -#
+    %button.twitter-share 
+

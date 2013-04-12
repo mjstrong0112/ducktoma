@@ -10,6 +10,7 @@
       margin-right: 25px; 
     }
   }
+  
   .description {
     width: 70%;
     padding-left: 25px;
@@ -28,7 +29,7 @@
   }
 
   .pick-btn {
-    margin-top: 15px;
-    @include button(#38a6e5);
+    @extend .blue-btn;
+    margin-top: 15px;    
   }
 }

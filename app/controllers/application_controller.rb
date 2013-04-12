@@ -14,12 +14,4 @@ class ApplicationController < ActionController::Base
     system "rake #{task} #{args.join(' ')} &"
   end
 
-  def current_user
-    if session[:omniauth_user_id]
-      @omniauth_user ||= OmniauthUser.find session[:omniauth_user_id]      
-    else
-      current_devise_user
-    end
-  end
-
 end

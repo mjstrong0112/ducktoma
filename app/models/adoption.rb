@@ -21,7 +21,7 @@ class Adoption < ActiveRecord::Base
   attr_accessible :number, :fee, :dollar_fee, :sales_type, :duck_count, :adopter_info_attributes
 
   # TODO: Longterm un-white-list these to protect us from mass-assignment.
-  attr_accessible :club_id, :sales_event_id, :user_id
+  attr_accessible :club_id, :sales_event_id, :user_id, :club_member_id
 
   # State of - PayPal - adoption.
   # Can be the following values:
@@ -39,10 +39,13 @@ class Adoption < ActiveRecord::Base
 
   # == associations ==
   has_many :ducks, :dependent => :destroy
-  belongs_to :user
+  
   belongs_to :payment_notification
   belongs_to :sales_event
   belongs_to :club, :class_name => "Organization"
+  belongs_to :club_member
+  belongs_to :user
+  
   has_one :adopter_info, :as => :contact, :class_name => "ContactInfo"
 
   # TODO: Implement nested attributes for contact info.
