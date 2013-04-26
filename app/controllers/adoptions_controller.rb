@@ -13,11 +13,15 @@ class AdoptionsController < ApplicationController
       @adoption      = Adoption.new
       @pricings      = Pricing.all.sort_by(&:quantity)
       @organizations = Organization.all.sort_by(&:name)
+
       
-      referer_id = params[:referer] || club_member_signed_in?
-      unless params[:no_referer] || referer_id.nil?
-        @referer = ClubMember.find referer_id
+
+      if params[:referer] && !params[:no_referer]
+        @referer = ClubMember.find params[:referer]
+      elsif current_club_member && current_club_member.creditable? && !params[:no_referer]
+        @referer = current_club_member
       end
+
     end
   end
 
@@ -37,15 +41,22 @@ class AdoptionsController < ApplicationController
     end
   end
 
+  # TODO: Add error handling.
+  def associate
+    @adoption = Adoption.find params[:id]
+    @adoption.club_member = ClubMember.find params[:user_id]
+    @adoption.save!
+    redirect_to edit_adoption_url @adoption
+  end
+
 
   def edit
     @adoption = Adoption.find(params[:id])
     if @adoption.state == 'new' || @adoption.state == 'associate'
-
       # If this organiztion has individuals,
       # display intermediate page to show individual orders.
       # Otherwise, jump directly to paypal.
-      if @adoption.club.try(:club_members).try(:count) > 0
+      if !@adoption.club_member && @adoption.club.try(:club_members).try(:count).to_i > 0 && !params[:skip_association]
         render 'associate'
         @adoption.state = 'associate'
         @adoption.save!        

@@ -1,15 +1,40 @@
 class ClubMember < ActiveRecord::Base
   
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable
+  devise :database_authenticatable, :recoverable, :rememberable, :validatable, :omniauthable
   
-  attr_accessible :name,  :picture_url # Custom fields.
+  attr_accessible :name,  :picture_url, :approved, :organization_id
+
+  # There are two types of roles:
+  #   Member:    Represents normal club member
+  #   Organizer: Represents organization club leader. Can edit/create new club members.
+  attr_accessible :role
   attr_accessible :email, :password, :password_confirmation, :remember_me # Devise Fields.  
   attr_accessible :provider, :uid, :oauth_token, :oauth_expires_at # Omniauth Fields.
   
   belongs_to :organization
   has_many :adoptions
 
+  scope :leaders, where(:role => :leader)
+
+  delegate :name, to: :organization, prefix: :organization
+
+  validates_presence_of :name, :email #, :organization
+
+
+
+  def picture_url
+    read_attribute(:picture_url) || 'default-avatar.png'
+  end
+
+  def total    
+    dollar_fee adoptions.paid.sum(&:fee)
+  end
+
+  def donation_level
+    org = organization.biggest_contribution.to_f
+    return 0 if org == 0 
+    (total / org * 100).to_i
+  end
 
 
   def self.from_omniauth(auth)
@@ -26,6 +51,11 @@ class ClubMember < ActiveRecord::Base
     end
   end
 
+  def is_facebook?
+    provider.to_s == "facebook"
+  end
+
+
   def facebook
     @facebook ||= Koala::Facebook::API.new(oauth_token)
   end
@@ -38,11 +68,16 @@ class ClubMember < ActiveRecord::Base
     self.picture_url = fetch_picture  
   end
 
-  # TODO: Implement.
+  def creditable?
+    role.to_s != "leader"
+  end
+
   def is?(role)
     return true if role.to_s == "facebook"
+    return true if self.role.to_s == role.to_s
     false
   end
+
 
   # Override devise pwd methods for omniauth integration.
   def password_required?
@@ -56,4 +91,5 @@ class ClubMember < ActiveRecord::Base
       super
     end
   end
+
 end

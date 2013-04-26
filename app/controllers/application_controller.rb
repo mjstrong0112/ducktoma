@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  helper :application
   protect_from_forgery
 
   alias_method :current_devise_user, :current_user

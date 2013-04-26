@@ -5,6 +5,7 @@ Ducktoma::Application.routes.draw do
   root :to => "adoptions#new"
 
   resources :adoptions, :except => :show
+  get '/adoptions/:id/associate/:user_id' => "adoptions#associate", :as => :associate_user_to_adoption
   get '/adoptions/:id' => 'adoptions#show', :as => :adoption, :constraints => { :id => /[^\D]+/ }
   get '/adoptions/:adoption_number' => 'adoptions#show', :as => :adoption
   match 'adoptions/number/:adoption_number' => 'adoptions#show'
@@ -17,11 +18,12 @@ Ducktoma::Application.routes.draw do
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
-  match '/profile' => "omniauth_users#show"
+  match '/profile' => "club_members#show"
 
   get 'club_members/autocomplete_name/:name' => "club_members#autocomplete_name", as: :club_members_autocomplete_name
   resources :club_members do
-    get :share_to_wall, on: :member    
+    get :share_to_wall, on: :member
+    get :approve, on: :member
   end
 
   resources :users do
@@ -44,6 +46,8 @@ Ducktoma::Application.routes.draw do
     resources :organizations
     resources :pricings
     resource :settings
+
+    resources :club_members
 
     match "/payment_notifications/failed" => "payment_notifications#failed"
     resources :payment_notifications

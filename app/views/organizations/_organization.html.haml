@@ -1,5 +1,9 @@
 .organization
-  .logo.left= image_tag organization.avatar if organization.avatar
+  .logo.left
+    - if organization.avatar.blank?
+      = image_tag "no_avatar.png"
+    - else
+      = image_tag organization.avatar
   .description.left
     %h1= organization.name
     = organization.description || "No Description"

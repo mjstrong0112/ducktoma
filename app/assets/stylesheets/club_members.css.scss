@@ -1,6 +1,5 @@
 .club-member {
   @include clearfix;
-
   .organization { 
     float: right;
     img { max-width: 130px; }
@@ -29,6 +28,8 @@
   }
 
   .donation-progress {
+    position: relative;
+    z-index: 1;
     margin-top: 32px;
     height: 30px; 
     width: 100%;
@@ -53,6 +54,17 @@
       color: #7a7a7a;
       font-family: $title-family;
       font-weight: bold;
+    }
+
+    .bar {
+      position: absolute;
+      background-color: #7ab9d7;
+      z-index: -1;
+      left: 0;
+      border-top: 1px solid #389aca;
+      border-bottom: 1px solid #389aca;
+      height: 28px;
+      top: -1px;
     }
   }
 
@@ -102,6 +114,7 @@ h3.donations {
 .share-options {
   width: 525px;
   margin: auto;
+  text-align: center;
   span.or { 
     padding: 0px 15px; 
     font-style: italic;
@@ -141,4 +154,36 @@ a.adopt-a-duck {
   text-decoration: none;
   display: inline;
   padding: 11px 20px;
+
+}
+
+.not-found {
+  text-align: center;
+  font-size: 22px;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  display: block;
+  padding: 30px;
+}
+
+.or-no-associate {
+  text-align: center;
+  font-size: 22px;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  display: block;
+  padding: 10px; 
+  font-style: italic;
+}
+.do-not-associate { width: auto; }
+
+.stop-img {
+  width: 273px;
+  height: 274px;
+  margin: 0 auto;
+  display: block;
+  padding: 15px;
+}
+
+.approval {
+  line-height: 30px;
+  font-size: 20px;
 }

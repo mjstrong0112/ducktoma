@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130412041648) do
+ActiveRecord::Schema.define(:version => 20130420004556) do
 
   create_table "adoptions", :force => true do |t|
     t.string   "number"
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(:version => 20130412041648) do
     t.string   "name"
     t.string   "picture_url"
     t.integer  "organization_id"
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",       :null => false
+    t.string   "encrypted_password",     :default => "",       :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -40,8 +40,10 @@ ActiveRecord::Schema.define(:version => 20130412041648) do
     t.string   "uid"
     t.string   "oauth_token"
     t.time     "oauth_expires_at"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.string   "role",                   :default => "member"
+    t.boolean  "approved",               :default => false
   end
 
   add_index "club_members", ["email"], :name => "index_club_members_on_email", :unique => true

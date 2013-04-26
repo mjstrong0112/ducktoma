@@ -33,6 +33,8 @@ GEM
     addressable (2.3.3)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    binding_of_caller (0.7.1)
+      debug_inspector (>= 0.0.1)
     bourbon (3.1.1)
       sass (>= 3.2.0)
       thor
@@ -51,6 +53,7 @@ GEM
       execjs
     coffee-script-source (1.6.2)
     database_cleaner (0.9.1)
+    debug_inspector (0.0.2)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -119,6 +122,9 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pry-stack_explorer (0.4.9)
+      binding_of_caller (>= 0.7)
+      pry (~> 0.9.11)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -205,6 +211,7 @@ DEPENDENCIES
   omniauth-facebook
   pg
   pry
+  pry-stack_explorer
   rails (= 3.2.13)
   rspec-rails (~> 2.0)
   sass-rails (~> 3.2.3)

@@ -1,20 +1,24 @@
-#header
-  /= image_tag "logo.png", :id => "logo", :alt => "ducktoma"
-  - unless user_signed_in?
+#header  
+  - if !user_signed_in? && !club_member_signed_in?
     = link_to new_user_session_path do      
       = image_tag "login.png", :id => "login", :alt => "Sign In"
   - else
+
     = link_to destroy_user_session_path, method: :delete do
       = image_tag "logout.png", :id => "logout", :alt => "Sign Out"
 
-    - if current_user.admin?
+    - if current_club_member
+      = link_to profile_path do
+        = image_tag "profile.png", alt: "Profile"
+        
+    - if current_user.try(:admin?)
       = link_to admin_root_path do
         = image_tag "admin.png", :alt => "Admin panel"
         
       = link_to sales_root_path do
         = image_tag "sales.png", :alt => "Sales panel"
         
-    - elsif current_user.is?(:sales)
+    - elsif current_user.try(:is?, :sales)
       = link_to sales_root_path do
         = image_tag "sales.png", :alt => "Sales panel"
         

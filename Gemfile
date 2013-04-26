@@ -8,6 +8,7 @@ gem "haml-rails"
 gem 'bourbon'
 gem 'simple_form'
 gem 'pry'
+gem 'pry-stack_explorer'
 gem 'will_paginate', '~> 3.0'
 gem 'carmen'
 gem 'letter_opener'

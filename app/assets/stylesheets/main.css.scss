@@ -262,8 +262,26 @@
       display: block;
     }
 
-    // -- Form and inputs -- //
+    // -- Simpleform error styles -- //
 
+    .field_with_errors {
+      input {
+        border: 1px solid #fbc2c4;
+        background-color: #fbe3e4;        
+      }
+
+      .error {
+        padding: 0;
+        background-color: transparent;
+        border: none;
+      }
+
+      span.error {
+        color: red;
+      }
+    }
+
+    // -- Form and inputs -- //
     .white-header { 
       @include vbox(54px);          
       text-align: center;
@@ -313,6 +331,11 @@
       width: 180px;
       margin: auto;
       text-align: center;
+    }
+
+    a.blue-button { 
+      color: #fff;
+      text-decoration: none;
     }
 
     .blue-button-disabled {
