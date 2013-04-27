@@ -1,0 +1,16 @@
+%div{class: "#{devise_mapping.omniauthable? ? '' : 'center-form'}"}
+
+  - if devise_mapping.omniauthable?
+    - resource_class.omniauth_providers.each do |provider|
+      .facebook-auth
+        %span.or or
+        = link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), class: "facebook-signin"
+
+  %h2.header.sign-in Sign in
+  = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+    .form-inputs
+      = f.input :email, :required => false, :autofocus => true
+      = f.input :password, :required => false
+      = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
+    .form-actions
+      = f.button :submit, "Sign in", class: "blue-btn"

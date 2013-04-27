@@ -83,7 +83,7 @@
         text-align: left;
         clear: left;
         padding-bottom: 20px;
-        padding-top: 36px;
+        padding-top: 15px;
     }
 
     // -- footer -- //
@@ -172,6 +172,14 @@
         a {
           text-decoration: none;
         }
+    }
+
+    #login-links {
+      margin-bottom: 15px;
+      float: right;
+      margin-right: 160px;
+
+      a { text-decoration: none; }
     }
 
     #main {
@@ -635,7 +643,6 @@
     }
 
 
-
 /* =====================
    Sales Adoption - New
    ===================== */
@@ -667,4 +674,61 @@
       margin-top: -20px;
       margin-bottom: 20px;
       text-align: center;
+    }
+
+
+/* ================
+   Devise - Sign In
+   ================ */
+
+    .facebook-auth {
+      float: right;
+
+
+      a.facebook-signin {
+        width: 237px;
+        height: 45px;
+        font-size: 0;
+        
+        background: url('facebook-signin.png') no-repeat;
+        border: none;
+        cursor: pointer;
+        vertical-align: middle;
+        display: inline-block;
+        
+        &:hover { background: url('facebook-signin-over.png') no-repeat; }
+      }
+
+      .or {
+        margin-top: 100px;
+        text-align: center;
+        padding: 15px;
+        font-family: $title-family;
+        font-weight: 600;
+        font-style: italic;
+        display: inline-block;
+      }
+
+    }
+  
+    h2.header.sign-in {  margin-bottom: 30px !important; }
+
+    #new_user, #new_club_member {
+      width: 310px;
+
+      label { padding-bottom: 5px;  }
+      .input { margin-bottom: 10px; }
+      .form-actions {  margin-top: 15px; }
+
+      .user_remember_me label, .club_member_remember_me label { 
+        display: inline; 
+        padding-left: 5px;
+      }
+    }   
+
+    .center-form {
+      h2.header.sign-in { text-align: center; }
+      #new_user, #new_club_member { 
+        margin: 0 auto; 
+      }
     }

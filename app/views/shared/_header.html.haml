@@ -1,11 +1,12 @@
-#header  
+#login-links
   - if !user_signed_in? && !club_member_signed_in?
     = link_to new_user_session_path do      
-      = image_tag "login.png", :id => "login", :alt => "Sign In"
-  - else
+      = image_tag "sertoma-login.png", :id => "login", :alt => "Sign In"
 
-    = link_to destroy_user_session_path, method: :delete do
-      = image_tag "logout.png", :id => "logout", :alt => "Sign Out"
+    = link_to new_club_member_session_path do      
+      = image_tag "affiliate-login.png", :id => "club-member-login", :alt => "Sign In"  
+
+  - if user_signed_in? || club_member_signed_in?
 
     - if current_club_member
       = link_to profile_path do
@@ -21,5 +22,11 @@
     - elsif current_user.try(:is?, :sales)
       = link_to sales_root_path do
         = image_tag "sales.png", :alt => "Sales panel"
-        
+
+    = link_to destroy_user_session_path, method: :delete do
+      = image_tag "logout.png", :id => "logout", :alt => "Sign Out"
+
+.clear
+
+#header        
   = image_tag "plane.png",  :id => "plane", :alt => "Annual Duck Race"

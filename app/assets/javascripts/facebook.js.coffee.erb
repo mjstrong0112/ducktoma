@@ -1,0 +1,35 @@
+jQuery ->
+  $('body').prepend('<div id="fb-root"></div>')
+  $.ajax
+    url: "#{window.location.protocol}//connect.facebook.net/en_US/all.js"
+    dataType: 'script'
+    cache: true
+
+window.fb_publish = (u_name, org_name, u_id) ->
+  FB.ui(
+    method:      'stream.publish'
+    name:        'Adopt a duck for ' + org_name
+    caption:      u_name + ' is asking for your help to give hearing to children.'
+    description: 'Seriously. Do not be a heartless bastard and give your money now.'        
+    link:         '<%= Ducktoma::Application.config.fb["referer_url"] %>' + u_id
+    picture:     'http://rrsertoma.heroku.com/images/fb-share-logo.png'
+
+    , (response) ->
+      if (response && response.post_id)
+        alert "Post was published!"
+      else
+        alert "Post was not published."
+  )
+
+window.fbAsyncInit = ->  
+  FB.init(appId: '<%= Ducktoma::Application.config.fb["facebook_app_id"] %>', cookie: true)
+  $('.facebook-signin').click (e) ->
+    e.preventDefault()
+    FB.login (response) ->
+      window.location = '/club_members/auth/facebook/callback' if response.authResponse
+
+  # No JS signout enabled at the moment.
+  #$('#sign_out').click (e) ->
+  #  FB.getLoginStatus (response) ->
+  #    FB.logout() if response.authResponse
+  #  true
