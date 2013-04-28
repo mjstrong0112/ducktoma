@@ -8,10 +8,14 @@ gem "haml-rails"
 gem 'bourbon'
 gem 'simple_form'
 gem 'pry'
+gem 'pry-stack_explorer'
 gem 'will_paginate', '~> 3.0'
 gem 'carmen'
 gem 'letter_opener'
 gem 'acts_as_singleton'
+gem 'omniauth-facebook', '1.4.0'
+gem 'koala'
+gem 'carrierwave'
 gem 'jquery-rails'
 
 # Heroku requires postgres.
@@ -21,6 +25,7 @@ end
 
 group :development do
   gem 'sqlite3'
+  gem 'quiet_assets'
 end
 
 # Gems used only for assets and not required

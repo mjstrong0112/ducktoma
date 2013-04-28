@@ -1,0 +1,9 @@
+= simple_form_for [:admin, user] do |f|
+  = f.input :name
+  = f.input :email
+  = f.input :password
+  = f.input :password_confirmation
+  = f.association :organization #, collection: Organization.all
+
+  = f.hidden_field :role, :value => "leader"  
+  = f.submit 'Submit'

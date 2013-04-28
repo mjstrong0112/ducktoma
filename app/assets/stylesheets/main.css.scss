@@ -35,6 +35,19 @@
      font-family: $title-family;
      color: #666666;
      font-weight: normal;
+
+      &.header, &.title-header {
+        font-family: $header-family;
+        color: #369fcf;
+        text-shadow: 2px 2px #e0f6ff;
+        font-weight: bold;
+      }
+
+      &.header.grey {
+        color: #666;
+        text-shadow: none;
+      }
+
     }
 
     h3 {
@@ -43,6 +56,14 @@
 
     h4 {
       font-size: 16px;
+    }
+
+    a.xsmall {
+      font-size: 14px;
+    }
+
+    .blue-btn {
+      @include button(#38a6e5);
     }
 
     // -- vertical center css hack -- //
@@ -62,7 +83,7 @@
         text-align: left;
         clear: left;
         padding-bottom: 20px;
-        padding-top: 36px;
+        padding-top: 15px;
     }
 
     // -- footer -- //
@@ -153,6 +174,14 @@
         }
     }
 
+    #login-links {
+      margin-bottom: 15px;
+      float: right;
+      margin-right: 160px;
+
+      a { text-decoration: none; }
+    }
+
     #main {
         @include rounded-border(15px);
         $padding: 27;
@@ -161,6 +190,8 @@
         padding: #{$padding}px;
         width: $main-width - $padding*2;
         background-color: #FFF;
+
+        box-shadow: 0px 3px 20px rgba(0, 0, 0, .25)
     }
 
     #sidebar {
@@ -186,6 +217,12 @@
     }
 
     .title {
+      font-family: $header-family;
+      font-size: 24px;
+      color: rgb(54, 159, 207);
+      text-shadow: 2px 2px rgb(224, 246, 255);
+      font-weight: bold;
+
       height: 40px;
       margin: auto;
       text-align: center;
@@ -195,6 +232,18 @@
             top: -10px;
             z-index: -1;
         }
+    }
+
+    .credit-group {
+      margin: 35px 0px;
+
+      .select {
+        width: 275px;
+        display: block;
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
 
     #clouds {
@@ -221,26 +270,50 @@
       display: block;
     }
 
+    // -- Simpleform error styles -- //
+
+    .field_with_errors {
+      input {
+        border: 1px solid #fbc2c4;
+        background-color: #fbe3e4;        
+      }
+
+      .error {
+        padding: 0;
+        background-color: transparent;
+        border: none;
+      }
+
+      span.error {
+        color: red;
+      }
+    }
+
     // -- Form and inputs -- //
+    .white-header { 
+      @include vbox(54px);          
+      text-align: center;
+      border: 1px solid #ccc;
+      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
+      
+      margin-top: 18px;
+      margin-bottom: 18px;
+      color: #666666;
+      font-family: $title-family;
+      font-size: 19px;
+      
+        .number {
+          float: left;
+          margin: 14px;
+        }            
+    }
+
     .form {
       margin: auto;
       padding-top: 10px;
 
         .header, .header-slim {
-          @include vbox(54px);
-          @include box-shadow(20px);
-          
-          margin-top: 18px;
-          margin-bottom: 18px;
-          color: #666666;
-          font-family: $title-family;
-          font-size: 19px;
-          
-            .number {
-              float: left;
-              margin: 14px;
-            }
-
+          @extend .white-header;
         }
 
         .header-slim {
@@ -258,50 +331,31 @@
       @include button(#52b0e6);
       
       display: block;
-      padding: 10px;
+      padding: 5px;
       margin: 20px !important;
-      font-size: 22px;
+      font-size: 20px;
       font-family: $title-family;
       font-weight: normal;
-      width: 222px;
+      width: 180px;
       margin: auto;
       text-align: center;
+    }
 
-      /*
-      @include vbox(74px);
-
-      font-size: 18px;
-      width: 222px;
-      margin: auto;
-      text-align: center;
-      background: url(button.png);
-      color: white;
-      border: none;
-      font-family: $title-family;
-      cursor: pointer;
-
-        input {
-          font-size: 18px;
-          border: none;
-          background: none;
-          color: white;
-          width: 222px;
-          height: 74px;
-          cursor: pointer;
-        }
-      */
+    a.blue-button { 
+      color: #fff;
+      text-decoration: none;
     }
 
     .blue-button-disabled {
       @include button(#ccc);
       
       display: block;
-      padding: 10px;
+      padding: 5px;
       margin: 20px !important;
-      font-size: 22px;
+      font-size: 20px;
       font-family: $title-family;
       font-weight: normal;
-      width: 222px;
+      width: 180px;
       margin: auto;
       text-align: center;
     }
@@ -378,10 +432,10 @@
     }
 
     #duck-count {
-      padding-top: 45px;
-      font-size: 45px;
-      font-family: $title-family;
-      color: #fff;
+      padding-top: 35px;
+      font-size: 40px;      
+      color: white;
+      padding-bottom: 10px;
     }
 
     #duck-form-total {
@@ -392,7 +446,7 @@
       text-align: right;
     }
     .adoption-new-button {
-      width: 231px;
+      width: 223px;
       margin: auto;
     }
     
@@ -589,7 +643,6 @@
     }
 
 
-
 /* =====================
    Sales Adoption - New
    ===================== */
@@ -621,4 +674,61 @@
       margin-top: -20px;
       margin-bottom: 20px;
       text-align: center;
+    }
+
+
+/* ================
+   Devise - Sign In
+   ================ */
+
+    .facebook-auth {
+      float: right;
+
+
+      a.facebook-signin {
+        width: 237px;
+        height: 45px;
+        font-size: 0;
+        
+        background: url('facebook-signin.png') no-repeat;
+        border: none;
+        cursor: pointer;
+        vertical-align: middle;
+        display: inline-block;
+        
+        &:hover { background: url('facebook-signin-over.png') no-repeat; }
+      }
+
+      .or {
+        margin-top: 100px;
+        text-align: center;
+        padding: 15px;
+        font-family: $title-family;
+        font-weight: 600;
+        font-style: italic;
+        display: inline-block;
+      }
+
+    }
+  
+    h2.header.sign-in {  margin-bottom: 30px !important; }
+
+    #new_user, #new_club_member {
+      width: 310px;
+
+      label { padding-bottom: 5px;  }
+      .input { margin-bottom: 10px; }
+      .form-actions {  margin-top: 15px; }
+
+      .user_remember_me label, .club_member_remember_me label { 
+        display: inline; 
+        padding-left: 5px;
+      }
+    }   
+
+    .center-form {
+      h2.header.sign-in { text-align: center; }
+      #new_user, #new_club_member { 
+        margin: 0 auto; 
+      }
     }

@@ -1,0 +1,34 @@
+%input#adoption_id{type: 'hidden', value: @adoption.id}/
+.white-header Please click on the club member to credit this adoption to:
+%input#user_search{type: 'text', placeholder: "Type name in here."}/
+#user_search_content
+  .not-found Please enter a search term above to continue.
+  
+%span.or-no-associate or  
+= link_to "Do not associate to an individual.", edit_adoption_url(@adoption, :skip_association => true), class: "blue-button do-not-associate"
+  
+
+-# TODO: Move to router.
+:javascript
+  var keyPressCount = 0;
+  $("#user_search").keypress(function() {    
+    keyPressCount++;
+    var currentCount = keyPressCount;
+    setTimeout(function() {
+      checkPressCount(currentCount);
+    }, 300);    
+  });
+
+  function checkPressCount(currentPressCount) {    
+    if(currentPressCount == keyPressCount) {    
+      $.get("/club_members/autocomplete_name/" + $("#user_search").val() + ".js");
+    }
+  }
+
+  function setupClubMemberClicks() {
+    $(".club-member-small").unbind('click').bind('click', function() {
+      adoption_id = $("#adoption_id").val();
+      user_id     = $(this).data('id');
+      window.location = "/adoptions/" + adoption_id + "/associate/" + user_id;
+    })
+  }

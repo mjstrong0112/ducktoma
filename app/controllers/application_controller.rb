@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
+  helper :application
   protect_from_forgery
+
+  alias_method :current_devise_user, :current_user
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message

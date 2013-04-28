@@ -1,0 +1,17 @@
+defaults: &defaults
+  facebook_app_id: "269634256504074"
+  facebook_secret: "d04def9d92a88678ce0542e26332663e"
+  scope: "email, publish_stream"
+
+
+development:
+  <<: *defaults
+  referer_url: "http://ducktoma-dev.herokuapp.com/?referer="
+
+test:
+  <<: *defaults
+  referer_url: "http://localhost:3000/?referer="
+
+production:
+  <<: *defaults
+  referer_url: "http://rrsertoma.heroku.com/?referer="

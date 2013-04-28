@@ -1,0 +1,19 @@
+%h1 Affiliate Leaders
+= will_paginate @leaders
+%table
+  %tr
+    %th Email    
+    %th Organization    
+    %th Actions
+  - @leaders.each do |user|
+    %tr
+      %td= user.email
+      %td= user.organization_name
+      %td
+        = link_to "Edit", edit_admin_club_member_path(user)
+
+= will_paginate @leaders
+
+- content_for :navlinks do
+  .navlink= link_to "Create a new Affiliate Leader", new_admin_club_member_path
+  .navlink= link_to "Admin Dashboard", admin_root_path

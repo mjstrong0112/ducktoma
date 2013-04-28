@@ -1,0 +1,7 @@
+count = <%= @users.count %>
+if(count == 0) {
+  $("#user_search_content").html("<span class='not-found'>No users found. Please try another search criteria.</span>");
+} else {
+  $("#user_search_content").html("<%= escape_javascript( render partial: 'user_search', collection: @users, as: :user ) %>")
+  setupClubMemberClicks();
+}

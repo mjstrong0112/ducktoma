@@ -1,11 +1,11 @@
 %h1 Admin Dashboard
 #admin-dashboard
   %p.large-text Search Functions
-  %p= link_to 'View all adoptions', admin_adoptions_url
-  %p= link_to 'View all users', admin_users_url
-  %p= link_to "View all sales events", admin_sales_events_url
-  %p #{ link_to 'View all locations', admin_locations_url } | #{ link_to 'View all organizations', admin_organizations_url }
-  %p #{ link_to "View successful payment notifications", admin_payment_notifications_url } | #{ link_to "View failed payment notifications", admin_payment_notifications_failed_url}
+  %p= link_to 'View all adoptions', admin_adoptions_path
+  %p= link_to 'View all users', admin_users_path
+  %p= link_to "View all sales events", admin_sales_events_path
+  %p #{ link_to 'View all locations', admin_locations_path } | #{ link_to 'View all organizations', admin_organizations_path }
+  %p #{ link_to "View successful payment notifications", admin_payment_notifications_path } | #{ link_to "View failed payment notifications", admin_payment_notifications_failed_path}
   
   #duck-number.clearfix
     .left
@@ -23,10 +23,11 @@
   %br/
 
   %p.large-text Update actions
-  %p= link_to 'Set pricing rules', admin_pricings_url
-  %p= link_to 'Edit Site Settings', edit_admin_settings_url
-  %p= link_to "Invalidate Adoptions", admin_invalidate_adoptions_url
-  %p= link_to "Regenerate Duck Numbers", admin_regenerate_ducks_url
+  %p= link_to 'Set pricing rules',       admin_pricings_path
+  %p= link_to 'Edit Site Settings',      edit_admin_settings_path
+  %p= link_to "Invalidate Adoptions",    admin_invalidate_adoptions_path
+  %p= link_to "Regenerate Duck Numbers", admin_regenerate_ducks_path
+  %p= link_to "Manage Affiliate Leaders",     admin_club_members_path
 
 %br/
 
