@@ -1,7 +1,7 @@
 development:
-  email: 'seller_1332807429_biz@gmail.com'
+  email: 'sertoma.test@test.com'
   secret: 'stumpsecret'
-  cert_id: 'KVTXN4CJU9D5E'
+  cert_id: 'NSLNRXTJ3U7SC'
   cert_file: 'paypal_cert_development.pem'
   url: 'https://www.sandbox.paypal.com/cgi-bin/webscr?'
 

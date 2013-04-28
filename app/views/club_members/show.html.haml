@@ -15,9 +15,9 @@
 
   %h3.donations Want More Donations?
   .share-options
-
     -if @user.is_facebook?
-      = link_to "Facebook Share", share_to_wall_club_member_path(@user), class: "facebook-share"  
+      = link_to "Facebook Share", share_to_wall_club_member_path(@user), class: "facebook-share", 
+                                  "data-uid" => @user.id, "data-name" => @user.name, "data-orgname" => @user.organization.name
       %span.or or
       
     = link_to "Personally adopt a duck", root_url, class: "blue-btn adopt-a-duck"
