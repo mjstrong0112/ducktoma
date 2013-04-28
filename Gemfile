@@ -16,6 +16,7 @@ gem 'acts_as_singleton'
 gem 'omniauth-facebook', '1.4.0'
 gem 'koala'
 gem 'carrierwave'
+gem 'fog'
 gem 'jquery-rails'
 
 # Heroku requires postgres.

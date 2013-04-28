@@ -1,5 +1,8 @@
 %h1 Editing Organization #{ @organization.name }
 = simple_form_for [:admin, @organization] do |f|
   = f.input :name
+  = image_tag @organization.avatar if @organization.avatar
+  %br/
+  = f.file_field :avatar
   = f.input :description
   = f.submit "Save"
