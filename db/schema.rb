@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130420004556) do
+ActiveRecord::Schema.define(:version => 20130428053444) do
 
   create_table "adoptions", :force => true do |t|
     t.string   "number"
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(:version => 20130420004556) do
     t.string   "invoice"
     t.string   "status"
     t.string   "state",          :default => "new"
-    t.string   "params"
+    t.text     "params"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
   end
