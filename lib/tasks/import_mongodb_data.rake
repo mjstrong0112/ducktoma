@@ -102,5 +102,5 @@ task import_mongodb_data: :environment do
     ContactInfo.create info, validate: false, without_protection: true
   end  
 
-  #User.all.each { |u| u.password = "sertoma123"; u.password_confirmation = "sertoma123"; u.save }
+  User.all.each { |u| u.password = "sertoma123"; u.password_confirmation = "sertoma123"; u.save }
 end
