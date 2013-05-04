@@ -63,10 +63,10 @@ function updateTotal(input) {
 var keyCodes = [ 37, 38, 39, 40, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 8, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105 ];
 
 function roundMainCorners(){
-  //use javascript to round corners
-  $("#main").corner("15px");
-  if($("#duck-form").length != 0) {
-      $("#duck-form").corner("15px");
+  if(!Modernizr.borderradius) {
+    if($("#duck-form").length != 0) {
+        /*$("#duck-form").corner("15px");*/        
+    }    
   }
 }
 
@@ -111,7 +111,7 @@ $(document).ready(function() {
       input.val(amount);
       updateTotal(input);
   });
-
+  
 });
 
 function duck_price(duckCount) {

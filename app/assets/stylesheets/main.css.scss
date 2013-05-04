@@ -63,7 +63,7 @@
     }
 
     .blue-btn {
-      @include button(#38a6e5);
+      @include button(#38a6e5);      
     }
 
     // -- vertical center css hack -- //
@@ -327,9 +327,8 @@
     }
 
     // -- Button styles -- //
-    .blue-button {      
-      @include button(#52b0e6);
-      
+    .blue-button {   
+      @include button(#52b0e6);         
       display: block;
       padding: 5px;
       margin: 20px !important;
@@ -339,6 +338,12 @@
       width: 180px;
       margin: auto;
       text-align: center;
+
+      
+    }
+
+    input.blue-button:focus {
+      background-color: #499ccc;
     }
 
     a.blue-button { 

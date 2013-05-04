@@ -14,5 +14,6 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require router
+//= require modernizr
 //= require main
 //= require_tree .

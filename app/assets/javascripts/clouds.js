@@ -7,10 +7,12 @@ var lastY=-1;
 var offset=0;
 
 $(function() {	
-	example = document.getElementById('example');
-	context = example.getContext('2d');
-	generateCloudPattern();
-	timer();	
+	if(Modernizr.canvas) {
+		example = document.getElementById('example');
+		context = example.getContext('2d');
+		generateCloudPattern();
+		timer();
+	}
 });
 
 function timer() {
