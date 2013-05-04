@@ -30,7 +30,12 @@
   = render 'shared/title_slim', :text => 'Adoption Info', :number => 2
 
   .sales-adoption-form-ducks
-    = f.input :number, :label => "Adoption Number", :input_html => {:tabindex => 9}, :required => false
+    .left(style="padding: 0;")
+      = f.input :number, :label => "Adoption Number", :input_html => {:tabindex => 9}, :required => false
+    - if @club_members.count > 0
+      .left
+        = f.association :club_member, collection: @club_members, label: "Affiliate Member (to credit adoption to):"
+    .clear
     .left(style="padding: 0;")
       = f.input :dollar_fee, :label => "Fee (in dollars)", :input_html => {:tabindex => 10}, :disabled => (true if @adoption.persisted?)
     .left     

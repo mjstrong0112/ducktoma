@@ -9,6 +9,7 @@ class Sales::AdoptionsController < Sales::BaseController
   def new
     @sales_event = SalesEvent.find(params[:sales_event_id]) if params[:sales_event_id]
     @adoption = Adoption.new
+    @club_members = @sales_event.organization.club_members
   end
 
 
@@ -16,8 +17,11 @@ class Sales::AdoptionsController < Sales::BaseController
     @adoption = Adoption.find params[:id]
   end
 
-  def edit    
+  def edit
     @adoption = Adoption.find params[:id]
+    if @adoption.sales_event
+      @club_members = sales_event.organization.club_members
+    end
   end
 
   def update
