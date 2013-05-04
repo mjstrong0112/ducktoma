@@ -17,6 +17,7 @@ function initSales() {
 //recieves a price in dollars
 function calculateDuckCount(price) {
     cents_price = price*100;
+    
     pricing_rule = retrieve_pricing_rule(cents_price);
 
     //if the user has donated enough to get one or more ducks
@@ -41,24 +42,30 @@ function calculateDuckCount(price) {
     }
     $('#adoption_duck_count').val($('#ducks_adopted').val());
 }
+
 function retrieve_pricing_rule(price) {
-    var pricings = pricingScheme.getPricings();
+    var pricings = pricingScheme.getPricings();    
     var pricing_rule;
-    var index=0;
-    //while the correct pricing rule hasn't been found
+    var index = 0;
+
+    // while the correct pricing rule hasn't been found
     while(pricing_rule == null) {
         //retrieve the next pricing rule in the pricing rules list
         t_pricing_rule = pricings[index];
+
         //break the loop if there are no more pricing rules
         if(!t_pricing_rule) {            
             break;
         }
+    
+        min_price = (t_pricing_rule['quantity']+1) * t_pricing_rule['price'];
+
         //if the amount donated is greater than or equals to the minimum amount required to enter this pricing bracket
         //then we've found the correct pricing rule.
-        if( price >= ((t_pricing_rule['quantity']+1) * t_pricing_rule['price'])  ) {
+        if( price >= min_price ) {
             pricing_rule = t_pricing_rule;
         }
         index++;
-    }    
+    }
     return pricing_rule;
 }

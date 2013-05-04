@@ -129,7 +129,7 @@ class Adoption < ActiveRecord::Base
     pricing ||= pricings.last
 
     # Alas, calculate the price.
-    duck_count * pricing.price
+    (duck_count * pricing.price).round
   end
   
   def ducks_available?
