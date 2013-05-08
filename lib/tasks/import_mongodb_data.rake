@@ -28,9 +28,10 @@ task import_mongodb_data: :environment do
   parse_json User do |json|
     if json["role_strings"] && json["role_strings"].include?("admin")
       json["role"] = "admin"
-    elsif json["role_strings"] && json["role_strings"].include?("sales_rep")
-      json["role"] = "sales_rep"
+    elsif json["role_strings"] && (  json["role_strings"].include?("sales") || json["role_strings"].include?("sales_rep") )
+      json["role"] = "sales"
     end
+
     json.delete("role_strings")
     json.delete("password_salt")
     json.delete("remember_token")
