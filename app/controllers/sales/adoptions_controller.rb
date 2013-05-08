@@ -19,8 +19,9 @@ class Sales::AdoptionsController < Sales::BaseController
 
   def edit
     @adoption = Adoption.find params[:id]
-    if @adoption.sales_event
-      @club_members = sales_event.organization.club_members
+    @sales_event = @adoption.sales_event
+    if @sales_event
+      @club_members = @sales_event.organization.club_members
     end
   end
 

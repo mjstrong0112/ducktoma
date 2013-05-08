@@ -6,7 +6,7 @@ Ducktoma::Application.routes.draw do
 
   resources :adoptions, :except => :show
   get '/adoptions/:id/associate/:user_id' => "adoptions#associate", :as => :associate_user_to_adoption
-  get '/adoptions/:id' => 'adoptions#show', :as => :adoption, :constraints => { :id => /[^\D]+/ }
+  #get '/adoptions/:id' => 'adoptions#show', :as => :adoption, :constraints => { :id => /[^\D]+/ }
   get '/adoptions/:adoption_number' => 'adoptions#show', :as => :adoption
   match 'adoptions/number/:adoption_number' => 'adoptions#show'
   resources :payment_notifications
