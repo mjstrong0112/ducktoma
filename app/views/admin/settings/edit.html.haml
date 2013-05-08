@@ -4,7 +4,13 @@
   = render "shared/error_messages_single", :target => @settings
   = f.label :duck_inventory
   = f.text_field :duck_inventory
+
   = f.input :adoptions_live, :as => :boolean
+
+  <br /> <br />
+  = f.input :canned_site_message, collection: ['completed_sales', 'maintenance', 'custom']
+  = f.input :custom_site_message
+
   %br/
   = f.submit "Update Settings"
 

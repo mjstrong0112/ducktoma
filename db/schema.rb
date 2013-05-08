@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130428053444) do
+ActiveRecord::Schema.define(:version => 20130508013931) do
 
   create_table "adoptions", :force => true do |t|
     t.string   "number"
@@ -126,6 +126,8 @@ ActiveRecord::Schema.define(:version => 20130428053444) do
   create_table "settings", :force => true do |t|
     t.boolean "adoptions_live"
     t.integer "duck_inventory"
+    t.string  "canned_site_message", :default => "member"
+    t.text    "custom_site_message", :default => "member"
   end
 
   create_table "users", :force => true do |t|

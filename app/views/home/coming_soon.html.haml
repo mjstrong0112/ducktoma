@@ -1,11 +1,11 @@
-%h2.center Thank you, for visiting the SERTOMA Rubber Duck Race adoption web site!
-%br/
-%h2.center Sales for this year are finished.
-%br/
-%h2.center Please, support us at next year's duck race for Dell Children's Hospital and Ronald McDonald House.
-
--# #comingsoon
--#   %h2.center
-    All ducks have been exhausted this year!
-    %br/
-    %br/
+- s = Settings.instance
+- if s.canned_site_message.blank? || s.canned_site_message == "completed_sales"
+  %h2.center Thank you, for visiting the SERTOMA Rubber Duck Race adoption web site!
+  %br/
+  %h2.center Sales for this year are finished.
+  %br/
+  %h2.center Please, support us at next year's duck race for Dell Children's Hospital and Ronald McDonald House.
+- elsif s.canned_site_message == "maintenance"
+  %h2 DUCKTOMA is under maintenance.  Please, pardon, the inconvenience.  It will be back on the air as soon as possible.
+- elsif s.canned_site_message == "custom"
+  %h2= s.custom_site_message
