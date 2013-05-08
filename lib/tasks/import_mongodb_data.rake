@@ -49,9 +49,10 @@ task import_mongodb_data: :environment do
     Organization.new json, without_protection: true
   end
 
-  parse_json SalesEvent do |json|
+  parse_json SalesEvent do |json, bson_id|    
     organization = json.delete('organization')
     location = json.delete('location')
+    json['date'] = Date.strptime(json['date'], "%m-%d-%Y") unless json['date'].blank?
     json['organization_id'] = Organization.find_or_create_by_name(organization).id if not organization.blank?
     json['location_id'] = Location.find_by_name(location).id if not location.blank?
     SalesEvent.new json, without_protection: true
