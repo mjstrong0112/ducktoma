@@ -13,7 +13,9 @@
       %td= sales_event.adoptions.count
       %td
         - if @scope && @scope == :admin
-          = link_to "Show", admin_sales_event_url(sales_event)
+          = link_to "Show", admin_sales_event_path(sales_event)
+          |
+          = link_to "Edit", edit_admin_sales_event_path(sales_event)
         - else
           = link_to "Continue", new_sales_sales_event_adoption_url(sales_event)
           |

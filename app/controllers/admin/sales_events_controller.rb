@@ -1,5 +1,7 @@
 class Admin::SalesEventsController < Admin::BaseController
 
+  respond_to :html
+
   def index
     @scope = :admin
     @sales_events = SalesEvent.order("date desc")
@@ -11,6 +13,16 @@ class Admin::SalesEventsController < Admin::BaseController
   def show
     @sales_event = SalesEvent.find(params[:id])
     @adoptions = @sales_event.adoptions.sort_by(&:adoption_number)    
+  end
+
+  def edit
+    @sales_event = SalesEvent.find(params[:id])    
+  end
+
+  def update
+    @sales_event = SalesEvent.find params[:id]
+    flash[:notice] = "Sales Event updated successfully" if @sales_event.update_attributes params[:sales_event]
+    respond_with(:admin, @sales_event)
   end
 
   def move

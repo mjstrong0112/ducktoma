@@ -1,0 +1,11 @@
+%h2 Editing Sales Event
+= simple_form_for [:admin, @sales_event] do |f|
+  = f.association :location
+  = f.association :organization
+  = f.input :date
+  <br />
+  = f.submit
+  <br /><br />
+
+- content_for :navlinks do  
+  .navlink= link_to "Admin Dashboard", admin_root_path
