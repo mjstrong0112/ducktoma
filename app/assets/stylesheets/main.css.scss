@@ -339,6 +339,7 @@
       margin: auto;
       text-align: center;
 
+      a { color: white; text-decoration: none;}
       
     }
 
@@ -737,3 +738,8 @@
         margin: 0 auto; 
       }
     }
+
+#print {
+  margin: 0 auto !important;
+  margin-top: 25px !important;
+}
