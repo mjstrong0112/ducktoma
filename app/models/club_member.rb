@@ -40,17 +40,13 @@ class ClubMember < ActiveRecord::Base
   def donation_level_for(passed_total)
     return 100 if passed_total = 0
     (self.total / passed_total * 100).to_i
-
-
   end
-
-
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
-      user.email = auth.info.email if auth.info.try(:email)
+      user.email = auth.info.email if not auth.info.try(:email).try(:blank?)
       user.name = auth.info.name
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
