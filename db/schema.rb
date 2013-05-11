@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130508013931) do
+ActiveRecord::Schema.define(:version => 20130511032726) do
 
   create_table "adoptions", :force => true do |t|
     t.string   "number"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20130508013931) do
     t.string   "name"
     t.string   "picture_url"
     t.integer  "organization_id"
-    t.string   "email",                  :default => "",       :null => false
+    t.string   "email"
     t.string   "encrypted_password",     :default => "",       :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
