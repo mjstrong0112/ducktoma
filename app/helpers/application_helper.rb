@@ -1,5 +1,11 @@
 module ApplicationHelper
 
+  def organization_avatar organization
+    url = organization.try(:avatar).try(:url)
+    return if url.nil?
+    image_tag url
+  end
+
   def dollar_fee(fee)
     BigDecimal.new(fee.to_s)/100
   end

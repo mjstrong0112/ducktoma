@@ -1,15 +1,7 @@
 - if @user.is?(:leader)
   = render 'leader_profile'
 - else 
-  .club-member
-    .profile-image= image_tag @user.picture_url
-    .profile-details
-      .organization= image_tag @user.organization.avatar.url if @user.organization.try(:avatar)
-      %h3.header= @user.name    
-      .donation-progress
-        .bar{style:"width: #{@user.donation_level}%;"}
-        %span.amount= number_to_currency @user.total
-        %span.description Your Donation Level
+  = render @user
 
   %h1.header.grey.raised  Your organization has raised <span class="amount">#{number_to_currency @user.organization.total_paid}</span>
 

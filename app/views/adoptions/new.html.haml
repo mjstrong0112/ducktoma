@@ -34,12 +34,9 @@
       .header 
         This sale will be credited to:
         = link_to "(is this incorrect? click here.)", root_path(:no_referer => true), class: "xsmall"
-      .club-member
-        .profile-image= image_tag @referer.picture_url
-        .profile-details-fluid
-          %h3= @referer.name
-          .organization.nofloat= image_tag @referer.organization.avatar.url if @referer.organization.try(:avatar)
 
+      = render @referer, compact: true
+      
     - else
       .credit-group.input.select.optional.clearfix
         .header-slim Pick a group to get credit for your purchase (optional) :      
