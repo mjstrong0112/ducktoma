@@ -4,15 +4,15 @@ Ducktoma::Application.routes.draw do
   devise_for :users
   root :to => "adoptions#new"
 
-  resources :adoptions, :except => :show
+  resources :adoptions, :except => :show  
   get '/adoptions/:id/associate/:user_id' => "adoptions#associate", :as => :associate_user_to_adoption
-
   get '/adoptions/:adoption_number' => 'adoptions#show', :as => :adoption, :constraints => { :adoption_number => /[^\D]{5,}/ }
   get '/adoptions/:id' => 'adoptions#show', :as => :adoption
-  
   match 'adoptions/number/:adoption_number' => 'adoptions#show'
   resources :payment_notifications
 
+
+  match 'top', to: "club_members#index", as: :top_contributors
   # -----------------
   # Facebook Omniauth
   # -----------------

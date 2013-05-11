@@ -31,10 +31,19 @@ class ClubMember < ActiveRecord::Base
   end
 
   def donation_level
-    org = organization.biggest_contribution.to_f
+    org = organization.biggest_contributor
     return 0 if org == 0 
     (total / org * 100).to_i
   end
+
+  # Gets relative donation level to total passed in
+  def donation_level_for(passed_total)
+    return 100 if passed_total = 0
+    (self.total / passed_total * 100).to_i
+
+
+  end
+
 
 
   def self.from_omniauth(auth)

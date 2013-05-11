@@ -1,6 +1,6 @@
 - if @user.is?(:leader)
   = render 'leader_profile'
-- else
+- else 
   .club-member
     .profile-image= image_tag @user.picture_url
     .profile-details

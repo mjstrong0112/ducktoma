@@ -16,7 +16,7 @@ class Organization < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
-  def biggest_contribution
+  def biggest_contributor
     dollar_fee Adoption.paid.joins(:club_member => :organization).where("organizations.id = ?", id)
                 .select("SUM(adoptions.fee) as total_fee")
                 .group("club_member_id")

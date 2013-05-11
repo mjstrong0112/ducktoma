@@ -1,4 +1,8 @@
 #login-links
+
+  = link_to top_contributors_path do      
+    = image_tag "top-10.png", :id => "top_10", :alt => "Top 10"
+
   - if !user_signed_in? && !club_member_signed_in?
     = link_to new_user_session_path do      
       = image_tag "sertoma-login.png", :id => "login", :alt => "Sign In"
@@ -25,7 +29,6 @@
 
     = link_to destroy_user_session_path, method: :delete do
       = image_tag "logout.png", :id => "logout", :alt => "Sign Out"
-
 .clear
 
 #header        

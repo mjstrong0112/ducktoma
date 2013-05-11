@@ -1,6 +1,12 @@
 class ClubMembersController < ApplicationController
   respond_to :html, :js
 
+
+  def index
+     # TODO: Figure out if we can get this to not load all club members.
+     @club_members = ClubMember.all.sort_by(&:total)[0..9]
+  end
+  
   def show
     @user = ClubMember.find(params[:id] || current_club_member)
     if @user.is?(:leader)

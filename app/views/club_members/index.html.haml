@@ -1,0 +1,18 @@
+%h3.header.center Top 10 Contributors.
+
+<br /> <br />
+
+- @club_members.each do |user|
+  .club-member
+    .profile-image= image_tag user.picture_url
+    .profile-details
+      .organization= image_tag user.organization.avatar.url  
+      %h3.header= user.name    
+      .donation-progress
+        .bar{style:"width: #{user.donation_level_for(@club_members.first.total)}%;"}
+        %span.amount= number_to_currency user.total
+        %span.description Your Donation Level
+
+- if @club_members.count == 0
+  %h3.center There are no contributors recorded yet! 
+  %h3.center Please come back later.
