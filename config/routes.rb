@@ -26,6 +26,7 @@ Ducktoma::Application.routes.draw do
   resources :club_members do
     get :share_to_wall, on: :member
     get :approve, on: :member
+    get :unapprove, on: :member
   end
 
   resources :users do

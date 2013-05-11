@@ -1,5 +1,5 @@
 %h1 Hello there, #{@user.name}!
-
+<br /> <br />
 %h3 Users pending approval.
 %table
   %tr
@@ -10,5 +10,18 @@
       %td= user.name
       %td
         = link_to "Approve", approve_club_member_path(user)
-        
+
+
+<br /> <br />
+%h3 Users already approved.
+%table
+  %tr
+    %th Name
+    %th Actions
+  - @approved.each do |user|
+    %tr
+      %td= user.name
+      %td
+        = link_to "Unapprove", unapprove_club_member_path(user)
+
 = link_to "Add a new Club Member", new_club_member_path

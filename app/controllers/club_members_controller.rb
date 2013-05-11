@@ -10,7 +10,9 @@ class ClubMembersController < ApplicationController
   def show
     @user = ClubMember.find(params[:id] || current_club_member)
     if @user.is?(:leader)
+      # TODO: Create scopes for these
       @pending = @user.organization.club_members.where(role: "member", approved: false)
+      @approved = @user.organization.club_members.where(role: "member", approved: true)
 
       @new_member = ClubMember.new
       @new_member.organization = @user.organization
@@ -53,12 +55,23 @@ class ClubMembersController < ApplicationController
     redirect_to profile_url
   end
 
+  # TODO: Reduce code duplication here.
+
   def approve
     @user = ClubMember.find params[:id]    
     if @user.update_attributes(approved: true)
       redirect_to profile_path, :notice => "User approved successfully!"      
     else
       redirect_to profile_path, :alert => "User could not be approved."
+    end
+  end
+
+  def unapprove
+    @user = ClubMember.find params[:id]    
+    if @user.update_attributes(approved: false)
+      redirect_to profile_path, :notice => "User unapproved successfully!"      
+    else
+      redirect_to profile_path, :alert => "User could not be unapproved."
     end
   end
 
