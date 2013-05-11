@@ -70,7 +70,7 @@ class ClubMembersController < ApplicationController
         u.uid = @fb_member.uid
         u.email = @fb_member.email if not @fb_member.email.blank?
         u.name = @fb_member.name
-        #u.oauth_token = @fb_member.oauth_token
+        u.oauth_token = @fb_member.oauth_token
         #u.oauth_expires_at = @fb_member.oauth_expires_at
         u.cache_photo
       end
