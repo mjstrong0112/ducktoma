@@ -1,6 +1,7 @@
 - compact ||= false
 - contributor ||= nil
-- donation_level = contributor ? club_member.donation_level_for(contributor.total) : club_member.donation_level
+- if !compact
+  - donation_level = contributor ? club_member.donation_level_for(contributor.total) : club_member.donation_level
 
 .club-member{class: contributor ? 'contributor' : ''}
   .profile-image= image_tag club_member.picture_url
