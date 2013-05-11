@@ -18,7 +18,7 @@ class ClubMember < ActiveRecord::Base
 
   delegate :name, to: :organization, prefix: :organization
 
-  validates_presence_of :name, :email #, :organization
+  validates_presence_of :name#, :email #, :organization
 
 
 
@@ -41,7 +41,7 @@ class ClubMember < ActiveRecord::Base
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
-      user.email = auth.info.email
+      user.email = auth.info.email if auth.info.try(:email)
       user.name = auth.info.name
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
@@ -80,6 +80,10 @@ class ClubMember < ActiveRecord::Base
 
 
   # Override devise pwd methods for omniauth integration.
+  def email_required?
+    false
+  end
+
   def password_required?
     super && provider.blank?
   end

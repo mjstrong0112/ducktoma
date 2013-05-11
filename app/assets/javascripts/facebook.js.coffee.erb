@@ -26,7 +26,8 @@ window.fbAsyncInit = ->
   $('.facebook-signin').click (e) ->
     e.preventDefault()
     FB.login (response) ->
-      window.location = '/club_members/auth/facebook/callback' if response.authResponse
+      if response.authResponse
+        window.location = '/club_members/auth/facebook/callback?' + $.param({ signed_request: response.authResponse.signedRequest })
 
   # No JS signout enabled at the moment.
   #$('#sign_out').click (e) ->

@@ -5,6 +5,13 @@ development:
   cert_file: 'paypal_cert_development.pem'
   url: 'https://www.sandbox.paypal.com/cgi-bin/webscr?'
 
+staging:
+  email: 'sertoma.test@test.com'
+  secret: 'stumpsecret'
+  cert_id: 'NSLNRXTJ3U7SC'
+  cert_file: 'paypal_cert_development.pem'
+  url: 'https://www.sandbox.paypal.com/cgi-bin/webscr?'  
+
 test:
   email: 'test@example.com'
   secret: 'testsecret'

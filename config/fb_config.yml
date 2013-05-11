@@ -1,11 +1,16 @@
 defaults: &defaults
-  facebook_app_id: "269634256504074"
-  facebook_secret: "d04def9d92a88678ce0542e26332663e"
   scope: "email, publish_stream"
-
 
 development:
   <<: *defaults
+  facebook_app_id: "657790737570565"
+  facebook_secret: "38560919fbbe9d1de781042405404120"
+  referer_url: "http://localhost:3000/?referer="
+
+staging:
+  <<: *defaults
+  facebook_app_id: "426482830781971"
+  facebook_secret: "1d93e6c8ec64404a15461f34cbef64db"
   referer_url: "http://ducktoma-dev.herokuapp.com/?referer="
 
 test:
@@ -14,4 +19,6 @@ test:
 
 production:
   <<: *defaults
+  facebook_app_id: "269634256504074"
+  facebook_secret: "d04def9d92a88678ce0542e26332663e"
   referer_url: "http://rrsertoma.heroku.com/?referer="
