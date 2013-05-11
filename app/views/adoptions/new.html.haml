@@ -38,7 +38,7 @@
         .profile-image= image_tag @referer.picture_url
         .profile-details-fluid
           %h3= @referer.name
-          .organization.nofloat= image_tag @referer.organization.avatar.url
+          .organization.nofloat= image_tag @referer.organization.avatar.url if @referer.organization.try(:avatar)
 
     - else
       .credit-group.input.select.optional.clearfix

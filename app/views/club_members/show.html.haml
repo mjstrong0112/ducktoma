@@ -4,7 +4,7 @@
   .club-member
     .profile-image= image_tag @user.picture_url
     .profile-details
-      .organization= image_tag @user.organization.avatar.url  
+      .organization= image_tag @user.organization.avatar.url if @user.organization.try(:avatar)
       %h3.header= @user.name    
       .donation-progress
         .bar{style:"width: #{@user.donation_level}%;"}

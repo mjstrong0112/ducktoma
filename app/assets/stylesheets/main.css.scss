@@ -311,19 +311,16 @@
     .form {
       margin: auto;
       padding-top: 10px;
+      .header { @extend .white-header; }
+    }
 
-        .header, .header-slim {
-          @extend .white-header;
-        }
-
-        .header-slim {
-          @include vbox(50px);
-
-            .number {
-              float: left;
-              margin: 11px;
-            }
-        }
+    .form-header-slim, .form .header-slim {
+      @extend .white-header;   
+      @include vbox(50px);
+      .number {
+        float: left;
+        margin: 11px;
+      } 
     }
 
     // -- Button styles -- //
