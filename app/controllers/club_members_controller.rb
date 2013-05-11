@@ -62,20 +62,15 @@ class ClubMembersController < ApplicationController
 
     ClubMember.transaction do      
       # Transfer over adoptions
-      @fb_member.adoptions.update_all(club_member_id: @email_member)
+      @email_member.adoptions.update_all(club_member_id: @fb_member.id)
 
       # Copy FB details over to email account.
-      @email_member.tap do |u|
-        u.provider = @fb_member.provider
-        u.uid = @fb_member.uid
-        u.email = @fb_member.email if not @fb_member.email.blank?
-        u.name = @fb_member.name
-        u.oauth_token = @fb_member.oauth_token
-        #u.oauth_expires_at = @fb_member.oauth_expires_at
-        u.cache_photo
+      @fb_member.tap do |u|
+        u.email = @email_member.email if @fb_member.email.blank?
+        u.encrypted_password =  @email_member.encrypted_password
       end
-      @fb_member.destroy
-      @email_member.save!
+      @email_member.destroy
+      @fb_member.save!
     end
     
     redirect_to profile_path, notice: "Merge completed successfully!"
