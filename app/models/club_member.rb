@@ -38,7 +38,7 @@ class ClubMember < ActiveRecord::Base
 
   # Gets relative donation level to total passed in
   def donation_level_for(passed_total)
-    return 100 if passed_total = 0
+    return 100 if passed_total == 0
     (self.total / passed_total * 100).to_i
   end
 
