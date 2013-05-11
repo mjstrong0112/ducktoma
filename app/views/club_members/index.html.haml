@@ -2,7 +2,7 @@
 
 <br /> <br />
 
-- [@club_members * 3].flatten.each do |user|
+- @club_members.each do |user|
   .club-member.contributor
     .profile-image= image_tag user.picture_url
     .profile-details
