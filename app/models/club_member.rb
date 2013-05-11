@@ -43,8 +43,11 @@ class ClubMember < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    
-    where(auth.slice(:provider, :uid)).first_or_create.tap do |user|
+    user = where(auth.slice(:provider, :uid))
+    # If no omniauth record found, try to find existing user account.    
+    user = where(email: auth[:info][:email]) if auth[:info][:email] && user.blank?
+  
+    user.first_or_create.tap do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email if not auth.info.try(:email).try(:blank?)
@@ -55,6 +58,7 @@ class ClubMember < ActiveRecord::Base
       user.save!
       user
     end
+
   end
 
   def is_facebook?

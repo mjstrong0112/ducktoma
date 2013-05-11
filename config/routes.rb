@@ -23,10 +23,12 @@ Ducktoma::Application.routes.draw do
   match '/profile' => "club_members#show"
 
   get 'club_members/autocomplete_name/:name' => "club_members#autocomplete_name", as: :club_members_autocomplete_name
+  post 'club_members/merge' => "club_members#merge", as: :club_members_merge
   resources :club_members do
     get :share_to_wall, on: :member
     get :approve, on: :member
     get :unapprove, on: :member
+
   end
 
   resources :users do

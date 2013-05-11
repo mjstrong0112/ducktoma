@@ -1,27 +1,39 @@
 %h1 Hello there, #{@user.name}!
 <br /> <br />
-%h3 Users pending approval.
-%table
-  %tr
-    %th Name
-    %th Actions
-  - @pending.each do |user|
+
+= form_tag(club_members_merge_path, method: "post") do |f|
+
+  %h3 Users pending approval.
+  %table
     %tr
-      %td= user.name
-      %td
-        = link_to "Approve", approve_club_member_path(user)
+      %th
+      %th Name
+      %th Actions
+    - @pending.each do |user|
+      %tr
+        %td{width: "15px;"}= check_box_tag "user_ids[]", user.id, false, id: nil, :'data-type' => provider_text(user)
+        %td{width: "30px;"}= user_type_icon user
+        %td= user.name
+        %td
+          = link_to "Approve", approve_club_member_path(user)
 
 
-<br /> <br />
-%h3 Users already approved.
-%table
-  %tr
-    %th Name
-    %th Actions
-  - @approved.each do |user|
+  <br /> <br />
+  %h3 Users already approved.
+  %table
     %tr
-      %td= user.name
-      %td
-        = link_to "Unapprove", unapprove_club_member_path(user)
+      %th
+      %th
+      %th Name
+      %th Actions
+    - @approved.each do |user|
+      %tr
+        %td{width: "15px;"}= check_box_tag "user_ids[]", user.id, false, id: nil, :'data-type' => provider_text(user)
+        %td{width: "30px;"}= user_type_icon user
+        %td= user.name
+        %td
+          = link_to "Unapprove", unapprove_club_member_path(user)
 
-= link_to "Add a new Club Member", new_club_member_path
+  = submit_tag "Combine Facebook/Email Accounts.", class: "grey-btn"
+
+  = link_to "Add a New Club Member", new_club_member_path, class: "blue-btn"

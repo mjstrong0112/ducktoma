@@ -62,8 +62,17 @@
       font-size: 14px;
     }
 
+    a.blue-btn, a.grey-btn { 
+      color: white;
+      text-decoration: none;
+    }
+
     .blue-btn {
       @include button(#38a6e5);      
+    }
+
+    .grey-btn {
+      @include button(#555);      
     }
 
     // -- vertical center css hack -- //

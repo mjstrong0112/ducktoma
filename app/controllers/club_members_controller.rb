@@ -55,8 +55,36 @@ class ClubMembersController < ApplicationController
     redirect_to profile_url
   end
 
-  # TODO: Reduce code duplication here.
+  def merge
+    all_members = ClubMember.find_all_by_id(params[:user_ids])
+    @fb_member    = all_members.find { |m| m.provider == "facebook" }
+    @email_member = all_members.find { |m| m.provider.nil? }
 
+    ClubMember.transaction do      
+      # Transfer over adoptions
+      @fb_member.adoptions.update_all(club_member_id: @email_member)
+
+      # Copy FB details over to email account.
+      @email_member.tap do |u|
+        u.provider = @fb_member.provider
+        u.uid = @fb_member.uid
+        u.email = @fb_member.email if not @fb_member.blank?
+        u.name = @fb_member.name
+        u.oauth_token = @fb_member.oauth_token
+        u.oauth_expires_at = @fb_member.oauth_expires_at
+        u.cache_photo
+      end
+      @fb_member.destroy
+      @email_member.save!
+    end
+    
+    redirect_to profile_path, notice: "Merge completed successfully!"
+  rescue Exception => e  
+    binding.pry
+    redirect_to profile_path, alert: "Merge could not be completed. Please try again later."
+  end
+
+  # TODO: Reduce code duplication here.
   def approve
     @user = ClubMember.find params[:id]    
     if @user.update_attributes(approved: true)
