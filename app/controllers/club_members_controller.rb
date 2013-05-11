@@ -68,7 +68,7 @@ class ClubMembersController < ApplicationController
       @email_member.tap do |u|
         u.provider = @fb_member.provider
         u.uid = @fb_member.uid
-        u.email = @fb_member.email if not @fb_member.blank?
+        u.email = @fb_member.email if not @fb_member.email.blank?
         u.name = @fb_member.name
         u.oauth_token = @fb_member.oauth_token
         u.oauth_expires_at = @fb_member.oauth_expires_at
@@ -80,8 +80,7 @@ class ClubMembersController < ApplicationController
     
     redirect_to profile_path, notice: "Merge completed successfully!"
   rescue Exception => e  
-    binding.pry
-    redirect_to profile_path, alert: "Merge could not be completed. Please try again later."
+    redirect_to profile_path, alert: "Merge could not be completed. #{e}"
   end
 
   # TODO: Reduce code duplication here.
