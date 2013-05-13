@@ -34,19 +34,21 @@ module ApplicationHelper
 
   # TODO: Verify with uncle mike that these functions should only consider sales events.
   def find_total_fee_by_organization(organization)
-    Adoption.valid.joins(:sales_event => :organization).where('organizations.id = ?', organization.id).sum(:fee) 
-    +
-    Adoption.valid.where(club_id: organization).sum(&:fee)
+    (
+      Adoption.valid.joins(:sales_event => :organization).where('organizations.id = ?', organization.id).sum(:fee) +
+      Adoption.valid.where(club_id: organization).sum(&:fee)
+    )
   end
 
   def find_total_ducks_by_organization(organization)
-    # TODO: Reform "invalid" query to use scope.
-    Duck.joins(:adoption => {:sales_event => :organization})
-        .where('organizations.id = ?', organization.id)
-        .where("adoptions.state != 'invalid'")
-        .count 
-    +    
-    Duck.joins(:adoption).where("adoptions.club_id = ?", organization.id).count
+    (
+      # TODO: Reform "invalid" query to use scope.
+      Duck.joins(:adoption => {:sales_event => :organization})
+          .where('organizations.id = ?', organization.id)
+          .where("adoptions.state != 'invalid'")
+          .count +    
+      Duck.joins(:adoption).where("adoptions.club_id = ?", organization.id).count
+    )
   end
 
   def duplicates(enum)
