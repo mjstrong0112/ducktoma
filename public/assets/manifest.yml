@@ -61,6 +61,8 @@ family.png: family-ffd0e9ea48eda7ff04122188c7d17506.png
 family/index.png: family-ffd0e9ea48eda7ff04122188c7d17506.png
 fb-account-type.png: fb-account-type-0f5df8add940e4c108ad3b11d3a55f2b.png
 fb-account-type/index.png: fb-account-type-0f5df8add940e4c108ad3b11d3a55f2b.png
+fb-share-logo.png: fb-share-logo-b8862584dacd96f15280cd00cb289257.png
+fb-share-logo/index.png: fb-share-logo-b8862584dacd96f15280cd00cb289257.png
 flock.png: flock-b29cb0a411e8da488ccad18e12b44f53.png
 flock/index.png: flock-b29cb0a411e8da488ccad18e12b44f53.png
 gradientbg.gif: gradientbg-09c314099b319e1e04bf6ab401a948c4.gif
@@ -153,8 +155,8 @@ whitelime.png: whitelime-7a0ad5f80ecd8a9bf0e2a1f2228ba997.png
 whitelime/index.png: whitelime-7a0ad5f80ecd8a9bf0e2a1f2228ba997.png
 wright.png: wright-4c971979f7b080453610a408de9f9992.png
 wright/index.png: wright-4c971979f7b080453610a408de9f9992.png
-application.js: application-c3e5f69a01e8e19fe91ec7f9b4487a61.js
-application/index.js: application-c3e5f69a01e8e19fe91ec7f9b4487a61.js
+application.js: application-6bf76f1ef73f79901aad0e36e1826a1f.js
+application/index.js: application-6bf76f1ef73f79901aad0e36e1826a1f.js
 application.css: application-53efc9ab780fb1603171ecf6b57f8797.css
 application/index.css: application-53efc9ab780fb1603171ecf6b57f8797.css
 print.css: print-fd1027f3fc2118507aeb8bc1ae5867b8.css
