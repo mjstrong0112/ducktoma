@@ -6,12 +6,16 @@ jQuery ->
     cache: true
 
 window.fb_publish = (u_name, org_name, u_id) ->
+
+  description = "Your sponsorship of one or more ducks will not only help #{u_name} to raise funds for seriously and terminally 
+                 ill children at Dell Children's Hospital. It will also help #{u_name} with their out-of-pocket costs related to 
+                 their #{org_name} activities."
   FB.ui(
     method:      'stream.publish'
-    name:        'Adopt a duck for ' + org_name
-    caption:      u_name + ' is asking for your help to give hearing to children.'
-    description: 'Seriously. Do not be a heartless bastard and give your money now.'        
-    link:         '<%= Ducktoma::Application.config.fb["referer_url"] %>' + u_id
+    name:        'Sponsor a duck for ' + org_name
+    caption:      u_name + ' would like your support!'
+    description:  description
+    link:        '<%= Ducktoma::Application.config.fb["referer_url"] %>' + u_id
     picture:     'http://rrsertoma.heroku.com/images/fb-share-logo.png'
 
     , (response) ->
