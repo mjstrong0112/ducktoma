@@ -73,6 +73,7 @@ class Adoption < ActiveRecord::Base
   # == hooks ==
   before_validation :save_duck_count, :save_fee, :create_adoption_number
   before_create :save_ducks
+  before_save :associate_club
 
 
   # simple alias.
@@ -224,4 +225,19 @@ class Adoption < ActiveRecord::Base
   def ducks_must_be_available
     errors.add :duck_count, "is more than the available ducks" unless ducks_available?
   end
+
+private
+
+  # =====
+  # HACK:
+  # Given that currently adoptions are associated to club members and to organizations through two different primary keys
+  # club_member_id, and club_id. A situation arises where an adoption can be associated to a club_member but not a club.
+  #
+  # The proper way to deal with this problem would be to merge both primary keys into one primary key and maintain
+  # a polymorphic relationship, but as a stop gap fix, this function with automatically populate an adoption's "club_id"
+  # if that adoption has a club member associated when saved.
+  def associate_club
+    self.club = club_member.organization if club_member
+  end
+
 end
