@@ -27,7 +27,7 @@ class Organization < ActiveRecord::Base
 
 
   def total_paid
-    dollar_fee adoptions.paid.sum(&:fee) + member_adoptions.paid.sum(&:fee) 
+    dollar_fee adoptions.paid.sum(&:fee) + member_adoptions.paid.sum(&:fee) + sales_events.sum { |s| s.adoptions.sum(&:fee) }
   end
 
   def self.to_collection
