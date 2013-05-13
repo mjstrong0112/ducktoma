@@ -3,7 +3,7 @@
   @include clearfix;
   .organization { 
     float: right;
-    img { max-width: 130px; }
+    img { max-width: 130px; max-height: 53px; }
     &.nofloat { 
       float: none; 
       margin-top: 25px;
@@ -29,6 +29,7 @@
   }
 
   .donation-progress {
+    clear: both;
     position: relative;
     z-index: 1;
     margin-top: 32px;

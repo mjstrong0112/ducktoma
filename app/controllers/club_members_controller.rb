@@ -119,7 +119,12 @@ class ClubMembersController < ApplicationController
   end
 
   def autocomplete_name    
-    @users = ClubMember.where("name LIKE ?", "%#{params[:name]}%")    
+    # HACK: Need this until remove dependency from SQLite
+    if Rails.env.production?
+      @users = ClubMember.where("name ILIKE ?", "%#{params[:name]}%")
+    else      
+      @users = ClubMember.where("name LIKE ?", "%#{params[:name]}%")    
+    end
   end
 
 
