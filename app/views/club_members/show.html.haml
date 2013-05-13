@@ -13,3 +13,6 @@
       %span.or or
       
     = link_to "Personally adopt a duck", root_url, class: "blue-btn adopt-a-duck"
+
+    %p.share-desc Alternatively, copy and share the link below with your friends:
+    %p.share-link= Ducktoma::Application.config.fb["referer_url"] + @user.id.to_s
