@@ -2,4 +2,4 @@
 <br /><br />
 = simple_form_for @user do |f|
   = f.input :organization_id, as: :hidden
-  = render Organization.order('name asc'), pick: true
+  = render Organization.members_permitted.order('name asc'), pick: true

@@ -1,8 +1,14 @@
 %h1 Editing Organization #{ @organization.name }
 = simple_form_for [:admin, @organization] do |f|
-  = f.input :name
+  = f.input :name  
   = organization_avatar @organization
   %br/
   = f.file_field :avatar
+  <br /><br />
+
+  = f.input :permit_members, label: false, wrapper: false
+  <label style="display: inline;">Permit Members</label>
+  <br /><br />
+
   = f.input :description
   = f.submit "Save"

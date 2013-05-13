@@ -16,6 +16,7 @@ module Admin
     def create
       @user = ClubMember.new params[:club_member]
       @user.approved = true
+      @user.organization.try(:allow_members!)
       if @user.save
         redirect_to admin_club_members_path, :notice => "Club Member created successfully!"
       else
