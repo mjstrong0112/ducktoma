@@ -47,7 +47,7 @@ module ApplicationHelper
           .where('organizations.id = ?', organization.id)
           .where("adoptions.state != 'invalid'")
           .count +    
-      Duck.joins(:adoption).where("adoptions.club_id = ?", organization.id).count
+      Duck.joins(:adoption).where("adoptions.club_id = ?", organization.id).where("adoptions.state != 'invalid'").count
     )
   end
 
