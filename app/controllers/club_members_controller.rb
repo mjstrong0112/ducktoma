@@ -11,8 +11,15 @@ class ClubMembersController < ApplicationController
     @user = ClubMember.find(params[:id] || current_club_member)
     if @user.is?(:leader)
       # TODO: Create scopes for these
-      @pending = @user.organization.club_members.where(role: "member", approved: false)
-      @approved = @user.organization.club_members.where(role: "member", approved: true)
+      @pending = @user.organization.club_members
+                      .where(role: "member", approved: false)
+                      .order('name asc')
+                      .paginate(:page => params[:pending_page] ||= 1, :per_page => 20)
+
+      @approved = @user.organization.club_members
+                       .order('name asc')
+                       .where(role: "member", approved: true)
+                       .paginate(:page => params[:approved_page] ||= 1, :per_page => 20)
 
       @new_member = ClubMember.new
       @new_member.organization = @user.organization

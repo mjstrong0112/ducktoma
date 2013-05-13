@@ -4,6 +4,11 @@
 = form_tag(club_members_merge_path, method: "post") do |f|
 
   %h3 Users pending approval.
+
+  <br />
+  = will_paginate @pending, param_name: 'pending_page'
+  <br />
+
   %table
     %tr
       %th
@@ -21,6 +26,11 @@
 
   <br /> <br />
   %h3 Users already approved.
+
+  <br />
+  = will_paginate @approved, param_name: 'approved_page'
+  <br />
+
   %table
     %tr
       %th

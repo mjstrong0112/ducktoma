@@ -7,7 +7,7 @@ class ClubMember < ActiveRecord::Base
   # There are two types of roles:
   #   Member:    Represents normal club member
   #   Organizer: Represents organization club leader. Can edit/create new club members.
-  attr_accessible :role
+  attr_accessible :role, :title
   attr_accessible :email, :password, :password_confirmation, :remember_me # Devise Fields.  
   attr_accessible :provider, :uid, :oauth_token, :oauth_expires_at # Omniauth Fields.
   
