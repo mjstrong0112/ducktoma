@@ -11,6 +11,13 @@ class Duck < ActiveRecord::Base
   # == hooks ==
   before_create :generate_number
 
+  # == scopes ==
+  def self.valid;   joins(:adoption).merge(Adoption.valid);   end
+  def self.paid;    joins(:adoption).merge(Adoption.paid);    end
+  def self.invalid; joins(:adoption).merge(Adoption.invalid); end
+  def self.sales;   joins(:adoption).merge(Adoption.sales);   end
+
+
   def number= number
     write_attribute(:number, number)
   end

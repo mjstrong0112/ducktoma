@@ -32,7 +32,6 @@ module ApplicationHelper
     end
   end
 
-  # TODO: Verify with uncle mike that these functions should only consider sales events.
   def find_total_fee_by_organization(organization)
     (
       Adoption.valid.joins(:sales_event => :organization).where('organizations.id = ?', organization.id).sum(:fee) +
@@ -42,12 +41,10 @@ module ApplicationHelper
 
   def find_total_ducks_by_organization(organization)
     (
-      # TODO: Reform "invalid" query to use scope.
-      Duck.joins(:adoption => {:sales_event => :organization})
+      Duck.valid.joins(:adoption => {:sales_event => :organization})
           .where('organizations.id = ?', organization.id)
-          .where("adoptions.state != 'invalid'")
           .count +    
-      Duck.joins(:adoption).where("adoptions.club_id = ?", organization.id).where("adoptions.state != 'invalid'").count
+      Duck.valid.joins(:adoption).where("adoptions.club_id = ?", organization.id).count
     )
   end
 

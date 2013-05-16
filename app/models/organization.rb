@@ -14,6 +14,7 @@ class Organization < ActiveRecord::Base
   has_many :member_adoptions, through: :club_members, source: :adoptions
   
   validates_presence_of :name
+  validates_uniqueness_of :name
 
   mount_uploader :avatar, AvatarUploader
 

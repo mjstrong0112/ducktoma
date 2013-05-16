@@ -1,10 +1,14 @@
 class ClubMembersController < ApplicationController
   respond_to :html, :js
-
+  load_and_authorize_resource
 
   def index
      # TODO: Figure out if we can get this to not load all club members.
      @club_members = ClubMember.all.sort_by(&:total)[0..9]
+  end
+
+  def edit
+    @club_member = ClubMember.find params[:id]
   end
   
   def show
@@ -47,7 +51,8 @@ class ClubMembersController < ApplicationController
 
   def update    
     @user = ClubMember.find params[:id]
-      
+    @club_member = @user
+    to_sign_in = current_club_member.try(:id) == @user.id
     if params[:club_member][:password].blank?
       params[:club_member].delete("password")
       params[:club_member].delete("password_confirmation")
@@ -56,10 +61,11 @@ class ClubMembersController < ApplicationController
     if @user.update_attributes(params[:club_member])
       flash[:notice] = "Your profile has been updated successfully!"      
     else
-      flash[:alert] = "We could not update your profile. Please try again later."            
+      flash[:alert] = "We could not update your profile."
     end
-
-    redirect_to profile_url
+    
+    sign_in(@user, :bypass => true) if to_sign_in && @user.errors.count == 0
+    respond_with @user
   end
 
   def merge

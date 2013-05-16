@@ -26,7 +26,7 @@ module Admin
 
     def update
       @user = ClubMember.find params[:id]
-      
+
       if params[:club_member][:password].blank?
         params[:club_member].delete("password")
         params[:club_member].delete("password_confirmation")

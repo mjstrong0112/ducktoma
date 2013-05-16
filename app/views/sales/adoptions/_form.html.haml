@@ -37,7 +37,7 @@
         = f.association :club_member, collection: @club_members, label: "Affiliate Member (to credit adoption to):"
     .clear
     .left(style="padding: 0;")
-      = f.input :dollar_fee, :label => "Fee (in dollars)", :input_html => {:tabindex => 10}, :disabled => (true if @adoption.persisted?)
+      = f.input :dollar_fee, :label => "Fee (in dollars)", :input_html => {:tabindex => 10}
     .left     
       %label{ :class => "string optional", :for => "ducks_adopted"} Ducks Adopted
       = text_field_tag 'ducks_adopted', 0 , :id => 'ducks_adopted', :disabled => true, :value => @adoption.duck_count

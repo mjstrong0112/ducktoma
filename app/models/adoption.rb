@@ -71,15 +71,23 @@ class Adoption < ActiveRecord::Base
   scope :sales,   where(:sales_type => "sales").order("number asc")
 
   # == hooks ==
-  before_validation :save_duck_count, :save_fee, :create_adoption_number
+  before_validation :save_duck_count, :save_fee, :create_adoption_number  
   before_create :save_ducks
   before_save :associate_club
+  before_update :save_ducks, :if => :fee_changed?
 
 
   # simple alias.
   def adoption_number; number; end
   def type; sales_type; end
   def type=(val); sales_type = val; end
+
+  def is?(type)
+    case type
+      when :sales then sales_type == "sales"
+      when :online then sales_type != "sales" # TODO: Make this declarative.
+    end
+  end
 
   def full_name
     adopter_info.try(:full_name) || "None" 
@@ -90,7 +98,7 @@ class Adoption < ActiveRecord::Base
   end
 
   def duck_count= count  
-    return if persisted?
+    return if (persisted? && !fee_changed?)        
     self.ducks = (1..count.to_i).to_a.collect{Duck.new}
   end
 
@@ -167,24 +175,27 @@ class Adoption < ActiveRecord::Base
   end
   # = end paypal
 
+
+  def fee_to_ducks
+    pricing = retrieve_pricing_scheme(fee)
+    (fee/pricing.price).to_i
+  end
+
   private
+
   # If the fee has been entered but the duck_count hasn't been generated,
   # presumably because javascript was turned off preventing the duck_count
   # from being sent in the post CREATE. Generate it here.
-  def save_duck_count
-    if (!fee.nil? && (duck_count.nil? || duck_count == 0))
-      pricing = retrieve_pricing_scheme(fee)
-      self.duck_count = fee/pricing.price
-    end
+  def save_duck_count    
+    return if (fee.nil? || duck_count.to_i > 0)     
+    self.duck_count = fee_to_ducks 
   end
 
   def save_fee
     # Sales adoptions cannot auto-generate fee,
     # since sales fees are specified by the sale itself
     # and not by the ducktoma system.
-    unless type == 'sales'
-      self.fee ||= calculate_fee
-    end
+    self.fee ||= calculate_fee unless type == 'sales'    
   end
 
   def create_adoption_number

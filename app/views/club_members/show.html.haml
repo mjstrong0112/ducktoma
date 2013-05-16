@@ -2,17 +2,20 @@
   = render 'leader_profile'
 - else 
   = render @user
+  - if can? :update, @user
+    = link_to "Change Your Password", edit_club_member_path(@user), class: "grey-btn change-password" 
+  .clear
 
   %h1.header.grey.raised  Your organization has raised <span class="amount">#{number_to_currency @user.organization.total_paid}</span>
-
-  %h3.donations Want More Donations?
-  .share-options
-    -if @user.is_facebook?
-      = link_to "Facebook Share", share_to_wall_club_member_path(@user), class: "facebook-share", 
-                                  "data-uid" => @user.id, "data-name" => @user.name, "data-orgname" => @user.organization.name
-      %span.or or
+    
+  -if can? :share, @user
+    %h3.donations Want More Donations?
+    .share-options
+      -if @user.is_facebook?
+        = link_to "Facebook Share", share_to_wall_club_member_path(@user), class: "facebook-share", 
+                                    "data-uid" => @user.id, "data-name" => @user.name, "data-orgname" => @user.organization.name
+        %span.or or
       
-    = link_to "Personally adopt a duck", root_url, class: "blue-btn adopt-a-duck"
-
-    %p.share-desc Alternatively, copy and share the link below with your friends:
-    %p.share-link= Ducktoma::Application.config.fb["referer_url"] + @user.id.to_s
+      = link_to "Personally adopt a duck", root_url, class: "blue-btn adopt-a-duck"
+      %p.share-desc Alternatively, copy and share the link below with your friends:
+      %p.share-link= Ducktoma::Application.config.fb["referer_url"] + @user.id.to_s

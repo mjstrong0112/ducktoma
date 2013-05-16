@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
 
   alias_method :current_devise_user, :current_user
 
+  def current_ability
+    @current_ability ||= Ability.new(current_user || current_club_member)
+  end
+
 
   def after_sign_in_path_for(resource)    
     if resource.class == ClubMember
