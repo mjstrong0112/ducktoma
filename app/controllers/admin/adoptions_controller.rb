@@ -1,10 +1,13 @@
-class Admin::AdoptionsController < Admin::BaseController    
+class Admin::AdoptionsController < Admin::BaseController
+
   load_and_authorize_resource :only => [:index]
+  sortable_for :adoption
 
   def index
     @total_donations = Adoption.paid.select(&:fee).sum(&:fee)
     @total_ducks = Adoption.paid.joins(:ducks).count
-    @adoptions = Adoption.valid.order("created_at asc").paginate(:page => params[:page] ||= 1, :per_page => 20)
+    @adoptions = Adoption.valid.with_duck_count.sort(sort_column, sort_direction)
+                         .paginate(:page => params[:page] ||= 1, :per_page => 20)
   end
 
   require 'csv'
