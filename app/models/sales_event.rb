@@ -5,7 +5,7 @@ class SalesEvent < ActiveRecord::Base
   attr_accessible :location_id, :organization_id
 
   has_many :adoptions
-  has_many :creators, :through => :adoptions, :class_name => "User"
+  has_many :creators, through: :adoptions, source: :user
 
   belongs_to :location
   belongs_to :organization

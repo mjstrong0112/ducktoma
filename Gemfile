@@ -18,6 +18,7 @@ gem 'koala'
 gem 'carrierwave'
 gem 'fog'
 gem 'jquery-rails'
+gem 'rails_admin'
 
 # Heroku requires postgres.
 group :production  do

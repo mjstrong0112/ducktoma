@@ -8,7 +8,7 @@ module SortableModel
       order("#{column} #{dir}")
     end
 
-    def sortable default, direction='asc'
+    def acts_as_sortable default, direction='asc'
       self.default_sort = default
       self.default_sort_direction = direction
     end
@@ -49,7 +49,7 @@ end
 module SortableHelper
   extend ActiveSupport::Concern
   included do
-    def sortable(column, title = nil)
+    def sortable_col(column, title = nil)
       title ||= column.titleize
       css_class = column == sort_column ? "current #{sort_direction}" : nil
       direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"

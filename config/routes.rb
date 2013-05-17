@@ -1,7 +1,8 @@
 Ducktoma::Application.routes.draw do
+  mount RailsAdmin::Engine => '/rails_admin', :as => 'rails_admin'
 
-  devise_for :club_members, controllers: {omniauth_callbacks: "omniauth_callbacks"}
   devise_for :users
+  devise_for :club_members, controllers: {omniauth_callbacks: "omniauth_callbacks"}
   root :to => "adoptions#new"
 
   resources :adoptions, :except => :show  
