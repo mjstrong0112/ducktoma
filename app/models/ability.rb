@@ -19,6 +19,9 @@ class Ability
 
   def club_member_abilities(club_member)
     can :manage, ClubMember, id: club_member.id
+    if club_member.is?(:leader)
+      can :manage, ClubMember, organization: { id: club_member.organization.id }
+    end 
   end
 
 
