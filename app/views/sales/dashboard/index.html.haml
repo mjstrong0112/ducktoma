@@ -1,13 +1,16 @@
 %h1 Sales Dashboard
-= link_to 'View sales events', sales_sales_events_url
+
+= link_to 'View sales events', sales_sales_events_path
 %br/
 %br/
-= link_to 'View your adoptions', sales_adoptions_url
+= link_to 'View your adoptions', sales_adoptions_path
 %br/
 %br/
-= link_to 'Add adoptions', new_sales_sales_event_url
+= link_to 'Add adoptions', new_sales_sales_event_path
 %br/
 %br/
+
+= link_to 'Change Password', edit_user_path(current_user), class: 'blue-btn'
 
 - content_for :navlinks do
   .navlink= link_to "Home", root_url

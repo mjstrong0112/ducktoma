@@ -1,8 +1,10 @@
 class Admin::UsersController < Admin::BaseController
+
+  sortable_for :user
   load_and_authorize_resource
 
   def index
-    @users = User.paginate(:page => params[:page] ||= 1)
+    @users = User.sort(sort_column, sort_direction).paginate(:page => params[:page] ||= 1)
   end
 
   def show

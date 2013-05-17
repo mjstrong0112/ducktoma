@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :adoptions
   has_many :sales_events, :through => :adoptions
 
+  sortable :email, 'asc'
+
 
   def admin?
     role.to_s == "admin"

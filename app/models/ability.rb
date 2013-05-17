@@ -13,6 +13,7 @@ class Ability
   def user_abilities(user)
     if user
       can :read, Adoption, :user_id => user.id
+      can :manage, User, :id => user.id
       can :manage, :all if user.admin?
     end
   end
