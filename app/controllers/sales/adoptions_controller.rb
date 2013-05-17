@@ -1,13 +1,17 @@
 class Sales::AdoptionsController < Sales::BaseController
-  load_and_authorize_resource
-  #belongs_to :sales_event, :optional => :true
+  load_and_authorize_resource  
+  sortable_for :adoption
+  before_filter :load_sales_event
+  respond_to :html
 
   def index
-    @adoptions = current_user.adoptions.sales.paginate(:page => params[:page] ||= 1, :per_page => 20)
+    @adoptions = current_user.adoptions.sales
+                             .with_duck_count
+                             .sort(sort_column, sort_direction)
+                             .paginate(:page => params[:page] ||= 1, :per_page => 20)
   end
 
   def new
-    @sales_event = SalesEvent.find(params[:sales_event_id]) if params[:sales_event_id]
     @adoption = Adoption.new
     @club_members = @sales_event.organization.club_members
   end
@@ -27,16 +31,12 @@ class Sales::AdoptionsController < Sales::BaseController
 
   def update
     @adoption = Adoption.find params[:id]
-    if @adoption.update_attributes params[:adoption]
-      redirect_to sales_adoptions_url, :notice => "Adoption updated successfully!"
-    else
-      render 'edit'
-    end
+    flash[:notice] = "Adoption updated successfully!" if @adoption.update_attributes(params[:adoption])
+    respond_with(@adoption)
   end
 
   def create
     if parent?
-      @sales_event = SalesEvent.find(params[:sales_event_id])
       @adoption = @sales_event.adoptions.build params[:adoption]
     else
       @adoption = Adoption.new(params[:adoption])
@@ -62,9 +62,13 @@ class Sales::AdoptionsController < Sales::BaseController
   end
 
 protected
-  
+
   def parent?
-    params[:sales_event_id] # || params[:sales_event]
+    params[:sales_event_id]
+  end
+
+  def load_sales_event
+    @sales_event = SalesEvent.find params[:sales_event_id] if params[:sales_event_id]
   end
 
   def collection

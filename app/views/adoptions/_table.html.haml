@@ -1,11 +1,11 @@
 = will_paginate adoptions
 %table#adoptions-table
   %tr
-    %th Adoption Number
-    %th Duck Count
-    %th Fee
+    %th= sortable "number", "Adoption Number"
+    %th= sortable "duck_count", "Duck Count"
+    %th= sortable "fee", "Fee"
     - if current_user.admin? || current_user.is?(:sales)
-      %th Status
+      %th= sortable "state", "Status"
       %th Actions
   = render :partial => 'adoptions/adoption_row', :collection => adoptions, :as => :adoption
 

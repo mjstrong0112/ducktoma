@@ -10,6 +10,8 @@ class Admin::OrganizationsController < ApplicationController
                     total_donations: find_total_fee_by_organization(o)
                                     }
     end
+    
+    @virtual_sales = virtual_org_sales
   end
 
   def new
@@ -45,6 +47,16 @@ class Admin::OrganizationsController < ApplicationController
     else
       redirect_to admin_organizations_url, :alert => "Could not destroy location."
     end
+  end
+
+private
+  # All sales that don't belong to any organization are combined into one
+  # "virtual" group.
+  def virtual_org_sales
+    {
+     total_donations: Adoption.valid.where(sales_event_id: nil, club_id: nil).sum(&:fee),
+     total_ducks: Duck.valid.where(adoptions: {sales_event_id: nil, club_id: nil}).count
+    }
   end
 
 end

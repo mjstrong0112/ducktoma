@@ -1,5 +1,5 @@
 class Admin::SalesEventsController < Admin::BaseController
-
+  sortable_for :adoption
   respond_to :html
 
   def index
@@ -12,7 +12,8 @@ class Admin::SalesEventsController < Admin::BaseController
 
   def show
     @sales_event = SalesEvent.find(params[:id])
-    @adoptions = @sales_event.adoptions.sort_by(&:adoption_number)    
+    @adoptions = @sales_event.adoptions.includes(:adopter_info, :user)
+                             .sort(sort_column, sort_direction)
   end
 
   def edit

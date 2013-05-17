@@ -1,0 +1,7 @@
+%h3.header Change your password.
+%br/
+%br/
+= simple_form_for @user do |f|
+  = f.input :password
+  = f.input :password_confirmation
+  = f.submit "Save New Password", class: 'blue-btn'

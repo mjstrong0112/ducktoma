@@ -7,7 +7,7 @@
   .profile-image= image_tag club_member.picture_url
   %div{class: compact ? 'profile-details-fluid' : 'profile-details'}
     - if compact
-      %h3= club_member.name
+      %h3= club_member.name      
       .organization.nofloat= organization_avatar club_member.organization    
     - else
       .organization= organization_avatar club_member.organization
@@ -17,4 +17,4 @@
       .donation-progress
         .bar{style:"width: #{donation_level}%;"}
         %span.amount= number_to_currency club_member.total
-        %span.description= contributor ? 'Donation Level' : 'Your Donation Level'
+        %span.description= contributor ? 'Donation Level' : 'Your Donation Level'    

@@ -5,6 +5,13 @@
     %th Total Ducks
     %th Total Donations
     %th
+
+  -# Virtual sales.
+  %tr.virtual
+    %td Sertoma (Virtual Sales Only)
+    %td= @virtual_sales[:total_ducks]
+    %td{colspan: 2}= number_to_currency dollar_fee @virtual_sales[:total_donations]    
+
   - @organizations.each do |organization|
     %tr
       %td= organization.name
@@ -13,7 +20,7 @@
       %td
         = link_to "Edit", edit_admin_organization_url(organization)
         |
-        = link_to "Delete", admin_organization_url(organization), :method => :delete        
+        = link_to "Delete", admin_organization_url(organization), :method => :delete
 
 %h3 Add a new organization
 = render 'form', :target => Organization.new

@@ -14,14 +14,11 @@ class AdoptionsController < ApplicationController
       @pricings      = Pricing.all.sort_by(&:quantity)
       @organizations = Organization.all.sort_by(&:name)
 
-      
-
       if params[:referer] && !params[:no_referer]
         @referer = ClubMember.find params[:referer]
       elsif current_club_member && current_club_member.creditable? && !params[:no_referer]
         @referer = current_club_member
       end
-
     end
   end
 

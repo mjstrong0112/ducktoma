@@ -1,3 +1,9 @@
+.change-password {
+  float: right;
+  margin-top: 5px;
+  /*margin-bottom: 15px;*/
+}
+
 .club-member.contributor { margin-bottom: 60px; }
 .club-member {
   @include clearfix;
@@ -32,7 +38,6 @@
     clear: both;
     position: relative;
     z-index: 1;
-    margin-top: 32px;
     height: 30px; 
     width: 100%;
     border: 1px solid #bababa;
