@@ -71,7 +71,7 @@ class Adoption < ActiveRecord::Base
   scope :sales,   where(:sales_type => "sales")
   scope :with_duck_count, joins(:ducks).select("adoptions.*, COUNT(ducks.id) as duck_count").group("adoptions.id")
 
-  sortable :number, 'asc'
+  acts_as_sortable :number, 'asc'
 
   # == hooks ==
   before_validation :save_duck_count, :save_fee, :create_adoption_number  

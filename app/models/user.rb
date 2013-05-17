@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
 
+  rails_admin do
+    object_label_method :email
+  end
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -9,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :adoptions
   has_many :sales_events, :through => :adoptions
 
-  sortable :email, 'asc'
+  acts_as_sortable :email, 'asc'
 
 
   def admin?
