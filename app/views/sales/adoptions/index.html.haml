@@ -1,5 +1,5 @@
 %h1 All your adoptions.
-- if @adoptions.count > 0
+- if @adoptions.to_a.count > 0
   = render '/adoptions/table', :adoptions => @adoptions
   %br/
   

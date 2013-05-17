@@ -68,7 +68,10 @@ class Adoption < ActiveRecord::Base
   scope :valid,   where("state != 'invalid'")
   scope :invalid, where(:state => "invalid")
   scope :paid,    where("state != 'invalid' AND state != 'pending'")
-  scope :sales,   where(:sales_type => "sales").order("number asc")
+  scope :sales,   where(:sales_type => "sales")
+  scope :with_duck_count, joins(:ducks).select("adoptions.*, COUNT(ducks.id) as duck_count").group("adoptions.id")
+
+  sortable :number, 'asc'
 
   # == hooks ==
   before_validation :save_duck_count, :save_fee, :create_adoption_number  

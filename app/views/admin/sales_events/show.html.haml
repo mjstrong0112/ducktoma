@@ -6,10 +6,10 @@
 %table
   %tr
     %th
-    %th Number
-    %th Entry Agent
-    %th Donator
-    %th Amount Donated
+    %th= sortable "number", "Number"
+    %th= sortable "users.email", "Entry Agent"
+    %th= sortable "contact_infos.full_name", "Donator"
+    %th= sortable "fee", "Amount Donated"
     %th Actions
   - @adoptions.each do |adoption|
     %tr{class: adoption.user == current_user ? 'blue_highlight' : ''}
@@ -25,8 +25,6 @@
 = form_for @sales_event, :url => move_admin_sales_event_url do |f|
   = hidden_field_tag :adoption_numbers
   = f.submit "Move to new Sales Event" , :id => "move_btn"
-
--#<button id="move-btn" type="submit">Move to new Sales Event</button>
 
 %br/
 - content_for :navlinks do

@@ -9,7 +9,7 @@ window.fb_publish = (u_name, org_name, u_id) ->
 
   description = "Your sponsorship of one or more ducks will not only help #{u_name} to raise funds for seriously and terminally 
                  ill children at Dell Children's Hospital. It will also help #{u_name} with their out-of-pocket costs related to 
-                 their #{org_name} activities."
+                 #{org_name} activities."
   FB.ui(
     method:      'stream.publish'
     name:        'Sponsor a duck for ' + org_name
