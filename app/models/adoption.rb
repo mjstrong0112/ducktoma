@@ -15,6 +15,10 @@ include ApplicationHelper
 #                     in the paypal payment process this adoption is in.
 class Adoption < ActiveRecord::Base
 
+  rails_admin do
+    object_label_method :number
+  end
+
   # TODO: Switch out all "adoption_number" references to "number"
   # TODO: Switch out all "organization" references to "club"
   # TODO: Switch out all "type" with "sales_type" (polymorphism clash)
@@ -71,7 +75,7 @@ class Adoption < ActiveRecord::Base
   scope :sales,   where(:sales_type => "sales")
   scope :with_duck_count, joins(:ducks).select("adoptions.*, COUNT(ducks.id) as duck_count").group("adoptions.id")
 
-  sortable :number, 'asc'
+  acts_as_sortable :number, 'asc'
 
   # == hooks ==
   before_validation :save_duck_count, :save_fee, :create_adoption_number  
