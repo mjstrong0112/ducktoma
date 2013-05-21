@@ -101,7 +101,14 @@ class Adoption < ActiveRecord::Base
   end
 
   def duck_count= count  
-    return if (persisted? && !fee_changed?)        
+    return if (persisted? && !fee_changed?)
+
+    # HACk: Trying to call delete_all on an association instantiates all records into memory, 
+    # causing massive performance issues for adoptions with thousands of ducks.
+    #
+    # By calling the delete_all on the model manually, we avoid loading all objects into memory.
+    Duck.where(adoption_id: self.id).delete_all    
+    
     self.ducks = (1..count.to_i).to_a.collect{Duck.new}
   end
 
