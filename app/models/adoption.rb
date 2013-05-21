@@ -15,6 +15,10 @@ include ApplicationHelper
 #                     in the paypal payment process this adoption is in.
 class Adoption < ActiveRecord::Base
 
+  rails_admin do
+    object_label_method :number
+  end
+
   # TODO: Switch out all "adoption_number" references to "number"
   # TODO: Switch out all "organization" references to "club"
   # TODO: Switch out all "type" with "sales_type" (polymorphism clash)
