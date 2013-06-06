@@ -65,39 +65,42 @@ var keyCodes = [ 37, 38, 39, 40, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 8, 96, 
 function roundMainCorners(){
   if(!Modernizr.borderradius) {
     if($("#duck-form").length != 0) {
-        /*$("#duck-form").corner("15px");*/        
-    }    
+        /*$("#duck-form").corner("15px");*/
+    }
   }
 }
 
 $(document).ready(function() {
+
+  $("select").select2();
+
   roundMainCorners();
-  
+
   var input = $("#adoption_duck_count");
 
   if (!input.val) {
       input.val(0);
   }
 
-	input.focus(function() {    
-		if(input.val() == 0) {		
+	input.focus(function() {
+		if(input.val() == 0) {
 			input.val('');
 		}
 	});
 
-	input.blur(function() {    
+	input.blur(function() {
 		if(input.val() == '') {
 			input.val(0);
-		}						
+		}
 	});
 
-	input.numeric();	
-	input.keyup(function(event) {		
+	input.numeric();
+	input.keyup(function(event) {
 		updateTotal(this);
 	});
 
   $('#family-button').click(function() {
-      var amount = duckFamilyAmount;        
+      var amount = duckFamilyAmount;
       input.val(amount);
       updateTotal(input);
   });
@@ -111,7 +114,7 @@ $(document).ready(function() {
       input.val(amount);
       updateTotal(input);
   });
-  
+
 });
 
 function duck_price(duckCount) {
@@ -123,7 +126,7 @@ function duck_price(duckCount) {
   if(pricings.length > 0) {
 	  while(not_true) {
 	    pricing = pricings[index];
-	    if(pricing) {	
+	    if(pricing) {
 	      if(duckCount > pricing['quantity']) {
 	        not_true = false;
 	      }
@@ -138,7 +141,7 @@ function duck_price(duckCount) {
   	  price = pricing['price']*duckCount
   } else {
     price = duckCount*50;
-  } 
+  }
   return 'Total: $'+(price/100).toFixed(2);
 }
 

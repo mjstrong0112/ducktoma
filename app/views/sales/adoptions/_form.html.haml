@@ -12,7 +12,7 @@
       .left
         = adopter_form.input :full_name, :input_html => {:tabindex => 1}, :required => false
         %br/
-        = adopter_form.input :phone, :input_html => {:tabindex => 3}        
+        = adopter_form.input :phone, :input_html => {:tabindex => 3}
         %br/
         = adopter_form.input :email, :input_html => {:tabindex => 5}
       .right
@@ -34,11 +34,11 @@
       = f.input :number, :label => "Adoption Number", :input_html => {:tabindex => 9}, :required => false
     - if @club_members.count > 0
       .left
-        = f.association :club_member, collection: @club_members, label: "Affiliate Member (to credit adoption to):"
+        = f.association :club_member, collection: @club_members, label: "Affiliate Member (to credit adoption to):", input_html: {style: "width: 300px;"}
     .clear
     .left(style="padding: 0;")
       = f.input :dollar_fee, :label => "Fee (in dollars)", :input_html => {:tabindex => 10}
-    .left     
+    .left
       %label{ :class => "string optional", :for => "ducks_adopted"} Ducks Adopted
       = text_field_tag 'ducks_adopted', 0 , :id => 'ducks_adopted', :disabled => true, :value => @adoption.duck_count
       = f.hidden_field :duck_count, :value => @adoption.duck_count

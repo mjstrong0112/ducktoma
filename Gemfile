@@ -19,6 +19,7 @@ gem 'carrierwave'
 gem 'fog'
 gem 'jquery-rails'
 gem 'rails_admin'
+gem 'select2-rails'
 
 # Heroku requires postgres.
 group :production  do

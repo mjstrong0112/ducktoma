@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   end
 
   def duck_count
-    adoptions.joins(:ducks).select("SUM(ducks.id) as duck_count").sum(&:duck_count)
+    adoptions.joins(:ducks).count
   end
 
   def fee
