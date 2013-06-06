@@ -157,10 +157,10 @@ whitelime.png: whitelime-7a0ad5f80ecd8a9bf0e2a1f2228ba997.png
 whitelime/index.png: whitelime-7a0ad5f80ecd8a9bf0e2a1f2228ba997.png
 wright.png: wright-4c971979f7b080453610a408de9f9992.png
 wright/index.png: wright-4c971979f7b080453610a408de9f9992.png
-application.js: application-ad9a95ba401e3ee7f538833e1736b5c8.js
-application/index.js: application-ad9a95ba401e3ee7f538833e1736b5c8.js
-application.css: application-1b89b9be3eaf31db1d8e27861a6435f2.css
-application/index.css: application-1b89b9be3eaf31db1d8e27861a6435f2.css
+application.js: application-4b6e4fa288aca19aeba03432f5871341.js
+application/index.js: application-4b6e4fa288aca19aeba03432f5871341.js
+application.css: application-03ed9a1fe98cf70c9a8243717068ffe4.css
+application/index.css: application-03ed9a1fe98cf70c9a8243717068ffe4.css
 print.css: print-fd1027f3fc2118507aeb8bc1ae5867b8.css
 print/index.css: print-fd1027f3fc2118507aeb8bc1ae5867b8.css
 adoption.json: adoption-adaeff7835f9c9a051b94998d6cc883b.json
@@ -179,6 +179,12 @@ sales_event.json: sales_event-b629c0e7e86c28a728bb935891cb3f9b.json
 sales_event/index.json: sales_event-b629c0e7e86c28a728bb935891cb3f9b.json
 user.json: user-1150426bdeb01d8305aa382c3b4f9384.json
 user/index.json: user-1150426bdeb01d8305aa382c3b4f9384.json
+select2-spinner.gif: select2-spinner-efec87a6e4d665ab02c27f9049095490.gif
+select2-spinner/index.gif: select2-spinner-efec87a6e4d665ab02c27f9049095490.gif
+select2.png: select2-dd52d2a9fb1c9fa4a36a773d90c1a549.png
+select2/index.png: select2-dd52d2a9fb1c9fa4a36a773d90c1a549.png
+select2x2.png: select2x2-3433af868bf93f068bda1dbe96a5c9de.png
+select2x2/index.png: select2x2-3433af868bf93f068bda1dbe96a5c9de.png
 rails_admin/aristo/images/bg_fallback.png: rails_admin/aristo/images/bg_fallback-6f9cb8477029d43d00adaa46dd7cf940.png
 rails_admin/aristo/images/bg_fallback/index.png: rails_admin/aristo/images/bg_fallback-6f9cb8477029d43d00adaa46dd7cf940.png
 rails_admin/aristo/images/icon_sprite.png: rails_admin/aristo/images/icon_sprite-0e02a0dbc3fa128644d7c5b6e6217014.png
