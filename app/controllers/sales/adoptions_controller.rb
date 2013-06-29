@@ -1,5 +1,5 @@
 class Sales::AdoptionsController < Sales::BaseController
-  load_and_authorize_resource  
+  load_and_authorize_resource
   sortable_for :adoption
   before_filter :load_sales_event
   respond_to :html
@@ -13,11 +13,11 @@ class Sales::AdoptionsController < Sales::BaseController
 
   def new
     @adoption = Adoption.new
-    @club_members = @sales_event.organization.club_members
+    @club_members = @sales_event ? @sales_event.organization.club_members : []
   end
 
 
-  def show    
+  def show
     @adoption = Adoption.find params[:id]
   end
 
@@ -44,7 +44,7 @@ class Sales::AdoptionsController < Sales::BaseController
 
     @adoption.sales_type = :sales
     @adoption.user = current_user if current_user
-    
+
     if @adoption.save
       redirect_to new_sales_sales_event_adoption_url, :notice => "Adoption created successfully!"
     else

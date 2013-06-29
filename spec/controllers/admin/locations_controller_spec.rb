@@ -12,11 +12,13 @@ describe Admin::LocationsController do
     end
   end
   context "PUT update" do
+
     before(:each) do
       @location = Fabricate(:location)
       @user = Fabricate(:admin)
       sign_in @user
     end
+
     describe "with valid information" do
       it "updates the location's name" do
         put :update, :id => @location.id, :location => {:name => "Hello World"}
@@ -28,13 +30,16 @@ describe Admin::LocationsController do
         response.should redirect_to admin_locations_url
       end
     end
+
     describe "with invalid information" do
       it "should render the edit page" do
-        put :update, :id => @location.id, :location => {}
-        response.should render_template
-      end      
+        put :update, :id => @location.id, :location => {:name => ""}
+        response.should render_template('edit')
+      end
     end
+
   end
+
   context "GET 'new'" do
     before(:each) do
       @user = Fabricate(:admin)
@@ -45,11 +50,13 @@ describe Admin::LocationsController do
       response.should be_success
     end
   end
+
   context "POST 'create'" do
     before(:each) do
       @user = Fabricate(:admin)
       sign_in @user
     end
+
     describe "with valid information" do
       before(:each) do
         @attr = {:name => "County of Rock and Roll - Austin Texas"}
@@ -64,6 +71,7 @@ describe Admin::LocationsController do
         response.should redirect_to admin_locations_url
       end
     end
+
     describe "with invalid information" do
       before(:each) do
         @attr = {}
@@ -78,6 +86,7 @@ describe Admin::LocationsController do
         response.should render_template('new')
       end
     end
+
   end
 
   context "DELETE 'destroy'" do
@@ -96,4 +105,5 @@ describe Admin::LocationsController do
       response.should redirect_to admin_locations_url
     end
   end
+
 end

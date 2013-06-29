@@ -1,5 +1,7 @@
 class AdoptionsController < ApplicationController
 
+  before_filter :authenticate_user!, only: [:index]
+
   def index
     @adoptions = current_user.adoptions_f(:std).paginate(:page => params[:page] ||= 1)
   end
@@ -9,7 +11,7 @@ class AdoptionsController < ApplicationController
       render('home/ducks_exhausted')
     elsif !Settings[:adoptions_live]
       render('home/coming_soon')
-    else  
+    else
       @adoption      = Adoption.new
       @pricings      = Pricing.all.sort_by(&:quantity)
       @organizations = Organization.all.sort_by(&:name)
@@ -28,13 +30,13 @@ class AdoptionsController < ApplicationController
       @adoption = Adoption.find(params[:id])
     elsif params[:adoption_number]
       @adoption = Adoption.where(:number => params[:adoption_number]).first
-    end    
+    end
 
     authorize! :show, @adoption
 
     if @adoption.nil?
       flash[:alert] = "Adoption could not be found"
-      redirect_to root_url      
+      redirect_to root_url
     end
   end
 
@@ -56,11 +58,11 @@ class AdoptionsController < ApplicationController
       if !@adoption.club_member && @adoption.club.try(:club_members).try(:count).to_i > 0 && !params[:skip_association]
         render 'associate'
         @adoption.state = 'associate'
-        @adoption.save!        
+        @adoption.save!
       else
         render 'confirm', :layout => 'barebones'
         @adoption.state =  'pending'
-        @adoption.save!        
+        @adoption.save!
       end
 
     elsif @adoption.state == 'pending'
@@ -92,5 +94,5 @@ class AdoptionsController < ApplicationController
       redirect_to new_adoption_url
     end
   end
-  
+
 end

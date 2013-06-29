@@ -35,8 +35,8 @@ describe Sales::AdoptionsController do
 
 
         sales_adoptions = Adoption.where(:state => "new", :user_id => @user.id)
-                          .order_by([:adoption_number, :asc])
-        
+                          .order('number ASC')
+
         get :index
         assigns(:adoptions).to_a.should == sales_adoptions
         assigns(:adoptions).to_a.should_not == @user.adoptions

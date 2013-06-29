@@ -1,32 +1,38 @@
 require 'spec_helper'
 
 describe Admin::OrganizationsController do
+
   context "GET 'index'" do
     before(:each) do
       @user = Fabricate(:admin)
       sign_in @user
     end
+
     it "is successful" do
       get :index
       response.should be_success
     end
   end
+
   context "GET 'new'" do
     before(:each) do
       @user = Fabricate(:admin)
       sign_in @user
     end
+
     it "is successful" do
       get :new
       response.should be_success
     end
   end
+
   context "PUT update" do
     before(:each) do
       @organization = Fabricate(:organization)
       @user = Fabricate(:admin)
       sign_in @user
     end
+
     describe "with valid information" do
       it "updates the organization's name" do
         put :update, :id => @organization.id, :organization => {:name => "Hello World"}
@@ -38,18 +44,22 @@ describe Admin::OrganizationsController do
         response.should redirect_to admin_organizations_url
       end
     end
+
     describe "with invalid information" do
       it "should render the edit page" do
-        put :update, :id => @organization.id, :organization => {}
-        response.should render_template
+        put :update, :id => @organization.id, :organization => {name: ""}
+        response.should render_template('edit')
       end
     end
   end
+
   context "POST 'create'" do
+
     before(:each) do
       @user = Fabricate(:admin)
       sign_in @user
     end
+
     describe "with valid information" do
       before(:each) do
         @attr = { :name => "The Organization of Sertoma" }
@@ -64,6 +74,7 @@ describe Admin::OrganizationsController do
         response.should redirect_to admin_organizations_url
       end
     end
+
     describe "with invalid information" do
       before(:each) do
         @attr = {}
@@ -78,7 +89,9 @@ describe Admin::OrganizationsController do
         response.should render_template('new')
       end
     end
+
   end
+
   context "DELETE 'destroy'" do
     before(:each) do
       @user = Fabricate(:admin)
@@ -95,4 +108,5 @@ describe Admin::OrganizationsController do
       response.should redirect_to admin_organizations_url
     end
   end
+
 end

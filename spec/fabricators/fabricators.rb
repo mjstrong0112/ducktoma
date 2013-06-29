@@ -23,12 +23,12 @@ end
 
 Fabricator(:adoption) do
   number { Forgery::Basic::UPPER_ALPHA.random_subset(1).join + Forgery::Basic.number(:at_least=> 100000, :at_most => 999999).to_s }
-  duck_count { (1..10).to_a.sample }  
+  duck_count { (1..10).to_a.sample }
 end
 
 Fabricator(:sales_adoption, :from => :adoption) do
   sales_type :sales
-  fee { |adoption| adoption.calculate_fee }
+  fee { |a| Adoption.new(a).calculate_fee }
 end
 
 Fabricator(:duck) do
