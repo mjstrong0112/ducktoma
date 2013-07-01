@@ -10,7 +10,7 @@ class Admin::InvalidateAdoptionsController < ApplicationController
 
   def invalidate
     date = Date.strptime(params[:date], "%m-%d-%Y")
-    adoptions = Adoption.where("created_at < ? AND state = ?", date, "pending")
+    adoptions = Adoption.where("created_at < ? AND state = ? OR state = ?", date, "pending", "associate")
     adoptions.each {|adoption| adoption.state = "invalid"; adoption.save! }
 
     # Adoptions with a state of new that are paypal never even got past the confirmation page.
