@@ -32,7 +32,7 @@
   .sales-adoption-form-ducks
     .left(style="padding: 0;")
       = f.input :number, :label => "Adoption Number", :input_html => {:tabindex => 9}, :required => false
-    - if @club_members.count > 0
+    - if @club_members.try(:count).to_i > 0
       .left
         = f.association :club_member, collection: @club_members, label: "Affiliate Member (to credit adoption to):", input_html: {style: "width: 300px;"}
     .clear
