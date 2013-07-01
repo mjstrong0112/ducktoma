@@ -4,7 +4,7 @@ class Admin::InvalidateAdoptionsController < ApplicationController
 
   def confirm
     date = Date.strptime(params[:invalidate][:date], "%m-%d-%Y")
-    @adoptions = Adoption.where("created_at < ? AND state = ?", date, "pending")
+    @adoptions = Adoption.where("created_at < ? AND state = ? OR state = ?", date, "pending", "associate")
     @date = params[:invalidate][:date]
   end
 
