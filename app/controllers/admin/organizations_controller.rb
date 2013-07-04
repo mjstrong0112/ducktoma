@@ -1,16 +1,15 @@
 class Admin::OrganizationsController < ApplicationController
   load_and_authorize_resource
-  
+
   def index
     @organizations = Organization.order("name asc")
     @organization_values = {}
-    @organizations.each do |o|      
+    @organizations.each do |o|
       @organization_values[o.name] = {
                     total_ducks: find_total_ducks_by_organization(o),
                     total_donations: find_total_fee_by_organization(o)
                                     }
     end
-    
     @virtual_sales = virtual_org_sales
   end
 
@@ -54,8 +53,8 @@ private
   # "virtual" group.
   def virtual_org_sales
     {
-     total_donations: Adoption.valid.where(sales_event_id: nil, club_id: nil).sum(&:fee),
-     total_ducks: Duck.valid.where(adoptions: {sales_event_id: nil, club_id: nil}).count
+     total_donations: Adoption.paid.where(sales_event_id: nil, club_id: nil).sum(&:fee),
+     total_ducks: Duck.paid.where(adoptions: {sales_event_id: nil, club_id: nil}).count
     }
   end
 

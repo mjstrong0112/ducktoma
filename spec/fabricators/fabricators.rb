@@ -41,3 +41,9 @@ end
 Fabricator(:organization) do
   name { Forgery::Name.company_name }
 end
+
+Fabricator(:sales_event) do
+  date { Date.today }
+  organization
+  location
+end
