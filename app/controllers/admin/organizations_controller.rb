@@ -54,7 +54,7 @@ private
   def virtual_org_sales
     {
      total_donations: Adoption.paid.includes(:sales_event).where(sales_events: {organization_id: nil}, club_id: nil).sum(&:fee),
-     total_ducks: Duck.paid.where(adoptions: {sales_event_id: nil, club_id: nil}).count
+     total_ducks: Duck.paid.includes(adoption: :sales_event).where(sales_events: {organization_id: nil}, adoptions: {club_id: nil}).count
     }
   end
 
