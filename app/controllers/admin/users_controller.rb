@@ -9,7 +9,7 @@ class Admin::UsersController < Admin::BaseController
 
   def show
     @user = User.find(params[:id])
-    @adoptions = @user.adoptions.paginate(:page => params[:page] ||= 1, :per_page => 20)
+    @adoptions = @user.adoptions.paginate(:page => params[:page] ||= 1, per_page: 20)
   end
 
   def new
@@ -28,14 +28,14 @@ class Admin::UsersController < Admin::BaseController
   def edit
     @user = User.find params[:id]
   end
-  
+
   def update
     user_params = params[:user]
-    user_params[:password] = user_params[:password_confirmation] = nil if user_params[:password].blank? &&                                
+    user_params[:password] = user_params[:password_confirmation] = nil if user_params[:password].blank? &&
                                                                           user_params[:password_confirmation].blank?
     @user = User.find params[:id]
     if @user.update_attributes user_params
-      redirect_to admin_users_path, :notice => "User created successfully!"      
+      redirect_to admin_users_path, :notice => "User created successfully!"
     else
       render 'edit'
     end

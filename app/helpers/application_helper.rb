@@ -34,17 +34,17 @@ module ApplicationHelper
 
   def find_total_fee_by_organization(organization)
     (
-      Adoption.valid.joins(:sales_event => :organization).where('organizations.id = ?', organization.id).sum(:fee) +
-      Adoption.valid.where(club_id: organization).sum(&:fee)
+      Adoption.paid.includes(:sales_event => :organization)
+              .where('organizations.id = ? OR adoptions.club_id = ?', organization.id, organization.id)
+              .sum(:fee)
     )
   end
 
   def find_total_ducks_by_organization(organization)
     (
-      Duck.valid.joins(:adoption => {:sales_event => :organization})
-          .where('organizations.id = ?', organization.id)
-          .count +    
-      Duck.valid.joins(:adoption).where("adoptions.club_id = ?", organization.id).count
+      Duck.paid.includes(:adoption => {:sales_event => :organization})
+          .where('organizations.id = ? OR adoptions.club_id = ?', organization.id, organization.id)
+          .count
     )
   end
 

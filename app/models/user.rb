@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :sales_events, :through => :adoptions
 
   acts_as_sortable :email, 'asc'
-
+  paginates_per 20
 
   def admin?
     role.to_s == "admin"

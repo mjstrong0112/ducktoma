@@ -13,7 +13,7 @@ class Sales::AdoptionsController < Sales::BaseController
 
   def new
     @adoption = Adoption.new
-    @club_members = @sales_event.organization.club_members
+    @club_members = @sales_event ? @sales_event.organization.club_members : []
   end
 
 

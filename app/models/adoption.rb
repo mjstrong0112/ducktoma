@@ -19,11 +19,7 @@ class Adoption < ActiveRecord::Base
     object_label_method :number
   end
 
-  # TODO: Switch out all "adoption_number" references to "number"
-  # TODO: Switch out all "organization" references to "club"
-  # TODO: Switch out all "type" with "sales_type" (polymorphism clash)
   attr_accessible :number, :fee, :dollar_fee, :sales_type, :duck_count, :adopter_info_attributes
-
   # TODO: Longterm un-white-list these to protect us from mass-assignment.
   attr_accessible :club_id, :sales_event_id, :user_id, :club_member_id
 
@@ -43,13 +39,13 @@ class Adoption < ActiveRecord::Base
 
   # == associations ==
   has_many :ducks, :dependent => :destroy
-  
+
   belongs_to :payment_notification
   belongs_to :sales_event
   belongs_to :club, :class_name => "Organization"
   belongs_to :club_member
   belongs_to :user
-  
+
   has_one :adopter_info, :as => :contact, :class_name => "ContactInfo"
 
   # TODO: Implement nested attributes for contact info.
@@ -57,7 +53,7 @@ class Adoption < ActiveRecord::Base
 
   # == validations ===
   validates_presence_of :ducks, :fee, :number
-  #validates_numericality_of :fee, :only_integer => true
+  validates_numericality_of :fee#, :only_integer => true
   validates_uniqueness_of :number
   validate :ducks_must_be_available, :on => :create
 
@@ -76,9 +72,10 @@ class Adoption < ActiveRecord::Base
   scope :with_duck_count, joins(:ducks).select("adoptions.*, COUNT(ducks.id) as duck_count").group("adoptions.id")
 
   acts_as_sortable :number, 'asc'
+  paginates_per 20
 
   # == hooks ==
-  before_validation :save_duck_count, :save_fee, :create_adoption_number  
+  before_validation :save_duck_count, :save_fee, :create_adoption_number
   before_create :save_ducks
   before_save :associate_club
   before_update :save_ducks, :if => :fee_changed?
@@ -97,22 +94,22 @@ class Adoption < ActiveRecord::Base
   end
 
   def full_name
-    adopter_info.try(:full_name) || "None" 
+    adopter_info.try(:full_name) || "None"
   end
 
   def first_number
     self.ducks.first.number
   end
 
-  def duck_count= count  
+  def duck_count= count
     return if (persisted? && !fee_changed?)
 
-    # HACk: Trying to call delete_all on an association instantiates all records into memory, 
+    # HACk: Trying to call delete_all on an association instantiates all records into memory,
     # causing massive performance issues for adoptions with thousands of ducks.
     #
     # By calling the delete_all on the model manually, we avoid loading all objects into memory.
-    Duck.where(adoption_id: self.id).delete_all    
-    
+    Duck.where(adoption_id: self.id).delete_all
+
     self.ducks = (1..count.to_i).to_a.collect{Duck.new}
   end
 
@@ -133,11 +130,11 @@ class Adoption < ActiveRecord::Base
     n_dollars = BigDecimal.new(dollars)
     self.fee = (n_dollars*100).to_i
   end
-  
-  def calculate_fee  
+
+  def calculate_fee
     # Sort pricings from greatest to smallest
     pricings = Pricing.order("quantity desc").to_a
-    
+
     # If no pricings exist, use default price of 50.
     return duck_count * 50 if pricings.count == 0
 
@@ -154,7 +151,7 @@ class Adoption < ActiveRecord::Base
     # Alas, calculate the price.
     (duck_count * pricing.price).round
   end
-  
+
   def ducks_available?
     (duck_count + Duck.valid_count) <= Settings[:duck_inventory].to_i
   end
@@ -200,16 +197,16 @@ class Adoption < ActiveRecord::Base
   # If the fee has been entered but the duck_count hasn't been generated,
   # presumably because javascript was turned off preventing the duck_count
   # from being sent in the post CREATE. Generate it here.
-  def save_duck_count    
-    return if (fee.nil? || duck_count.to_i > 0)     
-    self.duck_count = fee_to_ducks 
+  def save_duck_count
+    return if (fee.nil? || duck_count.to_i > 0)
+    self.duck_count = fee_to_ducks
   end
 
   def save_fee
     # Sales adoptions cannot auto-generate fee,
     # since sales fees are specified by the sale itself
     # and not by the ducktoma system.
-    self.fee ||= calculate_fee unless type == 'sales'    
+    self.fee ||= calculate_fee unless type == 'sales'
   end
 
   def create_adoption_number

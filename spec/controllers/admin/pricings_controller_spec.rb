@@ -11,9 +11,9 @@ describe Admin::PricingsController do
       (1..30).to_a.collect{Fabricate(:pricing)}
       get :index
       response.should be_success
-      assigns(:pricings).to_a.should == Pricing.desc(:quantity)
-
+      assigns(:pricings).to_a.should == Pricing.order('quantity DESC')
     end
+
   end
   context "POST 'create'" do
     before(:each) do

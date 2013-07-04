@@ -7,14 +7,14 @@ class Admin::AdoptionsController < Admin::BaseController
     @total_donations = Adoption.paid.select(&:fee).sum(&:fee)
     @total_ducks = Adoption.paid.joins(:ducks).count
     @adoptions = Adoption.valid.with_duck_count.sort(sort_column, sort_direction)
-                         .paginate(:page => params[:page] ||= 1, :per_page => 20)
+                         .paginate(:page => params[:page] ||= 1)
   end
 
   require 'csv'
   def export_by_adoption_number
     headers = ['Adoption Number', 'Duck count','Fee', 'First Duck']
     csv_string = to_csv headers, :number do |a, csv|
-                   csv << [a.number, a.duck_count, "$" + a.dollar_fee.to_s, a.first_number]   
+                   csv << [a.number, a.duck_count, "$" + a.dollar_fee.to_s, a.first_number]
                  end
     send_data csv_string, :type => "text/plain", :filename => "report.csv", :disposition => 'attachment'
   end
@@ -41,7 +41,7 @@ class Admin::AdoptionsController < Admin::BaseController
     csv_string = CSV.generate do |csv|
       # Headers
       csv << headers
-      Adoption.valid.includes(:ducks).order(sort).each { |a| 
+      Adoption.valid.includes(:ducks).order(sort).each { |a|
         yield(a, csv)
       }
     end
