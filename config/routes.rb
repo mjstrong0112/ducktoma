@@ -5,7 +5,7 @@ Ducktoma::Application.routes.draw do
   devise_for :club_members, controllers: {omniauth_callbacks: "omniauth_callbacks"}
   root :to => "adoptions#new"
 
-  resources :adoptions, :except => :show  
+  resources :adoptions, :except => :show
   get '/adoptions/:id/associate/:user_id' => "adoptions#associate", :as => :associate_user_to_adoption
   get '/adoptions/:adoption_number' => 'adoptions#show', :as => :adoption, :constraints => { :adoption_number => /[^\D]{5,}/ }
   get '/adoptions/:id' => 'adoptions#show', :as => :adoption
@@ -43,7 +43,7 @@ Ducktoma::Application.routes.draw do
     end
     match "/new" => "sales_events#new"
   end
-  
+
   namespace :admin do
     root :to => "dashboard#index"
     resources :users
@@ -76,9 +76,10 @@ Ducktoma::Application.routes.draw do
     match "/adoptions/export_by_name" => "adoptions#export_by_name"
     match "/adoptions/export_by_adoption_number" => "adoptions#export_by_adoption_number"
     match "/adoptions/export_by_duck_number" => "adoptions#export_by_duck_number"
+    match "/adoptions/export_by_club_member" => "adoptions#export_by_club_member"
     match "/adoptions/find_duplicates" => 'adoptions#find_duplicates', :as => :find_duplicates
     post "/adoptions/remove_duplicates" => 'adoptions#remove_duplicates', :as => :remove_duplicates
-    
+
     resources :adoptions, :only => :index
     # Redirect admin show to standard show.
     match "/adoptions/:id" => redirect("/adoptions/%{id}")

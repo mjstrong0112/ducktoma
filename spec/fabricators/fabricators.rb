@@ -47,3 +47,9 @@ Fabricator(:sales_event) do
   organization
   location
 end
+
+Fabricator(:club_member) do
+  name { Forgery::Name.full_name }
+  password { Forgery::Basic.password :allow_special => true, :at_least => 8 }
+  organization
+end

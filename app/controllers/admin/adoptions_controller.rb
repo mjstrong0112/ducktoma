@@ -35,6 +35,25 @@ class Admin::AdoptionsController < Admin::BaseController
     send_data csv_string, :type => "text/plain", :filename => "report.csv", :disposition => 'attachment'
   end
 
+  def export_by_club_member
+    @club_members = []
+    Adoption.paid.where("club_member_id IS NOT NULL")
+            .includes(:ducks, :club_member)
+            .group_by { |a| a.club_member.name }.each { |k, v|
+              @club_members << { name: k, duck_count: v.sum(&:duck_count),
+                                 adoption_count: v.count, fee: v.sum(&:dollar_fee) }
+            }
+
+    csv_string = CSV.generate do |csv|
+      csv << ["Name", "# Adoptions", "# Ducks", "Dollar Fee"]
+      @club_members.each do |hash|
+        csv << [hash[:name], hash[:adoption_count], hash[:duck_count], hash[:fee]]
+      end
+    end
+
+    send_data csv_string, :type => "text/plain", :filename => "report.csv", :disposition => 'attachment'
+  end
+
   private
 
   def to_csv headers, sort, &block
