@@ -7,9 +7,8 @@ jQuery ->
 
 window.fb_publish = (u_name, org_name, u_id) ->
 
-  description = "Your sponsorship of one or more ducks will not only help #{u_name} to raise funds for seriously and terminally 
-                 ill children at Dell Children's Hospital. It will also help #{u_name} with their out-of-pocket costs related to 
-                 #{org_name} activities."
+  description = "Your sponsorship of one or more ducks will help #{u_name} to raise funds for seriously and terminally
+                 ill children at Dell Children's Hospital and their families staying at the Ronald McDonald House."
   FB.ui(
     method:      'stream.publish'
     name:        'Sponsor a duck for ' + org_name
@@ -25,7 +24,7 @@ window.fb_publish = (u_name, org_name, u_id) ->
         alert "Post was not published."
   )
 
-window.fbAsyncInit = ->  
+window.fbAsyncInit = ->
   FB.init(appId: '<%= Ducktoma::Application.config.fb["facebook_app_id"] %>', cookie: true)
   $('.facebook-signin').click (e) ->
     e.preventDefault()
