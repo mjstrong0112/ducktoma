@@ -25,6 +25,8 @@ Ducktoma::Application.routes.draw do
 
   get 'club_members/autocomplete_name/:name' => "club_members#autocomplete_name", as: :club_members_autocomplete_name
   post 'club_members/merge' => "club_members#merge", as: :club_members_merge
+  post 'club_members/import' => "club_members#import", as: :club_members_import
+
   resources :club_members do
     get :share_to_wall, on: :member
     get :approve, on: :member

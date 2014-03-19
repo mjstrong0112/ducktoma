@@ -10,7 +10,7 @@ class ClubMembersController < ApplicationController
   def edit
     @club_member = ClubMember.find params[:id]
   end
-  
+
   def show
     @user = ClubMember.find(params[:id] || current_club_member)
     if @user.is?(:leader)
@@ -37,19 +37,19 @@ class ClubMembersController < ApplicationController
   end
 
 
-  def create    
+  def create
     @user = ClubMember.new params[:club_member]
     @user.approved = true
     @user.organization = current_club_member.organization
     if @user.update_attributes(params[:club_member])
-      flash[:notice] = "#{@user.name} has been updated successfully!"      
+      flash[:notice] = "#{@user.name} has been updated successfully!"
       redirect_to profile_url
-    else            
+    else
       render 'new'
     end
   end
 
-  def update    
+  def update
     @user = ClubMember.find params[:id]
     @club_member = @user
     to_sign_in = current_club_member.try(:id) == @user.id
@@ -59,13 +59,29 @@ class ClubMembersController < ApplicationController
     end
 
     if @user.update_attributes(params[:club_member])
-      flash[:notice] = "Your profile has been updated successfully!"      
+      flash[:notice] = "Your profile has been updated successfully!"
     else
       flash[:alert] = "We could not update your profile."
     end
-    
+
     sign_in(@user, :bypass => true) if to_sign_in && @user.errors.count == 0
     respond_with @user
+  end
+
+  def import
+    if params[:upload]
+
+      if load_csv(params[:upload][:file].path)
+        flash[:notice] = "Users imported successfully!"
+      else
+        flash[:alert] = "There was a problem importing this file. Please try again later."
+      end
+
+    else
+      flash[:alert] = "Please select a file to upload."
+    end
+
+    redirect_to profile_path
   end
 
   def merge
@@ -73,7 +89,7 @@ class ClubMembersController < ApplicationController
     @fb_member    = all_members.find { |m| m.provider == "facebook" }
     @email_member = all_members.find { |m| m.provider.nil? }
 
-    ClubMember.transaction do      
+    ClubMember.transaction do
       # Transfer over adoptions
       @email_member.adoptions.update_all(club_member_id: @fb_member.id)
 
@@ -85,26 +101,26 @@ class ClubMembersController < ApplicationController
       @email_member.destroy
       @fb_member.save!
     end
-    
+
     redirect_to profile_path, notice: "Merge completed successfully!"
-  rescue Exception => e  
+  rescue Exception => e
     redirect_to profile_path, alert: "Merge could not be completed. #{e}"
   end
 
   # TODO: Reduce code duplication here.
   def approve
-    @user = ClubMember.find params[:id]    
+    @user = ClubMember.find params[:id]
     if @user.update_attributes(approved: true)
-      redirect_to profile_path, :notice => "User approved successfully!"      
+      redirect_to profile_path, :notice => "User approved successfully!"
     else
       redirect_to profile_path, :alert => "User could not be approved."
     end
   end
 
   def unapprove
-    @user = ClubMember.find params[:id]    
+    @user = ClubMember.find params[:id]
     if @user.update_attributes(approved: false)
-      redirect_to profile_path, :notice => "User unapproved successfully!"      
+      redirect_to profile_path, :notice => "User unapproved successfully!"
     else
       redirect_to profile_path, :alert => "User could not be unapproved."
     end
@@ -124,21 +140,31 @@ class ClubMembersController < ApplicationController
 
   end
 
-  def autocomplete_name    
+  def autocomplete_name
     # HACK: Need this until remove dependency from SQLite
     if Rails.env.production? || Rails.env.staging?
       @users = ClubMember.where("name ILIKE ?", "%#{params[:name]}%")
-    else      
-      @users = ClubMember.where("name LIKE ?", "%#{params[:name]}%")    
+    else
+      @users = ClubMember.where("name LIKE ?", "%#{params[:name]}%")
     end
   end
 
 
 private
 
-  def load_leader_info
-  end
+  def load_csv(file_path)
+    ClubMember.transaction do
+      CSV.foreach(file_path, headers: true, encoding: 'windows-1251:utf-8') do |row|
+        first_name, last_name, email, password = row.fields
 
+        member = ClubMember.new(name: "#{first_name} #{last_name}", email: email, password: password)
+        member.organization = current_club_member.organization
+
+        raise ActiveRecord::Rollback if not member.save
+      end
+    end
+    return false
+  end
 
   def render_show
     return render('associate') if not @user.organization
