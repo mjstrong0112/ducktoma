@@ -46,5 +46,12 @@
           = link_to "Unapprove", unapprove_club_member_path(user)
 
   = submit_tag "Combine Facebook/Email Accounts.", class: "grey-btn"
-
   = link_to "Add a New Club Member", new_club_member_path, class: "blue-btn"
+
+
+<br /><br />
+%h3 Import Club Members
+
+= form_tag(club_members_import_path, method: "post", multipart: true) do |f|
+  = file_field :upload, :file
+  = submit_tag "Import", class: "blue-btn"
