@@ -1,28 +1,25 @@
 #login-links
 
-  = link_to top_contributors_path do      
-    = image_tag "top-10.png", :id => "top_10", :alt => "Top 10"
-
   - if !user_signed_in? && !club_member_signed_in?
-    = link_to new_user_session_path do      
+    = link_to new_user_session_path do
       = image_tag "sertoma-login.png", :id => "login", :alt => "Sign In"
 
-    = link_to new_club_member_session_path do      
-      = image_tag "affiliate-login.png", :id => "club-member-login", :alt => "Sign In"  
+    = link_to new_club_member_session_path do
+      = image_tag "affiliate-login.png", :id => "club-member-login", :alt => "Sign In"
 
   - if user_signed_in? || club_member_signed_in?
 
     - if current_club_member
       = link_to profile_path do
         = image_tag "profile.png", alt: "Profile"
-        
+
     - if current_user.try(:admin?)
       = link_to admin_root_path do
         = image_tag "admin.png", :alt => "Admin panel"
-        
+
       = link_to sales_root_path do
         = image_tag "sales.png", :alt => "Sales panel"
-        
+
     - elsif current_user.try(:is?, :sales)
       = link_to sales_root_path do
         = image_tag "sales.png", :alt => "Sales panel"
@@ -31,5 +28,5 @@
       = image_tag "logout.png", :id => "logout", :alt => "Sign Out"
 .clear
 
-#header        
+#header
   = image_tag "plane.png",  :id => "plane", :alt => "Annual Duck Race"
