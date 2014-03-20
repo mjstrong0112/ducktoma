@@ -12,7 +12,7 @@ class Organization < ActiveRecord::Base
   has_many :club_members
 
   has_many :member_adoptions, through: :club_members, source: :adoptions
-  
+
   validates_presence_of :name
   validates_uniqueness_of :name
 
@@ -22,7 +22,7 @@ class Organization < ActiveRecord::Base
   def allow_members!
     update_attributes(permit_members: true)
   end
-  
+
   def biggest_contributor
     dollar_fee Adoption.paid.joins(:club_member => :organization).where("organizations.id = ?", id)
                 .select("SUM(adoptions.fee) as total_fee")
@@ -34,7 +34,13 @@ class Organization < ActiveRecord::Base
 
 
   def total_paid
-    dollar_fee adoptions.paid.sum(&:fee) + member_adoptions.paid.sum(&:fee) + sales_events.sum { |s| s.adoptions.sum(&:fee) }
+
+    ids = adoptions.paid.pluck('adoptions.id') +
+          member_adoptions.paid.pluck('adoptions.id') +
+          sales_events.map { |s| s.adoptions.pluck('adoptions.id') }
+    ids = ids.flatten.uniq
+
+    dollar_fee Adoption.where(id: ids).sum(&:fee)
   end
 
   def self.to_collection
